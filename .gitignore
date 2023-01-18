@@ -1,0 +1,13 @@
+# Ignoring everything
+*
+
+# Except
+!.gitignore
+!*.tex
+!*.bib
+!*.run.xml
+!main.synctex.gz
+
+!*/
+
+!Articles*
