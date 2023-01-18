@@ -1,0 +1,348 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{LogicalCalculusIdeas}{article}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{A Logical Calculus of the Ideas Immanent in Nervous Activity}
+      \verb{file}
+      \verb /storage/Master Thesis/Articles/BF02478259.pdf
+      \endverb
+    \endentry
+    \entry{farleySimulationSelforganizingSystems1954}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6a811f91686e4ea192ff327f382b7184}{%
+           family={Farley},
+           familyi={F\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=84ad1185e50327ec29460f463fed3f4d}{%
+           family={Clark},
+           familyi={C\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d4ec65bc2b61ac78b76fcaaa34978c2}
+      \strng{fullhash}{2d4ec65bc2b61ac78b76fcaaa34978c2}
+      \strng{bibnamehash}{2d4ec65bc2b61ac78b76fcaaa34978c2}
+      \strng{authorbibnamehash}{2d4ec65bc2b61ac78b76fcaaa34978c2}
+      \strng{authornamehash}{2d4ec65bc2b61ac78b76fcaaa34978c2}
+      \strng{authorfullhash}{2d4ec65bc2b61ac78b76fcaaa34978c2}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Transactions of the IRE Professional Group on Information Theory}
+      \field{number}{4}
+      \field{title}{Simulation of Self-Organizing Systems by Digital Computer}
+      \field{volume}{4}
+      \field{year}{1954}
+      \field{pages}{76\bibrangedash 84}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/TIT.1954.1057468
+      \endverb
+    \endentry
+    \entry{haenleinBriefHistoryArtificial2019}{article}{}
+      \name{author}{2}{}{%
+        {{hash=146c7381fa3e25c333d754ee6c0f683b}{%
+           family={Haenlein},
+           familyi={H\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=79d63985e11c74c107449cb5581be70c}{%
+           family={Kaplan},
+           familyi={K\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a67f043ea812ccb0ad92b8dca34fbeb8}
+      \strng{fullhash}{a67f043ea812ccb0ad92b8dca34fbeb8}
+      \strng{bibnamehash}{a67f043ea812ccb0ad92b8dca34fbeb8}
+      \strng{authorbibnamehash}{a67f043ea812ccb0ad92b8dca34fbeb8}
+      \strng{authornamehash}{a67f043ea812ccb0ad92b8dca34fbeb8}
+      \strng{authorfullhash}{a67f043ea812ccb0ad92b8dca34fbeb8}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{This introduction to this special issue discusses artificial intelligence (AI), commonly defined as ``a system's ability to interpret external data correctly, to learn from such data, and to use those learnings to achieve specific goals and tasks through flexible adaptation.'' It summarizes seven articles published in this special issue that present a wide variety of perspectives on AI, authored by several of the world's leading experts and specialists in AI. It concludes by offering a comprehensive outlook on the future of AI, drawing on micro-, meso-, and macro-perspectives.}
+      \field{journaltitle}{California Management Review}
+      \field{month}{7}
+      \field{shorttitle}{A {{Brief History}} of {{Artificial Intelligence}}}
+      \field{title}{A {{Brief History}} of {{Artificial Intelligence}}: {{On}} the {{Past}}, {{Present}}, and {{Future}} of {{Artificial Intelligence}}}
+      \field{volume}{61}
+      \field{year}{2019}
+      \field{pages}{000812561986492}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1177/0008125619864925
+      \endverb
+      \verb{file}
+      \verb /home/david/Zotero/storage/GFIB753Q/Haenlein and Kaplan - 2019 - A Brief History of Artificial Intelligence On the.pdf
+      \endverb
+    \endentry
+    \entry{liSurveyConvolutionalNeural2020}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=693dfc50c48b04de716d7c709c7caa80}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Zewen},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=ee5c593d1df705b04d415b2b51c3c461}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Wenjie},
+           giveni={W\bibinitperiod}}}%
+        {{hash=db5dbc87671e893ede1502d00ee0a37a}{%
+           family={Peng},
+           familyi={P\bibinitperiod},
+           given={Shouheng},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9419610d270972bdd30e81d791d61b96}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Fan},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{0c23b4d48d24f65851e2fc11593256cc}
+      \strng{fullhash}{da5cedcd9e19df1f9edb3b54727057eb}
+      \strng{bibnamehash}{0c23b4d48d24f65851e2fc11593256cc}
+      \strng{authorbibnamehash}{0c23b4d48d24f65851e2fc11593256cc}
+      \strng{authornamehash}{0c23b4d48d24f65851e2fc11593256cc}
+      \strng{authorfullhash}{da5cedcd9e19df1f9edb3b54727057eb}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Convolutional Neural Network (CNN) is one of the most significant networks in the deep learning field. Since CNN made impressive achievements in many areas, including but not limited to computer vision and natural language processing, it attracted much attention both of industry and academia in the past few years. The existing reviews mainly focus on the applications of CNN in different scenarios without considering CNN from a general perspective, and some novel ideas proposed recently are not covered. In this review, we aim to provide novel ideas and prospects in this fast-growing field as much as possible. Besides, not only two-dimensional convolution but also one-dimensional and multi-dimensional ones are involved. First, this review starts with a brief introduction to the history of CNN. Second, we provide an overview of CNN. Third, classic and advanced CNN models are introduced, especially those key points making them reach state-of-the-art results. Fourth, through experimental analysis, we draw some conclusions and provide several rules of thumb for function selection. Fifth, the applications of one-dimensional, two-dimensional, and multi-dimensional convolution are covered. Finally, some open issues and promising directions for CNN are discussed to serve as guidelines for future work.}
+      \field{eprintclass}{cs, eess}
+      \field{eprinttype}{arxiv}
+      \field{month}{4}
+      \field{note}{Comment: 21 pages, 33 figures, journal}
+      \field{number}{arXiv:2004.02806}
+      \field{shorttitle}{A {{Survey}} of {{Convolutional Neural Networks}}}
+      \field{title}{A {{Survey}} of {{Convolutional Neural Networks}}: {{Analysis}}, {{Applications}}, and {{Prospects}}}
+      \field{year}{2020}
+      \verb{eprint}
+      \verb 2004.02806
+      \endverb
+      \verb{file}
+      \verb /home/david/Zotero/storage/C6FDB9FZ/Li et al. - 2020 - A Survey of Convolutional Neural Networks Analysi.pdf;/home/david/Zotero/storage/6PS2WQMA/2004.html
+      \endverb
+      \keyw{68T07 (Primary) 68T10; 68T45 (Secondary),Computer Science - Computer Vision and Pattern Recognition,Computer Science - Machine Learning,Electrical Engineering and Systems Science - Image and Video Processing,I.2.10,I.2.6}
+    \endentry
+    \entry{mccarthyPROPOSALDARTMOUTHSUMMER}{article}{}
+      \name{author}{5}{}{%
+        {{hash=46e54e04ec0343d677e2b791d1532f7e}{%
+           family={McCarthy},
+           familyi={M\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ff41659107c0d758b36b67bd4e23ccd7}{%
+           family={Minsky},
+           familyi={M\bibinitperiod},
+           given={M\bibnamedelima L},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=c805eef8aa9a498b75716cf494176b0c}{%
+           family={Rochester},
+           familyi={R\bibinitperiod},
+           given={N},
+           giveni={N\bibinitperiod}}}%
+        {{hash=185fa3a10af5c816db9de05364803ca7}{%
+           family={Corporation},
+           familyi={C\bibinitperiod},
+           given={I\bibnamedelima B\bibnamedelima M},
+           giveni={I\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=22e2130b8d96f93daba648ff62af869b}{%
+           family={Shannon},
+           familyi={S\bibinitperiod},
+           given={C\bibnamedelima E},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{9e29147df59594732cd2e484027c5286}
+      \strng{fullhash}{af922482ed83358434d0206fc9fe4403}
+      \strng{bibnamehash}{9e29147df59594732cd2e484027c5286}
+      \strng{authorbibnamehash}{9e29147df59594732cd2e484027c5286}
+      \strng{authornamehash}{9e29147df59594732cd2e484027c5286}
+      \strng{authorfullhash}{af922482ed83358434d0206fc9fe4403}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{A {{PROPOSAL FOR THE DARTMOUTH SUMMER RESEARCH PROJECT ON ARTIFICIAL INTELLIGENCE}}}
+      \verb{file}
+      \verb /home/david/Zotero/storage/3BPHNKVQ/McCarthy et al. - A PROPOSAL FOR THE DARTMOUTH SUMMER RESEARCH PROJE.pdf
+      \endverb
+    \endentry
+    \entry{turingCOMPUTINGMACHINERYINTELLIGENCE1950}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fdc523429c3c89c34880f733033f2099}{%
+           family={Turing},
+           familyi={T\bibinitperiod},
+           given={A.\bibnamedelimi M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{fdc523429c3c89c34880f733033f2099}
+      \strng{fullhash}{fdc523429c3c89c34880f733033f2099}
+      \strng{bibnamehash}{fdc523429c3c89c34880f733033f2099}
+      \strng{authorbibnamehash}{fdc523429c3c89c34880f733033f2099}
+      \strng{authornamehash}{fdc523429c3c89c34880f733033f2099}
+      \strng{authorfullhash}{fdc523429c3c89c34880f733033f2099}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1460-2113, 0026-4423}
+      \field{journaltitle}{Mind}
+      \field{langid}{english}
+      \field{month}{10}
+      \field{number}{236}
+      \field{title}{I.—{{COMPUTING MACHINERY AND INTELLIGENCE}}}
+      \field{volume}{LIX}
+      \field{year}{1950}
+      \field{pages}{433\bibrangedash 460}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.1093/mind/LIX.236.433
+      \endverb
+      \verb{file}
+      \verb /storage/Master Thesis/Articles/lix-236-433.pdf
+      \endverb
+    \endentry
+    \entry{universityReportGeneralProblemSolving}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=f311ddff046205732b610184e9dbbfaf}{%
+           family={University},
+           familyi={U\bibinitperiod},
+           given={{©}\bibnamedelima Stanford},
+           giveni={©\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=45ebe6bd838f67040a398bf6fd40841d}{%
+           family={{Stanford}},
+           familyi={S\bibinitperiod}}}%
+        {{hash=03f41a9f391ad580e0ab9ec140781ddc}{%
+           family={94305},
+           familyi={9\bibinitperiod},
+           given={California},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{1e7c919dfbf2ef263be0da4484e17bd3}
+      \strng{fullhash}{1e7c919dfbf2ef263be0da4484e17bd3}
+      \strng{bibnamehash}{1e7c919dfbf2ef263be0da4484e17bd3}
+      \strng{authorbibnamehash}{1e7c919dfbf2ef263be0da4484e17bd3}
+      \strng{authornamehash}{1e7c919dfbf2ef263be0da4484e17bd3}
+      \strng{authorfullhash}{1e7c919dfbf2ef263be0da4484e17bd3}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{https://purl.stanford.edu/sy501xd1313}
+      \field{langid}{english}
+      \field{title}{Report on a {{General Problem-Solving Program}}}
+      \verb{file}
+      \verb /home/david/Zotero/storage/VM5SKS6E/sy501xd1313.html
+      \endverb
+    \endentry
+    \entry{weizenbaumELIZAComputerProgram1966}{article}{}
+      \name{author}{1}{}{%
+        {{hash=536d446e9993fc32f8000445f2b917e5}{%
+           family={Weizenbaum},
+           familyi={W\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{536d446e9993fc32f8000445f2b917e5}
+      \strng{fullhash}{536d446e9993fc32f8000445f2b917e5}
+      \strng{bibnamehash}{536d446e9993fc32f8000445f2b917e5}
+      \strng{authorbibnamehash}{536d446e9993fc32f8000445f2b917e5}
+      \strng{authornamehash}{536d446e9993fc32f8000445f2b917e5}
+      \strng{authorfullhash}{536d446e9993fc32f8000445f2b917e5}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0001-0782}
+      \field{journaltitle}{Communications of the ACM}
+      \field{month}{1}
+      \field{number}{1}
+      \field{title}{{{ELIZA}}—a Computer Program for the Study of Natural Language Communication between Man and Machine}
+      \field{volume}{9}
+      \field{year}{1966}
+      \field{pages}{36\bibrangedash 45}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1145/365153.365168
+      \endverb
+      \verb{file}
+      \verb /home/david/Zotero/storage/3SAM3JPS/Weizenbaum - 1966 - ELIZA—a computer program for the study of natural .pdf
+      \endverb
+    \endentry
+    \entry{zhangStudyArtificialIntelligence2021}{article}{}
+      \name{author}{2}{}{%
+        {{hash=317109e5efd6b04b2dcc18b15fab760a}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Caiming},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b1f5d85067635d59dd4bd60235b83b7d}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d91a610482bac8a6be8b0cab842e34f}
+      \strng{fullhash}{4d91a610482bac8a6be8b0cab842e34f}
+      \strng{bibnamehash}{4d91a610482bac8a6be8b0cab842e34f}
+      \strng{authorbibnamehash}{4d91a610482bac8a6be8b0cab842e34f}
+      \strng{authornamehash}{4d91a610482bac8a6be8b0cab842e34f}
+      \strng{authorfullhash}{4d91a610482bac8a6be8b0cab842e34f}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In the world, the technological and industrial revolution is accelerating by the widespread application of new generation information and communication technologies, such as AI, IoT (the Internet of Things), and blockchain technology. Artificial intelligence has attracted much attention from government, industry, and academia. In this study, popular articles published in recent years that relate to artificial intelligence are selected and explored. This study aims to provide a review of artificial intelligence based on industry information integration. It presents an overview of the scope of artificial intelligence using background, drivers, technologies, and applications, as well as logical opinions regarding the development of artificial intelligence. This paper may play a role in AIrelated research and should provide important insights for practitioners in the real world.The main contribu\- tion of this study is that it clarifies the state of the art of AI for future study.}
+      \field{issn}{2452414X}
+      \field{journaltitle}{Journal of Industrial Information Integration}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{shorttitle}{Study on Artificial Intelligence}
+      \field{title}{Study on Artificial Intelligence: {{The}} State of the Art and Future Prospects}
+      \field{volume}{23}
+      \field{year}{2021}
+      \field{pages}{100224}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.jii.2021.100224
+      \endverb
+      \verb{file}
+      \verb /storage/Master Thesis/Articles/1-s2.0-S2452414X21000248-main.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

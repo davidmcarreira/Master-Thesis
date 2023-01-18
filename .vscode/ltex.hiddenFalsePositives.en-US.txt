@@ -1,0 +1,3 @@
+{"rule":"SO_AS_TO","sentence":"^\\QFurthermore, this paper presents suggestions which may benefit researchers in terms of combining specific knowledge domains in construction with machine learning algorithms so as to develop dedicated deep network models for the industry.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Qcover/cover.tex\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcover/cover.tex\\E$"}

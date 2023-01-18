@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\linespread{1.4}
+
+%Packages
+\usepackage{indentfirst}
+\usepackage{biblatex}
+\usepackage{xcolor}
+\usepackage{pagecolor}
+\definecolor{CoverUC}{cmyk}{0.17, 0.27 ,0.45, 0.04}
+\definecolor{CoverUCTypo}{cmyk}{0.44, 0.50 ,0.68, 0.45}
+
+%Bibtex resources
+\addbibresource{Master-Thesis.bib}
+
+%Subfiles package stays always at the end of the preamble
+\usepackage{subfiles}
+\begin{document}
+
+\subfile{cover/cover.tex}
+
+
+\section{Introduction}
+% - Turing test => Importance and evolution of machine learning => What led to CNN
+%Introductory paragraph
+On October 1950, in his article \textit{Computing Machinery and Intelligence}, Alan Turing questioned: "Can machines think?" \autocite{turingCOMPUTINGMACHINERYINTELLIGENCE1950}. At the time, the question was too meaningless to answer since not only the theory but also the technology available weren't devoleped enough. Noneotherless, Turing still predicted that in the future there would be computers that could effectively display human-like intelligence and discernment under the conditions proposed on the aforementioned article. 
+%Although Turing himself considered this specific inquiry too meaningless to answer, if the problem was viewed as whether a computer could perform adequately in a proposed game called \textit{The Imitation Game}, then machines could effectively be seen as a thought capable system. This game, nowadays also referred to as \textit{The Turing Test}, consists of typewritten questions and answers between 3 operators (two humans and one computer) to determine whom's the machine. Finally, and most importantly, Turing also predicted that in the future there would be computers that could play well said game, i.e, display human-like intelligence and discernment. Approximately seventy-three years have passed since the publication of the aforementioned article and, as predicted by Alan Turing, a number of systems have since passed the \textit{Turing Test} (insert citations here). 
+
+% Here should I cite the articles themselves or the article with the cronological order of events?
+%Paragraph leading to the birth of AI
+\par The breakthroughs of Artificial Intelligence (AI) are predominant, and its importance in our everyday life is undeniable, but the theory behind it has several early roots. The interest in the area grew immensely with, for example, all the Turing's research and the proposal of the first mathematical Artificial Neuron model in 1943 by Warren McCulloch and Walter Pitts (MP model) \autocite{LogicalCalculusIdeas,liSurveyConvolutionalNeural2020} which potentiated the research of Artificial Neural Networks (ANN) \autocite{zhangStudyArtificialIntelligence2021}. Ultimately, the latter lead to Belmont Farley and Westley Clark implementation of the first successful ANN in 1954 \autocite{farleySimulationSelforganizingSystems1954}. However, only in 1956, during the Dartmouth Summer Research Project on Artificial Intelligence \autocite{mccarthyPROPOSALDARTMOUTHSUMMER}, was the term "Artificial Intelligence" firstly proposed by John McCarthy et al. and began what is considered to be the birth of AI \autocite{zhangStudyArtificialIntelligence2021}.
+
+%Paragraph talking about the plateau of AI, leading  to CNN and DNN 
+\par The succeeding two decades following the Dartmouth conference were filled with great successes, with special emphasis in the works published by Rosenblatt in 1958 (adding the ability to learn to the MP model) \autocite{liSurveyConvolutionalNeural2020}, the ELIZA program developed by Joseph Weizenbaum between 1964 and 1966 (natural language processing tool) \autocite{haenleinBriefHistoryArtificial2019,weizenbaumELIZAComputerProgram1966}, the General Problem Solver implemented by Herbert Simon/Cliff Shaw/Allen Newell (program capable of solving problems such as the Towers of Hanoi) \autocite{universityReportGeneralProblemSolving}.
+
+%Hinton et al. (Backpropagation), Waibe et al. (Time Delay Neural Network for speech recognition, considered a one-dimensional convolutional neural network), Zhang (first two-dimensional CNN - SIANN), LeCun et al. (network for handwritten zipcode recognition and used the term "convolution" for the first time which is the original version of LeNet)
+
+%Paragraph talking about the importance of AI/Deep Learning nowadays (specifically in image recognition)
+
+%Paragraph talking about the id problem ==> TrustID
+
+
+\section{Background Section}
+
+% - Deep Learning vs Shallow learning/Conventional Machine Learning
+%     - What is deep learning
+%         - Examples of techniques
+%     - What is shallow learning/Conventional Machine Learning
+%         - Examples of techniques
+%     - Table comparing advantages and disadvantages (concluding why deep learning is better)
+
+%     - Neural Networks
+
+\subsection{The domains of Artificial Intelligence}
+Artificial Intelligence is an extensive term that can be broadly described as the ability of a computer to simulate or mimic human-like behaviors, such as decision-making, judgement and, most importantly, learning \autocite{zhangStudyArtificialIntelligence2021}.
+
+\newpage
+\printbibliography
+
+\end{document}
