@@ -12,27 +12,38 @@
 %Bibtex resources
 \addbibresource{Master-Thesis.bib}
 
+%Custom commands
+\newcommand{\red}[1]{\textcolor{red}{#1}} %To color red portions of text when needed
+
 %Subfiles package stays always at the end of the preamble
 \usepackage{subfiles}
+
 \begin{document}
-
 \subfile{cover/cover.tex}
-
 
 \section{Introduction}
 % - Turing test => Importance and evolution of machine learning => What led to CNN
 %Introductory paragraph
-On October 1950, in his article \textit{Computing Machinery and Intelligence}, Alan Turing questioned: "Can machines think?" \autocite{turingCOMPUTINGMACHINERYINTELLIGENCE1950}. At the time, the question was too meaningless to answer since not only the theory but also the technology available weren't devoleped enough. Noneotherless, Turing still predicted that in the future there would be computers that could effectively display human-like intelligence and discernment under the conditions proposed on the aforementioned article. 
+\subsection{Philosophy}
+On October 1950, in his article \textit{Computing Machinery and Intelligence}, Alan Turing questioned: "Can machines think?" \autocite{turingCOMPUTINGMACHINERYINTELLIGENCE1950}. At the time, the question was too meaningless to answer since not only the theory but also the technology available weren't devoleped enough. Noneotherless, Turing still predicted that in the future there would be computers that could effectively display human-like intelligence and discernment under the conditions proposed on the aforementioned article.
+
 %Although Turing himself considered this specific inquiry too meaningless to answer, if the problem was viewed as whether a computer could perform adequately in a proposed game called \textit{The Imitation Game}, then machines could effectively be seen as a thought capable system. This game, nowadays also referred to as \textit{The Turing Test}, consists of typewritten questions and answers between 3 operators (two humans and one computer) to determine whom's the machine. Finally, and most importantly, Turing also predicted that in the future there would be computers that could play well said game, i.e, display human-like intelligence and discernment. Approximately seventy-three years have passed since the publication of the aforementioned article and, as predicted by Alan Turing, a number of systems have since passed the \textit{Turing Test} (insert citations here). 
 
-% Here should I cite the articles themselves or the article with the cronological order of events?
+\subsection{Birth}
 %Paragraph leading to the birth of AI
-\par The breakthroughs of Artificial Intelligence (AI) are predominant, and its importance in our everyday life is undeniable, but the theory behind it has several early roots. The interest in the area grew immensely with, for example, all the Turing's research and the proposal of the first mathematical Artificial Neuron model in 1943 by Warren McCulloch and Walter Pitts (MP model) \autocite{LogicalCalculusIdeas,liSurveyConvolutionalNeural2020} which potentiated the research of Artificial Neural Networks (ANN) \autocite{zhangStudyArtificialIntelligence2021}. Ultimately, the latter lead to Belmont Farley and Westley Clark implementation of the first successful ANN in 1954 \autocite{farleySimulationSelforganizingSystems1954}. However, only in 1956, during the Dartmouth Summer Research Project on Artificial Intelligence \autocite{mccarthyPROPOSALDARTMOUTHSUMMER}, was the term "Artificial Intelligence" firstly proposed by John McCarthy et al. and began what is considered to be the birth of AI \autocite{zhangStudyArtificialIntelligence2021}.
+\par The breakthroughs of Artificial Intelligence (AI) are predominant, and its importance in our everyday life is undeniable, but the theory behind it has several early roots. The interest in the area grew immensely with, for example, all the Turing's research, the proposal of the first mathematical Artificial Neuron model in 1943 by Warren McCulloch and Walter Pitts (based of binary inputs and output) \autocite{LogicalCalculusIdeas} and Donald Hebb in 1949 revolutionized the way the artificial neurons were treated by proposing what is known as the Hebb's rule: when two neurons fire together their relation is strengthned \red{insert citations from the book}. All previously mentioned works were the backbone of research that eventually lead to Perceptrons - the first Artificial Neural Network (ANN) \red{citation needed for the last part} \autocite{zhangStudyArtificialIntelligence2021}. Taking into consideration the latter two, but specially Hebb's proposals, Belmont Farley and Westley Clark implementated one of the first successful ANN in 1954 \autocite{farleySimulationSelforganizingSystems1954}. Over the span of approximately ten years, multiple researches were performed attempting to computerize the human brain, however, only in 1956, during the \textit{Dartmouth Summer Research Project on Artificial Intelligence} \autocite{mccarthyPROPOSALDARTMOUTHSUMMER}, was the term "Artificial Intelligence" firstly proposed by John McCarthy et al., beginning what is now considered to be the birth of AI \autocite{zhangStudyArtificialIntelligence2021}.
 
+\subsection{Plateau}
 %Paragraph talking about the plateau of AI, leading  to CNN and DNN 
-\par The succeeding two decades following the Dartmouth conference were filled with great successes, with special emphasis in the works published by Rosenblatt in 1958 (adding the ability to learn to the MP model) \autocite{liSurveyConvolutionalNeural2020}, the ELIZA program developed by Joseph Weizenbaum between 1964 and 1966 (natural language processing tool) \autocite{haenleinBriefHistoryArtificial2019,weizenbaumELIZAComputerProgram1966}, the General Problem Solver implemented by Herbert Simon/Cliff Shaw/Allen Newell (program capable of solving problems such as the Towers of Hanoi) \autocite{universityReportGeneralProblemSolving}.
+\par The succeeding two decades following the Dartmouth conference were filled with important developments, with special emphasis in the works published in 1958 by Rosenblatt (generalized the Farley and Clark training to multi-layer networks rather than only two) \autocite{liSurveyConvolutionalNeural2020} and the General Problem Solver implemented by Herbert Simon/Cliff Shaw/Allen Newell (program capable of solving problems such as the Towers of Hanoi) \autocite{universityReportGeneralProblemSolving} and the ELIZA program developed by Joseph Weizenbaum between 1964 and 1966 (natural language processing tool) \autocite{weizenbaumELIZAComputerProgram1966}. Unfortunately, all the interested and development around AI met an unforseen halt in 1969 when Marvin Minksy and Seymour Papert released a paper that uncovered two issues that the perceptron network couldn't stolve: linear inseperatable problems \red{(with special significance the XOR and XNOR functions)} and lack of sufficient computing power to handle the processing of multi-layer large networks \red{(citation needed)}.
 
-%Hinton et al. (Backpropagation), Waibe et al. (Time Delay Neural Network for speech recognition, considered a one-dimensional convolutional neural network), Zhang (first two-dimensional CNN - SIANN), LeCun et al. (network for handwritten zipcode recognition and used the term "convolution" for the first time which is the original version of LeNet)
+% - 1943 MP Model threshold logic binary inputs and output
+% - Hebb introduced a biological sense and proposed a weighted input instead 
+% - Rosenbal First perceptron using the previous 2 discoveries
+
+
+\subsection{Comeback}
+Hinton et al. (Backpropagation), Waibe et al. (Time Delay Neural Network for speech recognition, considered a one-dimensional convolutional neural network), Zhang (first two-dimensional CNN - SIANN), LeCun et al. (network for handwritten zipcode recognition and used the term "convolution" for the first time which is the original version of LeNet)
 
 %Paragraph talking about the importance of AI/Deep Learning nowadays (specifically in image recognition)
 
