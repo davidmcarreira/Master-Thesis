@@ -3,6 +3,7 @@
 
 # Except
 !.gitignore
+!*.pdf
 !*.tex
 !*.bib
 !*.run.xml
