@@ -1,20 +1,51 @@
-\documentclass[class=article, crop=false]{standalone}
-\usepackage{xcolor}
-\usepackage{pagecolor}
-\definecolor{CoverUC}{RGB}{203, 179, 135}
-\definecolor{CoverUCTypo}{cmyk}{0.44, 0.50 ,0.68, 0.45}
+\documentclass[class=report, crop=false, a4paper]{standalone}
 
-% \usepackage{layout}
-% \makeatletter
-% \renewcommand*{\lay@value}[2]{%
-%   \strip@pt\dimexpr0.352778\dimexpr\csname#2\endcsname\relax\relax mm%
-% }
-% \makeatother
+%Packages import
+\usepackage{../pkgs}
+
+
+\usepackage{layout}
+\makeatletter
+\renewcommand*{\lay@value}[2]{%
+  \strip@pt\dimexpr0.352778\dimexpr\csname#2\endcsname\relax\relax mm%
+}
+\makeatother
+
+
 
 \begin{document}
-    \begin{minipage}{100pt}
-        Teste
-    \pagecolor{CoverUC}
-    \end{minipage}
-    \newpage
+\newgeometry{margin=2.5cm} 
+
+\pagenumbering{gobble}
+\pagecolor{CoverUC}\afterpage{\nopagecolor}
+
+\begin{center}
+    \color{CoverUCTypo}
+    \includegraphics[height=5cm]{MarcaUC_v.png}
+    \vspace{3cm}
+
+    \fontsize{18pt}{18pt}\selectfont
+    \par{\ArrusBt David Alexandre Mendes Carreira}
+    \vspace{2cm}
+
+    \fontsize{22pt}{22pt}\selectfont
+    \par{\ArrusBtScB example of a title written in versalete bold 22pt}
+    \fontsize{20pt}{20pt}\selectfont
+    \par{\ArrusBtSc subtitle versalete 20pt}
+    \vspace{2cm}
+
+    \vfill
+    \fontsize{12pt}{12pt}\selectfont
+    \par\textbf{\ArrusBt Dissertação no âmbito do <nome completo do mestrado> orientada pelo/a Professor/a Doutor/a
+    <nome completo do orientador> e apresentada <à nome da unidade
+    orgânica>/<ao nome do departamento, se aplicável da/do nome
+    da unidade orgânica>. AH}
+    
+    \vfill
+    \fontsize{16pt}{16pt}\selectfont
+    \par {\ArrusBt Month 20XX}
+\end{center}
+\restoregeometry
+\newpage
+
 \end{document}
