@@ -2,6 +2,7 @@
 *
 
 # Except
+!*.md
 !.gitignore
 !*.pdf
 !*.tex
