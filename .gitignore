@@ -11,6 +11,6 @@
 !main.synctex.gz
 !pkgs.sty
 
-!background-section*/*
-!cover*/*
-!images*/*
+!background-section/*
+!cover/*
+!images/*
