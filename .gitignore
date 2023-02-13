@@ -9,4 +9,8 @@
 !*.bib
 !*.run.xml
 !main.synctex.gz
+!pkgs.sty
+
+!background-section*/*
 !cover*/*
+!images*/*
