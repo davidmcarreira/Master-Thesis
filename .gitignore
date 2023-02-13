@@ -2,15 +2,17 @@
 *
 
 # Except
-!*.md
 !.gitignore
+!pkgs.sty
+
+# Folders
+!background-section/
+!cover/
+!images/
+
+#File types
+!*.md
 !*.pdf
 !*.tex
 !*.bib
-!*.run.xml
-!main.synctex.gz
-!pkgs.sty
-
-!background-section/*
-!cover/*
-!images/*
+!*.png
