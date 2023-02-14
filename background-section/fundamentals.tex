@@ -1,0 +1,53 @@
+\documentclass[class=report, crop=false, a4paper, 12pt]{standalone}
+
+%Packages import
+\usepackage{../pkgs}
+
+
+\begin{document}
+\newpage
+\section{Fundamentals}
+
+
+The exponential growth in the Artificial Intelligence domain, its corresponding subfields and technologies involved, spanned a plethora of terms that can be easily confused, mistook or mixed. For a better understanding of this dissertation, before discussing methods and implementations, it's important to analyze the fundamentals.
+
+\vspace{\baselineskip}
+\noindent\textbf{Computer Vision} is the science of trying to mimic with a computer what the humans do when looking at a scene, that is, extracting information from images through a series of computational techniques. \autocite{szeliskiComputerVisionAlgorithms2022}
+
+\vspace{\baselineskip}
+\noindent\textbf{Image querying}, is the process of finding information in a database of images that corresponds to the user query\footnote{Query, in computer science, is the request for information in a database.}, in this case, an image query\autocite{bartoliniImageQuerying2009}.  
+
+\vspace{\baselineskip}
+\noindent\textbf{Face verification}, also referred to as \textbf{face authentication}, is a one-to-one match, and it's the action of verifying if the query face matches the identity that's being claimed. These principles are used in biometric systems such as self-service immigration clearance using E-passport. \autocite{liHandbookFaceRecognition2011}
+
+\vspace{\baselineskip}
+\noindent\textbf{Face identification}, also called \textbf{face recognition}, is a one-to-many correlation process that compares a query face to a database of faces and associates it to the corresponding match (or matches). A typical use case is to identify someone in a watchlist or surveillance videos. \autocite{liHandbookFaceRecognition2011} 
+
+\vspace{\baselineskip}
+\noindent\textbf{\red{Definition of hyperparameters (?)}}
+
+\subsubsection{Machine Learning}
+% - Start by defining deep learning and convetional methods as a subseft of machine learning, which is a subset of AI in itself
+% - Define traditional/conventional machine learning methods and why deep learning is better
+% - Define a neural network
+
+\subsubsection{Convolutional Neural Networks}
+There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} with successful applications in the domains of Computer Vision \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021} or Natural Language Processing\autocite{abdel-hamidConvolutionalNeuralNetworks2014, wangGenCNNConvolutionalArchitecture2015, xiangConvolutionalNeuralNetworkbased2020}. In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers: the raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, yamashitaConvolutionalNeuralNetworks2018, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}. The convolutional layer is designed to extract feature representations by being composed of kernels (or filter banks \autocite{lecunDeepLearning2015}) that compute feature maps through element-wise product, to which is applied a \red{nonlinear activation function} \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. Next is the pooling layer, that's responsible for reducing the spatial size of the input data \autocite{guRecentAdvancesConvolutional2018} and joining identical features \autocite{lecunDeepLearning2015}. Finally, the fully connected layers and their core function is to perform high logic and generate semantic information \autocite{guRecentAdvancesConvolutional2018}. Finally, the output layer 
+
+%Should I talk about activation funtions, flattening, softmax and other optional layers?
+%A topic approaching the training process and its components?
+
+\par Using CNNs for Computer Vision tasks is not an arbitrary choice, but due to the fact that the network design can benefit from the intrinsic characteristics of the input data, consequently performing really well in image related applications \autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. In the first place, images have an array-like structure with numerous elements, namely, each pixel has an assigned value organized in a grid-like manner \autocite{yamashitaConvolutionalNeuralNetworks2018}. In the second place, there's an inherent correlation between local groups of values, which creates distinguishable motifs \autocite{lecunDeepLearning2015}. Finally, the local values of images are invariant to location, that is, a certain composition should have the same value independently of the spatial location in the picture \autocite{lecunDeepLearning2015}. Therefore, the following key, unique features potentiate the previously stated efficient performance \autocite{caoReviewNeuralNetworks2018}:
+\begin{enumerate}
+    \item Designed to process multidimensional arrays \autocite{lecunDeepLearning2015};
+    \item Shared weights between the same features in different locations; %Invariance to shift, distortions and rotations
+    \item Automatically identifies the relevant features without any human supervision, hence, small amounts of preprocessing \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}; %Easier to train
+    \item Local connections/receptive fields/sparse connectivity \autocite{alzubaidiReviewDeepLearning2021}; %Less complexity, easier to train; %Invariance to shift, distortions and rotations and less network complexity (easier to train)
+    \item Pooling layers that reduces the spatial size of the input data. %Invariance to shift, distortions and rotations
+\end{enumerate}
+% Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
+
+The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \red{citations needed}, while 2, 3, 4 and 5 helps to reduce the complexity of the model, and as a result training it is easier.
+
+
+\end{document}
