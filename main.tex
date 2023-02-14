@@ -6,43 +6,6 @@
 %Packages import
 \usepackage{pkgs}
 
-%Custom commands
-\newcommand{\red}[1]{\textcolor{red}{#1}} %To color red portions of text when needed
-
-%Custom settings
-\makeatletter
-
-\newcommand\frontmatter{%
-    \cleardoublepage
-  %\@mainmatterfalse
-  \pagenumbering{roman}}
-
-\newcommand\mainmatter{%
-    \cleardoublepage
- % \@mainmattertrue
-  \pagenumbering{arabic}}
-
-\newcommand\backmatter{%
-  \if@openright
-    \cleardoublepage
-  \else
-    \clearpage
-  \fi
- % \@mainmatterfalse
-   }
-
-\makeatother
-
-\usepackage{layout}
-\makeatletter
-\renewcommand*{\lay@value}[2]{%
-  \strip@pt\dimexpr0.352778\dimexpr\csname#2\endcsname\relax\relax mm%
-}
-\makeatother
-
-%Bibtex resources
-%\bibliography{Master-Thesis.bib}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 

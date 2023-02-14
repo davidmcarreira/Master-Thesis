@@ -2,7 +2,6 @@
 \ProvidesPackage{pkgs}[2023/01/27 Master Thesis Template Package]
 
 %Packages
-
 \RequirePackage{standalone}
 \RequirePackage{import}
 \RequirePackage[bottom]{footmisc} %Footmisc needs to be loaded before hyperreff, otherwise the latter gets broken
@@ -18,22 +17,48 @@
 \RequirePackage{geometry}
 
 
-
+% Custom parameters 
 \definecolor{CoverUC}{RGB}{203, 179, 135}
 \definecolor{CoverUCTypo}{cmyk}{0.44, 0.50 ,0.68, 0.45}
-
-\graphicspath{{images/}{../images/}}
-
 
 \newfontfamily{\ArrusBt}{Arrus BT}
 \newfontfamily{\ArrusBtSc}{ArrusBT-SmallCaps}
 \newfontfamily{\ArrusBtScB}{ArrusBT-BoldSmallCap}
-
 % \setmainfont{Gill Sans Std}
 
+%Custom commands
+\newcommand{\red}[1]{\textcolor{red}{#1}} %To color red portions of text when needed
 
+%Handles the paths
 \ifdefined\mainfile
     \addbibresource{Master-Thesis.bib}
 \else
     \addbibresource{../Master-Thesis.bib}
 \fi
+
+\graphicspath{{images/}{../images/}}
+
+
+%Custom settings
+\makeatletter
+
+\newcommand\frontmatter{%
+    \cleardoublepage
+  %\@mainmatterfalse
+  \pagenumbering{roman}}
+
+\newcommand\mainmatter{%
+    \cleardoublepage
+ % \@mainmattertrue
+  \pagenumbering{arabic}}
+
+\newcommand\backmatter{%
+  \if@openright
+    \cleardoublepage
+  \else
+    \clearpage
+  \fi
+ % \@mainmatterfalse
+   }
+
+\makeatother

@@ -15,45 +15,25 @@
 %   - Shallow Leaning vs Deep Learning => Concluding why DL is better
 %   - Conventional Machine Learning vs Deep Learning:
 %     - Examples of both topics' applications
-
-% - Convolutional Neural Networks:
-%   - Small description of why CNNs are important/different from other networks
-%   - The architecture of a CNN + what each layer does
-%   - Examples of CNN applications
 %
 % - Facial recognition, facial detection and facial identification
 
 
-%Paragraph describing what a CNN is and roughly how it works
-There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} with successful applications in the domains of Computer Vision \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021} or Natural Language Processing\autocite{abdel-hamidConvolutionalNeuralNetworks2014, wangGenCNNConvolutionalArchitecture2015, xiangConvolutionalNeuralNetworkbased2020}. In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers: the raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, proceeded to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, yamashitaConvolutionalNeuralNetworks2018, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}.
+There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} with successful applications in the domains of Computer Vision \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021} or Natural Language Processing\autocite{abdel-hamidConvolutionalNeuralNetworks2014, wangGenCNNConvolutionalArchitecture2015, xiangConvolutionalNeuralNetworkbased2020}. In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers: the raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, yamashitaConvolutionalNeuralNetworks2018, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}. The convolutional layer is designed to extract feature representations by being composed of kernels (or filter banks \autocite{lecunDeepLearning2015}) that compute feature maps through element-wise product, to which is applied a \red{nonlinear activation function} \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. Next is the pooling layer, that's responsible for reducing the spatial size of the input data \autocite{guRecentAdvancesConvolutional2018} and joining identical features \autocite{lecunDeepLearning2015}. Finally, the fully connected layers and their core function is to perform high logic and generate semantic information \autocite{guRecentAdvancesConvolutional2018}. Finally, the output layer 
 
-%Why using them for Computer Vision
-\par Using CNNs for Computer Vision tasks is not an arbitrary choice, but due to the fact that the network design can benefit from the intrinsic characteristics of the input data \autocite{lecunDeepLearning2015} they perform really well in image related applications. In the first place, images have an array-like structure with numerous elements, namely, each pixel has an assigned value organized in a grid like manner \autocite{yamashitaConvolutionalNeuralNetworks2018}, matching the type of input for these networks \autocite{lecunDeepLearning2015}. In the second place, there's an inherent correlation between local groups of values, which creates distinguishable motifs. Finally, the local values of images are invariant to location, that is, a certain composition should have the same value independently of the spatial location in the picture. 
+%Should I talk about activation funtions, flattening, softmax and other optional layers?
+%A topic approaching the training process and its components?
 
+\par Using CNNs for Computer Vision tasks is not an arbitrary choice, but due to the fact that the network design can benefit from the intrinsic characteristics of the input data, consequently performing really well in image related applications \autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. In the first place, images have an array-like structure with numerous elements, namely, each pixel has an assigned value organized in a grid-like manner \autocite{yamashitaConvolutionalNeuralNetworks2018}. In the second place, there's an inherent correlation between local groups of values, which creates distinguishable motifs \autocite{lecunDeepLearning2015}. Finally, the local values of images are invariant to location, that is, a certain composition should have the same value independently of the spatial location in the picture \autocite{lecunDeepLearning2015}. Therefore, the following key, unique features potentiate the previously stated efficient performance \autocite{caoReviewNeuralNetworks2018}:
+\begin{enumerate}
+    \item Designed to process multidimensional arrays \autocite{lecunDeepLearning2015};
+    \item Shared weights between the same features in different locations; %Invariance to shift, distortions and rotations
+    \item Automatically identifies the relevant features without any human supervision, hence, small amounts of preprocessing \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}; %Easier to train
+    \item Local connections/receptive fields/sparse connectivity \autocite{alzubaidiReviewDeepLearning2021}; %Less complexity, easier to train; %Invariance to shift, distortions and rotations and less network complexity (easier to train)
+    \item Pooling layers that reduces the spatial size of the input data. %Invariance to shift, distortions and rotations
+\end{enumerate}
+% Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
 
-
-This model architecture is based on the visual cortex ventral pathway, therefore, it is capable of automatically extracting spatial feature hierarchies, from a lower to higher complexity (in contrast to conventional machine learning) \autocite{lecunDeepLearning2015,yamashitaConvolutionalNeuralNetworks2018,guRecentAdvancesConvolutional2018,alzubaidiReviewDeepLearning2021}.
-
-
-Key features such as local connections/receptive fields, shared weights, sub-sampling and the use of many layers allows this network to be invariant to shift, scale and distortions.
-
-% Why CNN:
-% - Automatically identifies the relevant features without any human supervision \autocite{alzubaidiReviewDeepLearning2021, yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} 
-% - Little to none preprocessing \autocite{guRecentAdvancesConvolutional2018}
-% - Designed for multi-array data \autocite{lecunDeepLearning2015}
-% - Units at different locations share the same weights and detect the same pattern in different parts of the array \autocite{lecunDeepLearning2015}
-% - Invariance to small shifts, distortions rotations due to the pooling layer \autocite{lecunDeepLearning2015}
-% - Many layers, increase the depth, therefore the netweork can better approximate the target function with increased nonlinearity and get better feature representations. \autocite{guRecentAdvancesConvolutional2018}
-
-
-%Subsections describing what each layer does (probably mentioning some optional ones)
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% In digital images, pixel values are stored in a two-dimensional (2D) grid, i.e., an array of numbers (Fig. 2), and a small grid of parameters called kernel, an optimizable feature extractor, is applied at each image position, which makes CNNs highly efficient for image processing, since a feature may occur anywhere in the image.
-
-%The input layer holds the raw pixel values of the image; the convolutional layer computes the output of nodes that are connected to local regions in the input layer; the pooling layer performs the down-sampling operation along the spatial dimensions; the fully-connected layer computes the class scores; and the output layer gives the final results. In this way, we can create a deep architecture by alternately stacking the convolutional layer and pooling layer. \autocite{caoReviewNeuralNetworks2018}
-
+The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \red{citations needed}, while 2, 3, 4 and 5 helps to reduce the complexity of the model, and as a result training it is easier.
 
 \end{document}
