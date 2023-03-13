@@ -1,3 +1,12 @@
+# LaTeSe
+
+A template that has the advantage, over others, of:
+- Compiling the cover in LaTeX rather that importing an external PDF. This way guarantees the proper formatting, fonts, color palette and logo size/resolution.
+
+- Using the standalone package allows a smoother and faster compilation, since the whole document doesn't need to be compiled, which is a big problem when a lot of graphics are present. The package allows each `.tex` file to be compiled individually while being written and then group compiled when the `main.tex` file is ran. 
+
+</br>
+
 # Requirements for VS Code:
 - [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
 - Zotero
