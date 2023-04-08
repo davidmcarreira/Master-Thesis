@@ -6,9 +6,11 @@
 !pkgs.sty
 
 # Folders
-!background-section/
 !cover/
 !images/
+!introduction/
+!methodology/
+!sota/
 
 #File types
 !*.md
