@@ -1,0 +1,54 @@
+\documentclass[a4paper, 12pt]{report}
+\linespread{1.4}
+
+\def\mainfile{}
+
+%Packages import
+\usepackage{pkgs}
+
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+
+\import{cover/}{cover.tex}
+\newpage
+\tableofcontents
+\frontmatter
+\section*{Acknowledgments}\addcontentsline{toc}{section}{Acknowledgments}
+
+\newpage
+\section*{Abstract}\addcontentsline{toc}{section}{Abstract}
+
+\newpage
+\section*{Resumo}\addcontentsline{toc}{section}{Resumo}
+
+\mainmatter
+
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+\newpage
+\chapter{Introduction}
+\import{introduction/}{introduction.tex}
+
+\newpage
+\chapter{State of The Art}
+\import{sota/}{sota.tex}
+
+\newpage
+\chapter{Methodology}
+
+\newpage
+\chapter{Results}
+
+\newpage
+\chapter{Conclusion}
+
+\newpage
+\printbibliography
+
+\end{document}
