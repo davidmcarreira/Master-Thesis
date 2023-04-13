@@ -548,19 +548,20 @@
   file = {/home/david/Zotero/storage/7VUFR9HB/Deng et al. - 2017 - Marginal Loss for Deep Face Recognition.pdf}
 }
 
-@inproceedings{dengRetinaFaceSingleShotMultiLevel2020,
-  title = {{{RetinaFace}}: {{Single-Shot Multi-Level Face Localisation}} in the {{Wild}}},
+@misc{dengRetinaFaceSinglestageDense2019,
+  title = {{{RetinaFace}}: {{Single-stage Dense Face Localisation}} in the {{Wild}}},
   shorttitle = {{{RetinaFace}}},
-  booktitle = {2020 {{IEEE}}/{{CVF Conference}} on {{Computer Vision}} and {{Pattern Recognition}} ({{CVPR}})},
-  author = {Deng, Jiankang and Guo, Jia and Ververas, Evangelos and Kotsia, Irene and Zafeiriou, Stefanos},
-  year = {2020},
-  month = jun,
-  pages = {5202--5211},
-  issn = {2575-7075},
-  doi = {10.1109/CVPR42600.2020.00525},
-  abstract = {Though tremendous strides have been made in uncontrolled face detection, accurate and efficient 2D face alignment and 3D face reconstruction in-the-wild remain an open challenge. In this paper, we present a novel single-shot, multi-level face localisation method, named RetinaFace, which unifies face box prediction, 2D facial landmark localisation and 3D vertices regression under one common target: point regression on the image plane. To fill the data gap, we manually annotated five facial landmarks on the WIDER FACE dataset and employed a semi-automatic annotation pipeline to generate 3D vertices for face images from the WIDER FACE, AFLW and FDDB datasets. Based on extra annotations, we propose a mutually beneficial regression target for 3D face reconstruction, that is predicting 3D vertices projected on the image plane constrained by a common 3D topology. The proposed 3D face reconstruction branch can be easily incorporated, without any optimisation difficulty, in parallel with the existing box and 2D landmark regression branches during joint training. Extensive experimental results show that RetinaFace can simultaneously achieve stable face detection, accurate 2D face alignment and robust 3D face reconstruction while being efficient through single-shot inference.},
-  keywords = {Face,Face detection,Image reconstruction,Task analysis,Three-dimensional displays,Training,Two dimensional displays},
-  file = {/home/david/Zotero/storage/4FLJMQNL/Deng et al. - 2020 - RetinaFace Single-Shot Multi-Level Face Localisat.pdf;/home/david/Zotero/storage/824EK8MG/stamp.html}
+  author = {Deng, Jiankang and Guo, Jia and Zhou, Yuxiang and Yu, Jinke and Kotsia, Irene and Zafeiriou, Stefanos},
+  year = {2019},
+  month = may,
+  number = {arXiv:1905.00641},
+  eprint = {arXiv:1905.00641},
+  publisher = {{arXiv}},
+  urldate = {2023-04-13},
+  abstract = {Though tremendous strides have been made in uncontrolled face detection, accurate and efficient face localisation in the wild remains an open challenge. This paper presents a robust single-stage face detector, named RetinaFace, which performs pixel-wise face localisation on various scales of faces by taking advantages of joint extra-supervised and self-supervised multi-task learning. Specifically, We make contributions in the following five aspects: (1) We manually annotate five facial landmarks on the WIDER FACE dataset and observe significant improvement in hard face detection with the assistance of this extra supervision signal. (2) We further add a self-supervised mesh decoder branch for predicting a pixel-wise 3D shape face information in parallel with the existing supervised branches. (3) On the WIDER FACE hard test set, RetinaFace outperforms the state of the art average precision (AP) by 1.1\% (achieving AP equal to 91.4\%). (4) On the IJB-C test set, RetinaFace enables state of the art methods (ArcFace) to improve their results in face verification (TAR=89.59\% for FAR=1e-6). (5) By employing light-weight backbone networks, RetinaFace can run real-time on a single CPU core for a VGA-resolution image. Extra annotations and code have been made available at: https://github.com/deepinsight/insightface/tree/master/RetinaFace.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  file = {/home/david/Zotero/storage/97C8PXHB/Deng et al. - 2019 - RetinaFace Single-stage Dense Face Localisation i.pdf;/home/david/Zotero/storage/I79XJZC6/1905.html}
 }
 
 @inproceedings{dengUVGANAdversarialFacial2018,
@@ -1472,6 +1473,24 @@ Very important},
   file = {/home/david/Zotero/storage/3M8SEJJF/Liu et al. - 2018 - SphereFace Deep Hypersphere Embedding for Face Re.pdf;/home/david/Zotero/storage/TA73LZTU/1704.html}
 }
 
+@incollection{liuSSDSingleShot2016,
+  title = {{{SSD}}: {{Single Shot MultiBox Detector}}},
+  shorttitle = {{{SSD}}},
+  author = {Liu, Wei and Anguelov, Dragomir and Erhan, Dumitru and Szegedy, Christian and Reed, Scott and Fu, Cheng-Yang and Berg, Alexander C.},
+  year = {2016},
+  volume = {9905},
+  eprint = {1512.02325},
+  primaryclass = {cs},
+  pages = {21--37},
+  doi = {10.1007/978-3-319-46448-0_2},
+  urldate = {2023-04-13},
+  abstract = {We present a method for detecting objects in images using a single deep neural network. Our approach, named SSD, discretizes the output space of bounding boxes into a set of default boxes over different aspect ratios and scales per feature map location. At prediction time, the network generates scores for the presence of each object category in each default box and produces adjustments to the box to better match the object shape. Additionally, the network combines predictions from multiple feature maps with different resolutions to naturally handle objects of various sizes. Our SSD model is simple relative to methods that require object proposals because it completely eliminates proposal generation and subsequent pixel or feature resampling stage and encapsulates all computation in a single network. This makes SSD easy to train and straightforward to integrate into systems that require a detection component. Experimental results on the PASCAL VOC, MS COCO, and ILSVRC datasets confirm that SSD has comparable accuracy to methods that utilize an additional object proposal step and is much faster, while providing a unified framework for both training and inference. Compared to other single stage methods, SSD has much better accuracy, even with a smaller input image size. For \$300\textbackslash times 300\$ input, SSD achieves 72.1\% mAP on VOC2007 test at 58 FPS on a Nvidia Titan X and for \$500\textbackslash times 500\$ input, SSD achieves 75.1\% mAP, outperforming a comparable state of the art Faster R-CNN model. Code is available at https://github.com/weiliu89/caffe/tree/ssd .},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  note = {Comment: ECCV 2016},
+  file = {/home/david/Zotero/storage/RE2MU8FP/Liu et al. - 2016 - SSD Single Shot MultiBox Detector.pdf;/home/david/Zotero/storage/SXCPRCBW/1512.html}
+}
+
 @misc{liuTargetingUltimateAccuracy2015,
   title = {Targeting {{Ultimate Accuracy}}: {{Face Recognition}} via {{Deep Embedding}}},
   shorttitle = {Targeting {{Ultimate Accuracy}}},
@@ -1934,6 +1953,23 @@ Loss functions},
   langid = {english},
   annotation = {34 citations (Crossref) [2023-02-28]},
   file = {/home/david/Zotero/storage/VNJT2I6P/Rao et al. - 2017 - Learning Discriminative Aggregation Network for Vi.pdf}
+}
+
+@misc{renFasterRCNNRealTime2016,
+  title = {Faster {{R-CNN}}: {{Towards Real-Time Object Detection}} with {{Region Proposal Networks}}},
+  shorttitle = {Faster {{R-CNN}}},
+  author = {Ren, Shaoqing and He, Kaiming and Girshick, Ross and Sun, Jian},
+  year = {2016},
+  month = jan,
+  number = {arXiv:1506.01497},
+  eprint = {arXiv:1506.01497},
+  publisher = {{arXiv}},
+  urldate = {2023-04-13},
+  abstract = {State-of-the-art object detection networks depend on region proposal algorithms to hypothesize object locations. Advances like SPPnet and Fast R-CNN have reduced the running time of these detection networks, exposing region proposal computation as a bottleneck. In this work, we introduce a Region Proposal Network (RPN) that shares full-image convolutional features with the detection network, thus enabling nearly cost-free region proposals. An RPN is a fully convolutional network that simultaneously predicts object bounds and objectness scores at each position. The RPN is trained end-to-end to generate high-quality region proposals, which are used by Fast R-CNN for detection. We further merge RPN and Fast R-CNN into a single network by sharing their convolutional features---using the recently popular terminology of neural networks with 'attention' mechanisms, the RPN component tells the unified network where to look. For the very deep VGG-16 model, our detection system has a frame rate of 5fps (including all steps) on a GPU, while achieving state-of-the-art object detection accuracy on PASCAL VOC 2007, 2012, and MS COCO datasets with only 300 proposals per image. In ILSVRC and COCO 2015 competitions, Faster R-CNN and RPN are the foundations of the 1st-place winning entries in several tracks. Code has been made publicly available.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  note = {Comment: Extended tech report},
+  file = {/home/david/Zotero/storage/YNBMUM8A/Ren et al. - 2016 - Faster R-CNN Towards Real-Time Object Detection w.pdf;/home/david/Zotero/storage/EWPELMLX/1506.html}
 }
 
 @article{rochesterTestsCellAssembly1956,
