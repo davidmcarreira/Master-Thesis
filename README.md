@@ -1,5 +1,4 @@
-# LaTeSe - A template for a master's thesis at the University of Coimbra
-
+<h1 style="text-align:center;">LaTeSe - A template for a master's thesis at the University of Coimbra</h1>
 <p align="center">
     <a href="https://www.uc.pt/" target="_blank">
         <img src="images/MarcaUC_v.png" width="300">
