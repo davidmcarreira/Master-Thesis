@@ -1,25 +1,27 @@
 # LaTeSe
 
 A template that has the advantage, over others, of:
-- Compiling the cover in LaTeX rather that importing an external PDF. This way guarantees the proper formatting, fonts, color palette and logo size/resolution.
+- Compiling the cover in LaTeX rather that importing an external PDF. This guarantees the proper formatting, fonts, color palette and logo size/resolution.
 
-- Using the standalone package allows a smoother and faster compilation, since the whole document doesn't need to be compiled, which is a big problem when a lot of graphics are present. The package allows each `.tex` file to be compiled individually while being written and then group compiled when the `main.tex` file is ran. 
+- Using the \standalone package allows a smoother and faster compilation, since the whole document doesn't need to be compiled, which is a big problem when a lot of graphics are present. The package allows each `.tex` file to be compiled individually while being written and then group compiled when the `main.tex` file is ran. 
 
 </br>
 
-# Requirements for VS Code:
+## Requirements for VS Code:
 - [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
 - Zotero
     - Zotero browser extension
     - [Zotero LaTeX (VS Code extension)](https://marketplace.visualstudio.com/items?itemName=bnavetta.zoterolatex)
 - [Optional: LTeX - LanguageTool (VS Code extension)](https://marketplace.visualstudio.com/items?itemName=valentjn.vscode-ltex)
 
-# Requirements for Overleaf:
+## Requirements for Overleaf:
 - Untested for now
 
 </br>
-</br>
 
+## Special macros
+- `\red{}` easily colors the text red (useful to indicate placeholders or temporary content).
+- `\reffig{}` automatically references mid-text the figure with the correct number and creates a hyperlink to it. Takes as an argument the label of the figure, i.e. `\reffig{fig:label name}`, and outputs (Figure #).
 ---
 
 # Notes:
