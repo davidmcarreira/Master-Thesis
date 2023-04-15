@@ -1,7 +1,7 @@
 # LaTeSe - A template for a master's thesis at the University of Coimbra
 
 <p align="center">
-    <a href="https://www.uc.pt/">
+    <a href="https://www.uc.pt/" target="_blank">
         <img src="images/MarcaUC_v.png" width="300">
     </a>
 </p>
