@@ -1,5 +1,14 @@
-# LaTeSe
+# LaTeSe - A template for a master's thesis at the University of Coimbra
 
+<div style="text-align:center">
+    <a href="https://www.uc.pt/">
+        <img src="images/MarcaUC_v.png" width="300">
+    </a>
+</div>
+
+</br>
+
+---
 A template that has the advantage, over others, of:
 - Compiling the cover in LaTeX rather that importing an external PDF. This guarantees the proper formatting, fonts, color palette and logo size/resolution.
 
