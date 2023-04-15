@@ -77,7 +77,7 @@ Face Recognition (FR) is a thoroughly debated and extensively researched task in
         \footnotesize b)
     \end{minipage}
     \vspace{-0.4cm}
-    \caption{Comparison between a) MTCNN: multi-stage, CPU real-time and multi-task learning, and b) RetinaFace: single-stage, anchor-based, CPU real-time and multi-task learning. MTCNN \autocite{zhangJointFaceDetection2016a} proposes a series of bounding boxes then, through a series of refinement stages, the best solution and landmarks are found. RetinaFace \autocite{dengRetinaFaceSinglestageDense2019} accomplishes, in a single-stage, face classification and bounding box regression by evaluating anchors, landmark localization and dense 3D projection for facial correspondence.}
+    \caption{Comparison between \textbf{a)} MTCNN: multi-stage, CPU real-time and multi-task learning, and \textbf{b)} RetinaFace: single-stage, anchor-based, CPU real-time and multi-task learning. MTCNN \autocite{zhangJointFaceDetection2016a} proposes a series of bounding boxes then, through a series of refinement stages, the best solution and landmarks are found. RetinaFace \autocite{dengRetinaFaceSinglestageDense2019} accomplishes, in a single-stage, face classification and bounding box regression by evaluating anchors, landmark localization and dense 3D projection for facial correspondence.}
     \label{fig:mtcnn vs retinaface}
 \end{figure}
   
@@ -107,25 +107,23 @@ Face Recognition (FR) is a thoroughly debated and extensively researched task in
 Although this distribution can create some overlap among the categories, it is superior due to the simplicity of inferring what defines each category and being a more fine-grained way of classifying techniques when compared to others, namely the dual categorical division by \autocite{ranjanDeepLearningUnderstanding2018} that groups the methods in region\footnote{Region-based approaches creates thousands of generic object-proposals for every image, and subsequently, a DCNN classifies if a face is present in any of them.} or sliding-window\footnote{Sliding-window approaches centers on using a DCNN to compute a face detection score and bounding box at every location in a feature map.} based. 
 
 \subsection{Face Alignment}
-\par Face Alignment is the second stage of the face recognition pipeline, and has the objective of calibrating the detected face to a canonical layout, through landmark-based or landmark-free approaches, in order to leverage the core final stage of face representation \autocite{duElementsEndtoendDeep2022}. 
+\par Face Alignment, or facial landmark detection \autocite{changFacePoseNetMakingCase2017}, is the second stage of the face recognition pipeline, and has the objective of calibrating the detected face to a canonical layout, through landmark-based or landmark-free approaches, in order to leverage the core final stage of face representation \autocite{duElementsEndtoendDeep2022}. 
 \par Despite the fact that traditional face alignment methods are very accurate, that only occurs in constrained circumstances. Therefore, once again, to address that issue, deep learning-based methods are the solution to perform an accurate facial landmark localization that realistically scales to real world scenarios \autocite{fengWingLossRobust2018}. 
-\par This step in the face recognition process can be accomplished through standalone methods that process the detected face from the previous stage, or through joint detection and alignment methods, as previously mentioned in the \hyperref[mt learning]{multi-task learning} definition.
-
-
+\par Furthermore, face alignment (or landmark localization), can be accomplished through two categories of methods: landmark-based and landmark-free.
 
 \vspace{\baselineskip}
-\par \noindent \textbf{Landmark-based alignment}
+\par \noindent \textbf{Landmark-based alignment} is a category of methods that exploits the facial landmarks with the aim of, through spatial transformations, calibrating the face to an established layout \autocite{duElementsEndtoendDeep2022}. This can be accomplished through: coordinate regression, heatmap regression or 3D Model Fitting. \textbf{Coordinate regression-based} methodologies \autocite{fengWingLossRobust2018,liuTwoStreamTransformerNetworks2018,zhangJointFaceDetection2016a} consider the landmark localization as a numerical objective, i.e. a regression, thus an image is fed to a DCNN and it will output a vector of landmark coordinates. \textbf{Heatmap Regression} \autocite{dengJointMultiviewFace2017,wuLookBoundaryBoundaryAware2018,chenFaceAlignmentKernel2019} is different from coordinate regression because, although it is a numerical objective task, the output is not a coordinate vector, but a map of likelihood of landmarks' locations. Finally, \textbf{3D Model Fitting} \autocite{bhagavatulaFasterRealtimeFacial2017,changFacePoseNetMakingCase2017,xiaoRecurrent3D2DDual2017}is the category that integrates methods that consider the relation between 2D facial landmarks and the 3D shape of a generic face. The particularity of them is the reconstruction of the 3D face from a 2D face image that is then projected over a plane in order to obtain the landmarks. 
 
 \vspace{\baselineskip}
-\par \noindent \textbf{Landmark-free alignment}
+\par \noindent \textbf{Landmark-free alignment}, on the other hand, integrates the approaches that do not rely on landmarks as a reference to align the face, in contrast, these type of methods incorporate the alignment into a DCNN that gives, as a result, an aligned face \autocite{duElementsEndtoendDeep2022}. An example of an end-to-end method that does not depend on facial landmarks is RDCFace \autocite{zhaoRDCFaceRadialDistortion2020}, and it rectifies distortions, applies alignment transformations and executes face representation. Hayat et al. \autocite{hayatJointRegistrationRepresentation2017} proposes a method that deals with extreme head poses. The process to register faces in an image with high pose variance can be quite challenging and often demands complex pre-processing, namely landmark localization, therefore, to address that, a DCNN is employed that does not rely on landmark localization and concomitantly register and represent faces.
 
 %A facial landmark is nothing more than an important geometric point of reference that facilitates the alignment by acting as a reference 
 
-
-
-\subsubsection{Joint Face Detection and Alignment}
+\par As can be seen from the previous section, this step in the face recognition process can be accomplished, very sporadically, through standalone methods that process the detected face from the previous stage, but generally joint detection and alignment methods (and sometimes even face representation) is the optimal choice \autocite{changFacePoseNetMakingCase2017}, as previously mentioned in the \hyperref[mt learning]{multi-task learning} definition.
 
 \subsection{Face Representation}
+
+\newpage
 \section{Face Representation Pipeline}
 
 
