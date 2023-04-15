@@ -1,10 +1,10 @@
 # LaTeSe - A template for a master's thesis at the University of Coimbra
 
-<div style="text-align:center">
+<p align="center">
     <a href="https://www.uc.pt/">
         <img src="images/MarcaUC_v.png" width="300">
     </a>
-</div>
+</p>
 
 </br>
 
