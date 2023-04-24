@@ -25,13 +25,14 @@ Face Recognition (FR) is a thoroughly debated and extensively researched task in
 % \vspace{0.7\baselineskip}
 % \noindent\textbf{Image querying}, is the process of finding information in a database of images that corresponds to the user query\footnote{Query, in computer science, is the request for information in a database.}, in this case, an image query\autocite{bartoliniImageQuerying2009}.  
 
+\section{A Face Recognition System}
+
 \begin{figure}[!h]
     \includegraphics[scale=0.30]{fr_pipeline.png}
     \caption[Pipeline]{A typical face recognition pipeline, guided by the approach in \autocite{wangDeepFaceRecognition2021}.}
     \label{fig:fr pipeline}
 \end{figure}
 
-\section{A Face Recognition System}
 \par According to Ranjan \textit{et al.} \autocite{ranjanDeepLearningUnderstanding2018}, the goal of a FR system is to find, process and learn from a face, gathering as much information as possible, and as a result, it is one of the most widely implemented biometric system solutions, in light of its versatility when facing real world application \autocite{duElementsEndtoendDeep2022}, such as \red{military, public security and daily life}.
 
 \par By and large, all end-to-end automatic face recognition systems follow a sequential and modular\footnote{Sequential because each stage relies on the output from the previous ones, and modular in the sense that each stage employs its own method and it can be modified to better adapt to specific tasks.} pipeline \reffig{fig:fr pipeline} composed of three pillar stages \autocite{wangDeepFaceRecognition2021}: face detection, face alignment and face representation. First an image or video feed is used as an input then, as the name suggests, the \textbf{face detection} module is responsible for finding a face. Next, the \textbf{face alignment} phase applies spatial transformations to the data in order to normalize the faces' pictures (or frames, in the case where a video is used) to a standardized view. Finally, the \textbf{face representation} stage, makes use of deep learning techniques to learn discriminative features that will allow the recognition.
@@ -117,7 +118,7 @@ Although this distribution can create some overlap among the categories, it is s
 \par As can be seen from the previous section, this step in the face recognition process can be accomplished, very sporadically, through standalone methods that process the detected face from the previous stage, but generally joint detection and alignment methods (and sometimes even face representation), previously referenced in the \hyperref[mt learning]{multi-task learning} definition, are the optimal choice \autocite{changFacePoseNetMakingCase2017}.
 
 \subsection{Face Representation}
-\par Finally, Face Representation is the last stage of the Face Recognition process. It is responsible for processing the aligned face from the previous stage and map it to a feature space, in which features from the same person are closer together and those that are different stand further apart from each other \autocite{duElementsEndtoendDeep2022}.
+\par Finally, Face Representation is the last stage of the Face Recognition process. It is responsible for processing the aligned face from the previous stage and mapping the produced feature representation to a feature space, in which features from the same person are closer together and those that are different stand further apart from each other \autocite{duElementsEndtoendDeep2022}.
 \par According to the literature \autocite{duElementsEndtoendDeep2022,liHandbookFaceRecognition2011,ranjanDeepLearningUnderstanding2018,schroffFaceNetUnifiedEmbedding2015,wangDeepFaceRecognition2021}, there's a consensus about how Face Recognition can be performed in two settings of operation: face verification and face identification. This distinction is only made possible due to the approaches available in the Face Representation stage that can leverage one, the other or both. 
 
 \vspace{0.7\baselineskip}
@@ -131,9 +132,28 @@ Although this distribution can create some overlap among the categories, it is s
 
 \newpage
 \section{Face Representation Pipeline}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.4]{frep_pipeline.png}
+    \caption[Pipeline]{Face Representation pipeline, guided by the approach in \autocite{wangDeepFaceRecognition2021}.}
+    \label{fig:frep pipeline}
+\end{figure}
 
-\newpage
-\subsection{Convolutional Neural Networks} %Review this article \autocite{kangDeepSimilarityMetric2019}
+\par As show in \reffig{fig:frep pipeline}, Face Representation is a two-step module composed of a training and testing stage. So as to be capable of performing face recognition, in either a verification or identification manner, a face representation system needs to learn robust, invariant and discriminative features that can distinguish identities \autocite{ranjanDeepLearningUnderstanding2018}. 
+\par To meet these requirements, the feature extractor must first be trained properly by taking data from previous stages and producing an output that's compared to the desired value using a loss function\footnote{Also referred to as a cost or objective function. \autocite{lecunDeepLearning2015}} \autocite{lecunDeepLearning2015, wangDeepFaceRecognition2021}. After that, everything is ready for the testing stage, where the face recognition \textit{per se} occurs by calculating a similarity score for the feature representation produced by the trained feature extractor, and dictating if the identity belongs to the same person (face verification) or if it matches any identity (face identification) \autocite{ranjanDeepLearningUnderstanding2018}.
+
+
+
+
+
+
+
+
+\subsection{Training Stage}
+
+\subsubsection{Training Data - Datasets}
+\subsubsection{Transfer Learning}
+\subsubsection{Feature Extraction - Deep Convolutional Neural Networks}
 There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} with successful applications in the domains of Computer Vision \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021} or Natural Language Processing\autocite{abdel-hamidConvolutionalNeuralNetworks2014, wangGenCNNConvolutionalArchitecture2015, xiangConvolutionalNeuralNetworkbased2020}. In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers: the raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, yamashitaConvolutionalNeuralNetworks2018, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}. The convolutional layer is designed to extract feature representations by being composed of kernels (or filter banks \autocite{lecunDeepLearning2015}) that compute feature maps through element-wise product, to which is applied a nonlinear activation function \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. Next is the pooling layer, that's responsible for reducing the spatial size of the input data \autocite{guRecentAdvancesConvolutional2018} and joining identical features \autocite{lecunDeepLearning2015}. Finally, the fully connected layers, and their core function is to perform high logic and generate semantic information \autocite{guRecentAdvancesConvolutional2018}.
 
 \begin{figure}[t!]
@@ -154,4 +174,9 @@ There are several types of Neural Networks architectures, but Convolutional Neur
 % Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
 
 The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \autocite{guRecentAdvancesConvolutional2018,lecunDeepLearning2015}, while 2, 3, 4 and 5 helps to reduce the complexity of the model, and as a result training it is easier\autocite{guRecentAdvancesConvolutional2018,liSurveyConvolutionalNeural2022}.
+\subsubsection{Loss}
+
+\subsection{Testing Stage}
+
+
 \end{document}
