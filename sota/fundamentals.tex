@@ -144,16 +144,63 @@ Although this distribution can create some overlap among the categories, it is s
 
 
 
+\subsection{Datasets}
+\par As been discussed throughout this dissertation, Deep Learning techniques can solve the problem of handling unconstrained scenarios, where there are variations in pose, illumination, occlusion, and so forth. To support this, in the past few years, datasets have been developed with this in mind so to be able to provide a large and diverse set of both training data, allowing for adequate regularization to unseen circumstances, and testing data that benchmarks the face recognition system in, as similar as possible, unconstrained real world scenarios \autocite{duElementsEndtoendDeep2022}. 
+
+\subsubsection{Training Data}
+\par Large training datasets are essential for face recognition, therefore, there is an abundance of options available. Earlier works \autocite{schroffFaceNetUnifiedEmbedding2015,sunDeepLearningFace2014,taigmanDeepFaceClosingGap2014} resourced private face datasets, but as time passed, more public datasets were released. 
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{CASIA-WebFace} \autocite{yiLearningFaceRepresentation2014}, composed of 494,414 face images and 10,575 identities, was proposed as a novel dataset to overcome the problem of data dependence in face recognition and improve comparability across different methods. By training on the same dataset, methods can be better evaluated and compared.
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{VGGFace} 2014
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{CelebA} 2015
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{UMDFaces} 2015
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{MS-Celeb-1M} 2015
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{MegaFace} 2016
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{VGGFace2} 2017
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{UMDFaces-Videos} 2017
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{IMDb-Face} 2018
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{QMUL-SurvFace} 2018
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{Glint360K} 2021
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{WebFace260M} 2021
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{FaVCI2D} (2022)
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{CAFR} (2022) \autocite{zhaoAgeInvariantFaceRecognition2022}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{DigiFace-1M} (2023)
+
+\subsubsection{Testing Data}
+\par After the training is completed the performance of the system needs to be evaluated on different challenges to properly access if it scales (or generalizes or applies or performs in) to real-world scenarios. A test dataset can be chosen for specific hurdles, for instance, cross-pose, cross-age, racial variations, quality assessment, and so forth \autocite{duElementsEndtoendDeep2022}.
 
 
+\subsection{Feature Extraction}
 
-
-
-\subsection{Training Stage}
-
-\subsubsection{Training Data - Datasets}
-\subsubsection{Transfer Learning}
-\subsubsection{Feature Extraction - Deep Convolutional Neural Networks}
 There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} with successful applications in the domains of Computer Vision \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021} or Natural Language Processing\autocite{abdel-hamidConvolutionalNeuralNetworks2014, wangGenCNNConvolutionalArchitecture2015, xiangConvolutionalNeuralNetworkbased2020}. In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers: the raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, yamashitaConvolutionalNeuralNetworks2018, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}. The convolutional layer is designed to extract feature representations by being composed of kernels (or filter banks \autocite{lecunDeepLearning2015}) that compute feature maps through element-wise product, to which is applied a nonlinear activation function \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. Next is the pooling layer, that's responsible for reducing the spatial size of the input data \autocite{guRecentAdvancesConvolutional2018} and joining identical features \autocite{lecunDeepLearning2015}. Finally, the fully connected layers, and their core function is to perform high logic and generate semantic information \autocite{guRecentAdvancesConvolutional2018}.
 
 \begin{figure}[t!]
@@ -174,9 +221,9 @@ There are several types of Neural Networks architectures, but Convolutional Neur
 % Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
 
 The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \autocite{guRecentAdvancesConvolutional2018,lecunDeepLearning2015}, while 2, 3, 4 and 5 helps to reduce the complexity of the model, and as a result training it is easier\autocite{guRecentAdvancesConvolutional2018,liSurveyConvolutionalNeural2022}.
-\subsubsection{Loss}
 
-\subsection{Testing Stage}
+\subsubsection{Transfer Learning}
 
+\subsection{Loss}
 
 \end{document}
