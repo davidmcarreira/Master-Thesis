@@ -144,10 +144,10 @@ Although this distribution can create some overlap among the categories, it is s
 
 
 
-\subsection{Datasets}
+\subsection{Datasets: Training and Testing Data}
 \par As been discussed throughout this dissertation, Deep Learning techniques can solve the problem of handling unconstrained scenarios, where there are variations in pose, illumination, occlusion, and so forth. To support this, in the past few years, datasets have been developed with this in mind so to be able to provide a large and diverse set of both training data, allowing for adequate regularization to unseen circumstances, and testing data that benchmarks the face recognition system in, as similar as possible, unconstrained real world scenarios \autocite{duElementsEndtoendDeep2022}. 
 
-\subsubsection{Training Data}
+\subsubsection{\large Training Data}
 \par Large training datasets are essential for face recognition, therefore, there is an abundance of options available. Earlier works \autocite{schroffFaceNetUnifiedEmbedding2015,sunDeepLearningFace2014,taigmanDeepFaceClosingGap2014} resourced private face datasets, but as time passed, more public datasets were released. 
 
 \vspace{0.7\baselineskip}
@@ -182,10 +182,10 @@ Although this distribution can create some overlap among the categories, it is s
 % The introduction of noisy labels does not increase face verification performance, clean data always performs better. Although, the difference between a clean dataset and one with a low percentage of noise (less than 5\%) is very low.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{IMDb-Face} proposes a new dataset with based on a manually cleaned revision of MS-Celeb-1M and MegaFace. The growing demand for large-scale datasets introduced a new variable to take into consideration: the time available to annotate the data. Datasets that are well-annotated and have an enormous amount of data are notably expensive and time-consuming to develop. Therefore, automatic measures to clean the data were used, so it's expected for a certain degree of noise to be introduced in a dataset. After selecting a subset from both the originals datasets, 2 million images were manually cleaned and resulted in 1,7 million images of 59 thousand celebrities.
+\noindent\textbf{IMDb-Face} \autocite{wangDevilFaceRecognition2018} proposes a new dataset with based on a manually cleaned revision of MS-Celeb-1M and MegaFace. The growing demand for large-scale datasets introduced a new variable to take into consideration: the time available to annotate the data. Datasets that are well-annotated and have an enormous amount of data are notably expensive and time-consuming to develop. Therefore, automatic measures to clean the data were used, so it's expected for a certain degree of noise to be introduced in a dataset. After selecting a subset from both the originals datasets, 2 million images were manually cleaned and resulted in 1,7 million images of 59 thousand celebrities.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{QMUL-SurvFace} 2018
+\noindent\textbf{QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{Glint360K} 2021
@@ -205,7 +205,32 @@ Although this distribution can create some overlap among the categories, it is s
 \vspace{\baselineskip}
 \par Although some of the previously referenced datasets do have a benchmarking component, they're generally employed to train algorithms, opposed to the following datasets that are described as "benchmarks". A common denominator throughout the machine learning domain, and more specifically, deep learning, is a general difficulty in separating concepts with a single line. This is a non-linear science in its nature.
 
-\subsubsection{Testing Data}
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|c|}
+    \hline
+    \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Images} & \textbf{Identities} & \textbf{Depth} & \textbf{Year} & \textbf{} \\ \hline
+    CASIA-WebFace                          &                 &                     &                    & 2014          &           \\ \hline
+    VGGFace                                &                 &                     &                    & 2015          &           \\ \hline
+    MS-Celeb-1M                            &                 &                     &                    & 2016          &           \\ \hline
+    MegaFace                               &                 &                     &                    & 2016          &           \\ \hline
+    VGGFace2                               &                 &                     &                    & 2017          &           \\ \hline
+    UMDFaces-Videos                        &                 &                     &                    & 2017          &           \\ \hline
+    IMDb-Face                              &                 &                     &                    &               &           \\ \hline
+    QMUL-SurvFace                          &                 &                     &                    &               &           \\ \hline
+    Glint360k                              &                 &                     &                    &               &           \\ \hline
+    WebFace260M                            &                 &                     &                    &               &           \\ \hline
+    FaVCI2D                                &                 &                     &                    &               &           \\ \hline
+    CAFR                                   &                 &                     &                    &               &           \\ \hline
+    DigiFace-1M                            &                 &                     &                    &               &           \\ \hline
+    \end{tabular}
+    \caption{Testing the caption placement for tables Testing the caption placement for tables Testing the caption placement for tables Testing the caption placement for tables Testing the caption placement for tables}
+    \label{tab:tab1}
+\end{table}
+
+\newpage
+\subsubsection{\large Testing Data}
 
 \par After the training is completed the performance of the system needs to be evaluated on different challenges to properly access if it scales (or generalizes or applies or performs in) to real-world scenarios. A test dataset can be chosen for specific hurdles, for instance, cross-pose, cross-age, racial variations, quality assessment, and so forth \autocite{duElementsEndtoendDeep2022}.
 

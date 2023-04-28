@@ -123,6 +123,24 @@
   file = {/home/david/Zotero/storage/2H73HNMX/An et al. - 2022 - Killing Two Birds with One Stone Efficient and Ro.pdf}
 }
 
+@misc{anPartialFCTraining2021,
+  title = {Partial {{FC}}: {{Training}} 10 {{Million Identities}} on a {{Single Machine}}},
+  shorttitle = {Partial {{FC}}},
+  author = {An, Xiang and Zhu, Xuhan and Xiao, Yang and Wu, Lan and Zhang, Ming and Gao, Yuan and Qin, Bin and Zhang, Debing and Fu, Ying},
+  year = {2021},
+  month = jan,
+  number = {arXiv:2010.05222},
+  eprint = {2010.05222},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  urldate = {2023-04-28},
+  abstract = {Face recognition has been an active and vital topic among computer vision community for a long time. Previous researches mainly focus on loss functions used for facial feature extraction network, among which the improvements of softmax-based loss functions greatly promote the performance of face recognition. However, the contradiction between the drastically increasing number of face identities and the shortage of GPU memories is gradually becoming irreconcilable. In this paper, we thoroughly analyze the optimization goal of softmax-based loss functions and the difficulty of training massive identities. We find that the importance of negative classes in softmax function in face representation learning is not as high as we previously thought. The experiment demonstrates no loss of accuracy when training with only 10\textbackslash\% randomly sampled classes for the softmax-based loss functions, compared with training with full classes using state-of-the-art models on mainstream benchmarks. We also implement a very efficient distributed sampling algorithm, taking into account model accuracy and training efficiency, which uses only eight NVIDIA RTX2080Ti to complete classification tasks with tens of millions of identities. The code of this paper has been made available https://github.com/deepinsight/insightface/tree/master/recognition/partial\_fc.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition,{Computer Science - Distributed, Parallel, and Cluster Computing}},
+  note = {Comment: 8 pages, 9 figures},
+  file = {/home/david/Zotero/storage/SLM4MH5I/An et al. - 2021 - Partial FC Training 10 Million Identities on a Si.pdf;/home/david/Zotero/storage/V6WI4FW7/2010.html}
+}
+
 @article{ansariHumanDetectionTechniques2021,
   title = {Human Detection Techniques for Real Time Surveillance: A Comprehensive Survey},
   shorttitle = {Human Detection Techniques for Real Time Surveillance},
@@ -434,6 +452,23 @@
   pages = {467--476},
   issn = {1941-0042},
   doi = {10.1109/TIP.2002.999679}
+}
+
+@misc{chengSurveillanceFaceRecognition2018,
+  title = {Surveillance {{Face Recognition Challenge}}},
+  author = {Cheng, Zhiyi and Zhu, Xiatian and Gong, Shaogang},
+  year = {2018},
+  month = aug,
+  number = {arXiv:1804.09691},
+  eprint = {1804.09691},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  urldate = {2023-04-28},
+  abstract = {Face recognition (FR) is one of the most extensively investigated problems in computer vision. Significant progress in FR has been made due to the recent introduction of the larger scale FR challenges, particularly with constrained social media web images, e.g. high-resolution photos of celebrity faces taken by professional photo-journalists. However, the more challenging FR in unconstrained and low-resolution surveillance images remains largely under-studied. To facilitate more studies on developing FR models that are effective and robust for low-resolution surveillance facial images, we introduce a new Surveillance Face Recognition Challenge, which we call the QMUL-SurvFace benchmark. This new benchmark is the largest and more importantly the only true surveillance FR benchmark to our best knowledge, where low-resolution images are not synthesised by artificial down-sampling of native high-resolution images. This challenge contains 463,507 face images of 15,573 distinct identities captured in real-world uncooperative surveillance scenes over wide space and time. As a consequence, it presents an extremely challenging FR benchmark. We benchmark the FR performance on this challenge using five representative deep learning face recognition models, in comparison to existing benchmarks. We show that the current state of the arts are still far from being satisfactory to tackle the under-investigated surveillance FR problem in practical forensic scenarios. Face recognition is generally more difficult in an open-set setting which is typical for surveillance scenarios, owing to a large number of non-target people (distractors) appearing open spaced scenes. This is evidently so that on the new Surveillance FR Challenge, the top-performing CentreFace deep learning FR model on the MegaFace benchmark can now only achieve 13.2\% success rate (at Rank-20) at a 10\% false alarm rate.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  note = {Comment: The QMUL-SurvFace challenge is publicly available at https://qmul-survface.github.io/},
+  file = {/home/david/Zotero/storage/HWXQKI8W/Cheng et al. - 2018 - Surveillance Face Recognition Challenge.pdf;/home/david/Zotero/storage/AHXGLMGU/1804.html}
 }
 
 @misc{chenMobileFaceNetsEfficientCNNs2018,
