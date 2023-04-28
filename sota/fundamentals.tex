@@ -154,7 +154,9 @@ Although this distribution can create some overlap among the categories, it is s
 \noindent\textbf{CASIA-WebFace} \autocite{yiLearningFaceRepresentation2014}, composed of 494,414 face images and 10,575 identities, was proposed as a novel dataset to overcome the problem of data dependence in face recognition and improve comparability across different methods. By training on the same dataset, methods can be better evaluated and compared.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{VGGFace} \autocite{parkhiDeepFaceRecognition2015} was published alongside a homonymous face recognition method and, once again, with the objective of combating the lack of available large scale public datasets. It contains, roughly, 2,6 million images and 2,622 different identities.
+\noindent\textbf{VGGFace} \autocite{parkhiDeepFaceRecognition2015} was published alongside a homonymous face recognition method and, once again, with the objective of combating the lack of available large scale public datasets. It contains 2,6 million images and 2,622 different identities and a curated version, where incorrect image labels were hand-removed by humans, has 800,000 images for the same amount of identities.
+
+% Both datasets were released for training only purposes \autocite{caoVGGFace2DatasetRecognising2018}.
 
 % \vspace{0.7\baselineskip}
 % \noindent\textbf{CelebA} 2015
@@ -166,16 +168,21 @@ Although this distribution can create some overlap among the categories, it is s
 \noindent\textbf{MS-Celeb-1M}'s \autocite{guoMSCeleb1MDatasetBenchmark2016} first intention was to provide a novel benchmark to identify celebrities that solves name ambiguities by linking a face with an entity key in a knowledge base. Second, it aimed at solving the gap in available large-scale datasets by providing a training set with, approximately, 10 million images and 100 thousand identities.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{MF2} \autocite{nechLevelPlayingField2017} introduced a benchmark for million-scale face recognition and provided a public large-scale training dataset that integrated 4,7 million images over 672 thousand identities. The main difference compared to the previously mentioned datasets is that MF2 does not use celebrities as subjects, in contrast it leverages the photographs released by Flickr under the Creative Commons license. 
+\noindent\textbf{MegaFace} \autocite{nechLevelPlayingField2017} introduced a benchmark for million-scale face recognition and provided a public large-scale training dataset that integrated 4,753,320 faces over 672,057 identities. The main difference compared to the previously mentioned datasets is that MegaFace does not use celebrities as subjects, in contrast it leverages the photographs released by Flickr under the Creative Commons license. 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{VGGFace2} 2017
+\noindent\textbf{VGGFace2} \autocite{caoVGGFace2DatasetRecognising2018} is another large-scale dataset, and its main goals are: 1) covering numerous identities, 2) reduce labeling noise through automatic and manual filtering and, finally, 3) represent more realistic unconstrained scenarios due to a novel dataset generation pipeline that gathers images with a broad range of poses, age, illumination and ethnicity. All in all, this resulted in a dataset comprised of 3,31 million faces of 9131 subjects.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{UMDFaces-Videos} 2017
+\noindent\textbf{UMDFaces-Videos} \autocite{bansalDonTsCNNbased2017} is a video-based dataset composed of 22,075 videos of 3,107 subjects with 3,735,476 human annotated frames with great variation in image quality, pose, expressions and lightning. It was proposed during a study how the performance of a face verification models is impacted by the effects of: 1) the type of media used for training (only videos or still images vs a mixture of both), 2) \red{the width and depth of a dataset}, 3) the label's noise and 4) the alignment of the faces.
+
+
+% training on a mixture of still images and videos boosts performance. There's a bias toward high quality images in still datasets due to the way of capturing the data (high quality cameras). Models trained only on still images perform poorly on frames extracted from videos, they're very challenging due to pose, expression and illumination variations. Models trained only on videos perform poorly on datasets composed of only still images.
+
+% The introduction of noisy labels does not increase face verification performance, clean data always performs better. Although, the difference between a clean dataset and one with a low percentage of noise (less than 5\%) is very low.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{IMDb-Face} 2018
+\noindent\textbf{IMDb-Face} proposes a new dataset with based on a manually cleaned revision of MS-Celeb-1M and MegaFace. The growing demand for large-scale datasets introduced a new variable to take into consideration: the time available to annotate the data. Datasets that are well-annotated and have an enormous amount of data are notably expensive and time-consuming to develop. Therefore, automatic measures to clean the data were used, so it's expected for a certain degree of noise to be introduced in a dataset. After selecting a subset from both the originals datasets, 2 million images were manually cleaned and resulted in 1,7 million images of 59 thousand celebrities.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{QMUL-SurvFace} 2018
@@ -195,7 +202,11 @@ Although this distribution can create some overlap among the categories, it is s
 \vspace{0.7\baselineskip}
 \noindent\textbf{DigiFace-1M} (2023)
 
+\vspace{\baselineskip}
+\par Although some of the previously referenced datasets do have a benchmarking component, they're generally employed to train algorithms, opposed to the following datasets that are described as "benchmarks". A common denominator throughout the machine learning domain, and more specifically, deep learning, is a general difficulty in separating concepts with a single line. This is a non-linear science in its nature.
+
 \subsubsection{Testing Data}
+
 \par After the training is completed the performance of the system needs to be evaluated on different challenges to properly access if it scales (or generalizes or applies or performs in) to real-world scenarios. A test dataset can be chosen for specific hurdles, for instance, cross-pose, cross-age, racial variations, quality assessment, and so forth \autocite{duElementsEndtoendDeep2022}.
 
 

@@ -161,6 +161,23 @@
   file = {/home/david/Zotero/storage/8SM3XFTA/Bae et al. - 2023 - DigiFace-1M 1 Million Digital Face Images for Fac.pdf}
 }
 
+@misc{bansalDonTsCNNbased2017,
+  title = {The {{Do}}'s and {{Don}}'ts for {{CNN-based Face Verification}}},
+  author = {Bansal, Ankan and Castillo, Carlos and Ranjan, Rajeev and Chellappa, Rama},
+  year = {2017},
+  month = sep,
+  number = {arXiv:1705.07426},
+  eprint = {1705.07426},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  urldate = {2023-04-28},
+  abstract = {While the research community appears to have developed a consensus on the methods of acquiring annotated data, design and training of CNNs, many questions still remain to be answered. In this paper, we explore the following questions that are critical to face recognition research: (i) Can we train on still images and expect the systems to work on videos? (ii) Are deeper datasets better than wider datasets? (iii) Does adding label noise lead to improvement in performance of deep networks? (iv) Is alignment needed for face recognition? We address these questions by training CNNs using CASIA-WebFace, UMDFaces, and a new video dataset and testing on YouTube- Faces, IJB-A and a disjoint portion of UMDFaces datasets. Our new data set, which will be made publicly available, has 22,075 videos and 3,735,476 human annotated frames extracted from them.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  note = {Comment: 10 pages including references, added more experiments on deeper vs wider dataset (section 3.2)},
+  file = {/home/david/Zotero/storage/G7GBWXVE/Bansal et al. - 2017 - The Do's and Don'ts for CNN-based Face Verificatio.pdf;/home/david/Zotero/storage/8KR44NIS/1705.html}
+}
+
 @book{barronrodriguezRemoteLearningGlobal2021,
   title = {Remote {{Learning During}} the {{Global School Lockdown}}: {{Multi-Country Lessons}}},
   shorttitle = {Remote {{Learning During}} the {{Global School Lockdown}}},
@@ -311,6 +328,24 @@
   langid = {english},
   keywords = {Feed-forward neural networks,Neural networks with random weights,Training mechanism},
   file = {/home/david/Zotero/storage/2DW6TFC3/Cao et al. - 2018 - A review on neural networks with random weights.pdf;/home/david/Zotero/storage/Z7SHKWPE/S0925231217314613.html}
+}
+
+@misc{caoVGGFace2DatasetRecognising2018,
+  title = {{{VGGFace2}}: {{A}} Dataset for Recognising Faces across Pose and Age},
+  shorttitle = {{{VGGFace2}}},
+  author = {Cao, Qiong and Shen, Li and Xie, Weidi and Parkhi, Omkar M. and Zisserman, Andrew},
+  year = {2018},
+  month = may,
+  number = {arXiv:1710.08092},
+  eprint = {1710.08092},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  urldate = {2023-04-27},
+  abstract = {In this paper, we introduce a new large-scale face dataset named VGGFace2. The dataset contains 3.31 million images of 9131 subjects, with an average of 362.6 images for each subject. Images are downloaded from Google Image Search and have large variations in pose, age, illumination, ethnicity and profession (e.g. actors, athletes, politicians). The dataset was collected with three goals in mind: (i) to have both a large number of identities and also a large number of images for each identity; (ii) to cover a large range of pose, age and ethnicity; and (iii) to minimize the label noise. We describe how the dataset was collected, in particular the automated and manual filtering stages to ensure a high accuracy for the images of each identity. To assess face recognition performance using the new dataset, we train ResNet-50 (with and without Squeeze-and-Excitation blocks) Convolutional Neural Networks on VGGFace2, on MS- Celeb-1M, and on their union, and show that training on VGGFace2 leads to improved recognition performance over pose and age. Finally, using the models trained on these datasets, we demonstrate state-of-the-art performance on all the IARPA Janus face recognition benchmarks, e.g. IJB-A, IJB-B and IJB-C, exceeding the previous state-of-the-art by a large margin. Datasets and models are publicly available.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  note = {Comment: This paper has been accepted by IEEE Conference on Automatic Face and Gesture Recognition (F\&G), 2018. (Oral)},
+  file = {/home/david/Zotero/storage/N773889N/Cao et al. - 2018 - VGGFace2 A dataset for recognising faces across p.pdf;/home/david/Zotero/storage/93K97L3G/1710.html}
 }
 
 @inproceedings{changDataUncertaintyLearning2020,
@@ -2790,6 +2825,23 @@ Datasets},
   keywords = {Deep face recognition,Deep learning,Deep network architecture,Face processing,Face recognition database,Loss function},
   annotation = {714 citations (Semantic Scholar/DOI) [2023-02-28] 187 citations (Crossref) [2023-02-28]},
   file = {/home/david/Zotero/storage/SU8BH3WW/Wang and Deng - 2021 - Deep face recognition A survey.pdf;/home/david/Zotero/storage/99GWEEZH/S0925231220316945.html}
+}
+
+@misc{wangDevilFaceRecognition2018,
+  title = {The {{Devil}} of {{Face Recognition}} Is in the {{Noise}}},
+  author = {Wang, Fei and Chen, Liren and Li, Cheng and Huang, Shiyao and Chen, Yanjie and Qian, Chen and Loy, Chen Change},
+  year = {2018},
+  month = jul,
+  number = {arXiv:1807.11649},
+  eprint = {1807.11649},
+  primaryclass = {cs},
+  publisher = {{arXiv}},
+  urldate = {2023-04-28},
+  abstract = {The growing scale of face recognition datasets empowers us to train strong convolutional networks for face recognition. While a variety of architectures and loss functions have been devised, we still have a limited understanding of the source and consequence of label noise inherent in existing datasets. We make the following contributions: 1) We contribute cleaned subsets of popular face databases, i.e., MegaFace and MS-Celeb-1M datasets, and build a new large-scale noise-controlled IMDb-Face dataset. 2) With the original datasets and cleaned subsets, we profile and analyze label noise properties of MegaFace and MS-Celeb-1M. We show that a few orders more samples are needed to achieve the same accuracy yielded by a clean subset. 3) We study the association between different types of noise, i.e., label flips and outliers, with the accuracy of face recognition models. 4) We investigate ways to improve data cleanliness, including a comprehensive user study on the influence of data labeling strategies to annotation accuracy. The IMDb-Face dataset has been released on https://github.com/fwang91/IMDb-Face.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Computer Vision and Pattern Recognition},
+  note = {Comment: accepted to ECCV'18},
+  file = {/home/david/Zotero/storage/KUKBHIBM/Wang et al. - 2018 - The Devil of Face Recognition is in the Noise.pdf;/home/david/Zotero/storage/QKH4PUFE/1807.html}
 }
 
 @inproceedings{wangEfficientTrainingApproach2022,
