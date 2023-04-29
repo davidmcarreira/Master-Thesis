@@ -165,7 +165,7 @@ Although this distribution can create some overlap among the categories, it is s
 % \noindent\textbf{UMDFaces} 2015
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{MS-Celeb-1M}'s \autocite{guoMSCeleb1MDatasetBenchmark2016} first intention was to provide a novel benchmark to identify celebrities that solves name ambiguities by linking a face with an entity key in a knowledge base. Second, it aimed at solving the gap in available large-scale datasets by providing a training set with, approximately, 10 million images and 100 thousand identities.
+\noindent\textbf{MS-Celeb-1M}'s \autocite{guoMSCeleb1MDatasetBenchmark2016} first intention was to provide a novel benchmark to identify celebrities that solves name ambiguities by linking a face with an entity key in a knowledge base. Second, it aimed at solving the gap in available large-scale datasets by providing a training set with, approximately, 10 million images and 100 thousand identities. Unfortunately, it is a dataset known for the presence of noisy labels. That is mainly due to the size of the dataset, the automatic method of collecting and annotating the images, and also the fact that the noise is not removed on purpose (under the assumption that training with noisy data might be beneficial). 
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{MegaFace} \autocite{nechLevelPlayingField2017} introduced a benchmark for million-scale face recognition and provided a public large-scale training dataset that integrated 4,753,320 faces over 672,057 identities. The main difference compared to the previously mentioned datasets is that MegaFace does not use celebrities as subjects, in contrast it leverages the photographs released by Flickr under the Creative Commons license. 
@@ -182,10 +182,16 @@ Although this distribution can create some overlap among the categories, it is s
 % The introduction of noisy labels does not increase face verification performance, clean data always performs better. Although, the difference between a clean dataset and one with a low percentage of noise (less than 5\%) is very low.
 
 \vspace{0.7\baselineskip}
+\noindent\textbf{Celeb-500k} \autocite{caoCeleb500KLargeTraining2018} is another large-scale proposed with two issues in mind: the disparity in the scale of public datasets when compared with private ones, and determining the impact in performance from intra- and inter-class variations. The former highlights the depth of the dataset (number of images per identity) while the latter focuses on the breadth (overall number of identities) \autocite{caoVGGFace2DatasetRecognising2018}. That being so, Celeb-500k, consisting of 50 million images from 500 thousand persons, and Celeb-500k-2R, a cleaned version of the previous, comprised of 25 million aligned faces of 245 thousand identities, are released.
+
+\vspace{0.7\baselineskip}
 \noindent\textbf{IMDb-Face} \autocite{wangDevilFaceRecognition2018} proposes a new dataset with based on a manually cleaned revision of MS-Celeb-1M and MegaFace. The growing demand for large-scale datasets introduced a new variable to take into consideration: the time available to annotate the data. Datasets that are well-annotated and have an enormous amount of data are notably expensive and time-consuming to develop. Therefore, automatic measures to clean the data were used, so it's expected for a certain degree of noise to be introduced in a dataset. After selecting a subset from both the originals datasets, 2 million images were manually cleaned and resulted in 1,7 million images of 59 thousand celebrities.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{MS1MV2} \autocite{dengArcFaceAdditiveAngular} is another well know dataset. It was proposed in the ArcFace face recognition method paper and consists of a semi-automatic refinement of the previously mentioned MS-Celeb-1M, resulting in 5,8 million images of 85 thousand identities.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{Glint360K} 2021
