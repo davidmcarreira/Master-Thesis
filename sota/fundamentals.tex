@@ -20,10 +20,10 @@ Face Recognition (FR) is a thoroughly debated and extensively researched task in
 
 
 % \vspace{0.7\baselineskip}
-% \noindent\textbf{Computer Vision} is the science of trying to mimic with a computer what the humans do when looking at a scene, that is, extracting information from images through a series of computational techniques. \autocite{szeliskiComputerVisionAlgorithms2022}
+% \noindent\textbf{$\rightarrow$ Computer Vision} is the science of trying to mimic with a computer what the humans do when looking at a scene, that is, extracting information from images through a series of computational techniques. \autocite{szeliskiComputerVisionAlgorithms2022}
 
 % \vspace{0.7\baselineskip}
-% \noindent\textbf{Image querying}, is the process of finding information in a database of images that corresponds to the user query\footnote{Query, in computer science, is the request for information in a database.}, in this case, an image query\autocite{bartoliniImageQuerying2009}.  
+% \noindent\textbf{$\rightarrow$ Image querying}, is the process of finding information in a database of images that corresponds to the user query\footnote{Query, in computer science, is the request for information in a database.}, in this case, an image query\autocite{bartoliniImageQuerying2009}.  
 
 \section{A Face Recognition System}
 
@@ -33,11 +33,11 @@ Face Recognition (FR) is a thoroughly debated and extensively researched task in
     \label{fig:fr pipeline}
 \end{figure}
 
-\par According to Ranjan \textit{et al.} \autocite{ranjanDeepLearningUnderstanding2018}, the goal of a FR system is to find, process and learn from a face, gathering as much information as possible, and as a result, it is one of the most widely implemented biometric system solutions, in light of its versatility when facing real world application \autocite{duElementsEndtoendDeep2022}, such as \red{military, public security and daily life}.
+\par According to Ranjan \textit{et al.} \autocite{ranjanDeepLearningUnderstanding2018}, the goal of a FR system is to find, process and learn from a face, gathering as much information as possible, and as a result, it is one of the most widely implemented biometric system solutions in light of its versatility when facing real world application \autocite{duElementsEndtoendDeep2022}, such as \red{military, public security and daily life}.
 
 \par By and large, all end-to-end automatic face recognition systems follow a sequential and modular\footnote{Sequential because each stage relies on the output from the previous ones, and modular in the sense that each stage employs its own method and it can be modified to better adapt to specific tasks.} pipeline \reffig{fig:fr pipeline} composed of three pillar stages \autocite{wangDeepFaceRecognition2021}: face detection, face alignment and face representation. First an image or video feed is used as an input then, as the name suggests, the \textbf{face detection} module is responsible for finding a face. Next, the \textbf{face alignment} phase applies spatial transformations to the data in order to normalize the faces' pictures (or frames, in the case where a video is used) to a standardized view. Finally, the \textbf{face representation} stage, makes use of deep learning techniques to learn discriminative features that will allow the recognition.
 
-\par All three stages have their individual importance and methods of implementation\footnote{For a deeper and extensive study, please refer to: \autocite{zafeiriouSurveyFaceDetection2015} in the case of classic face detection approaches and \autocite{minaeeGoingDeeperFace2021} for deep learning based methods; \autocite{wangFacialFeaturePoint2018} addresses traditional face alignment methods and is complemented with \autocite{duElementsEndtoendDeep2022} for more up-to-date techniques; and \autocite{learned-millerLabeledFacesWild2016} tackles classic face representation \red{(add the following if needed) while X supplements the deep learning ones.}}. Face detection is achievable through classical approaches \autocite{violaRapidObjectDetection2001, brubakerDesignCascadesBoosted2008} or deep methods, among them is \autocite{dengRetinaFaceSinglestageDense2019} and the widely applied \autocite{zhangJointFaceDetection2016a}. Face alignment, once again, can be accomplished through traditional measures \autocite{cootesViewbasedActiveAppearance2002, martinezLocalEvidenceAggregation2013} or more modern ones, namely \autocite{huangPropagationNetPropagatePoints2020} or the aforementioned \autocite{zhangJointFaceDetection2016a} which concurrently performs detection and alignment. To conclude, the face representation module is no exception, and can also be divided in two groups, regarding the methodology used. Some conventional systems were already mentioned, such as \autocite{p.n.belhumeurEigenfacesVsFisherfaces1997,turkEigenfacesRecognition1991}, and the deep learning ones are the object of discussion of this dissertation and will be reviewed along the following sections, therefore, the focus will be on describing, with particular interest, the face representation stage.
+\par All three stages have their individual importance and methods of implementation\footnote{For a deeper and extensive study, please refer to: \autocite{zafeiriouSurveyFaceDetection2015} in the case of classic face detection approaches and \autocite{minaeeGoingDeeperFace2021} for deep learning based methods; \autocite{wangFacialFeaturePoint2018} addresses traditional face alignment methods and is complemented with \autocite{duElementsEndtoendDeep2022} for more up-to-date techniques; and \autocite{learned-millerLabeledFacesWild2016} tackles classic face representation \red{(add the following if needed) while X supplements the deep learning ones.}}. \textbf{Face detection} is achievable through classical approaches \autocite{violaRapidObjectDetection2001, brubakerDesignCascadesBoosted2008} or deep methods, among them is \autocite{dengRetinaFaceSinglestageDense2019} and the widely applied \autocite{zhangJointFaceDetection2016a}. \textbf{Face alignment}, once again, can be accomplished through traditional measures \autocite{cootesViewbasedActiveAppearance2002, martinezLocalEvidenceAggregation2013} or more modern ones, namely \autocite{huangPropagationNetPropagatePoints2020} or the aforementioned \autocite{zhangJointFaceDetection2016a} which concurrently performs detection and alignment. To conclude, the \textbf{face representation} module is no exception, and can also be divided in two groups, regarding the methodology used. Some conventional systems were already mentioned, such as \autocite{p.n.belhumeurEigenfacesVsFisherfaces1997,turkEigenfacesRecognition1991}, and the deep learning ones are the object of discussion of this dissertation and will be reviewed along the following sections, therefore, the focus will be on describing, with particular interest, the face representation stage.
 
 \subsection{Face Detection}
 \par Face detection is the first step in any automatic facial recognition system. Given an input image to a face detector module, it is in charge of detecting every face in the picture and returning bounding-boxes coordinates, for each one, with a certain confidence score \autocite{duElementsEndtoendDeep2022,ranjanDeepLearningUnderstanding2018}.
@@ -122,10 +122,10 @@ Although this distribution can create some overlap among the categories, it is s
 \par According to the literature \autocite{duElementsEndtoendDeep2022,liHandbookFaceRecognition2011,ranjanDeepLearningUnderstanding2018,schroffFaceNetUnifiedEmbedding2015,wangDeepFaceRecognition2021}, there's a consensus about how Face Recognition can be performed in two settings of operation: face verification and face identification. This distinction is only made possible due to the approaches available in the Face Representation stage that can leverage one, the other or both. 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{Face verification}, also referred to as \textbf{face authentication}, is a one-to-one match, and it's the action of verifying if the query face matches the identity that's being claimed. \red{These principles are used in biometric systems such as self-service immigration clearance using E-passport.} \autocite{liHandbookFaceRecognition2011}
+\noindent\textbf{$\rightarrow$ Face verification}, also referred to as \textbf{face authentication}, is a one-to-one match, and it's the action of verifying if the query face matches the identity that's being claimed. \red{These principles are used in biometric systems such as self-service immigration clearance using E-passport.} \autocite{liHandbookFaceRecognition2011}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{Face identification}, also called \textbf{face recognition}, is a one-to-many correlation process that compares a query face to a database of faces and associates it to the corresponding match (or matches). \red{A typical use case is to identify someone in a watchlist or surveillance videos.} \autocite{liHandbookFaceRecognition2011}
+\noindent\textbf{$\rightarrow$ Face identification}, also called \textbf{face recognition}, is a one-to-many correlation process that compares a query face to a database of faces and associates it to the corresponding match (or matches). \red{A typical use case is to identify someone in a watchlist or surveillance videos.} \autocite{liHandbookFaceRecognition2011}
 
 \vspace{0.7\baselineskip}
 \par The overall pipeline comes to a conclusion in this module, however, in reality, it goes further than that. As can be seen in \reffig{fig:fr pipeline}, due to its importance for the face recognition problem, it's highlighted the inherent pipeline of the Face Representation stage, henceforth, it shall be discussed in depth in the next section.
@@ -140,7 +140,7 @@ Although this distribution can create some overlap among the categories, it is s
 \end{figure}
 
 \par As show in \reffig{fig:frep pipeline}, Face Representation is a two-step module composed of a training and testing stage. So as to be capable of performing face recognition, in either a verification or identification manner, a face representation system needs to learn robust, invariant and discriminative features that can distinguish identities \autocite{ranjanDeepLearningUnderstanding2018}. 
-\par To meet these requirements, the feature extractor must first be trained properly by taking data from previous stages and producing an output that's compared to the desired value using a loss function\footnote{Also referred to as a cost or objective function. \autocite{lecunDeepLearning2015}} \autocite{lecunDeepLearning2015, wangDeepFaceRecognition2021}. After that, everything is ready for the testing stage, where the face recognition \textit{per se} occurs by calculating a similarity score for the feature representation produced by the trained feature extractor, and dictating if the identity belongs to the same person (face verification) or if it matches any identity (face identification) \autocite{ranjanDeepLearningUnderstanding2018}.
+\par To meet these requirements, the feature extractor must first be trained properly by taking data from previous stages and outputting a feature representation that's compared to the desired value using a loss function\footnote{Also referred to as a cost or objective function. \autocite{lecunDeepLearning2015}} \autocite{lecunDeepLearning2015, wangDeepFaceRecognition2021}. After that, everything is ready for the testing stage, where the face recognition \textit{per se} occurs by calculating a similarity score for the feature representation produced by the trained feature extractor, and dictating if the identity belongs to the same person (face verification) or if it matches any identity (face identification) \autocite{ranjanDeepLearningUnderstanding2018}.
 
 
 
@@ -148,33 +148,41 @@ Although this distribution can create some overlap among the categories, it is s
 \par As been discussed throughout this dissertation, Deep Learning techniques can solve the problem of handling unconstrained scenarios, where there are variations in pose, illumination, occlusion, and so forth. To support this, in the past few years, datasets have been developed with this in mind so to be able to provide a large and diverse set of both training data, allowing for adequate regularization to unseen circumstances, and testing data that benchmarks the face recognition system in, as similar as possible, unconstrained real world scenarios \autocite{duElementsEndtoendDeep2022}. 
 
 \subsubsection{\large Training Data}
-\par Large training datasets are essential for face recognition, therefore, there is an abundance of options available. Earlier works \autocite{schroffFaceNetUnifiedEmbedding2015,sunDeepLearningFace2014,taigmanDeepFaceClosingGap2014} resourced private face datasets, but as time passed, more public datasets were released. 
+\par When developing a deep face recognition system it's essential to keep in mind its necessity to adapt, and that's where the dataset used for training comes at play. Large training datasets are essential for face recognition \autocite{parkhiDeepFaceRecognition2015}, but large-scale is not enough. There must be a balance between the depth (number of unique identities) and the breadth/width (number of images per identity) \autocite{bansalDonTsCNNbased2017, caoVGGFace2DatasetRecognising2018}, and it will lead to different effects. 
+\par On one hand, a training dataset that is deep will help the face recognition system to produce more discriminative feature representations, since it will have a great number of identities to learn from. On the other hand, a wider set will have more images per identity, therefore, variations in pose, expressions, illuminations, occlusions, background clutter, image quality, accessories, and so forth \autocite{baeDigiFace1MMillionDigital2023} can be introduced and ultimately lead to feature representations more robust to them.
+
+\vspace{\baselineskip}
+In the following pages, a mix of training datasets, of overall relevance and more geared towards the purpose of this dissertation, will be reviewed.
+
+% \par Earlier works \autocite{schroffFaceNetUnifiedEmbedding2015,sunDeepLearningFace2014,taigmanDeepFaceClosingGap2014} resourced private face datasets, but as time passed, more public datasets were released. 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{CASIA-WebFace} \autocite{yiLearningFaceRepresentation2014}, composed of 494,414 face images and 10,575 identities, was proposed as a novel dataset to overcome the problem of data dependence in face recognition and improve comparability across different methods. By training on the same dataset, methods can be better evaluated and compared.
+\noindent\textbf{$\rightarrow$ CASIA-WebFace} \autocite{yiLearningFaceRepresentation2014}, composed of 494,414 face images and 10,575 identities, was proposed as a novel dataset to overcome the problem of data dependence in face recognition and improve comparability across different methods. By training on the same dataset, methods can be better evaluated and compared.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{VGGFace} \autocite{parkhiDeepFaceRecognition2015} was published alongside a homonymous face recognition method and, once again, with the objective of combating the lack of available large scale public datasets. It contains 2,6 million images and 2,622 different identities and a curated version, where incorrect image labels were hand-removed by humans, has 800,000 images for the same amount of identities.
+\noindent\textbf{$\rightarrow$ VGGFace} \autocite{parkhiDeepFaceRecognition2015} was published alongside a homonymous face recognition method and, once again, with the objective of combating the lack of available large scale public datasets. It contains 2,6 million images and 2,622 different identities and a curated version, where incorrect image labels were hand-removed by humans, has 800,000 images for the same amount of identities.
 
 % Both datasets were released for training only purposes \autocite{caoVGGFace2DatasetRecognising2018}.
 
 % \vspace{0.7\baselineskip}
-% \noindent\textbf{CelebA} 2015
+% \noindent\textbf{$\rightarrow$ CelebA} 2015
 
 % \vspace{0.7\baselineskip}
-% \noindent\textbf{UMDFaces} 2015
+% \noindent\textbf{$\rightarrow$ UMDFaces} 2015
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{MS-Celeb-1M}'s \autocite{guoMSCeleb1MDatasetBenchmark2016} first intention was to provide a novel benchmark to identify celebrities that solves name ambiguities by linking a face with an entity key in a knowledge base. Second, it aimed at solving the gap in available large-scale datasets by providing a training set with, approximately, 10 million images and 100 thousand identities. Unfortunately, it is a dataset known for the presence of noisy labels. That is mainly due to the size of the dataset, the automatic method of collecting and annotating the images, and also the fact that the noise is not removed on purpose (under the assumption that training with noisy data might be beneficial). 
+\noindent\textbf{$\rightarrow$ MS-Celeb-1M}'s \autocite{guoMSCeleb1MDatasetBenchmark2016} first intention was to provide a novel benchmark to identify celebrities that solves name ambiguities by linking a face with an entity key in a knowledge base. Second, it aimed at solving the gap in available large-scale datasets by providing a training set with, approximately, 10 million images and 100 thousand identities. Unfortunately, it is a dataset known for the presence of noisy labels. 
+
+% That is mainly due to the size of the dataset, the automatic method of collecting and annotating the images, and also the fact that the noise is not removed on purpose (under the assumption that training with noisy data might be beneficial). 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{MegaFace} \autocite{nechLevelPlayingField2017} introduced a benchmark for million-scale face recognition and provided a public large-scale training dataset that integrated 4,753,320 faces over 672,057 identities. The main difference compared to the previously mentioned datasets is that MegaFace does not use celebrities as subjects, in contrast it leverages the photographs released by Flickr under the Creative Commons license. 
+\noindent\textbf{$\rightarrow$ MegaFace} \autocite{nechLevelPlayingField2017} introduced a benchmark for million-scale face recognition and provided a public large-scale training dataset that integrated 4,753,320 faces over 672,057 identities. The main difference compared to the previously mentioned datasets is that MegaFace does not use celebrities as subjects, in contrast it leverages the photographs released by Flickr under the Creative Commons license. 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{VGGFace2} \autocite{caoVGGFace2DatasetRecognising2018} is another large-scale dataset, and its main goals are: 1) covering numerous identities, 2) reduce labeling noise through automatic and manual filtering and, finally, 3) represent more realistic unconstrained scenarios due to a novel dataset generation pipeline that gathers images with a broad range of poses, age, illumination and ethnicity. All in all, this resulted in a dataset comprised of 3,31 million faces of 9131 subjects.
+\noindent\textbf{$\rightarrow$ VGGFace2} \autocite{caoVGGFace2DatasetRecognising2018} is another large-scale dataset, and its main goals are: 1) covering numerous identities, 2) reduce labeling noise through automatic and manual filtering and, finally, 3) represent more realistic unconstrained scenarios due to a novel dataset generation pipeline that gathers images with a broad range of poses, age, illumination and ethnicity. All in all, this resulted in a dataset comprised of 3,31 million faces of 9131 subjects.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{UMDFaces-Videos} \autocite{bansalDonTsCNNbased2017} is a video-based dataset composed of 22,075 videos of 3,107 subjects with 3,735,476 human annotated frames with great variation in image quality, pose, expressions and lightning. It was proposed during a study how the performance of a face verification models is impacted by the effects of: 1) the type of media used for training (only videos or still images vs a mixture of both), 2) \red{the width and depth of a dataset}, 3) the label's noise and 4) the alignment of the faces.
+\noindent\textbf{$\rightarrow$ UMDFaces-Videos} \autocite{bansalDonTsCNNbased2017} is a video-based dataset composed of 22,075 videos of 3,107 subjects with 3,735,476 human annotated frames with great variation in image quality, pose, expressions and lightning. It was proposed during a study how the performance of a face verification models is impacted by the effects of: 1) the type of media used for training (only videos or still images vs a mixture of both), 2) \red{the width and depth of a dataset}, 3) the label's noise and 4) the alignment of the faces.
 
 
 % training on a mixture of still images and videos boosts performance. There's a bias toward high quality images in still datasets due to the way of capturing the data (high quality cameras). Models trained only on still images perform poorly on frames extracted from videos, they're very challenging due to pose, expression and illumination variations. Models trained only on videos perform poorly on datasets composed of only still images.
@@ -182,93 +190,99 @@ Although this distribution can create some overlap among the categories, it is s
 % The introduction of noisy labels does not increase face verification performance, clean data always performs better. Although, the difference between a clean dataset and one with a low percentage of noise (less than 5\%) is very low.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{Celeb-500k} \autocite{caoCeleb500KLargeTraining2018} is another large-scale proposed with two issues in mind: the disparity in the scale of public datasets when compared with private ones, and determining the impact in performance from intra- and inter-class variations. The former highlights the depth of the dataset (number of images per identity) while the latter focuses on the breadth (overall number of identities) \autocite{caoVGGFace2DatasetRecognising2018}. That being so, Celeb-500k, consisting of 50 million images from 500 thousand persons, and Celeb-500k-2R, a cleaned version of the previous, comprised of 25 million aligned faces of 245 thousand identities, are released.
+\noindent\textbf{$\rightarrow$ Celeb-500k} \autocite{caoCeleb500KLargeTraining2018} is another large-scale proposed with two issues in mind: the disparity in the scale of public datasets when compared with private ones, and determining the impact in performance from intra- and inter-class variations. That being so, Celeb-500k, consisting of 50 million images from 500 thousand persons, and Celeb-500k-2R, a cleaned version of the previous, comprised of 25 million aligned faces of 245 thousand identities, are released.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{IMDb-Face} \autocite{wangDevilFaceRecognition2018} proposes a new dataset with based on a manually cleaned revision of MS-Celeb-1M and MegaFace. The growing demand for large-scale datasets introduced a new variable to take into consideration: the time available to annotate the data. Datasets that are well-annotated and have an enormous amount of data are notably expensive and time-consuming to develop. Therefore, automatic measures to clean the data were used, so it's expected for a certain degree of noise to be introduced in a dataset. After selecting a subset from both the originals datasets, 2 million images were manually cleaned and resulted in 1,7 million images of 59 thousand celebrities.
+\noindent\textbf{$\rightarrow$ IMDb-Face} \autocite{wangDevilFaceRecognition2018} proposes a new dataset with based on a manually cleaned revision of MS-Celeb-1M and MegaFace. The growing demand for large-scale datasets introduced a new variable to take into consideration: the time available to annotate the data. Datasets that are well-annotated and have an enormous amount of data are notably expensive and time-consuming to develop. Therefore, automatic measures to clean the data were used, so it's expected for a certain degree of noise to be introduced in a dataset. After selecting a subset from both the originals datasets, 2 million images were manually cleaned and resulted in 1,7 million images of 59 thousand celebrities.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
+\noindent\textbf{$\rightarrow$ QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{MS1MV2} \autocite{dengArcFaceAdditiveAngular} is another well know dataset. It was proposed in the ArcFace face recognition method paper and consists of a semi-automatic refinement of the previously mentioned MS-Celeb-1M, resulting in 5,8 million images of 85 thousand identities.
+\noindent\textbf{$\rightarrow$ CAFR} (2019) \autocite{zhaoAgeInvariantFaceRecognition2022}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{Glint360K} \autocite{anPartialFCTraining2021} is a training set presented in the Partial FC method paper. It was generated by merging and cleaning the aforementioned Celeb-500K and MS1MV2 datasets, which resulted in 17 million images of 360 thousand individuals.
+\noindent\textbf{$\rightarrow$ MS1MV2} \autocite{dengArcFaceAdditiveAngular} is another well know dataset. It was proposed in the ArcFace face recognition method paper and consists of a semi-automatic refinement of the previously mentioned MS-Celeb-1M, resulting in 5,8 million images of 85 thousand identities.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{WebFace260M} \autocite{zhuWebFace260MBenchmarkUnveiling2021} takes a giant leap in closing the gap between public available datasets and private ones. Partnered with a time-constrained face recognition protocol, the original paper presented an enormous 260 million faces and 4 million identities noisy dataset, an automatically cleaned, high quality training set with 42 million faces over 2 million identities (WebFace42M), and a smaller scale training dataset derived from the WebFace42M that has 10\% of its data (WebFace4M).
+\noindent\textbf{$\rightarrow$ Glint360K} \autocite{anPartialFCTraining2021} is a training set presented in the Partial FC method paper. It was generated by merging and cleaning the aforementioned Celeb-500K and MS1MV2 datasets, which resulted in 17 million images of 360 thousand individuals.
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ MDMFR} \autocite{ullahNovelDeepMaskNetModel2022}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ WebFace260M} \autocite{zhuWebFace260MBenchmarkUnveiling2021} takes a giant leap in closing the gap between public available datasets and private ones. Partnered with a time-constrained face recognition protocol, the original paper presented an enormous 260 million faces and 4 million identities noisy dataset, an automatically cleaned, high quality training set with 42 million faces over 2 million identities (WebFace42M), and a smaller scale training dataset derived from the WebFace42M that has 10\% of its data (WebFace4M).
  % Traditional test datasets that focus on accuracy have been almost saturated
  % Interesting time-constrained face recognition protocol
 
-
-
 \vspace{0.7\baselineskip}
-\noindent\textbf{CAFR} (2019) \autocite{zhaoAgeInvariantFaceRecognition2022}
+\noindent\textbf{$\rightarrow$ DigiFace-1M} \autocite{baeDigiFace1MMillionDigital2023} is a novel approach that revolutionizes the way of training face recognition models. It is a fully synthetic dataset that proposes mitigating three very relevant problems present in the majority of the conventional datasets: 1) ethical issues, 2) label noise and 3) data bias. The dataset is divided in two parts: part one contains 720 thousand images from 10 thousand identities and part two has 500 thousand images with 100 thousand identities, for a total of 1,22 million images and 110 thousand unique identities.
 
-\vspace{0.7\baselineskip}
-\noindent\textbf{DigiFace-1M} (2023)
+% Privacy violations, lack of informed consent and exploitation of distribution licenses or vague terms (such as "celebrities") to gather data are some of the criticisms that raised enough concerns that lead to revoking the distribution of several datasets. 
 
 \vspace{\baselineskip}
-\par Although some of the previously referenced datasets do have a benchmarking component, they're generally employed to train algorithms, opposed to the following datasets that are described as "benchmarks". A common denominator throughout the machine learning domain, and more specifically, deep learning, is a general difficulty in separating concepts with a single line. This is a non-linear science in its nature.
+\par Although some of the previously referenced datasets do have a benchmarking component, they're generally employed to train algorithms, opposed to the following datasets that are described as "benchmarks". A common denominator throughout the machine learning domain, and more specifically deep learning, is a general difficulty in separating concepts with a single line. This is a non-linear science in its nature.
 
 
-\begin{table}[!ht]
+\begin{table}[]
     \centering
-    \begin{tabular}{|l|c|c|c|c|c|}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|c|l|c|c|c|l|c|}
     \hline
-    \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Images} & \textbf{Identities} & \textbf{Depth} & \textbf{Year} & \textbf{} \\ \hline
-    CASIA-WebFace                          &                 &                     &                    & 2014          &           \\ \hline
-    VGGFace                                &                 &                     &                    & 2015          &           \\ \hline
-    MS-Celeb-1M                            &                 &                     &                    & 2016          &           \\ \hline
-    MegaFace                               &                 &                     &                    & 2016          &           \\ \hline
-    VGGFace2                               &                 &                     &                    & 2017          &           \\ \hline
-    UMDFaces-Videos                        &                 &                     &                    & 2017          &           \\ \hline
-    IMDb-Face                              &                 &                     &                    &               &           \\ \hline
-    QMUL-SurvFace                          &                 &                     &                    &               &           \\ \hline
-    Glint360k                              &                 &                     &                    &               &           \\ \hline
-    WebFace260M                            &                 &                     &                    &               &           \\ \hline
-    FaVCI2D                                &                 &                     &                    &               &           \\ \hline
-    CAFR                                   &                 &                     &                    &               &           \\ \hline
-    DigiFace-1M                            &                 &                     &                    &               &           \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Year} & \textbf{Aivailability} & \textbf{Images/vids} & \textbf{Depth} & \textbf{Breadth} & \textbf{Distribution} & \textbf{Description} \\ \hline
+    CASIA-WebFace                          & 2014          &              &                      &                &                  &                       &                      \\ \hline
+    VGGFace                                & 2015          &              &                      &                &                  &                       &                      \\ \hline
+    MS-Celeb-1M                            & 2016          &              &                      &                &                  &                       &                      \\ \hline
+    MegaFace                               & 2016          &              &                      &                &                  &                       &                      \\ \hline
+    VGGFace2                               & 2017          &              &                      &                &                  &                       &                      \\ \hline
+    UMDFaces-Videos                        & 2017          &              &                      &                &                  &                       &                      \\ \hline
+    IMDb-Face                              &               &              &                      &                &                  &                       &                      \\ \hline
+    QMUL-SurvFace                          &               &              &                      &                &                  &                       &                      \\ \hline
+    Glint360k                              &               &              &                      &                &                  &                       &                      \\ \hline
+    WebFace260M                            &               &              &                      &                &                  &                       &                      \\ \hline
+    FaVCI2D                                &               &              &                      &                &                  &                       &                      \\ \hline
+    CAFR                                   &               &              &                      &                &                  &                       &                      \\ \hline
+    DigiFace-1M                            &               &              &                      &                &                  &                       &                      \\ \hline
     \end{tabular}
-    \caption{Testing the caption placement for tables Testing the caption placement for tables Testing the caption placement for tables Testing the caption placement for tables Testing the caption placement for tables}
-    \label{tab:tab1}
+    }
+    \caption{}
+    \label{tab:my-table}
 \end{table}
 
 \newpage
 \subsubsection{\large Testing Data}
-\vspace{0.7\baselineskip}
-\noindent\textbf{LFW}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{YTF}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{IJB-C} 
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{MegaFace}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{Trillion Pairs}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{DiF}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{Fair Face}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{RFW}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{XQLFW} (2022)
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{FaVCI2D} (2022)
 
 \par After the training is completed the performance of the system needs to be evaluated on different challenges to properly access if it scales (or generalizes or applies or performs in) to real-world scenarios. A test dataset can be chosen for specific hurdles, for instance, cross-pose, cross-age, racial variations, quality assessment, and so forth \autocite{duElementsEndtoendDeep2022}.
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ LFW}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ YTF}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ IJB-C} 
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ MegaFace}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ Trillion Pairs}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ DiF}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ Fair Face}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ RFW}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ XQLFW} (2022)
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ FaVCI2D} (2022)
 
 
 \subsection{Feature Extraction}
