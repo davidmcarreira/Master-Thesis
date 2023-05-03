@@ -254,7 +254,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ LFW} \autocite{huangLabeledFacesWild} is the most well-known face verification dataset. It was first released in 2007 as a way of evaluating the performance of face recognition methods, in a verification or pair matching manner, under unconstrained scenarios. LFW divides the dataset in 2 views. View 1 is designed for development, and in the training set contains 1100 pairs of mismatched images and 1100 pairs of matched ones, while the test set has 500 pairs of matched and 500 pairs of unmatched faces. View 2 is intended for performance reporting and splits the data over 10 separate folders to facilitate 10-fold cross validation. Overall, the dataset has 13,233 face images and 5749 identities (1680 persons have two or more images).
+\noindent\textbf{$\rightarrow$ LFW} \autocite{huangLabeledFacesWild} is the most well-known face verification dataset. It was first released in 2007 as a way of evaluating the performance of face recognition methods, in a verification or pair matching manner, under unconstrained scenarios. LFW divides the dataset in 2 views. View 1 is designed for development, and in the training set contains 1100 pairs of mismatched images and 1100 pairs of matched ones, while the test set has 500 pairs of matched and 500 pairs of unmatched faces. View 2 is intended for performance reporting and splits the data over 10 separate sets, to facilitate 10-fold cross validation, where each one has 300 positive pairs (same identity) and 300 negative pairs (different person), resulting in 6000 pairs. Overall, the dataset has 13,233 face images and 5749 identities (only 1680 persons have two or more images).
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ YTF} \autocite{wolfFaceRecognitionUnconstrained2011} is a video-based benchmark that leverages the greater amount of information provided by a video in comparison to still images. By collecting videos from \textit{Youtube} there isn't an opportunity to control the conditions, hence the footage will support a wider range of characteristic's variation, namely lighting conditions, difficult poses, motion blur, compression artifacts, etc. This resulted in 3425 videos from 1595 identities and a benchmark protocol inspired in the LFW. To evaluate performance, a pair-matching test is designed. From the database, 5000 video pairs are collected, where half are matches and the other half are not, to be divided to allow 10-fold cross validation.
@@ -263,22 +263,22 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \noindent\textbf{$\rightarrow$ IJB-A} \autocite{klarePushingFrontiersUnconstrained2015} aims at straying further from the saturation in recognition benchmarks by proposing more challenging benchmarks (specifically by including wider geographic distribution and full pose variation) for both verification and identification. It consists of a mix of 5712 images and 2085 videos from 500 individuals, with manual bounding boxes, facial landmarks and, most importantly, labels. IJB-A supports two protocols: search (face identification) and compare (face verification). For both the protocols, the specifications are the same, i.e., ten random training and testing splits are generated using all 500 identities then used to perform sample bootstrapping (instead of cross validation) in order to enhance the number of testing subjects. For each split, 333 subjects are randomly distributed in the training set and the remainder 167 are placed in the testing set.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ CFP} \autocite{senguptaFrontalProfileFace2016}
+\noindent\textbf{$\rightarrow$ CFP} \autocite{senguptaFrontalProfileFace2016} studies the effect of extreme pose variations, such as a profile view of a face, in face verification. During collection gender and profession balance, as well as racial diversity, were considered. A number of frontal and profile view images was also set as 10 and 4, respectively. Therefore, after cleaning the initial data, it resulted in 7000 images from 500 subjects. The experimental protocol divided the 500 identities over 10 splits (facilitating 10-fold cross validation) and randomly generated 7 matched pairs and 7 unmatched pairs per identity, resulting in a total of 7000 pairs of faces.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ MEGAFACE}
+\noindent\textbf{$\rightarrow$ MegaFace2} \autocite{nechLevelPlayingField2017} has already been mentioned in the Training Data section, with exception to detailing the benchmarking protocol. The MegaFace2 is used to train the model that will be tested in 3 datasets: a one million Flickr distraction set, FaceScrub \autocite{ngDatadrivenApproachCleaning2014} and FG-Net. The first dataset is intended to supply the model with identities that are not to be found (hence being called a distraction set), while the last two contain the known identities to be tested.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ CPLFW}
+\noindent\textbf{$\rightarrow$ CPLFW} \autocite{zhengCrossPoseLFWDatabase} is another dataset that tackles the overly optimistic accuracy saturation in classic benchmarks, such as the previously mentioned LFW. To this end, evaluating performance for cross-pose faces of LFW subjects is the matter of study. It contains the same number of 13,233 images of 5749 identities like LFW and the benchmark protocol performance is the LFW \textit{View 2} with some differences: 1) negative pairs are from people of the same race and gender, 2) class imbalance and limited positive pair's diversity is resolved by assuring that each identity has at least 2 images.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ CALFW}
+\noindent\textbf{$\rightarrow$ CALFW} \autocite{zhengCrossAgeLFWDatabase2017} has the same principles as CPLFW but applied to the age of the subjects (including the negative pairs selection and the class imbalance).
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ Age-DB}
+\noindent\textbf{$\rightarrow$ Age-DB} \autocite{moschoglouAgeDBFirstManually2017}, similarly to CALFW, is a dataset that considers the subject's age. It distances from other databases by solving the noisy labelling, induced by automatic or semi-automatic methods, by doing so manually. Age-DB has 16,488 images and 568 subjects used in 4 evaluation protocols, similar to LFW's \textit{View 2}, where the main difference between them is the age difference between pairs (5, 10, 20 and 30 years).
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ IJB-B}
+\noindent\textbf{$\rightarrow$ IJB-B} \autocite{whitelamIARPAJanusBenchmarkB2017} builds upon IJB-A and proposes solving flaws that were verified in the previous dataset. First, the improved IJB-B dataset is larger, consisting of 21,798 images and 7,011 videos from 1,845 subjects, with a more uniform racial distribution. Second, the protocols are upgraded due a greater number of possible comparisons between images and possible identities.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ TinyFace}
@@ -296,7 +296,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \noindent\textbf{$\rightarrow$ QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as a benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ CAFR} (rev 2021) \autocite{zhaoAgeInvariantFaceRecognition2022}
+\noindent\textbf{$\rightarrow$ CAFR} \autocite{zhaoAgeInvariantFaceRecognition2022}
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ MDMFR} \autocite{ullahNovelDeepMaskNetModel2022} is brought about in light of the COVID-19 impact, where wearing a mask became mandatory. Unfortunately, this rendered unusable the traditional face recognition methods because they were designed to recognize unveiled faces. Therefore, in conjunction with Deepmasknet, a framework that performs both masked detection and recognition, MDMFR was released
@@ -309,10 +309,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 
 
 
-
-% Please add the following required packages to your document preamble:
-% \usepackage{graphicx}
-\begin{table}[!h]
+\begin{table}[!ht]
     \centering
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|c|c|c|c|c|c|c|}
@@ -320,13 +317,13 @@ In the following pages, a mix of training datasets, of overall relevance and mor
     \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Year} & \textbf{Availability} & \textbf{Images/videos} & \textbf{Depth} & \textbf{Avg. Breadth} & \textbf{Distribution} & \textbf{Description} \\ \hline
     LFW \autocite{huangLabeledFacesWild}                                    & 2007          & Discontinued          & 494,414/-              & 10,575         & 46.7                  & Public                & temp                 \\ \hline
     YTF \autocite{wolfFaceRecognitionUnconstrained2011}                                    & 2011          & -                     & 500M/-                 & 10M            & 50                    & Private               & temp                 \\ \hline
-    IJB-A                                  & 2015          & -                     & 200M/-                 & 8M             & 25                    & Private               & temp                 \\ \hline
+    IJB-A \autocite{klarePushingFrontiersUnconstrained2015}                                  & 2015          & -                     & 200M/-                 & 8M             & 25                    & Private               & temp                 \\ \hline
     CFP \autocite{senguptaFrontalProfileFace2016}                                 & 2016          & Discontinued          & 2,6M/-                 & 2,622          & 991.6                 & Public                & temp                 \\ \hline
-    MegaFace*                              & 2016          & Discontinued          & 10M/-                  & 100k           & 100                   & Public                & temp                 \\ \hline
-    CPLFW                                  & 2017          & temp                  & 4,753,320/-            & 672,057        & 7.1                   & Public                & temp                 \\ \hline
-    CALFW                                  & 2017          & temp                  & 3,31M/-                & 9131           & 362.5                 & Public                & temp                 \\ \hline
-    AgeDB                                  & 2017          & temp                  & -/22,075               & 3,107          & 7.1                   & Public                & temp                 \\ \hline
-    IJB-B                                  & 2017          & temp                  & 50M/-                  & 500k           & 100                   & Public                & temp                 \\ \hline
+    MegaFace2* \autocite{nechLevelPlayingField2017}                              & 2016          & Discontinued          & 10M/-                  & 100k           & 100                   & Public                & temp                 \\ \hline
+    CPLFW \autocite{zhengCrossPoseLFWDatabase}                                  & 2017          & temp                  & 4,753,320/-            & 672,057        & 7.1                   & Public                & temp                 \\ \hline
+    CALFW \autocite{zhengCrossAgeLFWDatabase2017}                                  & 2017          & temp                  & 3,31M/-                & 9131           & 362.5                 & Public                & temp                 \\ \hline
+    AgeDB \autocite{moschoglouAgeDBFirstManually2017}                                  & 2017          & temp                  & -/22,075               & 3,107          & 7.1                   & Public                & temp                 \\ \hline
+    IJB-B \autocite{whitelamIARPAJanusBenchmarkB2017}                                 & 2017          & temp                  & 50M/-                  & 500k           & 100                   & Public                & temp                 \\ \hline
     TinyFace                               & 2018          & temp                  & 25M/-                  & 245k           & 102                   & Public                & temp                 \\ \hline
     IJB-C                                  & 2018          & temp                  & 1,7M/-                 & 59k            & 28.8                  & Public                & temp                 \\ \hline
     IJB-S                                  & 2018          & temp                  & 5,8M/-                 & 85k            & 68.2                  & Public                & temp                 \\ \hline
@@ -357,10 +354,10 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 }
 
 
-
+\newpage
 \subsection{Feature Extraction}
 
-\begin{figure}[t!]
+\begin{figure}[!h]
     \centering
     \includegraphics[width=0.85\textwidth]{Architecture-of-a-Convolutional-Neural-Network-CNN-The-traditional-CNN-structure-is.png}
     \caption{Architecture of a Convolutional Neural Network \autocite{kangDeepSimilarityMetric2019}.}
@@ -386,5 +383,6 @@ The ensemble of features 2, 4 and 5 enable an invariance of the network to small
 \subsubsection{Transfer Learning}
 
 \subsection{Loss}
+\subsection{Similarity}
 
 \end{document}
