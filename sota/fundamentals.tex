@@ -11,7 +11,7 @@
 \section{Face Recognition}
 Face Recognition (FR) is a thoroughly debated and extensively researched task in the Computer Vision community for more than two decades \autocite{ranjanDeepLearningUnderstanding2018}, popularized in the early 1990s with the introduction of the Eigenfaces \autocite{turkEigenfacesRecognition1991} or Fisherfaces \autocite{p.n.belhumeurEigenfacesVsFisherfaces1997} approaches. These methods projected faces in a low-dimensional subspace assuming certain distributions, but lacked the ability to handle uncontrolled facial changes that broke said assumptions, henceforth, bringing about face recognition approaches through local-features \autocite{chengjunliuGaborFeatureBased2002, ahonenFaceDescriptionLocal2006} that, even though, presented considerable results, weren't distinctive or compact. Beginning in 2010, methods based on learnable filters arose \autocite{z.caoFaceRecognitionLearningbased2010,leiLearningDiscriminantFace2014}, but unfortunately revealed limitations when nonlinear variations were at stake.
 
-\par Earlier methods for FR worked appropriately when the data was handpicked or generated on a constrained environment, however, they didn't scale adequately in the real world were there are large fluctuations in, particularly, pose, age, illumination, background scenario, the presence of facial occlusion \autocite{ranjanDeepLearningUnderstanding2018} and many unimaginable more. These shortcomings can be dealt with by using Deep Learning, a framework of techniques that solves the nonlinear inseparable classes problem \red{ref.}, more specifically a structure called Convolutional Neural Network (CNN) \autocite{wangDeepFaceRecognition2021}. 
+\par Earlier methods for FR worked appropriately when the data was handpicked or generated on a constrained environment, however, they didn't scale adequately in the real world were there are large fluctuations in, particularly, pose, age, illumination, background scenario, the presence of facial occlusion \autocite{ranjanDeepLearningUnderstanding2018} and many unimaginable more \red{cite ijb-s 2, 4, 23}. These shortcomings can be dealt with by using Deep Learning, a framework of techniques that solves the nonlinear inseparable classes problem \red{ref.}, more specifically a structure called Convolutional Neural Network (CNN) \autocite{wangDeepFaceRecognition2021}. 
 
 \par CNNs are an Artificial Neural Network (ANN) that exhibit a better performance on image or video-based tasks compared to other methods \autocite{lecunGradientBasedLearningApplied1998}. They were greatly hailed in 2012, after the AlexNet \autocite{krizhevskyImageNetClassificationDeep2012} victory, by a great margin, in the ImageNet Large Scale Visual Recognition Challenge (ILSVRC). Just two years later, DeepFace \autocite{taigmanDeepFaceClosingGap2014} revolutionized the benchmarks scores by achieving state-of-the-art results that approached human performance, reinforcing even further the importance of Deep Learning and shifting the research path to be taken \autocite{wangDeepFaceRecognition2021}.
 
@@ -127,8 +127,13 @@ Although this distribution can create some overlap among the categories, it is s
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ Face identification}, also called \textbf{face recognition}, is a one-to-many correlation process that compares a query face to a database of faces and associates it to the corresponding match (or matches). \red{A typical use case is to identify someone in a watchlist or surveillance videos.} \autocite{liHandbookFaceRecognition2011}
 
+
+
 \vspace{0.7\baselineskip}
 \par The overall pipeline comes to a conclusion in this module, however, in reality, it goes further than that. As can be seen in \reffig{fig:fr pipeline}, due to its importance for the face recognition problem, it's highlighted the inherent pipeline of the Face Representation stage, henceforth, it shall be discussed in depth in the next section.
+
+\vspace{\baselineskip}
+\red{Explain the probe and gallery sets (tinyface) and the open vs closed set identification problem}
 
 \newpage
 \section{Face Representation Pipeline}
@@ -272,42 +277,40 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \noindent\textbf{$\rightarrow$ CPLFW} \autocite{zhengCrossPoseLFWDatabase} is another dataset that tackles the overly optimistic accuracy saturation in classic benchmarks, such as the previously mentioned LFW. To this end, evaluating performance for cross-pose faces of LFW subjects is the matter of study. It contains the same number of 13,233 images of 5749 identities like LFW and the benchmark protocol performance is the LFW \textit{View 2} with some differences: 1) negative pairs are from people of the same race and gender, 2) class imbalance and limited positive pair's diversity is resolved by assuring that each identity has at least 2 images.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ CALFW} \autocite{zhengCrossAgeLFWDatabase2017} has the same principles as CPLFW but applied to the age of the subjects (including the negative pairs selection and the class imbalance).
+\noindent\textbf{$\rightarrow$ CALFW} \autocite{zhengCrossAgeLFWDatabase2017} has the same principles as CPLFW but applied to the age of the subjects (including the negative pairs selection and the class imbalance problem).
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ Age-DB} \autocite{moschoglouAgeDBFirstManually2017}, similarly to CALFW, is a dataset that considers the subject's age. It distances from other databases by solving the noisy labelling, induced by automatic or semi-automatic methods, by doing so manually. Age-DB has 16,488 images and 568 subjects used in 4 evaluation protocols, similar to LFW's \textit{View 2}, where the main difference between them is the age difference between pairs (5, 10, 20 and 30 years).
+\noindent\textbf{$\rightarrow$ Age-DB} \autocite{moschoglouAgeDBFirstManually2017}, similarly to CALFW, is a dataset that considers the subject's age. It distances itself from other databases by solving the noisy labelling, induced by automatic or semi-automatic methods, by doing so manually. Age-DB has 16,488 images and 568 subjects used in 4 evaluation protocols, similar to LFW's \textit{View 2}, where the main difference between them is the age difference between pairs (5, 10, 20 and 30 years).
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ IJB-B} \autocite{whitelamIARPAJanusBenchmarkB2017} builds upon IJB-A and proposes solving flaws that were verified in the previous dataset. First, the improved IJB-B dataset is larger, consisting of 21,798 images and 7,011 videos from 1,845 subjects, with a more uniform racial distribution. Second, the protocols are upgraded due a greater number of possible comparisons between images and possible identities.
+\noindent\textbf{$\rightarrow$ IJB-B} \autocite{whitelamIARPAJanusBenchmarkB2017} builds upon IJB-A and proposes solving flaws that were verified in the previous dataset. First, the improved IJB-B dataset is larger, consisting of 21,798 images and 7,011 videos from 1,845 subjects, with a more uniform racial distribution. Second, the protocols are upgraded due to a greater number of possible comparisons between images and possible identities.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ TinyFace}
+\noindent\textbf{$\rightarrow$ TinyFace} \autocite{chengLowResolutionFaceRecognition2019} was presented to fill in the gap of low-resolution face recognition benchmarks with genuine images and not downsampled ones. It is designed for face identification, and is composed of 15,975 labelled images and 153,428 distractors, totalling 169,403 low resolution images, from 5139 identities. The evaluation protocol is similar to the one used by MegaFace: 1) half of the identities are randomly sampled by the probe set and the other half by the gallery set, and 2) the distractor images are added to the gallery incorporating further complexity to the identification process.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ IJB-C} 
+\noindent\textbf{$\rightarrow$ IJB-C} \autocite{mazeIARPAJanusBenchmark2018} adds 1661 new identities to IJB-B and new end-to-end protocols (to evaluate face detection, identification, verification, clustering) in order to better mimic real-world unconstrained recognition. They have increased diversity, both in geographic location and profession, and occlusion scenarios. IJB-C has 31,334 images and 11,779 videos from 3531 subjects.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ IJB-S}
+\noindent\textbf{$\rightarrow$ IJB-S} \autocite{kalkaIJBIARPAJanus2018} is a manually annotated benchmark constructed by collecting images and surveillance videos that presents a challenging face recognition problem. It is a dataset with several challenging variations, namely, full pose, resolution, presence of motion blur and visual artifacts. The aforesaid are tested during 6 different face detection and identification protocols. IJB-S consists of 350 surveillance videos, 202 enrollment videos and 5656 images. 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ RFW}
+\noindent\textbf{$\rightarrow$ RFW} \autocite{wangRacialFacesWild2019} is a proposed benchmark dataset to evaluate the racial bias of face verification solutions. It is divided in 4 subsets regarding the race of the subjects, where each contains, approximately, 10 thousand images and 3 thousand identities, totaling 40,607 images from 11,429 subjects. The evaluation protocol is the same as the LFW one, but the negative pairs were mined to be difficult and avoid easily saturated performance.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as a benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
+\noindent\textbf{$\rightarrow$ QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as a benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context, and it contains both face verification and identification protocols. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ CAFR} \autocite{zhaoAgeInvariantFaceRecognition2022}
+\noindent\textbf{$\rightarrow$ MDMFR} \autocite{ullahNovelDeepMaskNetModel2022} is brought about in light of the COVID-19 impact, where wearing a mask became mandatory and rendered unusable the traditional face recognition methods. Therefore, in conjunction with Deepmasknet, MDMFR was released. It is a large-scale benchmark dataset designed to evaluate the performance of both masked face recognition and masked face detection algorithms. The recognition protocol contains 2896 images from 226 identities, intended to benchmark masked face recognition models.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ MDMFR} \autocite{ullahNovelDeepMaskNetModel2022} is brought about in light of the COVID-19 impact, where wearing a mask became mandatory. Unfortunately, this rendered unusable the traditional face recognition methods because they were designed to recognize unveiled faces. Therefore, in conjunction with Deepmasknet, a framework that performs both masked detection and recognition, MDMFR was released
+\noindent\textbf{$\rightarrow$ XQLFW} \autocite{knocheCrossQualityLFWDatabase2021}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ XQLFW}
+\noindent\textbf{$\rightarrow$ FaVCI2D} \autocite{popescuFaceVerificationChallenging2022}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ FaVCI2D} 
-
-
+\noindent\textbf{$\rightarrow$ CAFR} \autocite{zhaoAgeInvariantFaceRecognition2022} was introduced in 2022, in the revised paper of the AIM (Age-Invariant Model) as a large-scale benchmark dataset to advance the development of face recognition models invariant to age. It consists of 1,446,500 images from 25,000 subjects and spans a range of ages from 1 to 99 years old. The evaluation protocol divides the data in 10 splits of 2500 pair-wise disjoint subjects, where each one has associated to it 5 matched pairs and 5 unmatched, resulting in a total of 25,000 pairs per split.
 
 \begin{table}[!ht]
     \centering
@@ -324,15 +327,15 @@ In the following pages, a mix of training datasets, of overall relevance and mor
     CALFW \autocite{zhengCrossAgeLFWDatabase2017}                                  & 2017          & temp                  & 3,31M/-                & 9131           & 362.5                 & Public                & temp                 \\ \hline
     AgeDB \autocite{moschoglouAgeDBFirstManually2017}                                  & 2017          & temp                  & -/22,075               & 3,107          & 7.1                   & Public                & temp                 \\ \hline
     IJB-B \autocite{whitelamIARPAJanusBenchmarkB2017}                                 & 2017          & temp                  & 50M/-                  & 500k           & 100                   & Public                & temp                 \\ \hline
-    TinyFace                               & 2018          & temp                  & 25M/-                  & 245k           & 102                   & Public                & temp                 \\ \hline
-    IJB-C                                  & 2018          & temp                  & 1,7M/-                 & 59k            & 28.8                  & Public                & temp                 \\ \hline
-    IJB-S                                  & 2018          & temp                  & 5,8M/-                 & 85k            & 68.2                  & Public                & temp                 \\ \hline
-    RFW                                    & 2018          & temp                  & 95k/-                  & 525            & 180.9                 & Public                & temp                 \\ \hline
-    QMUL-SurvFace                          & 2018          &                       &                        &                &                       &                       &                      \\ \hline
-    CAFR                                   & 2020          &                       &                        &                &                       &                       &                      \\ \hline
-    MDMFR                                  & 2021          &                       &                        &                &                       &                       &                      \\ \hline
-    XQLFW                                  & 2021          & temp                  & 17M/-                  & 360k           & 47.2                  & Public                & temp                 \\ \hline
-    FaVCI2D                                & 2022          & temp                  & 260M/-                 & 4M             & 65                    & Public                & temp                 \\ \hline
+    TinyFace \autocite{chengLowResolutionFaceRecognition2019}                               & 2018          & temp                  & 25M/-                  & 245k           & 102                   & Public                & temp                 \\ \hline
+    IJB-C \autocite{mazeIARPAJanusBenchmark2018}                                  & 2018          & temp                  & 1,7M/-                 & 59k            & 28.8                  & Public                & temp                 \\ \hline
+    IJB-S \autocite{kalkaIJBIARPAJanus2018}                                  & 2018          & temp                  & 5,8M/-                 & 85k            & 68.2                  & Public                & temp                 \\ \hline
+    RFW \autocite{wangRacialFacesWild2019}                                    & 2018          & temp                  & 95k/-                  & 525            & 180.9                 & Public                & temp                 \\ \hline
+    QMUL-SurvFace \autocite{chengSurveillanceFaceRecognition2018}                          & 2018          &                       &                        &                &                       &                       &                      \\ \hline
+    MDMFR \autocite{ullahNovelDeepMaskNetModel2022}                                  & 2021          &                       &                        &                &                       &                       &                      \\ \hline
+    XQLFW \autocite{knocheCrossQualityLFWDatabase2021}                                  & 2021          & temp                  & 17M/-                  & 360k           & 47.2                  & Public                & temp                 \\ \hline
+    FaVCI2D \autocite{popescuFaceVerificationChallenging2022}                                & 2022          & temp                  & 260M/-                 & 4M             & 65                    & Public                & temp                 \\ \hline
+    CAFR \autocite{zhaoAgeInvariantFaceRecognition2022}                                   & 2020          &                       &                        &                &                       &                       &                      \\ \hline
     \end{tabular}%
     }
     \caption{}
