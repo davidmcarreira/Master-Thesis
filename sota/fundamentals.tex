@@ -301,16 +301,16 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \noindent\textbf{$\rightarrow$ QMUL-SurvFace} \autocite{chengSurveillanceFaceRecognition2018} is a dataset introduced as a benchmark in the \textit{Surveillance Face recognition Challenge} for face recognition in a surveillance context, and it contains both face verification and identification protocols. By data-mining 17 public person re-identification datasets, it achieves 463,507 facial images of 15,573 identities collected in uncooperative surveillance scenarios. Consequently, it presents a high variance in resolution, motion blur, pose, occlusion, illumination and background clutter.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ MDMFR} \autocite{ullahNovelDeepMaskNetModel2022} is brought about in light of the COVID-19 impact, where wearing a mask became mandatory and rendered unusable the traditional face recognition methods. Therefore, in conjunction with Deepmasknet, MDMFR was released. It is a large-scale benchmark dataset designed to evaluate the performance of both masked face recognition and masked face detection algorithms. The recognition protocol contains 2896 images from 226 identities, intended to benchmark masked face recognition models.
+\noindent\textbf{$\rightarrow$ MDMFR} \autocite{ullahNovelDeepMaskNetModel2022} is brought about in light of the COVID-19 impact, where wearing a mask became mandatory and rendered unusable the traditional face recognition methods. Therefore, in conjunction with DeepMaskNet, MDMFR was released. It is a large-scale benchmark dataset designed to evaluate the performance of both masked face recognition and masked face detection algorithms. The recognition protocol contains 2896 images from 226 identities, intended to benchmark masked face recognition models.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ XQLFW} \autocite{knocheCrossQualityLFWDatabase2021}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ FaVCI2D} \autocite{popescuFaceVerificationChallenging2022}
+\noindent\textbf{$\rightarrow$ XQLFW} \autocite{knocheCrossQualityLFWDatabase2021} revisits the LFW and modifies it to better evaluate cross-resolution face recognition problems. The evaluation protocol, number of images and identities remains the same (13,233 and 5749, respectively), but the negative pairs are sampled in the same manner as CPLFW \autocite{zhengCrossPoseLFWDatabase} and CALFW \autocite{zhengCrossAgeLFWDatabase2017}.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ CAFR} \autocite{zhaoAgeInvariantFaceRecognition2022} was introduced in 2022, in the revised paper of the AIM (Age-Invariant Model) as a large-scale benchmark dataset to advance the development of face recognition models invariant to age. It consists of 1,446,500 images from 25,000 subjects and spans a range of ages from 1 to 99 years old. The evaluation protocol divides the data in 10 splits of 2500 pair-wise disjoint subjects, where each one has associated to it 5 matched pairs and 5 unmatched, resulting in a total of 25,000 pairs per split.
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ FaVCI2D} \autocite{popescuFaceVerificationChallenging2022} is face verification benchmark dataset that proposes to address three relevant flaws : 1) the pairs selected are not challenging enough,  2) the demographics of other datasets are not representative enough of the real world diversity and 3) legal and ethical questions concerning the data used. It is composed of 64,879 images and 52,411 unique identities, where 12,468 are used to create genuine matched identity pairs with balanced gender and geographic distribution.
 
 \begin{table}[!ht]
     \centering
@@ -330,12 +330,12 @@ In the following pages, a mix of training datasets, of overall relevance and mor
     TinyFace \autocite{chengLowResolutionFaceRecognition2019}                               & 2018          & temp                  & 25M/-                  & 245k           & 102                   & Public                & temp                 \\ \hline
     IJB-C \autocite{mazeIARPAJanusBenchmark2018}                                  & 2018          & temp                  & 1,7M/-                 & 59k            & 28.8                  & Public                & temp                 \\ \hline
     IJB-S \autocite{kalkaIJBIARPAJanus2018}                                  & 2018          & temp                  & 5,8M/-                 & 85k            & 68.2                  & Public                & temp                 \\ \hline
-    RFW \autocite{wangRacialFacesWild2019}                                    & 2018          & temp                  & 95k/-                  & 525            & 180.9                 & Public                & temp                 \\ \hline
-    QMUL-SurvFace \autocite{chengSurveillanceFaceRecognition2018}                          & 2018          &                       &                        &                &                       &                       &                      \\ \hline
-    MDMFR \autocite{ullahNovelDeepMaskNetModel2022}                                  & 2021          &                       &                        &                &                       &                       &                      \\ \hline
+    RFW \autocite{wangRacialFacesWild2019}                                    & 2018 & temp                  & 95k/-                  & 525            & 180.9                 & Public                & temp                 \\ \hline          
+    QMUL-SurvFace \autocite{chengSurveillanceFaceRecognition2018}                          & 2018          & temp                  & 95k/-                  & 525            & 180.9                 & Public                & temp                 \\ \hline
+    MDMFR \autocite{ullahNovelDeepMaskNetModel2022}                                  & 2021          & temp                  & 95k/-                  & 525            & 180.9                 & Public                & temp                 \\ \hline
     XQLFW \autocite{knocheCrossQualityLFWDatabase2021}                                  & 2021          & temp                  & 17M/-                  & 360k           & 47.2                  & Public                & temp                 \\ \hline
+    CAFR \autocite{zhaoAgeInvariantFaceRecognition2022}                                   & 2022          & temp                  & 95k/-                  & 525            & 180.9                 & Public                & temp                 \\ \hline
     FaVCI2D \autocite{popescuFaceVerificationChallenging2022}                                & 2022          & temp                  & 260M/-                 & 4M             & 65                    & Public                & temp                 \\ \hline
-    CAFR \autocite{zhaoAgeInvariantFaceRecognition2022}                                   & 2020          &                       &                        &                &                       &                       &                      \\ \hline
     \end{tabular}%
     }
     \caption{}
