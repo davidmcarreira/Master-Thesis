@@ -359,7 +359,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 
 \newpage
 \subsection{Feature Extractor}
-A feature extractor is present in both the training and testing stage of the Face Representation process, and comprehends a fundamental part of it, as it is what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
+A feature extractor is present in both the training and testing stage of the Face Representation process, and comprehends a fundamental part of it, as it is what allows the visual data to be processed and transformed to be evaluated. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
 \par Being that the following methods are all based in deep learning, therefore, the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - "who is this person?") or 1:1 similarity (face verification - "are these persons the same?").
 
 \vspace{\baselineskip}
@@ -374,24 +374,32 @@ A feature extractor is present in both the training and testing stage of the Fac
 \end{figure}
 
 
-There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} with successful applications in the domains of Computer Vision \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021} or Natural Language Processing\autocite{abdel-hamidConvolutionalNeuralNetworks2014, wangGenCNNConvolutionalArchitecture2015, xiangConvolutionalNeuralNetworkbased2020}.
+\par There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022} with successful applications in the domains of Computer Vision \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021}.
+
+\par Using CNNs for Computer Vision tasks, in this specific case, Face Recognition, is not an arbitrary choice, but due to the fact that the network design can benefit from the intrinsic characteristics of the input data, consequently performing really well in image related applications \autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. In the first place, images have an array-like structure with numerous elements, namely, each pixel has an assigned value organized in a grid-like manner \autocite{yamashitaConvolutionalNeuralNetworks2018}. In the second place, there's an inherent correlation between local groups of values, which creates distinguishable motifs \autocite{lecunDeepLearning2015}. Finally, the local values of images are invariant to location, that is, a certain composition should have the same value independently of the spatial location in the picture \autocite{lecunDeepLearning2015}.
+
+\par Furthermore, when compared to fully connected networks, CNNs are superior due to 4 key features: 1) Shared weights between the same features in different locations reduce the number of parameters \autocite{liSurveyConvolutionalNeural2022}, 2) sparse connections \autocite{alzubaidiReviewDeepLearning2021}, 3) pooling layers and 4) automatically identifies the relevant features without any human supervision \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}.
+% \begin{enumerate}
+%     \item Designed to process multidimensional arrays \autocite{lecunDeepLearning2015};
+%     \item Shared weights between the same features in different locations; %Invariance to shift, distortions and rotations
+%     \item Automatically identifies the relevant features without any human supervision, hence, small amounts of preprocessing \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}; %Easier to train
+%     \item Sparse connections \autocite{alzubaidiReviewDeepLearning2021}; %Less complexity, easier to train; %Invariance to shift, distortions and rotations and less network complexity (easier to train)
+%     \item Pooling layers reduce the spatial size of the input data. %Invariance to shift, distortions and rotations
+% \end{enumerate}
+% Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
+
+The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \autocite{guRecentAdvancesConvolutional2018,lecunDeepLearning2015}, while 2, 3, 4 and 5 helps to reduce the complexity of the model, and as a result training it is easier \autocite{guRecentAdvancesConvolutional2018,liSurveyConvolutionalNeural2022}.
 
 \par In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers.
 
-\par The raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, yamashitaConvolutionalNeuralNetworks2018, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}. The convolutional layer is designed to extract feature representations by being composed of kernels (or filter banks \autocite{lecunDeepLearning2015}) that compute feature maps through element-wise product, to which is applied a nonlinear activation function \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. Next is the pooling layer, that's responsible for reducing the spatial size of the input data \autocite{guRecentAdvancesConvolutional2018} and joining identical features \autocite{lecunDeepLearning2015}. Finally, the fully connected layers, and their core function is to perform high logic and generate semantic information \autocite{guRecentAdvancesConvolutional2018}.
+\par The raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}.   
 
-
-\par Using CNNs for Computer Vision tasks, in this specific case, Face Recognition, is not an arbitrary choice, but due to the fact that the network design can benefit from the intrinsic characteristics of the input data, consequently performing really well in image related applications \autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. In the first place, images have an array-like structure with numerous elements, namely, each pixel has an assigned value organized in a grid-like manner \autocite{yamashitaConvolutionalNeuralNetworks2018}. In the second place, there's an inherent correlation between local groups of values, which creates distinguishable motifs \autocite{lecunDeepLearning2015}. Finally, the local values of images are invariant to location, that is, a certain composition should have the same value independently of the spatial location in the picture \autocite{lecunDeepLearning2015}. Therefore, the following key unique features, allow the previously stated efficient performance \autocite{caoReviewNeuralNetworks2018}:
-\begin{enumerate}
-    \item Designed to process multidimensional arrays \autocite{lecunDeepLearning2015};
-    \item Shared weights between the same features in different locations; %Invariance to shift, distortions and rotations
-    \item Automatically identifies the relevant features without any human supervision, hence, small amounts of preprocessing \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}; %Easier to train
-    \item Local connections (or receptive fields/sparse connectivity) \autocite{alzubaidiReviewDeepLearning2021}; %Less complexity, easier to train; %Invariance to shift, distortions and rotations and less network complexity (easier to train)
-    \item Pooling layers that reduces the spatial size of the input data. %Invariance to shift, distortions and rotations
-\end{enumerate}
-% Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
-
-The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \autocite{guRecentAdvancesConvolutional2018,lecunDeepLearning2015}, while 2, 3, 4 and 5 helps reducing the complexity of the model, and as a result training it is easier \autocite{guRecentAdvancesConvolutional2018,liSurveyConvolutionalNeural2022}.
+\subsubsection{Convolutional Layer}
+The convolutional layer is designed to extract feature representations by being composed of kernels (or filter banks \autocite{lecunDeepLearning2015}) that compute feature maps through element-wise product, to which is applied a nonlinear activation function \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}.
+\subsubsection{Pooling Layer}
+Next is the pooling layer, that's responsible for reducing the spatial size of the input data \autocite{guRecentAdvancesConvolutional2018} and joining identical features \autocite{lecunDeepLearning2015}. 
+\subsubsection{Fully Connected Layer}
+Finally, the fully connected layers, and their core function is to perform high logic and generate semantic information \autocite{guRecentAdvancesConvolutional2018}.
 
 \phantomsection\label{transf learning}
 \subsubsection{Transfer Learning}
