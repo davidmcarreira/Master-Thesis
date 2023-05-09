@@ -390,7 +390,43 @@ A feature extractor is present in both the training and testing stage of the Fac
 \par In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers. The raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}.   
 
 \subsubsection{Convolutional Layer}
-The convolutional layer is designed to extract feature representations by being composed of kernels (or filter banks \autocite{lecunDeepLearning2015}) that compute feature maps through element-wise product, to which is applied a nonlinear activation function \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}.
+\par The convolutional layer aims at extracting feature representations from the inputs, and is formed by a set of learnable filters called \textbf{kernels} and an \textbf{activation function} \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{sobel.png}
+    \caption{3x3 Kernels of the Sobel-Feldman operator used for edge detection \autocite{sobelIsotropicGradientOperator1973}.}
+    \label{fig:sobel}
+\end{figure}
+
+A \textbf{kernel}\footnote{Or feature detector \autocite{ajitReviewConvolutionalNeural2020}.} \reffig{fig:sobel}, is a grid-like structure of fixed dimensions [WxHxD], where W is the width and H is the height. The dimension D relates to the depth of the kernel and is used to multichannel images, such as RGB ones (3 channels). Each of its elements is a learnable weight that is adjusted during training to extract significant features \autocite{alzubaidiReviewDeepLearning2021}. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{conv.png} %source: https://anhreynolds.com/blogs/cnn.html
+    \caption{Convolution}
+    \label{fig:conv}
+\end{figure}
+
+\par With a predetermined \textbf{stride}, the kernel scans its receptive field \autocite{khanSurveyRecentArchitectures2020}, horizontally and vertically, through the input data, and produces the feature map\footnote{Also referred to as feature representation \autocite{liSurveyConvolutionalNeural2022} or activation map \autocite{ajitReviewConvolutionalNeural2020}.} \autocite{lecunDeepLearning2015, alzubaidiReviewDeepLearning2021} by performing an element-wise product, called \textbf{convolution} \reffig{fig:conv}, that can be described as follows \autocite{khanSurveyRecentArchitectures2020}:
+$$
+f_l^k(p, q) = \sum_{c}^{}\sum_{x, y}^{}i_c(x, y)\cdot w^k_l(u,v)
+$$
+where $f_l^k(p, q)$ is an element at line $p$ and column $q$ in the feature map from the k-th kernel in the l-th layer, $i_c(x, y)$ is the element at line $x$ and row $y$ in the input data, and $w^k_l(u,v)$ is the weight at line $u$ and column $v$ from the k-th kernel of the l-th layer. 
+
+% To adjust the density of the convolution, the value of the \textbf{stride}, which represents the shift between convolutions, is modified \autocite{ajitReviewConvolutionalNeural2020,liSurveyConvolutionalNeural2022}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{padding.png} %source: https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html
+    \caption{Convolution}
+    \label{fig:padding}
+\end{figure}
+
+\par At the edge of the input, it's not possible to overlap the whole kernel over all the elements, reaching a point where it can't shift anymore, so the dimensions of the feature map would be unintentionally reduced and information would be lost. Therefore, as seen in \reffig{fig:padding}, usually \textbf{zero padding} is employed to solve the aforesaid problems \autocite{yamashitaConvolutionalNeuralNetworks2018}.
+
+\par The overall architecture of CNNs are inspired by the visual perception \autocite{hubelReceptiveFieldsBinocular1962}, so a direct parallelism can be made to better define the \textbf{activation function}. The kernels can be seen as receptors, or artificial neurons, that respond to different features, whereas the activation function is a simulation of the threshold function that dictates if the next neuron is activated or not. Additionally, the convolution operation is linear, consequently, if no nonlinear activation function was used, the input of the next layer would be a linear output of the previous layer. The introduction of nonlinearity, such as ReLU (Rectified Linear Unite) \autocite{nairRectifiedLinearUnits}, allows deep neural networks to approximate any function, enhancing the ability to fit to any data \autocite{liSurveyConvolutionalNeural2022}.
+
 \subsubsection{Pooling Layer}
 Next is the pooling layer, that's responsible for reducing the spatial size of the input data \autocite{guRecentAdvancesConvolutional2018} and joining identical features \autocite{lecunDeepLearning2015}. 
 \subsubsection{Fully Connected Layer}
