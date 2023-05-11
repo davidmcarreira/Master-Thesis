@@ -359,8 +359,8 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 
 \vspace{\baselineskip}
 \subsection{Feature Extractor}
-A feature extractor is present in both the training and testing stage of the Face Representation process, and comprehends a fundamental part of it, as it is what allows the visual data to be processed and transformed to be evaluated. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
-\par Being that the following methods are all based in deep learning, therefore, the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - "who is this person?") or 1:1 similarity (face verification - "are these persons the same?").
+A feature extractor is present in both the training and testing stage of the Face Representation process, and comprehends a fundamental part of it, as it is what allows the visual data to be processed and transformed to be evaluated, by transforming the input into low dimensional representations \autocite{lecunGradientBasedLearningApplied1998}. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
+\par Being that the following methods are all based in deep learning, therefore, the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor contains prior knowledge and is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - "who is this person?") or 1:1 similarity (face verification - "are these persons the same?").
 
 \vspace{\baselineskip}
 \par The following section will be divided as follows: first, the general architecture and training process of a CNN will be described, then, a brief overview of loss functions and how similarity is computed in face recognition, and finally, related works regarding face recognition are reviewed.
@@ -439,10 +439,19 @@ After the features are extracted, the spatial location of them become less relev
 
 There are many ways of downsampling the feature map through pooling such as min pooling, average pooling or stochastic pooling, however max pooling is by far the most popular one. As pictured in \reffig{fig:maxpool}, this operation divides the feature map in sections and computes the maximum value in each while discarding the other ones.
 
-\subsubsection{Fully Connected Layer}
+\subsubsection{Fully Connected Layer (?)}
 The fully connected (FC) layer is located at the end of the network. It is a dense, feedforward neural network in which every neuron is connected to all other neurons \autocite{yamashitaConvolutionalNeuralNetworks2018, alzubaidiReviewDeepLearning2021}. The final feature map is flattened and transformed in a one-dimensional feature vector and the purpose of the FC layer is using this vector as an input, and act as the CNN classifier by performing high logic reasoning \autocite{guRecentAdvancesConvolutional2018}.
 
 \subsubsection{Training}
+Training a network in the context of CNNs is the process of finding the optimal kernel values. The training data is passed through the model, the predictions are asserted the distance between them and the expected ones is measured by a loss function. LeCun \textit{et al.} \autocite{lecunGradientBasedLearningApplied1998} presents the problem as follows:
+$$
+E^p = \mathcal{D}(D^p, Y^p)
+$$
+
+\noindent The loss function, $E^p$, is a measure of error. It computes the difference between the expected result, $D^p$, and the predicted result $Y^p$, where $Y^p = F(Z^p, W)$ is a function of the $p$-th training example, $Z^p$, for a determined weight $W$. Additionally, $E_{train}(W)$, is the average of all the errors calculated in a training set ${(Z^x, D^x),\dots (Z^p, D^p)}$. Training the network is nothing more than finding the value $W$ that minimizes $E_{train}(W)$.
+
+
+
 \phantomsection\label{transf learning}
 \subsubsection{Transfer Learning}
 
