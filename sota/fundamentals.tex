@@ -443,14 +443,32 @@ There are many ways of downsampling the feature map through pooling such as min 
 The fully connected (FC) layer is located at the end of the network. It is a dense, feedforward neural network in which every neuron is connected to all other neurons \autocite{yamashitaConvolutionalNeuralNetworks2018, alzubaidiReviewDeepLearning2021}. The final feature map is flattened and transformed in a one-dimensional feature vector and the purpose of the FC layer is using this vector as an input, and act as the CNN classifier by performing high logic reasoning \autocite{guRecentAdvancesConvolutional2018}.
 
 \subsubsection{Training}
-Training a network in the context of CNNs is the process of finding the optimal kernel values. The training data is passed through the model, the predictions are asserted the distance between them and the expected ones is measured by a loss function. LeCun \textit{et al.} \autocite{lecunGradientBasedLearningApplied1998} presents the problem as follows:
+Training a network in the context of CNNs is the process of finding the optimal kernel weights' values. The training data is passed through the model, the predictions asserted and the distance between them and the expected ones is measured by a loss function. LeCun \textit{et al.} \autocite{lecunGradientBasedLearningApplied1998} presents the problem as follows:
 $$
 E^p = \mathcal{D}(D^p, Y^p)
 $$
 
-\noindent The loss function, $E^p$, is a measure of error. It computes the difference between the expected result, $D^p$, and the predicted result $Y^p$, where $Y^p = F(Z^p, W)$ is a function of the $p$-th training example, $Z^p$, for a determined weight $W$. Additionally, $E_{train}(W)$, is the average of all the errors calculated in a training set ${(Z^x, D^x),\dots (Z^p, D^p)}$. Training the network is nothing more than finding the value $W$ that minimizes $E_{train}(W)$.
+\noindent The loss function, $E^p$, is a measure of error. It computes the difference between the expected result, $D^p$, and the predicted result $Y^p$, where $Y^p = F(Z^p, W)$ is a function of the $p$-th training example, $Z^p$, for a determined weight $W$. Additionally, $E_{train}(W)$, is the average of all the errors calculated in a training set $\left\{(Z^x, D^x),\dots (Z^p, D^p)\right\}$. Training the network is nothing more than a function minimization problem, and for that there are several techniques, the \textbf{optimizers}.
+
+\subsubsection{Optimizers}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{gd.png} %source: https://www.ibm.com/topics/gradient-descent
+    \caption{Gradient descent}
+    \label{fig:gd}
+\end{figure}
 
 
+\par By computing the gradient of the loss function in respect to the learnable parameters it allows studying how said parameters influence the loss function and how it can be more efficiently minimized. This algorithm is called \textbf{gradient descent} \autocite{ruderOverviewGradientDescent}, and is the simplest minimization technique. By definition, the gradient of a function is the direction of the steepest ascent, henceforth, the learnable parameters are updated once every epoch in the opposite direction to reduce the error: 
+$$
+W_k = W_{k-1}-\epsilon\frac{\delta E(W)}{{\delta} W}
+$$
+\noindent where $\epsilon$ is a constant called \textbf{learning rate} that controls how much the parameters are updated and has an immense impact in the performance of a neural network \reffig{fig:gd}. According to Goodfellow \textit{et al.} \autocite{Goodfellow-et-al-2016}, if the learning rate is set too low, training will be much slower and can become permanently stuck with a high training error. On the other hand, if the learning rate is too high, the gradient descent can increase the training error instead of reducing it.
+\par \textbf{Stochastic Gradient Descent} (SGD) \autocite{alzubaidiReviewDeepLearning2021} is the algorithm of choice to optimize the loss function and its main difference is that the parameters updating routine. First, training samples are randomly sampled in every epoch, then the gradient is calculated for each at a time, and, finally, the parameters are updated accordingly. This is an efficient algorithm in terms of memory usage, but, since the updates occur once at every sample, the convergence can be noisy. Other optimizers worth of mentioning are: \textbf{1) Mini-batch Gradient Descent} - divides the training data into non-overlapping batches and the parameters are updated on each one of them; \textbf{2) Momentum} \autocite{polyakMethodsSpeedingConvergence1964} - introduces a new hyperparameter to the network called momentum, that accumulates previous gradients, that accelerates the optimizer in the correct direction of minimization and reduces error's oscillation during optimization; \textbf{3) Adam (Adaptive moment estimation)} \autocite{kingmaAdamMethodStochastic2015} - uses the first and second moments of the gradients (gradient's mean and variance, respectively) to better optimize the parameters.
+
+\subsubsection{Backpropagation}
+Regardless of the optimizer selected, computing an analytical expression for the gradient is trivial, but evaluating it is a computational heavy task when the aim is to find a minimum with respect to all the parameters in the network. To this extent, the backpropagation (or backprop) algorithm is a solution to do so efficiently \autocite{6795724}. Backprop is usually referred to as a training algorithm, but that is not true. \textbf{Backpropagation is not a training algorithm}, it is simply the method of computing the gradient using a fixed sequence, efficient application of the \textit{Chain Rule of Calculus} $\left(\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\right)$, considering that it starts at the final layer, and proceeding backwards\autocite{Goodfellow-et-al-2016}. 
 
 \phantomsection\label{transf learning}
 \subsubsection{Transfer Learning}
@@ -459,4 +477,5 @@ $$
 \subsection{Similarity}
 
 
+\red{Define hyperparameter, epoch}
 \end{document}
