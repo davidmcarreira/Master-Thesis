@@ -8,7 +8,7 @@
 \newpage
 % A face recognition system works in either or both of two modalities: face verification (or authentication) or face identification (or recognition). The difference between them lies in the final stage of the workflow, identification involves a one-to-one pairing, while identification is a one-to-many match.
 
-\section{Face Recognition}
+\section{Face Recognition - Theory Background}
 Face Recognition (FR) is a thoroughly debated and extensively researched task in the Computer Vision community for more than two decades \autocite{ranjanDeepLearningUnderstanding2018}, popularized in the early 1990s with the introduction of the Eigenfaces \autocite{turkEigenfacesRecognition1991} or Fisherfaces \autocite{p.n.belhumeurEigenfacesVsFisherfaces1997} approaches. These methods projected faces in a low-dimensional subspace assuming certain distributions, but lacked the ability to handle uncontrolled facial changes that broke said assumptions, henceforth, bringing about face recognition approaches through local-features \autocite{chengjunliuGaborFeatureBased2002, ahonenFaceDescriptionLocal2006} that, even though, presented considerable results, weren't distinctive or compact. Beginning in 2010, methods based on learnable filters arose \autocite{z.caoFaceRecognitionLearningbased2010,leiLearningDiscriminantFace2014}, but unfortunately revealed limitations when nonlinear variations were at stake.
 
 \par Earlier methods for FR worked appropriately when the data was handpicked or generated on a constrained environment, however, they didn't scale adequately in the real world were there are large fluctuations in, particularly, pose, age, illumination, background scenario, the presence of facial occlusion \autocite{ranjanDeepLearningUnderstanding2018} and many unimaginable more \red{cite ijb-s 2, 4, 23}. These shortcomings can be dealt with by using Deep Learning, a framework of techniques that solves the nonlinear inseparable classes problem \red{ref.}, more specifically a structure called Convolutional Neural Network (CNN) \autocite{wangDeepFaceRecognition2021}. 
@@ -24,6 +24,116 @@ Face Recognition (FR) is a thoroughly debated and extensively researched task in
 
 % \vspace{0.7\baselineskip}
 % \noindent\textbf{$\rightarrow$ Image querying}, is the process of finding information in a database of images that corresponds to the user query\footnote{Query, in computer science, is the request for information in a database.}, in this case, an image query\autocite{bartoliniImageQuerying2009}.  
+
+\subsection{Convolutional Neural Networks}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Architecture-of-a-Convolutional-Neural-Network-CNN-The-traditional-CNN-structure-is.png}
+    \caption{Architecture of a Convolutional Neural Network \autocite{kangDeepSimilarityMetric2019}.}
+    \label{fig:cnn}
+\end{figure}
+
+
+\par There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022}. Using CNNs for Computer Vision tasks \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021}, in this specific case, Face Recognition, is not an arbitrary choice, but due to the fact that the network design benefits from the intrinsic characteristics of the input data: images have an array-like structure \autocite{yamashitaConvolutionalNeuralNetworks2018}, and local groups of values are correlated (motifs or patterns) and invariant to spatial location \autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. Furthermore, when compared to fully connected networks, CNNs are superior due to 4 key features: 1) Shared weights between the same features in different locations reduce the number of parameters \autocite{liSurveyConvolutionalNeural2022}, 2) sparse connections \autocite{alzubaidiReviewDeepLearning2021}, 3) pooling layers and 4) automatically identifies the relevant features without any human supervision \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}.
+% \begin{enumerate}
+%     \item Designed to process multidimensional arrays \autocite{lecunDeepLearning2015};
+%     \item Shared weights between the same features in different locations; %Invariance to shift, distortions and rotations
+%     \item Automatically identifies the relevant features without any human supervision, hence, small amounts of preprocessing \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}; %Easier to train
+%     \item Sparse connections \autocite{alzubaidiReviewDeepLearning2021}; %Less complexity, easier to train; %Invariance to shift, distortions and rotations and less network complexity (easier to train)
+%     \item Pooling layers reduce the spatial size of the input data. %Invariance to shift, distortions and rotations
+% \end{enumerate}
+% Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
+
+% The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \autocite{guRecentAdvancesConvolutional2018,lecunDeepLearning2015}, while 2, 3, 4 and 5 helps to reduce the complexity of the model, and as a result training it is easier \autocite{guRecentAdvancesConvolutional2018,liSurveyConvolutionalNeural2022}.
+
+\par In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers. The raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}.   
+
+\subsubsection{Convolutional Layer}
+\par The convolutional layer aims at extracting feature representations from the inputs, and is formed by a set of learnable filters called \textbf{kernels} and an \textbf{activation function} \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{sobel.png}
+    \caption{3x3 Kernels of the Sobel-Feldman operator used for edge detection \autocite{sobelIsotropicGradientOperator1973}.}
+    \label{fig:sobel}
+\end{figure}
+
+A \textbf{kernel}\footnote{Or feature detector \autocite{ajitReviewConvolutionalNeural2020}.} \reffig{fig:sobel}, is a grid-like structure of fixed dimensions [WxHxD], where W is the width and H is the height. The dimension D relates to the depth of the kernel and is used to multichannel images, such as RGB ones (3 channels). Each of its elements is a learnable weight that is adjusted during training to extract significant features \autocite{alzubaidiReviewDeepLearning2021}. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{conv.png} %source: https://anhreynolds.com/blogs/cnn.html
+    \caption{Convolution}
+    \label{fig:conv}
+\end{figure}
+
+\par With a predetermined \textbf{stride}, the kernel scans its receptive field \autocite{khanSurveyRecentArchitectures2020}, horizontally and vertically, through the input data, and produces the feature map\footnote{Also referred to as feature representation \autocite{liSurveyConvolutionalNeural2022} or activation map \autocite{ajitReviewConvolutionalNeural2020}.} \autocite{lecunDeepLearning2015, alzubaidiReviewDeepLearning2021} by performing an element-wise product, called \textbf{convolution} \reffig{fig:conv}, that can be described as follows \autocite{khanSurveyRecentArchitectures2020}:
+$$
+f_l^k(p, q) = \sum_{c}^{}\sum_{x, y}^{}i_c(x, y)\cdot w^k_l(u,v)
+$$
+where $f_l^k(p, q)$ is an element at line $p$ and column $q$ in the feature map from the k-th kernel in the l-th layer, $i_c(x, y)$ is the element at line $x$ and row $y$ in the input data, and $w^k_l(u,v)$ is the weight at line $u$ and column $v$ from the k-th kernel of the l-th layer. 
+
+% To adjust the density of the convolution, the value of the \textbf{stride}, which represents the shift between convolutions, is modified \autocite{ajitReviewConvolutionalNeural2020,liSurveyConvolutionalNeural2022}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{padding.png} %source: https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html
+    \caption{Convolution}
+    \label{fig:padding}
+\end{figure}
+
+\par At the edge of the input, it's not possible to overlap the whole kernel over all the elements, reaching a point where it can't shift anymore, so the dimensions of the feature map would be unintentionally reduced and information would be lost. Therefore, as seen in \reffig{fig:padding}, usually \textbf{zero padding} is employed to solve the aforesaid problems \autocite{yamashitaConvolutionalNeuralNetworks2018}.
+
+\par The overall architecture of CNNs are inspired by the visual perception \autocite{hubelReceptiveFieldsBinocular1962}, so a direct parallelism can be made to better define the \textbf{activation function}. The kernels can be seen as receptors, or artificial neurons, that respond to different features, whereas the activation function is a simulation of the threshold function that dictates if the next neuron is activated or not. Additionally, the convolution operation is linear, consequently, if no nonlinear activation function was used, the input of the next layer would be a linear output of the previous layer. The introduction of nonlinearity, such as ReLU (Rectified Linear Unite) \autocite{nairRectifiedLinearUnits}, allows deep neural networks to approximate any function, enhancing the ability to fit to any data \autocite{liSurveyConvolutionalNeural2022}.
+
+\subsubsection{Pooling Layer}
+After the features are extracted, the spatial location of them become less relevant for the following layers. Introducing a pooling layer with the purpose of reducing the spatial size of the feature maps by joining identical features \autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018}, then only the dominant response will prevail. This downsampling operation has two important advantages that help reduce the overfitting problem \autocite{ajitReviewConvolutionalNeural2020,liSurveyConvolutionalNeural2022}. First, it reduces the number of learnable features, which requires less memory to train the network. Second, it enhances feature extraction invariance to shifts and rotations by emphasizing only the relevant features.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{maxpool.png} %source: https://paperswithcode.com/method/max-pooling
+    \caption{Max pool}
+    \label{fig:maxpool}
+\end{figure}
+
+There are many ways of downsampling the feature map through pooling such as min pooling, average pooling or stochastic pooling, however max pooling is by far the most popular one. As pictured in \reffig{fig:maxpool}, this operation divides the feature map in sections and computes the maximum value in each while discarding the other ones.
+
+\subsubsection{Fully Connected Layer (?)}
+The fully connected (FC) layer is located at the end of the network. It is a dense, feedforward neural network in which every neuron is connected to all other neurons \autocite{yamashitaConvolutionalNeuralNetworks2018, alzubaidiReviewDeepLearning2021}. The final feature map is flattened and transformed in a one-dimensional feature vector and the purpose of the FC layer is using this vector as an input, and act as the CNN classifier by performing high logic reasoning \autocite{guRecentAdvancesConvolutional2018}.
+
+\subsection{Training}
+Training a network in the context of CNNs is the process of finding the optimal kernel weights' values. The training data is passed through the model, the predictions asserted and the distance between them and the expected ones is measured by a loss function. LeCun \textit{et al.} \autocite{lecunGradientBasedLearningApplied1998} presents the problem as follows:
+$$
+E^p = \mathcal{D}(D^p, Y^p)
+$$
+
+\noindent The loss function, $E^p$, is a measure of error. It computes the difference between the expected result, $D^p$, and the predicted result $Y^p$, where $Y^p = F(Z^p, W)$ is a function of the $p$-th training example, $Z^p$, for a determined weight $W$. Additionally, $E_{train}(W)$, is the average of all the errors calculated in a training set $\left\{(Z^x, D^x),\dots (Z^p, D^p)\right\}$. Training the network is nothing more than a function minimization problem, and for that there are several techniques, the \textbf{optimizers}.
+
+\subsubsection{Optimizers}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{gd.png} %source: https://www.ibm.com/topics/gradient-descent
+    \caption{Gradient descent}
+    \label{fig:gd}
+\end{figure}
+
+
+\par By computing the gradient of the loss function in respect to the learnable parameters it allows studying how said parameters influence the loss function and how it can be more efficiently minimized. This algorithm is called \textbf{gradient descent} \autocite{ruderOverviewGradientDescent}, and is the simplest minimization technique. By definition, the gradient of a function is the direction of the steepest ascent, henceforth, the learnable parameters are updated once every epoch in the opposite direction to reduce the error: 
+$$
+W_k = W_{k-1}-\epsilon\frac{\delta E(W)}{{\delta} W}
+$$
+\noindent where $\epsilon$ is a constant called \textbf{learning rate} that controls how much the parameters are updated and has an immense impact in the performance of a neural network \reffig{fig:gd}. According to Goodfellow \textit{et al.} \autocite{Goodfellow-et-al-2016}, if the learning rate is set too low, training will be much slower and can become permanently stuck with a high training error. On the other hand, if the learning rate is too high, the gradient descent can increase the training error instead of reducing it.
+\par \textbf{Stochastic Gradient Descent} (SGD) \autocite{alzubaidiReviewDeepLearning2021} is the algorithm of choice to optimize the loss function and its main difference is that the parameters updating routine. First, training samples are randomly sampled in every epoch, then the gradient is calculated for each at a time, and, finally, the parameters are updated accordingly. This is an efficient algorithm in terms of memory usage, but, since the updates occur once at every sample, the convergence can be noisy. Other optimizers worth of mentioning are: \textbf{1) Mini-batch Gradient Descent} - divides the training data into non-overlapping batches and the parameters are updated on each one of them; \textbf{2) Momentum} \autocite{polyakMethodsSpeedingConvergence1964} - introduces a new hyperparameter to the network called momentum, that accumulates previous gradients, that accelerates the optimizer in the correct direction of minimization and reduces error's oscillation during optimization; \textbf{3) Adam (Adaptive moment estimation)} \autocite{kingmaAdamMethodStochastic2015} - uses the first and second moments of the gradients (gradient's mean and variance, respectively) to better optimize the parameters.
+
+\subsubsection{Backpropagation}
+\par Regardless of the optimizer selected, computing an analytical expression for the gradient is trivial, but evaluating it is a computational heavy task when the aim is to find a minimum with respect to all the parameters in the network. To this extent, the backpropagation (or backprop) algorithm is a solution to do so efficiently \autocite{6795724}. Backprop is usually referred to as a training algorithm, but that is not true. \textbf{Backpropagation is not a training algorithm}, it is simply the method of computing the gradient using a fixed sequence, efficient application of the \textit{Chain Rule of Calculus} $\left(\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\right)$, considering that it starts at the final layer, and proceeding backwards\autocite{Goodfellow-et-al-2016}. 
+
+\phantomsection\label{transf learning}
+\subsubsection{Transfer Learning} %Source: https://cs231n.github.io/transfer-learning/
+\par Developing a Deep Learning system requires data in large scale \autocite{parkhiDeepFaceRecognition2015}, specially labeled one. In a general sense, gathering information can be very difficult, but if the domain of study is too specific or not widespread enough, that poses an even bigger challenge. To overcome this solution, based on the psychologist C.H. Judd's theory, a technique called Transfer Learning takes place. It is defined by Zhuang \textit{et al.} \autocite{zhuangComprehensiveSurveyTransfer2020} as: given a source and target domain, transfer learning is the act of utilizing the knowledge acquired in the source to further improve the performance of the learned decision functions on the target domain. A classic example is the case of learning how to ride a motorcycle. It will be easier for someone who has already learned how to ride a bicycle than it is to someone starting from scratch.
+\par In the context of CNNs, there are 2 ways of approaching the aforesaid problem. By taking a pre-trained CNN and either use it as a fixed feature extractor or fine-tune it. In the first case, an already trained CNN is used, however, the final few layers or the fully connected one is discarded and retrained to a specific task, while the rest of the network is frozen and used as the feature extractor that will feed the classifier input. The second approach is referred to as fine-tuning a network and, as the name suggests, the source network's parameters are used as a starting point and is entirely retrained using the desired data. It is also common to freeze the first layers since they are responsible to extract the more general, universal features (edges or patterns).
+
 
 \newpage
 \section{A Face Recognition System}
@@ -108,7 +218,7 @@ Although this distribution can create some overlap among the categories, it is s
 \par Furthermore, face alignment, can be accomplished through two categories of methods: landmark-based and landmark-free.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ Landmark-based alignment} is a category of methods that exploits the facial landmarks with the aim of, through spatial transformations, calibrating the face to an established layout \autocite{duElementsEndtoendDeep2022}. This can be accomplished through: coordinate regression, heatmap regression or 3D Model Fitting. \textbf{Coordinate regression-based} methodologies \autocite{fengWingLossRobust2018,liuTwoStreamTransformerNetworks2018,zhangJointFaceDetection2016a} consider the landmark localization as a numerical objective, i.e. a regression, thus an image is fed to a DCNN and it will output a vector of landmark coordinates. \textbf{Heatmap Regression} \autocite{dengJointMultiviewFace2017,wuLookBoundaryBoundaryAware2018,chenFaceAlignmentKernel2019} is different from coordinate regression because, although it is a numerical objective task, the output is not a coordinate vector, but a map of likelihood of landmarks' locations. Finally, \textbf{3D Model Fitting} \autocite{bhagavatulaFasterRealtimeFacial2017,changFacePoseNetMakingCase2017,xiaoRecurrent3D2DDual2017}is the category that integrates methods that consider the relation between 2D facial landmarks and the 3D shape of a generic face. The particularity of them is the reconstruction of the 3D face from a 2D face image that is then projected over a plane in order to obtain the landmarks. 
+\noindent\textbf{$\rightarrow$ Landmark-based alignment} is a category of methods that exploits the facial landmarks with the aim of, through spatial transformations, calibrating the face to an established layout \autocite{duElementsEndtoendDeep2022}. This can be accomplished through: coordinate regression, heatmap regression or 3D Model Fitting. \textbf{Coordinate regression-based} methodologies \autocite{fengWingLossRobust2018,liuTwoStreamTransformerNetworks2018,zhangJointFaceDetection2016a} consider the landmark localization as a numerical objective, i.e. a regression, thus an image is fed to a DCNN and it will output a vector of landmark coordinates. \textbf{Heatmap Regression} \autocite{dengJointMultiviewFace2017,wuLookBoundaryBoundaryAware2018,chenFaceAlignmentKernel2019} is different from coordinate regression because, although it is a numerical objective task, the output is not a coordinate vector, but a map of likelihood of landmarks' locations. Finally, \textbf{3D Model Fitting} \autocite{bhagavatulaFasterRealtimeFacial2017,changFacePoseNetMakingCase2017,xiaoRecurrent3D2DDual2017} is the category that integrates methods that consider the relation between 2D facial landmarks and the 3D shape of a generic face. The particularity of them is the reconstruction of the 3D face from a 2D face image that is then projected over a plane in order to obtain the landmarks. 
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ Landmark-free alignment}, on the other hand, integrates the approaches that do not rely on landmarks as a reference to align the face, in contrast, these type of methods incorporate the alignment into a DCNN that gives, as a result, an aligned face \autocite{duElementsEndtoendDeep2022}. An example of an end-to-end method that does not depend on facial landmarks is RDCFace \autocite{zhaoRDCFaceRadialDistortion2020}, and it rectifies distortions, applies alignment transformations and executes face representation. Hayat et al. \autocite{hayatJointRegistrationRepresentation2017} proposes a method that deals with extreme head poses. The process to register faces in an image with high pose variance can be quite challenging and often demands complex pre-processing, namely landmark localization, therefore, to address that, a DCNN is employed that does not rely on landmark localization and concomitantly register and represent faces.
@@ -361,124 +471,34 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \subsection{Feature Extractor}
 A feature extractor is present in both the training and testing stage of the Face Representation process, and comprehends a fundamental part of it, as it is what allows the visual data to be processed and transformed to be evaluated, by transforming the input into low dimensional representations \autocite{lecunGradientBasedLearningApplied1998}. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
 \par Being that the following methods are all based in deep learning, therefore, the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor contains prior knowledge and is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - "who is this person?") or 1:1 similarity (face verification - "are these persons the same?").
+\par Over the years, the architecture of CNNs evolved and became of great importance to all image related tasks. Other than the already mentioned revolutionary AlexNet \autocite{krizhevskyImageNetClassificationDeep2012}, there are other designs that significantly contributed to breakthroughs and broken benchmark records. There can be general architectures, suchlike VGGNet \autocite{simonyanVERYDEEPCONVOLUTIONAL2015}, ResNet \autocite{heDeepResidualLearning2016}, iResNet \autocite{dutaImprovedResidualNetworks2021}, or specialized architectures, such as MobileFaceNet \autocite{chenMobileFaceNetsEfficientCNNs2018}, VarGFaceNet \autocite{yanVarGFaceNetEfficientVariable2019}, MixFaceNet \autocite{boutrosMixFaceNetsExtremelyEfficient2021} and ConvFaceNeXt \autocite{hooConvFaceNeXtLightweightNetworks2022} for lightweight face recognition.
 
-\vspace{\baselineskip}
-\par The following section will be divided as follows: first, the general architecture and training process of a CNN will be described, then, a brief overview of loss functions and how similarity is computed in face recognition, and finally, related works regarding face recognition are reviewed.
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ VGGNet} \autocite{simonyanVERYDEEPCONVOLUTIONAL2015}
 
-\newpage
-\subsubsection{Convolutional Neural Networks}
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.85\textwidth]{Architecture-of-a-Convolutional-Neural-Network-CNN-The-traditional-CNN-structure-is.png}
-    \caption{Architecture of a Convolutional Neural Network \autocite{kangDeepSimilarityMetric2019}.}
-    \label{fig:cnn}
-\end{figure}
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ ResNet} \autocite{heDeepResidualLearning2016}
 
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ iResNet} \autocite{dutaImprovedResidualNetworks2021}
 
-\par There are several types of Neural Networks architectures, but Convolutional Neural Networks (CNNs or Convnets) are probably the most widely implemented model overall \autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022}. Using CNNs for Computer Vision tasks \autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021}, in this specific case, Face Recognition, is not an arbitrary choice, but due to the fact that the network design benefits from the intrinsic characteristics of the input data: images have an array-like structure \autocite{yamashitaConvolutionalNeuralNetworks2018}, and local groups of values are correlated (motifs or patterns) and invariant to spatial location \autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. Furthermore, when compared to fully connected networks, CNNs are superior due to 4 key features: 1) Shared weights between the same features in different locations reduce the number of parameters \autocite{liSurveyConvolutionalNeural2022}, 2) sparse connections \autocite{alzubaidiReviewDeepLearning2021}, 3) pooling layers and 4) automatically identifies the relevant features without any human supervision \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}.
-% \begin{enumerate}
-%     \item Designed to process multidimensional arrays \autocite{lecunDeepLearning2015};
-%     \item Shared weights between the same features in different locations; %Invariance to shift, distortions and rotations
-%     \item Automatically identifies the relevant features without any human supervision, hence, small amounts of preprocessing \autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}; %Easier to train
-%     \item Sparse connections \autocite{alzubaidiReviewDeepLearning2021}; %Less complexity, easier to train; %Invariance to shift, distortions and rotations and less network complexity (easier to train)
-%     \item Pooling layers reduce the spatial size of the input data. %Invariance to shift, distortions and rotations
-% \end{enumerate}
-% Check this article for better description of key features \autocite{liSurveyConvolutionalNeural2022}
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ MobileFaceNet} \autocite{chenMobileFaceNetsEfficientCNNs2018}
 
-% The ensemble of features 2, 4 and 5 enable an invariance of the network to small shifts, distortions and rotations \autocite{guRecentAdvancesConvolutional2018,lecunDeepLearning2015}, while 2, 3, 4 and 5 helps to reduce the complexity of the model, and as a result training it is easier \autocite{guRecentAdvancesConvolutional2018,liSurveyConvolutionalNeural2022}.
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ VarGFaceNet} \autocite{yanVarGFaceNetEfficientVariable2019}
 
-\par In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling \autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones \autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers. The raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers \autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}.   
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ MixFaceNet} \autocite{boutrosMixFaceNetsExtremelyEfficient2021}
 
-\subsubsection{Convolutional Layer}
-\par The convolutional layer aims at extracting feature representations from the inputs, and is formed by a set of learnable filters called \textbf{kernels} and an \textbf{activation function} \autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. 
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{sobel.png}
-    \caption{3x3 Kernels of the Sobel-Feldman operator used for edge detection \autocite{sobelIsotropicGradientOperator1973}.}
-    \label{fig:sobel}
-\end{figure}
-
-A \textbf{kernel}\footnote{Or feature detector \autocite{ajitReviewConvolutionalNeural2020}.} \reffig{fig:sobel}, is a grid-like structure of fixed dimensions [WxHxD], where W is the width and H is the height. The dimension D relates to the depth of the kernel and is used to multichannel images, such as RGB ones (3 channels). Each of its elements is a learnable weight that is adjusted during training to extract significant features \autocite{alzubaidiReviewDeepLearning2021}. 
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{conv.png} %source: https://anhreynolds.com/blogs/cnn.html
-    \caption{Convolution}
-    \label{fig:conv}
-\end{figure}
-
-\par With a predetermined \textbf{stride}, the kernel scans its receptive field \autocite{khanSurveyRecentArchitectures2020}, horizontally and vertically, through the input data, and produces the feature map\footnote{Also referred to as feature representation \autocite{liSurveyConvolutionalNeural2022} or activation map \autocite{ajitReviewConvolutionalNeural2020}.} \autocite{lecunDeepLearning2015, alzubaidiReviewDeepLearning2021} by performing an element-wise product, called \textbf{convolution} \reffig{fig:conv}, that can be described as follows \autocite{khanSurveyRecentArchitectures2020}:
-$$
-f_l^k(p, q) = \sum_{c}^{}\sum_{x, y}^{}i_c(x, y)\cdot w^k_l(u,v)
-$$
-where $f_l^k(p, q)$ is an element at line $p$ and column $q$ in the feature map from the k-th kernel in the l-th layer, $i_c(x, y)$ is the element at line $x$ and row $y$ in the input data, and $w^k_l(u,v)$ is the weight at line $u$ and column $v$ from the k-th kernel of the l-th layer. 
-
-% To adjust the density of the convolution, the value of the \textbf{stride}, which represents the shift between convolutions, is modified \autocite{ajitReviewConvolutionalNeural2020,liSurveyConvolutionalNeural2022}.
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{padding.png} %source: https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html
-    \caption{Convolution}
-    \label{fig:padding}
-\end{figure}
-
-\par At the edge of the input, it's not possible to overlap the whole kernel over all the elements, reaching a point where it can't shift anymore, so the dimensions of the feature map would be unintentionally reduced and information would be lost. Therefore, as seen in \reffig{fig:padding}, usually \textbf{zero padding} is employed to solve the aforesaid problems \autocite{yamashitaConvolutionalNeuralNetworks2018}.
-
-\par The overall architecture of CNNs are inspired by the visual perception \autocite{hubelReceptiveFieldsBinocular1962}, so a direct parallelism can be made to better define the \textbf{activation function}. The kernels can be seen as receptors, or artificial neurons, that respond to different features, whereas the activation function is a simulation of the threshold function that dictates if the next neuron is activated or not. Additionally, the convolution operation is linear, consequently, if no nonlinear activation function was used, the input of the next layer would be a linear output of the previous layer. The introduction of nonlinearity, such as ReLU (Rectified Linear Unite) \autocite{nairRectifiedLinearUnits}, allows deep neural networks to approximate any function, enhancing the ability to fit to any data \autocite{liSurveyConvolutionalNeural2022}.
-
-\subsubsection{Pooling Layer}
-After the features are extracted, the spatial location of them become less relevant for the following layers. Introducing a pooling layer with the purpose of reducing the spatial size of the feature maps by joining identical features \autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018}, then only the dominant response will prevail. This downsampling operation has two important advantages that help reduce the overfitting problem \autocite{ajitReviewConvolutionalNeural2020,liSurveyConvolutionalNeural2022}. First, it reduces the number of learnable features, which requires less memory to train the network. Second, it enhances feature extraction invariance to shifts and rotations by emphasizing only the relevant features.
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{maxpool.png} %source: https://paperswithcode.com/method/max-pooling
-    \caption{Max pool}
-    \label{fig:maxpool}
-\end{figure}
-
-There are many ways of downsampling the feature map through pooling such as min pooling, average pooling or stochastic pooling, however max pooling is by far the most popular one. As pictured in \reffig{fig:maxpool}, this operation divides the feature map in sections and computes the maximum value in each while discarding the other ones.
-
-\subsubsection{Fully Connected Layer (?)}
-The fully connected (FC) layer is located at the end of the network. It is a dense, feedforward neural network in which every neuron is connected to all other neurons \autocite{yamashitaConvolutionalNeuralNetworks2018, alzubaidiReviewDeepLearning2021}. The final feature map is flattened and transformed in a one-dimensional feature vector and the purpose of the FC layer is using this vector as an input, and act as the CNN classifier by performing high logic reasoning \autocite{guRecentAdvancesConvolutional2018}.
-
-\subsubsection{Training}
-Training a network in the context of CNNs is the process of finding the optimal kernel weights' values. The training data is passed through the model, the predictions asserted and the distance between them and the expected ones is measured by a loss function. LeCun \textit{et al.} \autocite{lecunGradientBasedLearningApplied1998} presents the problem as follows:
-$$
-E^p = \mathcal{D}(D^p, Y^p)
-$$
-
-\noindent The loss function, $E^p$, is a measure of error. It computes the difference between the expected result, $D^p$, and the predicted result $Y^p$, where $Y^p = F(Z^p, W)$ is a function of the $p$-th training example, $Z^p$, for a determined weight $W$. Additionally, $E_{train}(W)$, is the average of all the errors calculated in a training set $\left\{(Z^x, D^x),\dots (Z^p, D^p)\right\}$. Training the network is nothing more than a function minimization problem, and for that there are several techniques, the \textbf{optimizers}.
-
-\subsubsection{Optimizers}
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{gd.png} %source: https://www.ibm.com/topics/gradient-descent
-    \caption{Gradient descent}
-    \label{fig:gd}
-\end{figure}
-
-
-\par By computing the gradient of the loss function in respect to the learnable parameters it allows studying how said parameters influence the loss function and how it can be more efficiently minimized. This algorithm is called \textbf{gradient descent} \autocite{ruderOverviewGradientDescent}, and is the simplest minimization technique. By definition, the gradient of a function is the direction of the steepest ascent, henceforth, the learnable parameters are updated once every epoch in the opposite direction to reduce the error: 
-$$
-W_k = W_{k-1}-\epsilon\frac{\delta E(W)}{{\delta} W}
-$$
-\noindent where $\epsilon$ is a constant called \textbf{learning rate} that controls how much the parameters are updated and has an immense impact in the performance of a neural network \reffig{fig:gd}. According to Goodfellow \textit{et al.} \autocite{Goodfellow-et-al-2016}, if the learning rate is set too low, training will be much slower and can become permanently stuck with a high training error. On the other hand, if the learning rate is too high, the gradient descent can increase the training error instead of reducing it.
-\par \textbf{Stochastic Gradient Descent} (SGD) \autocite{alzubaidiReviewDeepLearning2021} is the algorithm of choice to optimize the loss function and its main difference is that the parameters updating routine. First, training samples are randomly sampled in every epoch, then the gradient is calculated for each at a time, and, finally, the parameters are updated accordingly. This is an efficient algorithm in terms of memory usage, but, since the updates occur once at every sample, the convergence can be noisy. Other optimizers worth of mentioning are: \textbf{1) Mini-batch Gradient Descent} - divides the training data into non-overlapping batches and the parameters are updated on each one of them; \textbf{2) Momentum} \autocite{polyakMethodsSpeedingConvergence1964} - introduces a new hyperparameter to the network called momentum, that accumulates previous gradients, that accelerates the optimizer in the correct direction of minimization and reduces error's oscillation during optimization; \textbf{3) Adam (Adaptive moment estimation)} \autocite{kingmaAdamMethodStochastic2015} - uses the first and second moments of the gradients (gradient's mean and variance, respectively) to better optimize the parameters.
-
-\subsubsection{Backpropagation}
-\par Regardless of the optimizer selected, computing an analytical expression for the gradient is trivial, but evaluating it is a computational heavy task when the aim is to find a minimum with respect to all the parameters in the network. To this extent, the backpropagation (or backprop) algorithm is a solution to do so efficiently \autocite{6795724}. Backprop is usually referred to as a training algorithm, but that is not true. \textbf{Backpropagation is not a training algorithm}, it is simply the method of computing the gradient using a fixed sequence, efficient application of the \textit{Chain Rule of Calculus} $\left(\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\right)$, considering that it starts at the final layer, and proceeding backwards\autocite{Goodfellow-et-al-2016}. 
-
-\phantomsection\label{transf learning}
-\subsubsection{Transfer Learning} %Source: https://cs231n.github.io/transfer-learning/
-\par Developing a Deep Learning system requires data in large scale \autocite{parkhiDeepFaceRecognition2015}, specially labeled one. In a general sense, gathering information can be very difficult, but if the domain of study is too specific or not widespread enough, that poses an even bigger challenge. To overcome this solution, based on the psychologist C.H. Judd's theory, a technique called Transfer Learning takes place. It is defined by Zhuang \textit{et al.} \autocite{zhuangComprehensiveSurveyTransfer2020} as: given a source and target domain, transfer learning is the act of utilizing the knowledge acquired in the source to further improve the performance of the learned decision functions on the target domain. A classic example is the case of learning how to ride a motorcycle. It will be easier for someone who has already learned how to ride a bicycle than it is to someone starting from scratch.
-\par In the context of CNNs, there are 2 ways of approaching the aforesaid problem. By taking a pre-trained CNN and either use it as a fixed feature extractor or fine-tune it. In the first case, an already trained CNN is used, however, the final few layers or the fully connected one is discarded and retrained to a specific task, while the rest of the network is frozen and used as the feature extractor that will feed the classifier input. The second approach is referred to as fine-tuning a network and, as the name suggests, the source network's parameters are used as a starting point and is entirely retrained using the desired data. It is also common to freeze the first layers since they are responsible to extract the more general, universal features (edges or patterns).
-
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ ConvFaceNeXt} \autocite{hooConvFaceNeXtLightweightNetworks2022}
 
 \subsection{Loss}
-\subsection{Similarity}
+The initial face recognition proposals, such as Facenet \autocite{schroffFaceNetUnifiedEmbedding2015} or DeepID \autocite{sunDeepLearningFace2014a}, inherited principles from successful object classification implementations, henceforth, the most common loss function utilized was the well-known softmax loss. Unfortunately, it soon proved to be inefficient for face recognition applications since intra-variations can be larger than inter-ones. Thus, the investigation interest shifted towards developing loss functions that promote more separable and discriminative features \autocite{wangDeepFaceRecognition2021}.
 
 
+
+%\subsection{Similarity}
 \red{Define hyperparameter, epoch}
 \end{document}
