@@ -471,44 +471,63 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \subsection{Feature Extractor}
 A feature extractor is present in both the training and testing stage of the Face Representation process, and comprehends a fundamental part of it, as it is what allows the visual data to be processed and transformed to be evaluated, by transforming the input into low dimensional representations \autocite{lecunGradientBasedLearningApplied1998}. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
 \par Being that the following methods are all based in deep learning, therefore, the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor contains prior knowledge and is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - "who is this person?") or 1:1 similarity (face verification - "are these persons the same?").
-\par Over the years, the architecture of CNNs evolved and became of great importance to all image related tasks. Other than the already mentioned revolutionary AlexNet \autocite{krizhevskyImageNetClassificationDeep2012}, there are other designs that significantly contributed to breakthroughs and broken benchmark records. There can be general architectures, suchlike VGGNet \autocite{simonyanVERYDEEPCONVOLUTIONAL2015}, GoogLeNet \autocite{szegedyGoingDeeperConvolutions2014}, ResNet \autocite{heDeepResidualLearning2016}, iResNet \autocite{dutaImprovedResidualNetworks2021}, or specialized architectures, for example lightweight face recognition implementations such as MobileFaceNet \autocite{chenMobileFaceNetsEfficientCNNs2018}, VarGFaceNet \autocite{yanVarGFaceNetEfficientVariable2019}, MixFaceNet \autocite{boutrosMixFaceNetsExtremelyEfficient2021} and ConvFaceNeXt \autocite{hooConvFaceNeXtLightweightNetworks2022}.
+\par Over the years, the architecture of CNNs evolved and became of great importance to all image related tasks. Other than the already mentioned revolutionary AlexNet \autocite{krizhevskyImageNetClassificationDeep2012}, there are other designs that significantly contributed to breakthroughs and broken benchmark records. There can be general architectures, suchlike VGGNet \autocite{simonyanVERYDEEPCONVOLUTIONAL2015}, GoogLeNet \autocite{szegedyGoingDeeperConvolutions2014}, ResNet \autocite{heDeepResidualLearning2016}, iResNet \autocite{dutaImprovedResidualNetworks2021}, or specialized architectures. For example, lightweight face recognition implementations such as MobileFaceNet \autocite{chenMobileFaceNetsEfficientCNNs2018}, VarGFaceNet \autocite{yanVarGFaceNetEfficientVariable2019}, MixFaceNet \autocite{boutrosMixFaceNetsExtremelyEfficient2021} and ConvFaceNeXt \autocite{hooConvFaceNeXtLightweightNetworks2022}.
 
-\vspace{0.7\baselineskip}
+\newpage
+% \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ VGGNet} \autocite{simonyanVERYDEEPCONVOLUTIONAL2015} took inspiration from AlexNet and improved its accuracy in image classification by studying the effect of the network's depth. It accomplished that by substituting the 11x11 convolution kernel with stride 4 for a stack of very small 3x3 receptive field with stride 1. The final best performing model was 19 layers deep (16 convolutional and 3 fully-connected) and had 144 million parameters.
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[scale=0.2]{inception.png}
+    \includegraphics[scale=0.16]{inception.png}
     \caption{GoogLeNet architecture}
     \label{fig:inception}
 \end{figure}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ GoogLeNet} \autocite{szegedyGoingDeeperConvolutions2014}, also known as Inception-V1, aimed at reducing the computational cost associated with training and employing a network, while retaining highly accurate results. That was accomplished by introducing an inception black, consisting of multi-scale convolutional layers with small blocks of different sized kernels (1x1, 3x3 and 5x5). By doing so, it allowed the network to capture information at different scales and increasing both the width and the depth without compromising computational costs. Additionally, sparse connectivity (not all feature maps are shared with the forward layers), replacing the last fully connected layer with a global averaging pooling one and adding a dimension lowering bottleneck layer of 1x1 convolution before employing large kernels, helped to achieve a significantly lower number of 4 million parameters (12x fewer than the revolutionary AlexNet and 36x less than VGGNe)t. This resulted in its victory on the 2014 ImageNet Large Scale Visual Recognition Challenge (ILSVRC) with a 22 layers deep model.
+\noindent\textbf{$\rightarrow$ GoogLeNet} \autocite{szegedyGoingDeeperConvolutions2014}, also known as Inception-V1, aimed at reducing the computational cost associated with training and employing a network, while retaining highly accurate results. That was accomplished by introducing an inception black, consisting of multi-scale convolutional layers with small blocks of different sized kernels (1x1, 3x3 and 5x5). By doing so, it allowed the network to capture information at different scales and increasing both the width and the depth without compromising computational costs. Additionally, sparse connectivity (not all feature maps are shared with the forward layers), replacing the last fully connected layer with a global averaging pooling one and adding a dimension lowering bottleneck layer of 1x1 convolution before employing large kernels, helped to achieve a significantly lower number of 4 million parameters (12x fewer than the revolutionary AlexNet and 36x less than VGGNet). This resulted in its victory on the 2014 ImageNet Large Scale Visual Recognition Challenge (ILSVRC) with a 22 layers deep model.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.3]{residual.png}
+    \caption{ResNet's residual block}
+    \label{fig:residual}
+\end{figure}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ ResNet} \autocite{heDeepResidualLearning2016}
+\noindent\textbf{$\rightarrow$ ResNet} \autocite{heDeepResidualLearning2016} is one of the most resourced architecture of feature extractors when applied to face recognition. Its main objective is to efficiently train deeper neural networks that are remarkably more difficult to do so. By reformulating the layers as residual learning functions, it supports deeper architectures while being easier to optimize and, at the same time, producing more accurate results. It also solves the accuracy degradation and the vanishing gradient problems verified when the depth of the network is increased. The main contribution is the introduction of the residual block \reffig{fig:residual}. It consists of convolutional layers, followed by element-wise addition between the output and the input of the block. This addition performs an identity mapping by creating a direct "shortcut connection" that skips the input directly to the output, allowing the network to learn the difference between the input and the output, i.e., the residual. Enabling the flow of information from earlier layers directly to later layers, facilitates the gradient flow during training and makes it easier for the network to learn. Depending on the depth, there are different variations of the ResNet architecture: ResNet-18 (11.7 million parameters), ResNet-34 (21.8 million parameters), ResNet-50 (25.6 million parameters), ResNet-101(44.6 million parameters), ResNet-152 (60.2 million parameters). The ResNet-152 won the 2015 ImageNet Large Scale Visual Recognition Challenge (ILSVRC), and it was 20 and 8 times deeper than AlexNet and VGGNet, respectively, while being less computational demanding.
+
+\newpage
+% \vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ iResNet} \autocite{dutaImprovedResidualNetworks2021} further improves the ResNet architecture. It proposes: 1) a separation of the network into stages, providing a better path of information flow through the network's layers, 2) an introduction of an enhanced version of the residual learning block with 4 times more spatial channels that focus on the spatial convolution, and 3) an introduction of an improved projection shortcut (used when the dimensions of the previous blocks doesn't match the ones of the next) that includes an additional 3x3 max pooling. A major advantage is that all the improvements above do not increase the original model's parameters and, consequently, overall complexity.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ iResNet} \autocite{dutaImprovedResidualNetworks2021}
+\phantomsection\label{mobilefacenet}
+\noindent\textbf{$\rightarrow$ MobileFaceNet} \autocite{chenMobileFaceNetsEfficientCNNs2018} is a set of face verification CNN models designed to perform in real time and with high accuracy on mobile and embedded devices. It is built upon the inverted residual bottlenecks proposed in the general architecture lightweight CNN MobileNetV2 \autocite{sandlerMobileNetV2InvertedResiduals2019} that have the purpose of reducing the number of parameters of the network. The general residual bottleneck block \autocite{heDeepResidualLearning2016} is composed of an input, followed by bottlenecks to reduce dimension and finished with an expansion to restore it, and the shortcut connects the high dimension layers. On the other hand, in the inverted residual architecture, it is considered that the information is stored in the bottleneck layers and the expansion is a mere implementation detail, therefore, a shortcut is placed directly between the bottlenecks. To solve the accuracy problem of face recognition CNNs that have a global average pooling layer, MobileFaceNets replaces it by a global depthwise convolution layer with kernel of size 7x7x1280 followed by a 1x1 convolution as the feature output layer. The primary MobileFaceNet architecture has 0.99 million parameters, but there is also the MobileFaceNet-M (the final 1x1 convolution is removed) and the MobileFaceNet-S (the 1x1 linear convolution before the global depthwise convolution is also removed).
+
+\newpage
+% \vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ VarGFaceNet} \autocite{yanVarGFaceNetEfficientVariable2019} is a lightweight face recognition CNN implmentation based on the VarGNet architecture \autocite{zhangVarGNetVariableGroup2020} that introduced a variable group convolution to solve unbalance of computational intensity due to hardware and compilers optimization. VarGFaceNet will use the normal and downsampling blocks from the VarGNet CNN, but will add a Squeeze-and-excitation (SE) block \autocite{huSqueezeandExcitationNetworks2019} and replace the usual ReLU activation function by the PReLU \autocite{heDelvingDeepRectifiers2015} one, since it is better for face recognition tasks. Other than that, the head setting is also changed without losing discriminative ability. The network is started with a 3x3 convolution with stride 1 that preserves the input size, instead of the downsampling 3x3 one with stride 2 from VarGNet. Finally, the embedding setting is also modified by performing variable group convolution and pointwise convolution to shrink the feature map to a 512-dimensional feature vector that's fed to the fully connected layer. However, this shrinking can lead to loss of information, accordingly, to counter that, the number of channels of the feature map is expanded after the last convolution layer, and only then the variable group convolution is performed, decreasing the number of parameters and computation overhead while not degrading the information. In conclusion, the VarGFaceNet network is capable of performing accurate face recognition while maintaining a lower amount of 5 million parameters.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ MobileFaceNet} \autocite{chenMobileFaceNetsEfficientCNNs2018}
+\noindent\textbf{$\rightarrow$ MixFaceNet} \autocite{boutrosMixFaceNetsExtremelyEfficient2021} is a lightweight implementation of MixNet \autocite{tanMixConvMixedDepthwise} tailored for face verification. MixNet introduced Mixed Depthwise Convolution Kernels (MixConv) that extends the theory behind depthwise convolution, but employs multiple kernel sizes in a single convolution, promoting the capturing of different patterns from distinct resolutions while reducing the number of parameters needed. The main differences proposed by the MixFaceNet design compared to MixNet resides in the head and embedding settings. For the network head set-up, fast downsampling in the first convolution layer with a 3x3 kernel and stride of 2, and PReLU \autocite{heDelvingDeepRectifiers2015} activation function are used. Regarding the embedding settings, the global average pooling layer used by the MixNet architecture is replaced by a global depthwise convolution, in the same manner as the previously described \hyperref[mobilefacenet]{MobileFaceNet}. Additionally, a shuffle operation is also introduced to the MixConv block. All in all, 3 networks were proposed, MixFaceNet-XS, MixFaceNet-S and MixFaceNet-M, that would be added the prefix "Shuffle" if trained using the aforesaid shuffle operation.  \red{Number of parameters needed}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ VarGFaceNet} \autocite{yanVarGFaceNetEfficientVariable2019}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ MixFaceNet} \autocite{boutrosMixFaceNetsExtremelyEfficient2021}
-
-\vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ ConvFaceNeXt} \autocite{hooConvFaceNeXtLightweightNetworks2022}
+\noindent\textbf{$\rightarrow$ ConvFaceNeXt (?)} \autocite{hooConvFaceNeXtLightweightNetworks2022}
 
 \subsection{Loss}
-The initial face recognition proposals,  \red{such as Facenet \autocite{schroffFaceNetUnifiedEmbedding2015} or DeepID \autocite{sunDeepLearningFace2014a}, inherited principles from successful object classification implementations, henceforth, the most common loss function utilized was the well-known softmax loss.} Unfortunately, it soon proved to be inefficient for face recognition applications since intra-variations can be larger than inter-ones. Thus, the investigation interest shifted towards developing loss functions that promote more separable and discriminative features \autocite{wangDeepFaceRecognition2021}.
+The initial face recognition proposals,  \red{such as Facenet \autocite{schroffFaceNetUnifiedEmbedding2015} or DeepID \autocite{sunDeepLearningFace2014a}, inherited principles from successful object classification implementations, henceforth, the most common loss function utilized was the well-known softmax loss.} Unfortunately, it soon proved to be inefficient for face recognition applications since intra-variations can be larger than inter-ones. Thus, the investigation interest shifted towards developing loss functions that promote more separable (to distinguish between an identity) and discriminative (to distinguish between identities) features \autocite{wangDeepFaceRecognition2021}.
 
 
 
 %\subsection{Similarity}
-\red{Define hyperparameter, epoch}
+\red{
+To do:
+\begin{itemize}
+    \item Define hyperparameter
+    \item Define epoch
+    \item Calculate flops for all networks
+\end{itemize}
+}
+
 \end{document}
