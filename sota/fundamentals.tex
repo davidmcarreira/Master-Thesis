@@ -513,21 +513,132 @@ A feature extractor is present in both the training and testing stage of the Fac
 \noindent\textbf{$\rightarrow$ MixFaceNet}~\autocite{boutrosMixFaceNetsExtremelyEfficient2021} is a lightweight implementation of MixNet~\autocite{tanMixConvMixedDepthwise} tailored for face verification. MixNet introduced Mixed Depthwise Convolution Kernels (MixConv) that extends the theory behind depthwise convolution, but employs multiple kernel sizes in a single convolution, promoting the capturing of different patterns from distinct resolutions while reducing the number of parameters needed. The main differences proposed by the MixFaceNet design compared to MixNet resides in the head and embedding settings. For the network head set-up, fast downsampling in the first convolution layer with a 3x3 kernel and stride of 2, and PReLU~\autocite{heDelvingDeepRectifiers2015} activation function are used. Regarding the embedding settings, the global average pooling layer used by the MixNet architecture is replaced by a global depthwise convolution, in the same manner as the previously described \hyperref[mobilefacenet]{MobileFaceNet}. Additionally, a shuffle operation is also introduced to the MixConv block. All in all, 3 networks were proposed, MixFaceNet-XS, MixFaceNet-S and MixFaceNet-M, that would be added the prefix "Shuffle" if trained using the aforesaid shuffle operation. Both MixFaceNet-S and ShuffleMixFaceNet-S have 3.07 million parameters.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ ConvFaceNeXt}~\autocite{hooConvFaceNeXtLightweightNetworks2022} is a family lightweight face recognition models, based on the ConvNeXt and MobileFaceNets architectures. The original ConvNeXt block is modified to better adapt to face recognition tasks and optimized to reduce the number of parameters. Accordingly, the Enhanced ConvNext (ECN) block is designed by adopting a smaller 3x3 kernel during the depthwise convolution, instead of the original 7x7 one. Adopting the principles studied in the MobileFaceNets implementation, rather than the usual layer of normalisation and GeLU in the ConvNeXt model, batch normalization and PReLU~\autocite{heDelvingDeepRectifiers2015} are employed. The overall ConvFaceNeXt architecture has 3 main components: the stem partition, the bottleneck partition and the embedding partition. The stem partition is similar to the previously referred "head settings" and is responsible for downsampling the data, and it can be deployed in two settings. The first setting is called patchify head (PH) and utilizes 2x2 convolutions with a stride of two, and the second setting is the typical head (TH) that maintains the stride and changes the kernel size to 3x3. The bottleneck partition is responsible for reducing the number of floating point operations (FLOPs)\footnote{Not to be confused with FLOPS (Floating point operations per second), a unit of computation speed}. Finally, the embedding partition, which is the stage where the face representation (or embedding) is obtained, and instead of average pooling and fully connected layers, once again, global depthwise convolution is engaged. Fine-tuning to the three partitions resulted in 4 different networks: ConvFaceNeXt\_PS and ConvFaceNeXt\_TS, both with 0.96 million parameters, as well as ConvFaceNeXt\_PE and ConvFaceNeXt\_TE, both with 1.05 million parameters.
+\noindent\textbf{$\rightarrow$ ConvFaceNeXt}~\autocite{hooConvFaceNeXtLightweightNetworks2022} is a family lightweight face recognition models, based on the ConvNeXt and MobileFaceNets architectures. The original ConvNeXt block is modified to better adapt to face recognition tasks and optimized to reduce the number of parameters. Accordingly, the Enhanced ConvNext (ECN) block is designed by adopting a smaller 3x3 kernel during the depthwise convolution, instead of the original 7x7 one. Adopting the principles studied in the MobileFaceNets implementation, rather than the usual layer of normalization and GeLU in the ConvNeXt model, batch normalization and PReLU~\autocite{heDelvingDeepRectifiers2015} are employed. The overall ConvFaceNeXt architecture has 3 main components: the stem partition, the bottleneck partition and the embedding partition. The stem partition is similar to the previously referred "head settings" and is responsible for downsampling the data, and it can be deployed in two settings. The first setting is called patchify head (PH) and utilizes 2x2 convolutions with a stride of two, and the second setting is the typical head (TH) that maintains the stride and changes the kernel size to 3x3. The bottleneck partition is responsible for reducing the number of floating point operations (FLOPs)\footnote{Not to be confused with FLOPS (Floating point operations per second), a unit of computation speed}. Finally, the embedding partition, which is the stage where the face representation (or embedding) is obtained, and instead of average pooling and fully connected layers, once again, global depthwise convolution is engaged. Fine-tuning to the three partitions resulted in 4 different networks: ConvFaceNeXt\_PS and ConvFaceNeXt\_TS, both with 0.96 million parameters, as well as ConvFaceNeXt\_PE and ConvFaceNeXt\_TE, both with 1.05 million parameters.
 
 \subsection{Loss}
-The initial face recognition proposals,  \red{such as Facenet~\autocite{schroffFaceNetUnifiedEmbedding2015} or DeepID~\autocite{sunDeepLearningFace2014a}, inherited principles from successful object classification implementations, henceforth, the most common loss function utilized was the well-known softmax loss.} Unfortunately, it soon proved to be inefficient for face recognition applications since intra-variations can be larger than inter-ones. Thus, the investigation interest shifted towards developing loss functions that promote more separable (to distinguish between an identity) and discriminative (to distinguish between identities) features~\autocite{wangDeepFaceRecognition2021}.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.3]{compactness.png}
+    \caption{Intra- and Inter-class challenge \autocite{wangNormFaceL2Hypersphere2017}. Eventhough features $f_2$ and $f_3$ belong to the same class, the euclidean distance between $f_1$ and $f_2$ is much smaller, proving the ineffectiness of the softmax loss regarding inter-class compactness and inter-class separateness.}
+    \label{fig:compactness}
+\end{figure}
+
+The initial face recognition proposals inherited principles from successful object classification implementations, henceforth, the most common loss function utilized was the well-known softmax loss. Unfortunately, it soon proved to be inefficient for face recognition applications since intra-variations (age gap between pictures of the same identity, for example) can be larger than inter-ones \reffig{fig:compactness}. Thus, the investigation interest shifted towards developing loss functions that had a better generalization ability and promoted more separable (to distinguish between an identity) and discriminative (to distinguish between identities) features~\autocite{wangDeepFaceRecognition2021}.
+\par Face recognition can be achieved using either metric learning loss functions that learn a feature embedding to compute similarity or softmax-based loss functions that treat the problem as a classification task. Some works merge the two concepts.
+
+\subsubsection{Classification-based loss functions}
+Classification-based loss functions, derived from the general object classification task, aim at learn an N-way classification of all the classes, where each class relates to an identity composed of several faces~\autocite{duElementsEndtoendDeep2022}.
+\par Because the methods are classification-based, the pioneers such as DeepFace or DeepID~\autocite{sunDeepLearningFace2014a}, utilized the most widely implemented loss function for classification, i.e. the softmax loss. It consists of a fully connected layer, the softmax function and cross-entropy loss, and can be formulated as follows:
+\begin{equation}
+\mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N}\log{\frac{e^{W_{y_i}^{T}x_i+b_{y_i}}}{\sum_{j=1}^{c}e^{W_{j}^{T}x_i+b_{j}}}},
+\end{equation}
+
+\noindent where $N$ is the number of images, $c$ is the number of identities, $y_i$ is the $x_i$'s ground-truth label, $W_{y_i}$ is the ground-truth weight from $x_i$ in the fully connected layer and $b_j$ is a bias term. The term inside the logarithm represents the probability on the ground-truth class and the training objective is to maximize this probability.
+
+\vspace{\baselineskip}
+\par Taking the aforementioned principles and the drawbacks of lackluster generalization, and separable/discriminative abilities, the following loss functions proposed improving the softmax loss to better serve face recognition tasks.
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ NormFace (2017)}~\autocite{wangNormFaceL2Hypersphere2017} improves the classic softmax loss by studying the effect of $L_2$ normalization to the features and weights during the training stage. Because introducing this constraint resulted in the network not converging, a scale factor is also adopted that resizes the cosine similarity's scale between features and weights. \red{This normalized softmax loss function can de reformulated as}
+\begin{equation}
+\mathcal{L}_{norm} = -\frac{1}{N}\sum_{i=1}^{N}\log{\frac{e^{s \cos{(\theta_{y_i})}}}{e^{s \cos{(\theta_{y_i})}}+\sum_{j=1, j\neq y_i}^{c}s \cos{(\theta_{j})}}},
+\end{equation}
+
+\noindent where $s$ is the scale parameter and $\cos{(\theta_j)}$ results from the inner product between the $L_2$ normalized  weights $W_j$ and features $x_i$, i.e., $\cos{(\theta_j)}=\frac{\langle x_i, W_j\rangle}{\|W_j\|_2\|i_i\|_2}$
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.215]{sphereface.png}
+    \caption{Comparison between the classic softmax loss, modified softmax loss (NormFace)~\autocite{wangNormFaceL2Hypersphere2017} and SphereFace \autocite{liuSphereFaceDeepHypersphere2018}.}
+    \label{fig:sphereface}
+\end{figure}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ SphereFace (2018)}~\autocite{liuSphereFaceDeepHypersphere2018} improved the intra-class compactness and inter-class distance by introducing a very important concept of angular margin that contrasts with the usual Euclidean margin. As proven by Liu \textit{et al.}, features learned by softmax loss adopt an intrinsic angular distribution, therefore, euclidean margins are not compatible with softmax loss \reffig{fig:sphereface}. The decision boundary for a classic softmax loss function is $(W_1 - W_2)x+b_1-b_2=0$, and by normalizing the weights and zeroing the bias, it becomes $\|x\|(\cos{(\theta_1)}-\cos{(\theta_2)})=0$, where $x$ is a feature vector and the decision will only depend on the angles between class 1 and 2. SphereFace introduces the hyperparameter $m$ ($m\geq1 \in \mathbb{Z}$) that will, effectively, control the margin size between class 1 and 2 respectively as such $\|x\|(\cos{(m\theta_1)}-\cos{(\theta_2)})=0$ and $\|x\|(\cos{(\theta_1)}-\cos{(m\theta_2)})=0$.
 
 
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ AM-Softmax (2018)} and \textbf{CosFace (2018)} both improved SphereFace's main problem: the potential unstable training convergence due to the multiplicative angular margin. Thus, an additive cosine margin $\cos{\theta_{y_i}}+m$ is proposed to facilitate the convergence.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.215]{arcface.png}
+    \caption{ArcFace \autocite{dengArcFaceAdditiveAngular} training pipeline}
+    \label{fig:sphereface}
+\end{figure}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ ArcFace (2019)}~\autocite{dengArcFaceAdditiveAngular} aims at optimizing the geodesic distance margin since there's a mathematical correspondence between the angle and the arc in the normalized hypersphere. Taking that into consideration, the cosine distance between features obtained by the dot product between the feature produced by the CNN and the fully connected layer, then arc-cosine is used to calculate the angle between the feature and the target one. Finally, the authors took the principles from AM-softmax \autocite{wangAdditiveMarginSoftmax2018} and SphereFace \autocite{liuSphereFaceDeepHypersphere2018} and introduced an additive angular margin directly to the angle $\cos{(\theta_{y_i}+m)}$, getting the target logit back by the cosine function and further stabilizing the training process and improving the discriminative power of the overall system. The loss function is reformulated by: 1) zeroing the bias and transforming the softmax loss logit $W^{T}_{j}x_i=\|W_j\|x_i\|\cos{(\theta_j)}$, as suggested in~\autocite{liuSphereFaceDeepHypersphere2018}, where $\theta_j$ is the angle between the weight $W_J$ and the feature $x_i$, 2) following~\autocite{wangNormFaceL2Hypersphere2017,liuSphereFaceDeepHypersphere2018,wangCosFaceLargeMargin2018} the weights are normalized by $L_2$, 3) the features $x$ are also normalized in $L_2$ per~\autocite{ranjanL2constrainedSoftmaxLoss2017,wangNormFaceL2Hypersphere2017,wangAdditiveMarginSoftmax2018,wangCosFaceLargeMargin2018} suggestion. This normalization insures that there's only an angular dependence between weights and features. By distributing the learned features through a hypersphere with radius $s$, and combining the margin penalties imposed by SphereFace~\autocite{liuSphereFaceDeepHypersphere2018}, CosFace~\autocite{wangCosFaceLargeMargin2018} and ArcFace, the geodesic distance can be optimized by the following unified framework:
+\begin{equation}
+\mathcal{L}=-\log\left(
+                \frac{e^{s(\cos{(m_1\theta_{y_i}+m_2)-m_3})}}
+                {e^{s(\cos{(m_1\theta_{y_i}+m_2)-m_3})} + \sum_{j=1, j\neq y_i}^{N}e^{s \cos{(\theta_j)}}}
+            \right),
+\end{equation}
+\noindent where $m_1$, $m_2$ and $m_3$ are the hyperparameters relating, respectively, to SphereFace, ArcFace and CosFace.
+
+\vspace{\baselineskip}
+To this day, ArcFace is still the state-of-the-art regarding face recognition, and one of the most implemented loss functions of this category, consequently, is usual to see other novel cost functions to try to improve it by using it as a base foundation to other tasks. The accuracy saturation of more common benchmarks like LFW~\autocite{huangLabeledFacesWild} lead to the appearance of harder ones, namely XQLFW~\autocite{knocheCrossQualityLFWDatabase2021} or \autocite{kalkaIJBIARPAJanus2018}, which by itself, ultimately, lead to loss functions aimed at more specific challenges.
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ CurricularFace (2020)}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ MagFace (2021)}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ AdaFace (2022)}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ QMagFace (2023)}
+
+\subsubsection{Metric learning loss functions}
+Metric learning loss functions include the methods that aim optimizing the distance between feature embeddings. That is, increase the distance between negative embeddings and minimize the distance for those that are positive.
+\par One classic example is the contrastive loss, but this category's attention mainly pends over the triplet loss first implemented by Schroff \textit{et al.} in FaceNet~\autocite{schroffFaceNetUnifiedEmbedding2015}. 
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ Contrastive Loss}~\autocite{duElementsEndtoendDeep2022} has the objective of optimizing the distance between identity pairs: positive pairs are encouraged to be closer and negative ones to be further apart. The loss function to be minimized is
+
+\begin{equation}
+    \mathcal{L}_{contrastive} = 
+    \begin{cases}
+      \frac{1}{2}\|f(x_i)-f(x_j)\|^{2}_{2}, \text{if} y_i=y_j\\
+      \frac{1}{2}\max{(0, m_d-\|f(x_i)-f(x_j)\|_2)^2}, \text{if} y_i\neq y_j
+    \end{cases}
+\end{equation}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=0.215]{triplet.png}
+    \caption{Triplet}
+    \label{fig:triplet}
+\end{figure}
+
+\vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ Triplet Loss (2014)}~\autocite{schroffFaceNetUnifiedEmbedding2015} embeds an image to a d-dimensional feature vector in an Euclidean space. The motivation is to guarantee that, for every individual $i$, the squared distance between an image $x^{a}_{i}$ (anchor) of an identity and its corresponding true identities $x^{p}_{i}$ (positive) is smaller than the distance between non-identities, $x^{n}_{i}$ (negative). This structure is called a triplet \reffig{fig:triplet}. The aforesaid can be described in mathematical terms as:
+\begin{equation}
+\|f(x^{a}_{i})-f(x^{p}_{i})\|^{2}_{2} + \alpha < \|f(x^{a}_{i})-f(x^{n}_{i})\|^{2}_{2},
+\end{equation}
+
+\noindent where $f(\dot)$ are the feature embeddings from all the possible triplets, and $\alpha$ is a margin between positive and negative pairs. Therefore, the loss function to be optimized is:
+\begin{equation}
+\mathcal{L}_{triplet} = \sum_{i}^{N}\left[\|f(x^{a}_{i})-f(x^{p}_{i})\|^{2}_{2}-\|f(x^{a}_{i})-f(x^{n}_{i})\|^{2}_{2}+\alpha\right]
+\end{equation}
+
+However, there's a major drawback associated with this methodology. The selection of the triplets are essential for good results and there's a combinatorial explosion regarding the number of possible triplets, specially for large-scale datasets, leading to a slower convergence and computational overhead if all the possible triplets are to be used. The only way to address this problem is through the development of efficient mining strategies that select both hard and representative triplets.
+
+
+% In the feature comparison step, the cosine similarity or equivalently L2 normalized Euclidean distance is used to measure the similarities between features \autocite{wangNormFaceL2Hypersphere2017}
 
 %\subsection{Similarity}
-\red{
-To do:
-\begin{itemize}
-    \item Define hyperparameter
-    \item Define epoch
-    \item Calculate flops for all networks (in the ConvFaceNeXt paper)
-\end{itemize}
-}
+% \red{
+% To do:
+% \begin{itemize}
+%     \item Define hyperparameter
+%     \item Define epoch
+%     \item Calculate flops for all networks (in the ConvFaceNeXt paper)
+% \end{itemize}
+% }
 
 \end{document}
