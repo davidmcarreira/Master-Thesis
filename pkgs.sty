@@ -18,6 +18,7 @@
 \RequirePackage{geometry}
 \RequirePackage{float}
 \RequirePackage{caption}
+\RequirePackage{cleveref}
 
 
 % Custom parameters 
@@ -31,10 +32,10 @@
 
 \captionsetup{font=footnotesize}
 
-
 %Custom commands
 \newcommand{\red}[1]{\textcolor{red}{#1}} %To color red portions of text when needed
 \newcommand{\reffig}[1]{\hyperref[#1]{(Figure~\ref*{#1})}} %Command to make referencing figure easier. Only the figure label needs to be passed as an argument
+
 
 %Handles the paths
 \ifdefined\mainfile
@@ -69,3 +70,5 @@
    }
 
 \makeatother
+
+
