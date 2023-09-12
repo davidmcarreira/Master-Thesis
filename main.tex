@@ -6,16 +6,32 @@
 %Packages import
 \usepackage{pkgs}
 
+\makeglossaries
+
+
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
 
+\newacronym{FR}{FR}{Face Recognition}
+\newacronym{AI}{AI}{Artificial Intelligence}
+\newacronym{ANN}{ANN}{Artificial Neural Network}
+\newacronym{CNN}{CNN}{Convolutional Neural Network}
+\newacronym{SGD}{SGD}{Stochastic Gradient Descent}
+\newacronym{Adam}{Adam}{Adaptive moment estimation}
+\newacronym{DCNN}{DCNN}{Deep Convolutional Neural Network}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \import{cover/}{cover.tex}
+\newpage
+\printglossary[type=\acronymtype]
+
+\newpage
 \listoffigures
+
 \newpage
 \listoftables
+
 \newpage
 \tableofcontents
 \frontmatter
@@ -54,4 +70,7 @@
 \newpage
 \printbibliography
 
+\newpage
+\section*{Appendix}
+\import{appendix/}{appendix.tex}
 \end{document}
