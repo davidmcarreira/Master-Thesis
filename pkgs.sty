@@ -23,9 +23,9 @@
 \usepackage{multirow}
 \RequirePackage{caption}
 \RequirePackage[noabbrev]{cleveref}
+\RequirePackage{amssymb}
+\RequirePackage{pifont}
 \crefformat{footnote}{#2\textsuperscript{\normalfont #1}#3}
-
-
 
 % Custom parameters 
 \definecolor{CoverUC}{RGB}{203, 179, 135}
@@ -41,7 +41,8 @@
 %Custom commands
 \newcommand{\red}[1]{\textcolor{red}{#1}} %To color red portions of text when needed
 \newcommand{\reffig}[1]{\hyperref[#1]{(Figure~\ref*{#1})}} %Command to make referencing figure easier. Only the figure label needs to be passed as an argument
-
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
 
 %Handles the paths
 \ifdefined\mainfile
