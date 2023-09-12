@@ -235,11 +235,11 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \newpage
 \subsubsection{\large Testing Data}
 
-\par After the training is completed the performance of the system needs to be evaluated on different challenges to properly access if it scales (or generalizes or applies or performs in) to real-world scenarios. A test dataset can be chosen for specific hurdles, for instance, cross-pose, cross-age, racial variations, quality assessment, and so forth~\autocite{duElementsEndtoendDeep2022}.
+\par After the training is completed the performance of the system needs to be evaluated on different challenges to properly access if it scales (or generalizes) to real-world scenarios. The way of doing so is by employing test datasets, where their evaluation protocols are designed to perform pair matching, that is, face verification. 
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparison table of the previously described test datasets. \cmark - Datasets that are still available to the public. \xmark - Datasets that have been removed from distribution.}
+    \caption{Comparison of the test datasets. \cmark - Datasets that are still available to the public. \xmark - Datasets that have been removed from distribution.}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|c|c|c|c|c|c|c|}
     \hline
@@ -267,65 +267,96 @@ In the following pages, a mix of training datasets, of overall relevance and mor
     \label{tab:test data}
 \end{table}
 
-\vspace{\baselineskip}
-\par Although some of the previously referenced datasets do have a benchmarking component and are described as such, they can also be generally employed to train algorithms. When it is desired to fine-tune a model for a specific challenge, that usually can be better achieved by employing a benchmark dataset, which was purposefully developed to evaluate a model's performance on that exact challenge.
-\par 
+\par One of the most well known test data set is LFW~\autocite{huangLabeledFacesWild}, but with the evolution of face recognition methods, it quickly became saturated in terms of accuracy reports. This motivated investigations to develop more challenging datasets, like A, B, C and S IJB benchmarks~\autocite{klarePushingFrontiersUnconstrained2015, whitelamIARPAJanusBenchmarkB2017, mazeIARPAJanusBenchmark2018, kalkaIJBIARPAJanus2018}, QMUL-SurvFace~\autocite{chengSurveillanceFaceRecognition2018} and YTF (for video tests)~\autocite{wolfFaceRecognitionUnconstrained2011}, or for specific hurdles~\autocite{duElementsEndtoendDeep2022}, for instance, CPLFW~\autocite{zhengCrossPoseLFWDatabase} or CFP~\autocite{senguptaFrontalProfileFace2016} for cross-pose, CALFW~\autocite{zhengCrossAgeLFWDatabase2017} or AgeDB30~\autocite{moschoglouAgeDBFirstManually2017} for cross-age, RFW~\autocite{kalkaIJBIARPAJanus2018} for racial variations, XQLFW~\autocite{knocheCrossQualityLFWDatabase2021} for quality assessment or MDMFR~\autocite{ullahNovelDeepMaskNetModel2022} for masked reocgnition. Although some of the previously referenced datasets do have a benchmarking component and are described as such, they can also be generally employed to train or fine-tune algorithms for specific challenges.
+\par For a better description of all the datasets see the \hyperref[sec:train_data_appendix]{Train Data Appendix} and \hyperref[sec:test_data_appendix]{Test Data Appendix}.
 
-\vspace{\baselineskip}
 \subsection{Feature Extractor}
-A feature extractor is present in both the training and testing stage of the Face Representation process, and comprehends a fundamental part of it, as it is what allows the visual data to be processed and transformed to be evaluated, by transforming the input into low dimensional representations~\autocite{lecunGradientBasedLearningApplied1998}. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
-\par Being that the following methods are all based in deep learning, therefore, the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor contains prior knowledge and is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - "who is this person?") or 1:1 similarity (face verification - "are these persons the same?").
-\par Over the years, the architecture of CNNs evolved and became of great importance to all image related tasks. Other than the already mentioned revolutionary AlexNet~\autocite{krizhevskyImageNetClassificationDeep2012}, there are other designs that significantly contributed to breakthroughs and broken benchmark records. There can be general architectures, suchlike VGGNet~\autocite{simonyanVERYDEEPCONVOLUTIONAL2015}, GoogLeNet~\autocite{szegedyGoingDeeperConvolutions2014}, ResNet~\autocite{heDeepResidualLearning2016}, iResNet~\autocite{dutaImprovedResidualNetworks2021}, or specialized architectures. For example, lightweight face recognition implementations such as MobileFaceNet~\autocite{chenMobileFaceNetsEfficientCNNs2018}, VarGFaceNet~\autocite{yanVarGFaceNetEfficientVariable2019}, MixFaceNet~\autocite{boutrosMixFaceNetsExtremelyEfficient2021} and ConvFaceNeXt~\autocite{hooConvFaceNeXtLightweightNetworks2022}.
+A feature extractor is present in both the training and testing stage of the Face Representation process, as it allows the visual data to be processed for evaluation by transforming the input into low dimensional representations~\autocite{lecunGradientBasedLearningApplied1998}. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
+\par The following methods are all based in deep learning, therefore the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor contains prior knowledge and is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - ``who is this person?'') or 1:1 similarity (face verification - ``are these persons the same?'').
+\par Over the years, the architecture of CNNs evolved and became of great importance to all image related tasks. Other than the already mentioned revolutionary AlexNet~\autocite{krizhevskyImageNetClassificationDeep2012}, there are other designs that significantly contributed to breakthroughs and broken benchmark records. There can be general architectures, like VGGNet~\autocite{simonyanVERYDEEPCONVOLUTIONAL2015}, GoogLeNet~\autocite{szegedyGoingDeeperConvolutions2014}, ResNet~\autocite{heDeepResidualLearning2016}, iResNet~\autocite{dutaImprovedResidualNetworks2021}, or specialized architectures. For example, lightweight face recognition implementations such as MobileFaceNet~\autocite{chenMobileFaceNetsEfficientCNNs2018}, VarGFaceNet~\autocite{yanVarGFaceNetEfficientVariable2019}, MixFaceNet~\autocite{boutrosMixFaceNetsExtremelyEfficient2021} and ConvFaceNeXt~\autocite{hooConvFaceNeXtLightweightNetworks2022}.
 
-\newpage
-% \vspace{0.7\baselineskip}
+\vspace{\baselineskip}
 \noindent\textbf{$\rightarrow$ VGGNet}~\autocite{simonyanVERYDEEPCONVOLUTIONAL2015} took inspiration from AlexNet and improved its accuracy in image classification by studying the effect of the network's depth. It accomplished that by substituting the 11x11 convolution kernel with stride 4 for a stack of very small 3x3 receptive field with stride 1. The final best performing model was 19 layers deep (16 convolutional and 3 fully-connected) and had 144 million parameters.
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.16]{inception.png}
-    \caption{GoogLeNet architecture}
+    \includegraphics[scale=0.11]{inception_naive.png}
+    \caption{GoogLeNet's inception block from the original paper~\autocite{szegedyGoingDeeperConvolutions2014}.}
     \label{fig:inception}
 \end{figure}
 
-\vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ GoogLeNet}~\autocite{szegedyGoingDeeperConvolutions2014}, also known as Inception-V1, aimed at reducing the computational cost associated with training and employing a network, while retaining highly accurate results. That was accomplished by introducing an inception black, consisting of multi-scale convolutional layers with small blocks of different sized kernels (1x1, 3x3 and 5x5). By doing so, it allowed the network to capture information at different scales and increasing both the width and the depth without compromising computational costs. Additionally, sparse connectivity (not all feature maps are shared with the forward layers), replacing the last fully connected layer with a global averaging pooling one and adding a dimension lowering bottleneck layer of 1x1 convolution before employing large kernels, helped to achieve a significantly lower number of 4 million parameters (12x fewer than the revolutionary AlexNet and 36x less than VGGNet). This resulted in its victory on the 2014 ImageNet Large Scale Visual Recognition Challenge (ILSVRC) with a 22 layers deep model.
+\noindent\textbf{$\rightarrow$ GoogLeNet}~\autocite{szegedyGoingDeeperConvolutions2014}, also known as Inception-V1, aimed at reducing the computational cost associated with training and employing a network, while retaining highly accurate results. That was accomplished by introducing sparse connectivity (not all feature maps are shared with the forward layers), an inception block \autoref{fig:inception}, consisting of multi-scale convolutional layers with small blocks of different sized kernels (1x1, 3x3 and 5x5), and replacing the last fully connected layer with a global averaging pooling one and adding a dimension lowering bottleneck layer of 1x1 convolution before large kernels. These changes helped to achieve a low number of 4 million parameters (12x fewer than the revolutionary AlexNet and 36x less than VGGNet)
 
-\begin{figure}[!h]
+\vspace{0.7\baselineskip}
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.3]{residual.png}
-    \caption{ResNet's residual block}
+    \includegraphics[scale=0.35]{residual.png}
+    \caption{ResNet's residual block from the original paper~\autocite{heDeepResidualLearning2016}.}
     \label{fig:residual}
 \end{figure}
 
 \vspace{0.7\baselineskip}
 \label{sec:resnet}
-\noindent\textbf{$\rightarrow$ ResNet}~\autocite{heDeepResidualLearning2016} is one of the most resourced architecture of feature extractors when applied to face recognition. Its main objective is to efficiently train deeper neural networks that are remarkably more difficult to do so. By reformulating the layers as residual learning functions, it supports deeper architectures while being easier to optimize and, at the same time, producing more accurate results. It also solves the accuracy degradation and the vanishing gradient problems verified when the depth of the network is increased. The main contribution is the introduction of the residual block \reffig{fig:residual}. It consists of convolutional layers, followed by element-wise addition between the output and the input of the block. This addition performs an identity mapping by creating a direct "shortcut connection" that skips the input directly to the output, allowing the network to learn the difference between the input and the output, i.e., the residual. Enabling the flow of information from earlier layers directly to later layers, facilitates the gradient flow during training and makes it easier for the network to learn. Depending on the depth, there are different variations of the ResNet architecture: ResNet-18 (11.7 million parameters), ResNet-34 (21.8 million parameters), ResNet-50 (25.6 million parameters), ResNet-101(44.6 million parameters), ResNet-152 (60.2 million parameters). The ResNet-152 won the 2015 ImageNet Large Scale Visual Recognition Challenge (ILSVRC), and it was 20 and 8 times deeper than AlexNet and VGGNet, respectively, while being less computational demanding.
-
-\newpage
-% \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ iResNet}~\autocite{dutaImprovedResidualNetworks2021} further improves the ResNet architecture. It proposes: 1) a separation of the network into stages, providing a better path of information flow through the network's layers, 2) an introduction of an enhanced version of the residual learning block with 4 times more spatial channels that focus on the spatial convolution, and 3) an introduction of an improved projection shortcut (used when the dimensions of the previous blocks doesn't match the ones of the next) that includes an additional 3x3 max pooling. A major advantage is that all the improvements above do not increase the original model's parameters and, consequently, overall complexity.
+\noindent\textbf{$\rightarrow$ ResNet}~\autocite{heDeepResidualLearning2016} is one of the most resourced architecture of feature extractors when applied to face recognition and its main objective is to efficiently train deep neural networks. By reformulating the layers as residual learning functions, it supports deeper architectures while being easier to optimize while improving performance. It also solves the accuracy degradation and the vanishing gradient problems verified when the depth of the network is increased. The main contribution is the introduction of the residual block \reffig{fig:residual}. It consists of convolutional layers, followed by element-wise addition between the output and the input of the block. This addition performs an identity mapping by creating a direct ``shortcut connection'' that skips the input directly to the output, allowing the network to learn the difference between the input and the output, i.e., the residual. Enabling the flow of information from earlier layers directly to later layers, facilitates the gradient flow during training and makes it easier for the network to learn. Depending on the depth, there are different variations of the ResNet architecture: ResNet-18 (11.7 million parameters), ResNet-34 (21.8 million parameters), ResNet-50 (25.6 million parameters), ResNet-101(44.6 million parameters), ResNet-152 (60.2 million parameters).
 
 \vspace{0.7\baselineskip}
+\noindent\textbf{$\rightarrow$ iResNet}~\autocite{dutaImprovedResidualNetworks2021} further improves the ResNet architecture. It proposes separating the network into stages, providing a better path of information flow through the network's layers. Also, it introduces an enhanced version of the residual learning block with 4 times more spatial channels that focuses on the spatial convolution, and an improved projection shortcut (used when the dimensions of the previous blocks doesn't match the ones of the next) that includes an additional 3x3 max pooling. A major advantage is that all the improvements above do not increase the original model's parameters and, consequently, overall complexity.
+
+\vspace{0.7\baselineskip}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.16]{mobilenet.png}
+    \caption{Comparison between ResNet's residual block (left)~\autocite{chenMobileFaceNetsEfficientCNNs2018} with the inverted residual block proposed by MobileNetV2 (right)~\autocite{sandlerMobileNetV2InvertedResiduals2019} and used by MobileFaceNet. Image taken from MovileNetV2's paper~\autocite{sandlerMobileNetV2InvertedResiduals2019}.}
+    \label{fig:mobilefacenet}
+\end{figure}
+
 \phantomsection\label{mobilefacenet}
-\noindent\textbf{$\rightarrow$ MobileFaceNet}~\autocite{chenMobileFaceNetsEfficientCNNs2018} is a set of face verification CNN models designed to perform in real time and with high accuracy on mobile and embedded devices. It is built upon the inverted residual bottlenecks proposed in the general architecture lightweight CNN MobileNetV2~\autocite{sandlerMobileNetV2InvertedResiduals2019} that have the purpose of reducing the number of parameters of the network. The general residual bottleneck block~\autocite{heDeepResidualLearning2016} is composed of an input, followed by bottlenecks to reduce dimension and finished with an expansion to restore it, and the shortcut connects the high dimension layers. On the other hand, in the inverted residual architecture, it is considered that the information is stored in the bottleneck layers and the expansion is a mere implementation detail, therefore, a shortcut is placed directly between the bottlenecks. To solve the accuracy problem of face recognition CNNs that have a global average pooling layer, MobileFaceNets replaces it by a global depthwise convolution layer with kernel of size 7x7x1280 followed by a 1x1 convolution as the feature output layer. The primary MobileFaceNet architecture has 0.99 million parameters, but there is also the MobileFaceNet-M (the final 1x1 convolution is removed) and the MobileFaceNet-S (the 1x1 linear convolution before the global depthwise convolution is also removed).
-
-\newpage
-% \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ VarGFaceNet}~\autocite{yanVarGFaceNetEfficientVariable2019} is a lightweight face recognition CNN implmentation based on the VarGNet architecture~\autocite{zhangVarGNetVariableGroup2020} that introduced a variable group convolution to solve unbalance of computational intensity due to hardware and compilers optimization. VarGFaceNet will use the normal and downsampling blocks from the VarGNet CNN, but will add a Squeeze and Excitation (SE) block~\autocite{huSqueezeandExcitationNetworks2019} and replace the usual ReLU activation function by the PReLU~\autocite{heDelvingDeepRectifiers2015} one, since it is better for face recognition tasks. Other than that, the head setting is also changed without losing discriminative ability. The network is started with a 3x3 convolution with stride 1 that preserves the input size, instead of the downsampling 3x3 one with stride 2 from VarGNet. Finally, the embedding setting is also modified by performing variable group convolution and pointwise convolution to shrink the feature map to a 512-dimensional feature vector that is fed to the fully connected layer. However, this shrinking can lead to loss of information, accordingly, to counter that, the number of channels of the feature map is expanded after the last convolution layer, and only then the variable group convolution is performed, decreasing the number of parameters and computation overhead while not degrading the information. In conclusion, the VarGFaceNet network is capable of performing accurate face recognition while maintaining a lower amount of 5 million parameters.
+\noindent\textbf{$\rightarrow$ MobileFaceNet}~\autocite{chenMobileFaceNetsEfficientCNNs2018} is a set of face verification CNN models designed to perform in real time and with high accuracy on mobile and embedded devices. It is built upon the inverted residual bottlenecks \reffig{fig:mobilefacenet} proposed in the general architecture lightweight CNN MobileNetV2~\autocite{sandlerMobileNetV2InvertedResiduals2019} that have the purpose of reducing the number of parameters of the network. The general residual bottleneck block~\autocite{heDeepResidualLearning2016} is composed of an input, followed by bottlenecks to reduce dimension and finished with an expansion to restore it, and the shortcut connects the high dimension layers. On the other hand, in the inverted residual architecture, it is considered that the information is stored in the bottleneck layers and the expansion is a mere implementation detail, therefore, a shortcut is placed directly between the bottlenecks. To solve the accuracy problem of face recognition CNNs that have a global average pooling layer, MobileFaceNets replaces it by a global depthwise convolution layer with kernel of size 7x7x1280 followed by a 1x1 convolution as the feature output layer. The primary MobileFaceNet architecture has 0.99 million parameters, but there is also the MobileFaceNet-M (the final 1x1 convolution is removed) and the MobileFaceNet-S (the 1x1 linear convolution before the global depthwise convolution is also removed).
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ MixFaceNet}~\autocite{boutrosMixFaceNetsExtremelyEfficient2021} is a lightweight implementation of MixNet~\autocite{tanMixConvMixedDepthwise} tailored for face verification. MixNet introduced Mixed Depthwise Convolution Kernels (MixConv) that extends the theory behind depthwise convolution, but employs multiple kernel sizes in a single convolution, promoting the capturing of different patterns from distinct resolutions while reducing the number of parameters needed. The main differences proposed by the MixFaceNet design compared to MixNet resides in the head and embedding settings. For the network head set-up, fast downsampling in the first convolution layer with a 3x3 kernel and stride of 2, and PReLU~\autocite{heDelvingDeepRectifiers2015} activation function are used. Regarding the embedding settings, the global average pooling layer used by the MixNet architecture is replaced by a global depthwise convolution, in the same manner as the previously described \hyperref[mobilefacenet]{MobileFaceNet}. Additionally, a shuffle operation is also introduced to the MixConv block. All in all, 3 networks were proposed, MixFaceNet-XS, MixFaceNet-S and MixFaceNet-M, that would be added the prefix "Shuffle" if trained using the aforesaid shuffle operation. Both MixFaceNet-S and ShuffleMixFaceNet-S have 3.07 million parameters.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[scale=0.17]{vargnet_normal.png}
+    \end{subfigure}
+    
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[scale=0.17]{vargnet_ds.png}
+    \end{subfigure}
+    
+    \caption{VargNet's normal block (top) and downsampling block (bottom)~\autocite{zhangVarGNetVariableGroup2020} used by VargFaceNet. Image from VargNet's paper~\autocite{zhangVarGNetVariableGroup2020}.}
+    \label{fig:vargnet}
+\end{figure}
+
+\noindent\textbf{$\rightarrow$ VarGFaceNet}~\autocite{yanVarGFaceNetEfficientVariable2019} is a lightweight face recognition CNN implementation based on the VarGNet architecture~\autocite{zhangVarGNetVariableGroup2020}~\autocite{chenMobileFaceNetsEfficientCNNs2018} that introduced a variable group convolution to solve unbalance of computational intensity due to hardware and compilers optimization. VarGFaceNet will use the normal and downsampling blocks from the VarGNet CNN \reffig{fig:vargnet}, but will add a Squeeze and Excitation (SE) block~\autocite{huSqueezeandExcitationNetworks2019} and replace the usual ReLU activation function by the PReLU~\autocite{heDelvingDeepRectifiers2015} one, since it is better for face recognition tasks. Other than that, the head setting is also changed without losing discriminative ability. The network is started with a 3x3 convolution with stride 1 that preserves the input size, instead of the downsampling 3x3 one with stride 2 from VarGNet. Finally, the embedding setting is also modified by performing variable group convolution and pointwise convolution to shrink the feature map to a 512-dimensional feature vector that is fed to the fully connected layer. In conclusion, the VarGFaceNet network is capable of performing accurate face recognition while maintaining a low amount of 5 million parameters.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ ConvFaceNeXt}~\autocite{hooConvFaceNeXtLightweightNetworks2022} is a family of lightweight face recognition models, based on the ConvNeXt and MobileFaceNets architectures. The original ConvNeXt block is modified to better adapt to face recognition tasks and optimized to reduce the number of parameters. Accordingly, the Enhanced ConvNext (ECN) block is designed by adopting a smaller 3x3 kernel during the depthwise convolution, instead of the original 7x7 one. Adopting the principles studied in the MobileFaceNets implementation, rather than the usual layer of normalization and GeLU in the ConvNeXt model, batch normalization and PReLU~\autocite{heDelvingDeepRectifiers2015} are employed. The overall ConvFaceNeXt architecture has 3 main components: the stem partition, the bottleneck partition and the embedding partition. The stem partition is similar to the previously referred "head settings" and is responsible for downsampling the data, and it can be deployed in two settings. The first setting is called patchify head (PH) and utilizes 2x2 convolutions with a stride of two, and the second setting is the typical head (TH) that maintains the stride and changes the kernel size to 3x3. The bottleneck partition is responsible for reducing the number of floating point operations (FLOPs)\footnote{Not to be confused with FLOPS (Floating point operations per second), a unit of computation speed}. Finally, the embedding partition, which is the stage where the face representation (or embedding) is obtained, and instead of average pooling and fully connected layers, once again, global depthwise convolution is engaged. Fine-tuning to the three partitions resulted in 4 different networks: ConvFaceNeXt\_PS and ConvFaceNeXt\_TS, both with 0.96 million parameters, as well as ConvFaceNeXt\_PE and ConvFaceNeXt\_TE, both with 1.05 million parameters.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.16]{mixconv.png}
+    \caption{A normal convolution block that uses a single kernel (left) and the Mixed Depthwise Convolution proposed by MixNet~\autocite{tanMixConvMixedDepthwise}.}
+    \label{fig:mixconv}
+\end{figure}
+
+\noindent\textbf{$\rightarrow$ MixFaceNet}~\autocite{boutrosMixFaceNetsExtremelyEfficient2021} is a lightweight implementation of MixNet~\autocite{tanMixConvMixedDepthwise} tailored for face verification. MixNet introduced Mixed Depthwise Convolution Kernels \reffig{fig:mixconv} that extends the theory behind depthwise convolution, but employs multiple kernel sizes in a single convolution, promoting the capturing of different patterns from distinct resolutions while reducing the number of parameters needed. The main differences proposed by the MixFaceNet design compared to MixNet resides in the head and embedding settings. For the network head set-up, fast downsampling in the first convolution layer with a 3x3 kernel and stride of 2, and PReLU~\autocite{heDelvingDeepRectifiers2015} activation function are used. Regarding the embedding settings, the global average pooling layer used by the MixNet architecture is replaced by a global depthwise convolution, in the same manner as the previously described \hyperref[mobilefacenet]{MobileFaceNet}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{convnext.png}
+    \caption{Convolutional block proposed by ConvNeXt~\autocite{liuConvNet2020s2022} (top) and the one by ConvFaceNeXt~\autocite{hooConvFaceNeXtLightweightNetworks2022} (bottom). Image from the ConvFaceNeXt work~\autocite{hooConvFaceNeXtLightweightNetworks2022}.}
+    \label{fig:convnext}
+\end{figure}
+
+\noindent\textbf{$\rightarrow$ ConvFaceNeXt}~\autocite{hooConvFaceNeXtLightweightNetworks2022} is a family of lightweight face recognition models, based on the ConvNeXt~\autocite{liuConvNet2020s2022} and MobileFaceNet architectures \reffig{fig:convnext}. The original ConvNeXt block is modified to better adapt to face recognition tasks and optimized to reduce the number of parameters. Accordingly, the Enhanced ConvNext (ECN) block is designed by adopting a smaller 3x3 kernel during the depthwise convolution, instead of the original 7x7 one. Adopting the principles studied in the MobileFaceNets implementation, rather than the usual layer of normalization and GeLU in the ConvNeXt model, batch normalization and PReLU~\autocite{heDelvingDeepRectifiers2015} are employed. 
 
 \subsection{Loss}
 
 \begin{figure}[!h]
     \centering
     \includegraphics[scale=0.3]{compactness.png}
-    \caption{Intra- and Inter-class challenge \autocite{wangNormFaceL2Hypersphere2017}. Eventhough features $f_2$ and $f_3$ belong to the same class, the euclidean distance between $f_1$ and $f_2$ is much smaller, proving the ineffectiness of the softmax loss regarding inter-class compactness and inter-class separateness.}
+    \caption{Intra- and Inter-class challenge \autocite{wangNormFaceL2Hypersphere2017}. Eventhough features $f_2$ and $f_3$ belong to the same class, the euclidean distance between $f_1$ and $f_2$ is much smaller, proving the ineffectiveness of the softmax loss regarding inter-class compactness and inter-class separateness.}
     \label{fig:compactness}
 \end{figure}
 
@@ -345,7 +376,7 @@ Classification-based loss functions, derived from the general object classificat
 \par Taking the aforementioned principles and the drawbacks of lackluster generalization, and separable/discriminative abilities, the following loss functions proposed improving the softmax loss to better serve face recognition tasks.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ NormFace (2017)}~\autocite{wangNormFaceL2Hypersphere2017} improves the classic softmax loss by studying the effect of $L_2$ normalization to the features and weights during the training stage. Because introducing this constraint resulted in the network not converging, a scale factor is also adopted that resizes the cosine similarity's scale between features and weights. This normalized softmax loss function can de reformulated as
+\noindent\textbf{$\rightarrow$ NormFace}~\autocite{wangNormFaceL2Hypersphere2017} improves the classic softmax loss by studying the effect of $L_2$ normalization to the features and weights during the training stage. Because introducing this constraint resulted in the network not converging, a scale factor is also adopted that resizes the cosine similarity's scale between features and weights. This normalized softmax loss function can de reformulated as
 \begin{equation}
 \mathcal{L}_{norm} = -\frac{1}{N}\sum_{i=1}^{N}\log{\frac{e^{s \cos{(\theta_{y_i})}}}{e^{s \cos{(\theta_{y_i})}}+\sum_{j=1, j\neq y_i}^{c}s \cos{(\theta_{j})}}},
 \end{equation}
@@ -360,31 +391,36 @@ Classification-based loss functions, derived from the general object classificat
 \end{figure}
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ SphereFace (2018)}~\autocite{liuSphereFaceDeepHypersphere2018} improved the intra-class compactness and inter-class distance by introducing a very important concept of angular margin that contrasts with the usual Euclidean margin. As proven by Liu \textit{et al.}, features learned by softmax loss adopt an intrinsic angular distribution, therefore, euclidean margins are not compatible with softmax loss \reffig{fig:sphereface}. The decision boundary for a classic softmax loss function is $(W_1 - W_2)x+b_1-b_2=0$, and by normalizing the weights and zeroing the bias, it becomes $\|x\|(\cos{(\theta_1)}-\cos{(\theta_2)})=0$, where $x$ is a feature vector and the decision will only depend on the angles between class 1 and 2. SphereFace introduces the hyperparameter $m$ ($m\geq1 \in \mathbb{Z}$) that will, effectively, control the margin size between class 1 and 2 respectively as such $\|x\|(\cos{(m\theta_1)}-\cos{(\theta_2)})=0$ and $\|x\|(\cos{(\theta_1)}-\cos{(m\theta_2)})=0$.
+\noindent\textbf{$\rightarrow$ SphereFace}~\autocite{liuSphereFaceDeepHypersphere2018} improved the intra-class compactness and inter-class distance by introducing a very important concept of angular margin that contrasts with the usual Euclidean margin. As proven by Liu \textit{et al.}, features learned by softmax loss adopt an intrinsic angular distribution, therefore, euclidean margins are not compatible with softmax loss \reffig{fig:sphereface}. The decision boundary for a classic softmax loss function is $(W_1 - W_2)x+b_1-b_2=0$, and by normalizing the weights and zeroing the bias, it becomes $\|x\|(\cos{(\theta_1)}-\cos{(\theta_2)})=0$, where $x$ is a feature vector and the decision will only depend on the angles between class 1 and 2. SphereFace introduces the hyperparameter $m$ ($m\geq1 \in \mathbb{Z}$) that will, effectively, control the margin size between class 1 and 2 respectively as such $\|x\|(\cos{(m\theta_1)}-\cos{(\theta_2)})=0$ and $\|x\|(\cos{(\theta_1)}-\cos{(m\theta_2)})=0$.
 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ AM-Softmax (2018)} and \textbf{CosFace (2018)} both improved SphereFace's main problem: the potential unstable training convergence due to the multiplicative angular margin. Thus, an additive cosine margin $\cos{\theta_{y_i}}+m$ is proposed to facilitate the convergence.
+\noindent\textbf{$\rightarrow$ AM-Softmax} and \textbf{CosFace} both improved SphereFace's main problem: the potential unstable training convergence due to the multiplicative angular margin. Thus, an additive cosine margin $\cos{\theta_{y_i}}+m$ is proposed to facilitate the convergence.
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.215]{arcface.png}
-    \caption{ArcFace \autocite{dengArcFaceAdditiveAngular} training pipeline}
-    \label{fig:sphereface}
+    \caption{ArcFace training process as described in the original paper~\autocite{dengArcFaceAdditiveAngular}.}
+    \label{fig:arcface}
 \end{figure}
 
-\vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ ArcFace (2019)}~\autocite{dengArcFaceAdditiveAngular} aims at optimizing the geodesic distance margin since there is a mathematical correspondence between the angle and the arc in the normalized hypersphere. Taking that into consideration, the cosine distance between features obtained by the dot product between the feature produced by the CNN and the fully connected layer, then arc-cosine is used to calculate the angle between the feature and the target one. Finally, the authors took the principles from AM-softmax \autocite{wangAdditiveMarginSoftmax2018} and SphereFace \autocite{liuSphereFaceDeepHypersphere2018} and introduced an additive angular margin directly to the angle $\cos{(\theta_{y_i}+m)}$, getting the target logit back by the cosine function and further stabilizing the training process and improving the discriminative power of the overall system. The loss function is reformulated by: 1) zeroing the bias and transforming the softmax loss logit $W^{T}_{j}x_i=\|W_j\|x_i\|\cos{(\theta_j)}$, as suggested in~\autocite{liuSphereFaceDeepHypersphere2018}, where $\theta_j$ is the angle between the weight $W_J$ and the feature $x_i$, 2) following~\autocite{wangNormFaceL2Hypersphere2017,liuSphereFaceDeepHypersphere2018,wangCosFaceLargeMargin2018} the weights are normalized by $L_2$, 3) the features $x$ are also normalized in $L_2$ per~\autocite{ranjanL2constrainedSoftmaxLoss2017,wangNormFaceL2Hypersphere2017,wangAdditiveMarginSoftmax2018,wangCosFaceLargeMargin2018} suggestion. This normalization insures that there is only an angular dependence between weights and features. By distributing the learned features through a hypersphere with radius $s$, and combining the margin penalties imposed by SphereFace~\autocite{liuSphereFaceDeepHypersphere2018}, CosFace~\autocite{wangCosFaceLargeMargin2018} and ArcFace, the geodesic distance can be optimized by the following unified framework:
+\noindent\textbf{$\rightarrow$ ArcFace}~\autocite{dengArcFaceAdditiveAngular} aims at optimizing the geodesic distance margin since there is a mathematical correspondence between the angle and the arc in the normalized hypersphere. The concept behind this is described in \reffig{fig:arcface}. First, the cosine distance among features is obtained by the dot product between the feature produced by the CNN and the fully connected layer. After that, the arc-cosine is used to calculate the angle between the feature and the target one. Finally, the authors took the principles from AM-softmax \autocite{wangAdditiveMarginSoftmax2018} and SphereFace \autocite{liuSphereFaceDeepHypersphere2018}, and introduced an additive angular margin directly to the angle $\cos{(\theta_{y_i}+m)}$, getting the target logit back by the cosine function and further stabilizing the training process and improving the discriminative power of the overall system. The loss function is reformulated by: 1) zeroing the bias and transforming the softmax loss logit $W^{T}_{j}x_i=\|W_j\|x_i\|\cos{(\theta_j)}$, as suggested in~\autocite{liuSphereFaceDeepHypersphere2018}, where $\theta_j$ is the angle between the weight $W_J$ and the feature $x_i$, 2) following~\autocite{wangNormFaceL2Hypersphere2017,liuSphereFaceDeepHypersphere2018,wangCosFaceLargeMargin2018} the weights are normalized by $L_2$, 3) the features $x$ are also normalized in $L_2$ per~\autocite{ranjanL2constrainedSoftmaxLoss2017,wangNormFaceL2Hypersphere2017,wangAdditiveMarginSoftmax2018,wangCosFaceLargeMargin2018} suggestion. This normalization insures that there is only an angular dependence between weights and features, and the learned features are distributed along a hypersphere with radius $s$. To conclude, ArcFace can be described as follos:
 \begin{equation}
 \mathcal{L}=-\log\left(
-                \frac{e^{s(\cos{(m_1\theta_{y_i}+m_2)-m_3})}}
-                {e^{s(\cos{(m_1\theta_{y_i}+m_2)-m_3})} + \sum_{j=1, j\neq y_i}^{N}e^{s \cos{(\theta_j)}}}
+                \frac{e^{s(\cos{(\theta_{y_i}+m)})}}
+                {e^{s(\cos{(\theta_{y_i}+m)})} + \sum_{j=1, j\neq y_i}^{N}e^{s \cos{(\theta_j)}}}
             \right),
 \end{equation}
-\noindent where $m_1$, $m_2$ and $m_3$ are the hyperparameters relating, respectively, to SphereFace, ArcFace and CosFace.
+\noindent where $m$ is the employed additive angular margin penalty between the feature $x_i$ and the ground truth center $W_{y_i}$ to promote the intra-class compactness and inter-class distance \reffig{fig:norm_arcface}.
 
-\vspace{\baselineskip}
-To this day, ArcFace is still the state-of-the-art regarding face recognition, and one of the most implemented loss functions of this category, consequently, it is usual to see other novel cost functions to try to improve it by using it as a base foundation to other tasks. The accuracy saturation of more common benchmarks like LFW~\autocite{huangLabeledFacesWild} lead to the appearance of harder ones, namely XQLFW~\autocite{knocheCrossQualityLFWDatabase2021} or IJB-S~\autocite{kalkaIJBIARPAJanus2018}, which by itself, ultimately, lead to loss functions aimed at more specific challenges, namely CurricularFace~\autocite{huangCurricularFaceAdaptiveCurriculum2020}, MagFace~\autocite{mengMagFaceUniversalRepresentation2021}, AdaFace~\autocite{kimAdaFaceQualityAdaptive2022} or QMagFace~\autocite{terhorstQMagFaceSimpleAccurate2023}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.13]{norm_arc.png}
+    \caption{Demonstration of the intra-class compactness and inter-class distance of ArcFace (right) compared to Norm-Softmax (left) for 8 identities. The distance margin between classes is clear for ArcFace. Image from ArcFace's paper ~\autocite{dengArcFaceAdditiveAngular}.}
+    \label{fig:norm_arcface}
+\end{figure}
+
+\par To this day, ArcFace is still the state-of-the-art regarding face recognition, and one of the most implemented loss functions of this category, and it is usual to see other novel losses to use it as a starting point. The accuracy saturation of more common benchmarks like LFW~\autocite{huangLabeledFacesWild} lead to the appearance of harder ones, which will lead to loss functions aimed at more specific challenges, namely CurricularFace~\autocite{huangCurricularFaceAdaptiveCurriculum2020}, MagFace~\autocite{mengMagFaceUniversalRepresentation2021}, AdaFace~\autocite{kimAdaFaceQualityAdaptive2022} or QMagFace~\autocite{terhorstQMagFaceSimpleAccurate2023}.
 
 \subsubsection{Metric learning loss functions}
 Metric learning loss functions include the methods that aim optimizing the distance between feature embeddings. That is, increase the distance between negative embeddings and minimize the distance for those that are positive.
@@ -404,7 +440,7 @@ Metric learning loss functions include the methods that aim optimizing the dista
 \begin{figure}[!h]
     \centering
     \includegraphics[scale=0.215]{triplet.png}
-    \caption{Triplet}
+    \caption{Representation of training using triplet loss. Image from Facenet's paper \autocite{schroffFaceNetUnifiedEmbedding2015}.}
     \label{fig:triplet}
 \end{figure}
 
@@ -419,11 +455,11 @@ Metric learning loss functions include the methods that aim optimizing the dista
 \mathcal{L}_{triplet} = \sum_{i}^{N}\left[\|f(x^{a}_{i})-f(x^{p}_{i})\|^{2}_{2}-\|f(x^{a}_{i})-f(x^{n}_{i})\|^{2}_{2}+\alpha\right]
 \end{equation}
 
-However, there is a major drawback associated with this methodology. The selection of the triplets are essential for good results and there is a combinatorial explosion regarding the number of possible triplets, specially for large-scale datasets, leading to a slower convergence and computational overhead if all the possible triplets are to be used. The only way to address this problem is through the development of efficient mining strategies that select both hard and representative triplets.
+\par However, there is a major drawback associated with this methodology. The selection of the triplets has a significant impact on the results and there is a combinatorial explosion regarding the number of possible triplets, specially for large-scale datasets, leading to a slower convergence and computational overhead if all the possible triplets are to be used. The only way to address this problem is through the development of efficient mining strategies that select both hard and representative triplets.
 
 \section{Related work}
 \label{sec:related_work}
-The development of solutions for student monitoring has encompassed a plethora of possibilities. Depending on the application, they can be intended for commercial purposes or developed as part of academic research. Commercial solutions such as Kryterion, ProctorExam, ProctorU, Procotorio, ProctorFree, or SMOWL~\autocite{labayenOnlineStudentAuthentication2021} are available; however, with the exception of SMOWL, due to their proprietary nature, their methods of implementation are not disclosed, making it impossible to study them adequately. Therefore, all the methods analyzed, other than SMOWL, will fall under the second category.
+The development of solutions for student monitoring, specially image-based, has encompassed a plethora of possibilities that can face several challenges, specially not being capable of controlling the capturing conditions or the computational power of the device where the system is executed. Depending on the application, they can be intended for commercial purposes or developed as part of academic research. Commercial solutions such as Kryterion, ProctorExam, ProctorU, Procotorio, ProctorFree, or SMOWL~\autocite{portugalContinuousUserIdentification2023} are available; however, with the exception of SMOWL, due to their proprietary nature, their methods of implementation are not disclosed, not allowing to study them adequately. Therefore, all the methods analyzed, except SMOWL, will fall under the second category.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ Zhang \textit{et al.}~\autocite{zhangVirtualLaboratorySystem2016} (2016)} studied a system based on facial features exclusively. The faces are first detected and extracted using the OpenCV pretrained classifier based on the Viola-Jones/Haar Cascades algorithm. Subsequently, recognition is carried out utilizing the Eigenfaces algorithm, which incorporates Principal Component Analysis (PCA). The main disadvantage of this solution is lacking the flexibility to adverse visual conditions that Deep Learning techniques have.
@@ -445,11 +481,13 @@ The development of solutions for student monitoring has encompassed a plethora o
 \noindent\textbf{$\rightarrow$ SMOWL~\autocite{labayenOnlineStudentAuthentication2021} (2021)} is a multi-modal tool that analyzes voice, face and key-strokes data. For this dissertation, the interest resides only on the facial aspect of it. For face detection, it utilizes a combination of FaceBoxes with MobileNet-SSD for occlusion detection. The face recognition is accomplished with a Facenet model trained with triplet loss on the MS-Celeb-1M dataset. Anew, the triplet loss training can be considered a drawback. 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ TrustID~\autocite{fariaImagebasedFaceVerification2023} (2023)} is our solution, designed and developed at ISR - Instituto de Sistemas e Robótica from University of Coimbra. It utilizes as a face detection a linear detector conjointly with a Histogram of Oriented Gradients and pyramidal image search. After the faces are detected and aligned, they're cropped to a Region of Interest (RoI) of $150\times150$ pixels. Finally, the faces are passed to a face recognition that uses a CNN called ResNet-34, trained with triplet loss on a dataset of, approximately, 3 million faces derived from the Visual Geometry Group
+\noindent\textbf{$\rightarrow$ TrustID~\autocite{fariaImagebasedFaceVerification2023} (2023)} is our solution, designed and developed at ISR - UC. It utilizes as a face detection a linear detector conjointly with a Histogram of Oriented Gradients and pyramidal image search. After the faces are detected and aligned, they are cropped to a Region of Interest (RoI) of $150\times150$ pixels. Finally, the faces are passed to a face recognition module that uses a CNN with 29 layers based on the ResNet-34, trained with triplet loss on a dataset of, approximately, 3 million faces derived from the Visual Geometry Group
 Face~\autocite{parkhiDeepFaceRecognition2015} and FaceScrub~\autocite{ngDatadrivenApproachCleaning2014} datasets.
 
 
 \vspace{\baselineskip}
-\par As stated before, the choice of architecture will be based only on Deep Learning approaches. That is, because the system will be deployed on a difficult scenario where control of, more specifically, illumination, pose and quality will be impossible. Henceforth, a framework insensitive to those variations is the correct choice.
+\par The primary focus of this work revolves around the selection of the architecture for the face recognition module, which, as previously mentioned, will exclusively center on image-based Deep Learning approaches. In pursuit of this goal, the monitoring system must proactively address potential, previously mentioned, challenges that may arise during data acquisition. Deep Learning methods have shown remarkable capabilities in tackling such challenges effectively.
+
+\par In particular, the face recognition module must exhibit robustness in handling variations in illumination, pose, and image quality, especially in scenarios where precise control over these factors is unattainable. Furthermore, we need to consider the computational resources available to users, as students may access the system using smartphones or less powerful computing devices. Consequently, our choice of framework must be resilient to these variations and resource constraints.
 
 \end{document}
