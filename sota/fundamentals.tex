@@ -108,8 +108,15 @@ Training a network in the context of CNNs is the process of finding the optimal 
 \newpage
 \section{A Face Recognition System}
 
+% \begin{figure}[H]
+%     \includegraphics[scale=0.30]{fr_pipeline.png}
+%     \caption[Pipeline]{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
+%     \label{fig:fr pipeline}
+% \end{figure}
+
 \begin{figure}[H]
-    \includegraphics[scale=0.30]{fr_pipeline.png}
+    \centering
+    \includegraphics[scale=0.38]{face_rec_pipeline.png}
     \caption[Pipeline]{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
     \label{fig:fr pipeline}
 \end{figure}
@@ -125,7 +132,7 @@ Training a network in the context of CNNs is the process of finding the optimal 
 
 \par Previously employed traditional face detectors are incapable of detecting facial information when faced with challenges such as variants in image resolution, age, pose, illumination, race, occlusions or accessories (masks, glasses, makeup)~\autocite{duElementsEndtoendDeep2022,ranjanDeepLearningUnderstanding2018}. The progress in deep learning and increasing GPU power led Deep CNNs (DCNNs) to become a viable and reliable option that solves said problems in face detection. Methods such as CenterFace~\autocite{xuCenterFaceJointFace2019}, MTCNN~\autocite{zhangJointFaceDetection2016a} or RetinaFace\autocite{dengRetinaFaceSinglestageDense2019} are examples of the more commonly adopted state-of-the-art approaches.
 
-\par These techniques can be included in different categories depending on the method's characteristics. A more analytical perspective~\autocite{duElementsEndtoendDeep2022} distributes the methods, depending upon their architecture or purpose of application, over seven categories: multi-stage, single-stage, anchor-based, anchor-free, multi-task learning, CPU real-time and, finally, problem-oriented. To an in depth review of each category, refer to the \hyperref[sec:face_detection_appendix]{Appendix}.
+\par These techniques can be included in different categories depending on the method's characteristics. A more analytical perspective~\autocite{duElementsEndtoendDeep2022} distributes the methods, depending upon their architecture or purpose of application, over seven categories: multi-stage, single-stage, anchor-based, anchor-free, multi-task learning, CPU real-time and, finally, problem-oriented. To an in depth review of each category, refer to the \hyperref[sec:face_detection_appendix]{Appendix - Face Detection Classes}.
 
 \vspace{0.5\baselineskip}
 \begin{figure}[h!]
@@ -161,7 +168,7 @@ Training a network in the context of CNNs is the process of finding the optimal 
 \subsection{Face Alignment}
 \par Face Alignment, or facial landmark detection~\autocite{changFacePoseNetMakingCase2017}, is the second stage of the face recognition pipeline, and has the objective of calibrating the detected face to a canonical layout, through landmark-based or landmark-free approaches, in order to leverage the core final stage of face representation~\autocite{duElementsEndtoendDeep2022}. 
 \par Despite the fact that traditional face alignment methods are very accurate, that only occurs in constrained circumstances. Therefore, once again, to address that issue, deep learning-based methods are the solution to perform an accurate facial landmark localization that realistically scales to real world scenarios~\autocite{fengWingLossRobust2018}. 
-\par Furthermore, face alignment, can be accomplished through two categories of methods: landmark-based and landmark-free. Landmark-based alignment leverages facial landmarks (eyes, mouth, nose, etc.) to normalize the image to a layout through spatial transformations~\autocite{duElementsEndtoendDeep2022}. Methods like Wing loss~\autocite{fengWingLossRobust2018}, Kernel Density Deep Neural Network~\autocite{chenFaceAlignmentKernel2019} or the Recurrent Dual Refinement (RDR) proposed in~\autocite{xiaoRecurrent3D2DDual2017} integrate this category. Landmark-free alignment, as the name obviously suggests, is the category of methods that align the face without points of reference, namely RDCFace~\autocite{zhaoRDCFaceRadialDistortion2020} or the one proposed by by Hayat \textit{et al.}~\autocite{hayatJointRegistrationRepresentation2017}. The \hyperref[sec:face_alignment_appendix]{Appendix} presents more details regarding the aforementioned.
+\par Furthermore, face alignment, can be accomplished through two categories of methods: landmark-based and landmark-free. Landmark-based alignment leverages facial landmarks (eyes, mouth, nose, etc.) to normalize the image to a layout through spatial transformations~\autocite{duElementsEndtoendDeep2022}. Methods like Wing loss~\autocite{fengWingLossRobust2018}, Kernel Density Deep Neural Network~\autocite{chenFaceAlignmentKernel2019} or the Recurrent Dual Refinement (RDR) proposed in~\autocite{xiaoRecurrent3D2DDual2017} integrate this category. Landmark-free alignment, as the name obviously suggests, is the category of methods that align the face without points of reference, namely RDCFace~\autocite{zhaoRDCFaceRadialDistortion2020} or the one proposed by by Hayat \textit{et al.}~\autocite{hayatJointRegistrationRepresentation2017}. The \hyperref[sec:face_alignment_appendix]{Appendix - Face Alignment Classes} presents more details regarding the aforementioned.
 
 \vspace{0.7\baselineskip}
 \par As can be seen from the previous section, this step in the face recognition process can be accomplished, very sporadically, through standalone methods that process the detected face from the previous stage, but generally joint detection and alignment methods, such as RetinaFace \autocite{dengRetinaFaceSinglestageDense2019}, are the optimal choice~\autocite{changFacePoseNetMakingCase2017}.
@@ -176,9 +183,16 @@ Training a network in the context of CNNs is the process of finding the optimal 
 \par The overall pipeline comes to a conclusion in this module. However, as can be seen in \reffig{fig:fr pipeline}, due to its importance for the face recognition problem, it is highlighted the inherent pipeline of the Face Representation stage is discussed in depth in the next section.
 
 \section{Face Representation Pipeline}
-\begin{figure}[!h]
+% \begin{figure}[!h]
+%     \centering
+%     \includegraphics[scale=0.4]{frep_pipeline.png}
+%     \caption[Pipeline]{Face Representation pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
+%     \label{fig:frep pipeline}
+% \end{figure}
+
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.4]{frep_pipeline.png}
+    \includegraphics[scale=0.5]{face_representation.png}
     \caption[Pipeline]{Face Representation pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
     \label{fig:frep pipeline}
 \end{figure}
@@ -268,7 +282,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 \end{table}
 
 \par One of the most well known test data set is LFW~\autocite{huangLabeledFacesWild}, but with the evolution of face recognition methods, it quickly became saturated in terms of accuracy reports. This motivated investigations to develop more challenging datasets, like A, B, C and S IJB benchmarks~\autocite{klarePushingFrontiersUnconstrained2015, whitelamIARPAJanusBenchmarkB2017, mazeIARPAJanusBenchmark2018, kalkaIJBIARPAJanus2018}, QMUL-SurvFace~\autocite{chengSurveillanceFaceRecognition2018} and YTF (for video tests)~\autocite{wolfFaceRecognitionUnconstrained2011}, or for specific hurdles~\autocite{duElementsEndtoendDeep2022}, for instance, CPLFW~\autocite{zhengCrossPoseLFWDatabase} or CFP~\autocite{senguptaFrontalProfileFace2016} for cross-pose, CALFW~\autocite{zhengCrossAgeLFWDatabase2017} or AgeDB30~\autocite{moschoglouAgeDBFirstManually2017} for cross-age, RFW~\autocite{kalkaIJBIARPAJanus2018} for racial variations, XQLFW~\autocite{knocheCrossQualityLFWDatabase2021} for quality assessment or MDMFR~\autocite{ullahNovelDeepMaskNetModel2022} for masked reocgnition. Although some of the previously referenced datasets do have a benchmarking component and are described as such, they can also be generally employed to train or fine-tune algorithms for specific challenges.
-\par For a better description of all the datasets see the \hyperref[sec:train_data_appendix]{Train Data Appendix} and \hyperref[sec:test_data_appendix]{Test Data Appendix}.
+\par For a better description of all the datasets see the \hyperref[sec:train_data_appendix]{Appendix - Train Data} and \hyperref[sec:test_data_appendix]{Appendix - Test Data}.
 
 \subsection{Feature Extractor}
 A feature extractor is present in both the training and testing stage of the Face Representation process, as it allows the visual data to be processed for evaluation by transforming the input into low dimensional representations~\autocite{lecunGradientBasedLearningApplied1998}. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  

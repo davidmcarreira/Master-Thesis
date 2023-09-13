@@ -132,4 +132,85 @@
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ FaVCI2D}~\autocite{popescuFaceVerificationChallenging2022} is face verification benchmark dataset that proposes to address three relevant flaws : 1) the pairs selected are not challenging enough,  2) the demographics of other datasets are not representative enough of the real world diversity and 3) legal and ethical questions concerning the data used. It is composed of 64,879 images and 52,411 unique identities, where 12,468 are used to create genuine matched identity pairs with balanced gender and geographic distribution.
 
+\section*{ROC Curves}\label{sec:roc_curves_appendix}
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters as needed
+        \begin{minipage}[c]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{pre_cfpff_trained.eps}
+            \caption{ROC Curves for the CFP-FF benchmark from the Frontal group.}
+            \label{fig:roc_lfw}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[c]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{pre_agedb30_trained.eps}
+            \caption{ROC Curves for the AgeDB30 benchmark from the Age group.}
+            \label{fig:roc_calfw}
+        \end{minipage}
+    \end{adjustbox}
+    \vspace{-0.4cm}
+  \end{figure}
+\vspace{-1cm}
+\begin{figure}[H]
+  \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
+      \begin{minipage}[c]{0.49\textwidth}
+          \centering
+          \includegraphics[width=0.8\textwidth]{pre_cfpfp_trained.eps}
+          \caption{ROC Curves for the CFP-FP benchmark from the Pose group.}
+          \label{fig:roc_cplfw}
+      \end{minipage}
+      \hfill
+      \begin{minipage}[c]{0.49\textwidth}
+          \centering
+          \includegraphics[width=0.8\textwidth]{pre_vgg2_trained.eps}
+          \caption{ROC Curves for the VGGFace2 benchmark from the Hard group.}
+          \label{fig:roc_xqlfw}
+      \end{minipage}
+  \end{adjustbox}
+  \vspace{-0.4cm}
+\end{figure}
+
+
+\section*{DET Curves}\label{sec:det_curves_appendix}
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters as needed
+        \begin{minipage}[c]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{pre_cfpff_dte_trained.eps}
+            \caption{DET Curves for the CFP-FF benchmark from the Frontal group.}
+            \label{fig:dte_lfw}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[c]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{pre_agedb30_dte_trained.eps}
+            \caption{DET Curves for the AgeDB30 benchmark from the Age group.}
+            \label{fig:dte_lfw}
+        \end{minipage}
+    \end{adjustbox}
+    \vspace{-0.4cm}
+  \end{figure}
+  
+\begin{figure}[H]
+\begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
+    \begin{minipage}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{pre_cfpfp_dte_trained.eps}
+        \caption{DET Curves for the CFP-FP benchmark from the Pose group.}
+        \label{fig:dte_cplfw}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{pre_vgg2_dte_trained.eps}
+        \caption{DET Curves for the VGGFace2 benchmark from the Hard group.}
+        \label{fig:dte_xqlfw}
+    \end{minipage}
+\end{adjustbox}
+\vspace{-0.4cm}
+\end{figure}
+
 \end{document}

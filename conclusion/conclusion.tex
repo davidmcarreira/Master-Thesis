@@ -5,7 +5,7 @@
 
 
 \begin{document}
-\section{Conclusion}
+\section{Main Outcomes}
 \par This work studied different neural networks models in order to propose a better approach to TrustID's facial verification module. The main objective was to find a good compromise between the maximum accurate performance and the minimum computational cost possible without compromising safety. To that extent, four different sized models were suggested: MobileFaceNet, FaceNet, iResnet-18 and iResnet-SE-50. First they were compared in terms of their specifications: number of trainable parameters, mult-adds, number of trainable layers, embedding size, inference time, loss function and training dataset. Because the system is to be applied on a student monitoring scenario, the capturing device will induce high data variations, hence the model must be invariant to poses, illumination, quality, etc. With that in mind, appropriate benchmarks were designed to test the methods in a wide range of possible scenarios.
 
 \par Initial tests, studied the pre-trained models in order to pick the best one to then verify if it can be refined. Analyzing the accuracies on all benchmarks, the ROC curves, TAR at different FAR values, DET curves and EER points, clearly showcased the best three models that could substitute TrustID0s solution: iResnet-SE-50, iResnet-18 and MobileFaceNet. iResnet-SE-50 and iResnet-18 are two contenders that performed very similarly and MobileFaceNet consistently placed third place, but is very close. Balancing MobileFaceNet's performance with its inherent lightweight characteristics, it was selected as the best starting point for fine-tuning, since it has much less trainable parameters, number of mult-adds operations and inference time for a small performance trade-off.

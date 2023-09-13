@@ -61,83 +61,45 @@ The main purpose of the following chapter is to select a better approach to Trus
 \par The previous table indicates that the three methods with superior performance, based exclusively on the accuracy at the best similarity threshold for each model and dataset, are the iResnet-SE-50, iResnet-18 and MobileFaceNet. To conduct a more thorough investigation allowing us to select the most appropriate model to be fine-tuned, the TAR values are computed for a range of FAR values and the ROC curves are generated. By inspecting how close the ROC curve is to the top left corner, the prime models can be determined since those are able to correctly identify more genuine matches while keeping the impostor matches low. 
 
 \begin{figure}[H]
-  \centering
-  \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters as needed
-      \begin{minipage}[c]{0.49\textwidth}
-          \centering
-          \includegraphics[width=\textwidth]{pre_cfpff.png}
-          \label{fig:roc_cfpff}
-      \end{minipage}
-      \hfill
-      \begin{minipage}[c]{0.49\textwidth}
-          \centering
-          \includegraphics[width=\textwidth]{pre_lfw.png}
-          \label{fig:roc_lfw}
-      \end{minipage}
-  \end{adjustbox}
-  \vspace{-0.4cm}
-  \caption{ROC Curves for the frontal pose face verification datasets.}
-  \label{fig:roc_frontal}
-\end{figure}
-
+    \centering
+    \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters as needed
+        \begin{minipage}[c]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{pre_lfw_trained.eps}
+            \caption{ROC Curves for the LFW benchmark from the Frontal group.}
+            \label{fig:roc_lfw}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[c]{0.49\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{pre_calfw_trained.eps}
+            \caption{ROC Curves for the CALFW benchmark from the Age group.}
+            \label{fig:roc_calfw}
+        \end{minipage}
+    \end{adjustbox}
+    \vspace{-0.4cm}
+  \end{figure}
+\vspace{-1cm}
 \begin{figure}[H]
   \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
       \begin{minipage}[c]{0.49\textwidth}
           \centering
-          \includegraphics[width=1\textwidth]{pre_agedb30.png}
-          \label{fig:roc_agedb30_a}
+          \includegraphics[width=0.8\textwidth]{pre_cplfw_trained.eps}
+          \caption{ROC Curves for the CPLFW benchmark from the Pose group.}
+          \label{fig:roc_cplfw}
       \end{minipage}
       \hfill
       \begin{minipage}[c]{0.49\textwidth}
           \centering
-          \includegraphics[width=1\textwidth]{pre_calfw.png}
-          \label{fig:roc_calfw_b}
+          \includegraphics[width=0.8\textwidth]{pre_xqlfw_trained.eps}
+          \caption{ROC Curves for the XQLFW benchmark from the Hard group.}
+          \label{fig:roc_xqlfw}
       \end{minipage}
   \end{adjustbox}
   \vspace{-0.4cm}
-  \caption{ROC Curves for the age face verification datasets.}
-  \label{fig:roc_age}
 \end{figure}
 
-\begin{figure}[H]
-  \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
-      \begin{minipage}[c]{0.49\textwidth}
-          \centering
-          \includegraphics[width=1\textwidth]{pre_cfpfp.png}
-          \label{fig:roc_cfpfp_a}
-      \end{minipage}
-      \hfill
-      \begin{minipage}[c]{0.49\textwidth}
-          \centering
-          \includegraphics[width=1\textwidth]{pre_cplfw.png}
-          \label{fig:roc_cplfw_b}
-      \end{minipage}
-  \end{adjustbox}
-  \vspace{-0.4cm}
-  \caption{ROC Curves for the pose face verification datasets.}
-  \label{fig:roc_pose}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
-      \begin{minipage}[c]{0.49\textwidth}
-          \centering
-          \includegraphics[width=1\textwidth]{pre_vgg2.png}
-          \label{fig:roc_vgg2_a}
-      \end{minipage}
-      \hfill
-      \begin{minipage}[c]{0.49\textwidth}
-          \centering
-          \includegraphics[width=1.0\textwidth]{pre_xqlfw.png}
-          \label{fig:roc_xqlfw_b}
-      \end{minipage}
-  \end{adjustbox}
-  \vspace{-0.4cm}
-  \caption{ROC Curves for the hard face verification datasets.}
-  \label{fig:roc_hard}
-\end{figure}
-
-\par The ROC curves support our initial assumptions. It is evident that, across the entire FAR range, the three top-performing models are iResnet-SE-50, iResnet-18, and MobileFacenet. With the exception of XQLFW in \reffig{fig:roc_hard}, where all models, except TrustID, perform poorly and are close to random guessing, the remaining seven datasets consistently position these three models near the top-left corner. This pattern indicates strong model performance. In scenarios with low FAR values, where the model is less tolerant of incorrectly identifying impostors as matches, the number of correctly classified pairs (TAR) is higher.
+\par The selected ROC curves support our initial assumptions\footnote{Please refer to \hyperref[sec:roc_curves_appendix]{Appendix - ROC Curves} for the remaining from each benchmark group}. It is evident that, across the entire FAR range, the three top-performing models are iResnet-SE-50, iResnet-18, and MobileFacenet. With the exception of XQLFW in \reffig{fig:roc_xqlfw}, where all models, except TrustID, perform poorly and are close to random guessing, the remaining seven datasets consistently position these three models near the top-left corner. This pattern indicates strong model performance. In scenarios with low FAR values, where the model is less tolerant of incorrectly identifying impostors as matches, the number of correctly classified pairs (TAR) is higher.
 
 \begin{table}[H]
     \caption{TAR@FAR for all the models and benchmarks.}
@@ -173,78 +135,39 @@ To finalize the selection of the most appropriate model, the FRRs are calculated
     \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters as needed
         \begin{minipage}[c]{0.49\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{pre_cfpff_dte.png}
-            \label{fig:dte_cfpff}
+            \includegraphics[width=0.8\textwidth]{pre_lfw_dte_trained.eps}
+            \caption{DET Curves for the LFW benchmark from the Frontal group.}
+            \label{fig:dte_lfw}
         \end{minipage}
         \hfill
         \begin{minipage}[c]{0.49\textwidth}
             \centering
-            \includegraphics[width=\textwidth]{pre_lfw_dte.png}
+            \includegraphics[width=0.8\textwidth]{pre_calfw_dte_trained.eps}
+            \caption{DET Curves for the CALFW benchmark from the Age group.}
             \label{fig:dte_lfw}
         \end{minipage}
     \end{adjustbox}
     \vspace{-0.4cm}
-    \caption{DTE Curves and EER points for the frontal pose face verification datasets.}
-    \label{fig:dte_frontal}
   \end{figure}
   
-  \begin{figure}[H]
-    \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
-        \begin{minipage}[c]{0.49\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{pre_agedb30_dte.png}
-            \label{fig:dte_agedb30_a}
-        \end{minipage}
-        \hfill
-        \begin{minipage}[c]{0.49\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{pre_calfw_dte.png}
-            \label{fig:dte_calfw_b}
-        \end{minipage}
-    \end{adjustbox}
-    \vspace{-0.4cm}
-    \caption{DET Curves and EER points for the age face verification datasets.}
-    \label{fig:dte_age}
-  \end{figure}
-  
-  \begin{figure}[H]
-    \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
-        \begin{minipage}[c]{0.49\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{pre_cfpfp_dte.png}
-            \label{fig:dte_cfpfp_a}
-        \end{minipage}
-        \hfill
-        \begin{minipage}[c]{0.49\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{pre_cplfw_dte.png}
-            \label{fig:dte_cplfw_b}
-        \end{minipage}
-    \end{adjustbox}
-    \vspace{-0.4cm}
-    \caption{DET Curves and EER points for the pose face verification datasets.}
-    \label{fig:dte_pose}
-  \end{figure}
-  
-  \begin{figure}[H]
-    \begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
-        \begin{minipage}[c]{0.49\textwidth}
-            \centering
-            \includegraphics[width=1\textwidth]{pre_vgg2_dte.png}
-            \label{fig:dte_vgg2_a}
-        \end{minipage}
-        \hfill
-        \begin{minipage}[c]{0.49\textwidth}
-            \centering
-            \includegraphics[width=1.0\textwidth]{pre_xqlfw_dte.png}
-            \label{fig:dte_xqlfw_b}
-        \end{minipage}
-    \end{adjustbox}
-    \vspace{-0.4cm}
-    \caption{DET Curves and EER points for the hard face verification datasets.}
-    \label{fig:dte_hard}
+\begin{figure}[H]
+\begin{adjustbox}{center, minipage=1.2\textwidth, margin=0cm -0.1cm 0cm -0.1cm}  % Adjust parameters
+    \begin{minipage}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{pre_cplfw_dte_trained.eps}
+        \caption{DET Curves for the CPLFW benchmark from the Pose group.}
+        \label{fig:dte_cplfw}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{pre_xqlfw_dte_trained.eps}
+        \caption{DET Curves for the XQLFW benchmark from the Hard group.}
+        \label{fig:dte_xqlfw}
+    \end{minipage}
+\end{adjustbox}
+\vspace{-0.4cm}
 \end{figure}
-
 
 \begin{table}[H]
     \centering
@@ -265,13 +188,14 @@ To finalize the selection of the most appropriate model, the FRRs are calculated
 
 \end{table}
 
-As a final analysis, both the DET plots and the EER values support what has been previously discussed: iResnet-SE-50, iResnet-18 and MobileFaceNet are the best performing models. To no surprise, this group is always close to each other and close to the ideal corner of the DET graphs. Additionally, XQLFW reveals once again to be too much of a challenge. Regarding the EER scores, the results and conclusions are similar to the ones from \autoref{tab:acc}. iResnet-SE-50, the more complex model, has the lower scores, with iResnet-18 a close second and MobileFaceNet as the third.
+As a final analysis, the DET plots\footnote{Please refer to \hyperref[sec:det_curves_appendix]{Appendix - DET Curves} for the remaining from each benchmark group} and the EER values support what has been previously discussed: iResnet-SE-50, iResnet-18 and MobileFaceNet are the best performing models. To no surprise, this group is always close to each other and close to the ideal corner of the DET graphs. Additionally, XQLFW reveals once again to be too much of a challenge. Regarding the EER scores, the results and conclusions are similar to the ones from \autoref{tab:acc}. iResnet-SE-50, the more complex model, has the lower scores, with iResnet-18 a close second and MobileFaceNet as the third.
 
 
 \subsection{Discussion}
 \par At this stage, we are capable of assuring, based on the previous tests, that there are more adequate solutions to TrustID's facial verification framework. The three top performing methods proved their robustness to extreme variation in pose (CFP-FP and CPLFW), age (AgeDB30 and CALFW) or illumination (CFP-FF, VGGFace2). That being said, the benchmark concerning quality and image degradation (XQLFW) proved to be a major hurdle to most of the models aside from TrustID.
 
-\par Considering the benchmark's results, the much lower amount of trainable parameters, mult-adds and inference time, MobileFaceNet is the best balance between performance and computational cost. Furthermore, although it is true that MobileFacenet's accuracy is high in the pose group and VGGFace2, there is room for improvement in the TAR at low FAR values, hence the fine-tuning. The objective of further training the model first with QMUL-SurvFace is to try and improve its scores in both the hard group, but specially XQLFW, and pose group benchmarks. On the other hand, DigiFace-1M enables the study of the impact of fully-synthetic ethically collected data on the scores throughout the benchmarks, with a special attention to the pose group benchmarks. 
+\par Considering the benchmarks' results, the much lower amount of trainable parameters, mult-adds and inference time, MobileFaceNet is the best balance between performance and computational cost. As discussed in \autoref{sec:methodology_discussion}, due to the monitoring context, achieving perfect accuracy is not the main concern. This is due to the fact that, as the monitoring occurs over a time span it allows the system to perform more face verifications, compensating for lower accuracy values.
+Furthermore, although it is true that MobileFacenet's accuracy is high in the pose group and VGGFace2, there is room for improvement in the TAR at low FAR values, hence the fine-tuning. The objective of further training the model first with QMUL-SurvFace is to try and improve its scores in both the hard group, but specially XQLFW, and pose group benchmarks. On the other hand, DigiFace-1M enables the study of the impact of fully-synthetic ethically collected data on the scores throughout the benchmarks, with a special attention to the pose group benchmarks. 
 
 
 \section{Training Details}
@@ -470,7 +394,7 @@ As expected, the weights are less updated, hence the majority of the accuracy sc
     }
 \end{table}
 
-\par Finally, tables \autoref{tar_far_5_qmul} and \autoref{tar_far_5_digifaces} highlight that training with less layers does not improve the performance at any FAR or margin. Moreover, the previous enhancements verified when the complete model is trained with QMUL-SurvFace with $m=0.5$, and $FAR=1e-3$ and $FAR=1e-2$ are lost with this configuration.
+\par Finally, \autoref{tab:tar_far_5_qmul} and \autoref{tab:tar_far_5_digiface} highlight that training with less layers does not improve the performance at any FAR or margin. Moreover, the previous enhancements verified when the complete model is trained with QMUL-SurvFace with $m=0.5$, and $FAR=1e-3$ and $FAR=1e-2$ are lost with this configuration.
 
 
 \subsection*{Fine-tuning the last 2 layers}
@@ -564,7 +488,7 @@ To finalize, we conducted additional tests by training only the last two layers 
     }
 \end{table}
 
-\par To conclude, the TAR values continue to be worse than the original model, for both QMUL-SurvFace and DigiFace-1M, with the usual outliers values that are slightly higher but do not highlight any pattern of improvement.
+\par To conclude, the TAR values continue to be worse than the original model, for both QMUL-SurvFace (\autoref{tab:tar_far_final_qmul}) and DigiFace-1M (\autoref{tab:tar_far_final_digiface}), with the usual outliers values that are slightly higher but do not highlight any pattern of improvement.
 
 \subsection{Discussion}
 \par Taking into consideration the previous experiments, it can be inferred that the most adequate solution is the pre-trained model. Further training on any of the selected datasets does not improve the overall performance. Although fine-tuning the whole network with QMUL-SurvFace leads to higher accuracy on the XQLFW benchmark, the scores for the other tests are worse. Moreover, when $m=0.5$ the model is more discriminative for $FAR=1e-3$ and $1e-2$ on the pose group and XQLFW, but once again, on the other benchmarks the model is less discriminative. Since the intended application is to monitor students, it is highly required for the model to adapt to any quality and pose, that is, profile and frontal. Therefore, improvement on one benchmark at a cost of having negative impact on the others is less than idealized. The initial pre-trained model outperforms TrustID's method, with low computational cost and respectable scores on all the tests and benchmarks. Despite the fact that it did not respond well to the fine-tuning on the selected datasets, it still is the most competent approach to the student monitoring problem as it performs appropriately considering the possible challenges of pose, illumination, expressions, etc. while maintaining a light resource utilization. 
