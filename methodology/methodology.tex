@@ -73,14 +73,14 @@ As can be seen in \reffig{fig:scenarios}, for faces captured in the same exact s
 \section{Benchmarks}
 \par The evaluation will be conducted with 10-fold cross validation on the processed dataset to match the size of the training data for each model. First with the original pretrained model and then with the fine-tuned version of the selected one. The model will produce the feature embeddings and pairwise cosine similarity, and if it is above a certain threshold the pair is considered as a match. 
 
-\par To comprehensively assess the performance of the chosen models, we will subject them to testing across eight diverse datasets: VGGFace2, AgeDB30, two CFP variations (CFP-FF for frontal-frontal pairs and CFP-FP for frontal-profile pairs), CALFW, CPLFW, XQLFW and LFW. This approach is designed to capture a wide array of characteristics, closely resembling real-world scenarios for a thorough evaluation, therefore, four dataset groups \autoref{tab:bench_groups} based on their characteristics are defined: frontal, age, pose and hard. 
+\par To comprehensively assess the performance of the chosen models, we will subject them to testing across eight diverse datasets: VGGFace2, AgeDB30, two CFP variations (CFP-FF for frontal-frontal pairs and CFP-FP for frontal-profile pairs), CALFW, CPLFW, XQLFW and LFW. This approach is designed to capture a wide array of characteristics, closely resembling real-world scenarios for a thorough evaluation, therefore, four dataset groups based on their characteristics are defined: frontal, age, pose and hard. 
 
 
 \begin{table}[H]
   \centering
   \caption{Benchmarks' groups, their difficulty and intended evaluation purpose. * - Very easy. ***** - Very difficult.}
   \label{tab:bench_groups}
-  \resizebox{0.6\textwidth}{!}{%
+  \resizebox{0.5\textwidth}{!}{%
   \begin{tabular}{c|c|c|c|}
   \cline{2-4}
   \multicolumn{1}{l|}{}                          & Dataset  & Difficulty & Evaluation purpose                                                                           \\ \hline
@@ -97,6 +97,15 @@ As can be seen in \reffig{fig:scenarios}, for faces captured in the same exact s
   \end{table}
 
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.11]{benchmarks.png}
+  \caption{Example pairs from each benchmark. Row 1: CFP-FF and LFW; Row 2: AgeDB30 and CALFW; Row 3: CFP-FP and CPLFW; Row 4: VGGFace2 and XQLFW}
+  \label{fig:benchmarks}
+\end{figure}
+
+These groups are summarized in \autoref{tab:bench_groups} and pictured on \reffig{fig:benchmarks}, where it is possible to observe the diversity in pose, expressions, age, illumination and image quality. In terms of difficulty, the Frontal group is easier, while the Age and Pose groups are moderate. However, the Hard group significantly raises the challenge, leading to stricter benchmarks.
+
 % The frontal group is composed of the CFP-FF and LFW, easier datasets with only frontal views of the face. The age group is designed to evaluate the model's sensitivity to age variations, and gathers the AgeDB30 and CALFW datasets. The pose one measures the system's performance when tested against faces with a wide range of poses by evaluating in the CFP-FP and CPLFW datasets. Finally, the hard group includes VGGFace2, a large scale benchmark with great variation in pose, age, light, etc., and XQLFW, a very difficult dataset with degraded image quality. 
 
 \par The chosen evaluation metrics are based on biometric systems of verification and encompass Accuracy, the Receiver Operating Characteristic (ROC) and Detection Error Trade-off (DET) plots obtained by sweeping an interval of thresholds and calculating the True Acceptance Rate (TAR), False Acceptance Rate (FAR) and the False Reject Rate (FRR), and the Equal Error Rate (EER). The $Accuracy=\frac{TP+TN}{TP+TN+FP+FN}$ is a measure for the number of correct predictions, $TAR=\frac{TP}{TP+FN}$ indicates the proportion of genuine face pairs correctly classified and $FAR=\frac{FP}{FP+TN}$ indicates the quantity of imposter face pairs incorrectly classified as matches, where TP is True Positive, TN is True Negative, FP is False Positive and FN is False Negative. With the previous metrics is possible to obtain the ROC plot and study the trade-off between the TAR and FAR at different thresholds and evaluate the performance of different models \reffig{fig:roc_curve}. $FRR = 1 - TAR$ calculates the ratio of genuine matches that are classified as a non-match and allows to generate the DET curve which serves a similar purpose to the ROC curves, but with a better performance visualization due to the axis' logarithmic scale. Finally, the EER is the point where FRR = FAR and the lower it is, the better performing the system is. 
@@ -106,12 +115,13 @@ As can be seen in \reffig{fig:scenarios}, for faces captured in the same exact s
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.2]{roc_det.png}
+  \includegraphics[scale=0.17]{roc_det.png}
   \caption{DET (left) and ROC (right) curves. The y-axis represents the True Positive Rate (or TAR) for the ROC curves and False Negative Rate (or FRR) for the DET curves. The x-axis represents the False Positive Rate (or FAR) for both plots. Image from~\autocite{saenz-lechonMethodologicalIssuesDevelopment2006}}
   \label{fig:roc_curve}
 \end{figure}
 
 \par \reffig{fig:roc_curve} highlights the performance visualization for both the curves' plots. The closer the ROC curve is to the top left corner, the better performance the model has, since that means that it is able of correctly identify more genuine face matches (TAR) while minimizing the wrong identities incorrectly classified as matches (FAR). For DET, a curve closer to the origin represents a better model, since it minimizes the amount of genuine identities matches classified wrongly classified as imposters (FRR) for a more strict FAR threshold.
+\par Additionally, to evaluate the performance/resource utilization trade-off, the following are considered: the number of trainable parameters, trainable layers, quantity of multiplication and addition operations (mult-adds), inference time and a proposed metric called ``Number of Parameters per Unit of Accuracy'' (NPUA). 
 
 \section{Implementation details}
 \par All the training, processing, and benchmarking was developed in a Docker environment to ensure reproducibility. The code was written using Python 3.8.10 and relies on PyTorch 1.14.0 and Torchvision 0.15.0, along with their corresponding required libraries. The training process is conducted exclusively on a single GPU, specifically NVIDIA's GeForce RTX 3080 Ti 12GB. 

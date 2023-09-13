@@ -190,11 +190,33 @@ To finalize the selection of the most appropriate model, the FRRs are calculated
 
 As a final analysis, the DET plots\footnote{Please refer to \hyperref[sec:det_curves_appendix]{Appendix - DET Curves} for the remaining from each benchmark group} and the EER values support what has been previously discussed: iResnet-SE-50, iResnet-18 and MobileFaceNet are the best performing models. To no surprise, this group is always close to each other and close to the ideal corner of the DET graphs. Additionally, XQLFW reveals once again to be too much of a challenge. Regarding the EER scores, the results and conclusions are similar to the ones from \autoref{tab:acc}. iResnet-SE-50, the more complex model, has the lower scores, with iResnet-18 a close second and MobileFaceNet as the third.
 
+\section{Number of trainable parameters per unit of accuracy}
+
+\par This metric is obtained by computing the division of the number of trainable parameters by the accuracy values, and it will serve as a complement to the metrics that evaluate resource's cost, i.e, the amount of mult-adds, inference time, and the number of trainable parameters and layers. Because the previous tests consecutively place iResnet-SE-50, iResnet-18 and MobileFaceNet as the more capable methods, they will be the ones studied in \autoref{tab:param_acc}. 
+
+\begin{table}[H]
+    \centering
+    \caption{Number of trainable parameters per unit of accuracy for the three highest achieving models.}
+    \label{tab:param_acc}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|cc|cc|cc|cc|}
+    \hline
+    \multicolumn{1}{|c|}{\multirow{2}{*}{\diagbox{Models}{Datasets}}} & \multicolumn{2}{c|}{Frontal}           & \multicolumn{2}{c|}{Age}               & \multicolumn{2}{c|}{Pose}              & \multicolumn{2}{c|}{Hard}               \\ \cline{2-9} 
+    \multicolumn{1}{|c|}{}                   & \multicolumn{1}{c|}{CFP-FF}  & LFW     & \multicolumn{1}{c|}{AgeDB30} & CALFW   & \multicolumn{1}{c|}{CFP-FP}  & CPLFW   & \multicolumn{1}{c|}{VGGFace2} & XQLFW   \\ \hline
+    MobileFaceNet                            & \multicolumn{1}{c|}{\textbf{\num{1.216e6}}} & \textbf{\num{1.211e6}} & \multicolumn{1}{c|}{\textbf{\num{1.290e6}}} & \textbf{\num{1.282e6}} & \multicolumn{1}{c|}{\textbf{\num{1.340e6}}} & \textbf{\num{1.389e6}} & \multicolumn{1}{c|}{\textbf{\num{1.327e6}}}  & \textbf{\num{2.371e6}} \\ \hline
+    iResnet-18                               & \multicolumn{1}{c|}{\num{2.412e7}} & \num{2.412e7} & \multicolumn{1}{c|}{\num{2.470e7}} & \num{2.514e7} & \multicolumn{1}{c|}{\num{2.552e7}} & \num{2.687e7} & \multicolumn{1}{c|}{\num{2.612e7}}  & \num{4.861e7} \\ \hline
+    iResnet-SE-50                            & \multicolumn{1}{c|}{\num{4.398e7}} & \num{4.400e7} & \multicolumn{1}{c|}{\num{4.728e7}} & \num{4.590e7} & \multicolumn{1}{c|}{\num{4.631e7}} & \num{4.841e7} & \multicolumn{1}{c|}{\num{4.661e7}}  & \num{8.526e7} \\ \hline
+    \end{tabular}%
+    }
+\end{table}
+
+\par \autoref{tab:acc} emphasizes that the three methods attain comparable accuracy values, a crucial factor for model comparison with this metric. In this context, a lower NPUA value is preferred, as it indicates that a model can achieve the same accuracy while utilizing fewer trainable parameters. Finally, we can conclude that MobileFaceNet is the more computational cost-efficient, presenting NPUA scores lower than iResnet-18 and iResnet-SE-50 by, at least, an order of magnitude.
+
 
 \subsection{Discussion}
 \par At this stage, we are capable of assuring, based on the previous tests, that there are more adequate solutions to TrustID's facial verification framework. The three top performing methods proved their robustness to extreme variation in pose (CFP-FP and CPLFW), age (AgeDB30 and CALFW) or illumination (CFP-FF, VGGFace2). That being said, the benchmark concerning quality and image degradation (XQLFW) proved to be a major hurdle to most of the models aside from TrustID.
 
-\par Considering the benchmarks' results, the much lower amount of trainable parameters, mult-adds and inference time, MobileFaceNet is the best balance between performance and computational cost. As discussed in \autoref{sec:methodology_discussion}, due to the monitoring context, achieving perfect accuracy is not the main concern. This is due to the fact that, as the monitoring occurs over a time span it allows the system to perform more face verifications, compensating for lower accuracy values.
+\par Considering the benchmarks' results, the much lower amount of trainable parameters, mult-adds, inference time and NPUA, MobileFaceNet is the best balance between performance and computational cost. As discussed in \autoref{sec:methodology_discussion}, due to the monitoring context, achieving perfect accuracy is not the main concern. This is due to the fact that, as the monitoring occurs over a time span it allows the system to perform more face verifications, compensating for lower accuracy values.
 Furthermore, although it is true that MobileFacenet's accuracy is high in the pose group and VGGFace2, there is room for improvement in the TAR at low FAR values, hence the fine-tuning. The objective of further training the model first with QMUL-SurvFace is to try and improve its scores in both the hard group, but specially XQLFW, and pose group benchmarks. On the other hand, DigiFace-1M enables the study of the impact of fully-synthetic ethically collected data on the scores throughout the benchmarks, with a special attention to the pose group benchmarks. 
 
 
@@ -209,7 +231,7 @@ By leveraging Optuna's hyperparameter searching capabilities\footnote{\url{https
     \centering
     \caption{MobileFaceNet accuracy scores before and after fine-tuning the whole network on QMUL-SurvFace with different ArcFace margins.}
     \label{tab:acc_whole_qmul}
-    \resizebox{0.8\textwidth}{!}{%
+    \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{|clc|c|c|c|}
     \hline
     \multicolumn{2}{|l|}{Benchmarks}                                                & Original                      & $m=0.5$                              & $m=0.4$                              & $m=0.3$                              \\ \hline
@@ -231,7 +253,7 @@ By leveraging Optuna's hyperparameter searching capabilities\footnote{\url{https
     \centering
     \caption{MobileFaceNet accuracy scores before and after fine-tuning the whole network on DigiFace-1M with different ArcFace margins.}
     \label{tab:acc_whole_digiface}
-    \resizebox{0.8\textwidth}{!}{%
+    \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{|clc|c|c|c|}
     \hline
     \multicolumn{2}{|l|}{Benchmarks}                                                & Original                      & $m=0.5$                              & $m=0.4$                              & $m=0.3$                              \\ \hline
@@ -312,7 +334,7 @@ The reduced margins $m=0.4$ and $m=0.3$ produce lower TAR scores at any FAR, inc
     \centering
     \caption{MobileFaceNet accuracy scores before and after fine-tuning the network, with the first five layers frozen, on QMUL-SurvFace with different ArcFace margins.}
     \label{tab:acc_5_qmul}
-    \resizebox{0.7\textwidth}{!}{%
+    \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{clcccc}
     \multicolumn{1}{l}{}                           &                               & \multicolumn{1}{l}{}          & \multicolumn{1}{l}{}             & \multicolumn{1}{l}{}             & \multicolumn{1}{l}{}             \\ \hline
     \multicolumn{2}{|l|}{Benchmarks}                                               & \multicolumn{1}{c|}{Original} & \multicolumn{1}{c|}{$m=0.5$}       & \multicolumn{1}{c|}{$m=0.4$}       & \multicolumn{1}{c|}{$m=0.3$}       \\ \hline
@@ -333,7 +355,7 @@ The reduced margins $m=0.4$ and $m=0.3$ produce lower TAR scores at any FAR, inc
     \centering
     \caption{MobileFaceNet accuracies before and after fine-tuning the network, with the first five layers frozen, on DigiFace-1M with different ArcFace margins.}
     \label{tab:acc_5_digiface}
-    \resizebox{0.7\textwidth}{!}{%
+    \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{clcccc}
     \multicolumn{1}{l}{}                           &                               & \multicolumn{1}{l}{}          & \multicolumn{1}{l}{}             & \multicolumn{1}{l}{}             & \multicolumn{1}{l}{}             \\ \hline
     \multicolumn{2}{|l|}{Benchmarks}                                               & \multicolumn{1}{c|}{Original} & \multicolumn{1}{c|}{$m=0.5$}       & \multicolumn{1}{c|}{$m=0.4$}       & \multicolumn{1}{c|}{$m=0.3$}       \\ \hline
@@ -405,7 +427,7 @@ To finalize, we conducted additional tests by training only the last two layers 
     \centering
     \caption{MobileFaceNet accuracy scores before and after fine-tuning the network, with all the layers frozen aside the last two, on QMUL-SurvFace with different ArcFace margins.}
     \label{tab:acc_final_qmul}
-    \resizebox{0.7\textwidth}{!}{%
+    \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{|clc|c|c|c|}
     \hline
     \multicolumn{2}{|l|}{Benchmarks}                                               & Original & $m=0.5$       & $m=0.4$       & $m=0.3$       \\ \hline
@@ -426,7 +448,7 @@ To finalize, we conducted additional tests by training only the last two layers 
     \centering
     \caption{MobileFaceNet accuracies before and after fine-tuning the network, with all the layers frozen aside the last two, on DigiFace-1M with different ArcFace margins.}
     \label{tab:acc_final_digiface}
-    \resizebox{0.7\textwidth}{!}{%
+    \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{|clc|c|c|c|}
     \hline
     \multicolumn{2}{|l|}{Benchmarks}                                               & Original & $m=0.5$       & $m=0.4$       & $m=0.3$       \\ \hline
