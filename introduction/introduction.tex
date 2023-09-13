@@ -14,14 +14,14 @@ The outbreak of the COVID-19 pandemic tested the entire world on several levels 
 
 \par An additional detail that must be considered is the processing power available to execute the system\footnote{According to the February 2023 Steam hardware survey, roughly 5\% of its users do not have a dedicated GPU.}, since solutions that benefit from higher accuracy comes at the cost of increased computational overhead, which can make real-time continuous monitoring unfeasible.
 
-\par In conclusion, the method of choice must take the aforesaid into consideration and provide a trade-off between accuracy and computational cost, while also being invariant, to a certain degree, to the posed challenges of capturing the required data. 
+\par In conclusion, the method of choice must take the aforesaid into consideration and provide a trade-off between accuracy and computational cost, while also being invariant, to a certain degree, to the posed challenges of capturing the required data. Another detail to consider is the accuracy values required in this context. Because the solution is intended to perform image-based student monitoring, the accuracy values do not need to be perfect. Since the monitoring process occurs over a prolonged span of time, there are enough face verifications to supplant possible low accuracy values.
 
 \section{Objectives}
-Building \red{upon} the earlier context, the main objective of this dissertation is to evaluate Face Recognition (FR) methods and compare them to the TrustID project's student monitoring solution. The aim is to identify the model that offers the most favorable balance of accuracy and computational efficiency. To achieve this, the following specific objectives have been established:
+Building \red{upon} the earlier context, the main objective of this dissertation is to evaluate Face Recognition (FR) methods on different benchmarks, compare them to the TrustID project's student monitoring solution and find a better approach. The aim is to identify the model that offers the most favorable balance of performance and computational efficiency, with the notion in mind that in this context a perfect accuracy is not required. To achieve this, the following specific objectives have been established:
 \begin{itemize}
-    \item Conduct a comprehensive review of state-of-the-art face recognition methods and datasets.
+    \item Conduct a comprehensive review of state-of-the-art face recognition methods to select the prime ones.
     \item Implement the essential stages of a face recognition pipeline.
-    \item Search for a better approach to TrustID's facial recognition module.
+    \item Search for a better approach to TrustID's facial recognition module by evaluating the proposed methods on diverse benchmarks.
     \item Employ transfer learning techniques using relevant datasets to further improve the selected approach.
     \item Analyze and assess the performance of the implemented methods using selected benchmarks.
 \end{itemize}
