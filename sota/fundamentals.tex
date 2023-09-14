@@ -8,43 +8,43 @@
 % A face recognition system works in either or both of two modalities: face verification (or authentication) or face identification (or recognition). The difference between them lies in the final stage of the workflow, identification involves a one-to-one pairing, while identification is a one-to-many match.
 
 \section{Face Recognition - Theory Background}
-Face Recognition is a thoroughly debated and extensively researched task in the Computer Vision community for more than two decades~\autocite{ranjanDeepLearningUnderstanding2018}, popularized in the early 1990s with the introduction of the Eigenfaces~\autocite{turkEigenfacesRecognition1991} or Fisherfaces~\autocite{p.n.belhumeurEigenfacesVsFisherfaces1997} approaches. These methods project faces in a low-dimensional subspace assuming certain distributions, but lack the ability to handle uncontrolled facial changes that breaks said assumptions. Henceforth, bringing about face recognition approaches through local-features~\autocite{chengjunliuGaborFeatureBased2002, ahonenFaceDescriptionLocal2006} that, even though, presented considerable results, were not distinctive or compact. Beginning in 2010, methods based on learnable filters have risen~\autocite{z.caoFaceRecognitionLearningbased2010,leiLearningDiscriminantFace2014}, but revealed limitations when nonlinear variations are at stake.
+\par \acrlong{FR} (FR) is a thoroughly debated and extensively researched task in the Computer Vision community for more than two decades~\autocite{ranjanDeepLearningUnderstanding2018}, popularized in the early 1990s with the introduction of the Eigenfaces~\autocite{turkEigenfacesRecognition1991} or Fisherfaces~\autocite{p.n.belhumeurEigenfacesVsFisherfaces1997} approaches. These methods project faces in a low-dimensional subspace assuming certain distributions, but lack the ability to handle uncontrolled facial changes that breaks said assumptions. Henceforth, bringing about face recognition approaches through local-features~\autocite{chengjunliuGaborFeatureBased2002, ahonenFaceDescriptionLocal2006} that, even though, presented considerable results, were not distinctive or compact. Beginning in 2010, methods based on learnable filters have risen~\autocite{z.caoFaceRecognitionLearningbased2010,leiLearningDiscriminantFace2014}, but revealed limitations when nonlinear variations were at stake.
 
-\par Earlier methods for FR worked appropriately when the data was handpicked or generated on a constrained environment. However, they did not scale adequately in the real world were there are large fluctuations in, particularly, pose, age, illumination, background scenario, the presence of facial occlusion~\autocite{ranjanDeepLearningUnderstanding2018} and many unimaginable more~\autocite{kalkaIJBIARPAJanus2018}. These shortcomings can be dealt with by using Deep Learning, a framework of techniques that solves the nonlinear inseparable classes problem~\autocite{minsky69perceptrons}, more specifically a structure called Convolutional Neural Network~\autocite{wangDeepFaceRecognition2021}. 
+\par Earlier methods for FR worked appropriately when the data was handpicked or generated on a constrained environment. However, they did not scale adequately in the real world were there are large fluctuations in, particularly, pose, age, illumination, background scenario, the presence of facial occlusion~\autocite{ranjanDeepLearningUnderstanding2018} and many unimaginable more~\autocite{kalkaIJBIARPAJanus2018}. These shortcomings can be dealt with by using Deep Learning, a framework of techniques that solves the nonlinear inseparable classes problem~\autocite{minsky69perceptrons}, more specifically a structure called \gls{CNN}~\autocite{wangDeepFaceRecognition2021}. 
 
-\par CNNs are a type of Artificial Neural Network that exhibits an improved performance on image or video-based tasks compared to other methods~\autocite{lecunGradientBasedLearningApplied1998}. They were greatly hailed in 2012, after the AlexNet~\autocite{krizhevskyImageNetClassificationDeep2012} victory, by a great margin, in the ImageNet Large Scale Visual Recognition Challenge (ILSVRC). Just two years later, DeepFace~\autocite{taigmanDeepFaceClosingGap2014} revolutionized the benchmarks scores by achieving state-of-the-art results that approached human performance, reinforcing even further the importance of Deep Learning and shifting the research path to be taken~\autocite{wangDeepFaceRecognition2021}.
+\par CNNs are a type of Artificial Neural Network that exhibits an improved performance on image or video-based tasks compared to other methods~\autocite{lecunGradientBasedLearningApplied1998}. They were greatly hailed in 2012, after the AlexNet~\autocite{krizhevskyImageNetClassificationDeep2012} victory, by a great margin, on the \gls{ILSVRC}. Just two years later, DeepFace~\autocite{taigmanDeepFaceClosingGap2014} revolutionized the benchmarks scores by achieving state-of-the-art results that approached human performance, reinforcing even further the importance of Deep Learning and shifting the research path to be taken~\autocite{wangDeepFaceRecognition2021}.
 
-\par Given what has been stated so far and the proven robustness, performance, and overall results in computer vision, the methods discussed in this dissertation will therefore deal exclusively with Deep Learning approaches. For more information on other methods, please refer to~\autocite{learned-millerLabeledFacesWild2016}. 
+\par Given what has been stated so far and the proven robustness, performance, and overall results in computer vision, the methods discussed in this dissertation will relate exclusively to Deep Learning approaches. For more information on other methods, please refer to~\autocite{learned-millerLabeledFacesWild2016}. 
 
 \subsection{Convolutional Neural Networks}
-\begin{figure}[!h]
+
+\par There are several types of Neural Network architectures, but CNNs are probably the most widely implemented model overall~\autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022}. Using CNNs for Computer Vision tasks~\autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021}, in this specific case, Face Recognition, is not an arbitrary choice, but due to the fact that the network design benefits from the intrinsic characteristics of the input data: images have an array-like structure~\autocite{yamashitaConvolutionalNeuralNetworks2018}, and local groups of values are correlated (motifs or patterns) and invariant to spatial location~\autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. Furthermore, when compared to fully connected networks, CNNs are superior due to 4 key features: 1) shared weights between the same features in different locations~\autocite{liSurveyConvolutionalNeural2022}, 2) sparse connections among neurons~\autocite{alzubaidiReviewDeepLearning2021}, 3) pooling layers and 4) the relevant features are automatically identified without any human supervision~\autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}. The weight sharing, sparse connectivity and pooling layers are responsible for reducing the number of parameters, decreasing the network's complexity and computational cost required.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{Architecture-of-a-Convolutional-Neural-Network-CNN-The-traditional-CNN-structure-is.png}
-    \caption{Architecture of a Convolutional Neural Network~\autocite{kangDeepSimilarityMetric2019}.}
+    \caption[Architecture of a Convolutional Neural Network.]{Architecture of a Convolutional Neural Network~\autocite{kangDeepSimilarityMetric2019}.}
     \label{fig:cnn}
 \end{figure}
 
-
-\par There are several types of Neural Networks architectures, but CNNs are probably the most widely implemented model overall~\autocite{yamashitaConvolutionalNeuralNetworks2018, liSurveyConvolutionalNeural2022}. Using CNNs for Computer Vision tasks~\autocite{krizhevskyImageNetClassificationDeep2012,taigmanDeepFaceClosingGap2014,tompsonEfficientObjectLocalization2015, zhangImprovedBreastCancer2021}, in this specific case, Face Recognition, is not an arbitrary choice, but due to the fact that the network design benefits from the intrinsic characteristics of the input data: images have an array-like structure~\autocite{yamashitaConvolutionalNeuralNetworks2018}, and local groups of values are correlated (motifs or patterns) and invariant to spatial location~\autocite{lecunDeepLearning2015,caoReviewNeuralNetworks2018}. Furthermore, when compared to fully connected networks, CNNs are superior due to 4 key features: 1) shared weights between the same features in different locations reduce the number of parameters~\autocite{liSurveyConvolutionalNeural2022}, 2) sparse connections~\autocite{alzubaidiReviewDeepLearning2021}, 3) pooling layers and 4) automatically identifies the relevant features without any human supervision~\autocite{alzubaidiReviewDeepLearning2021,liSurveyConvolutionalNeural2022}.
-
-\par In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling~\autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones~\autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages, blocks or layers. The raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers, transmitted to a stage of one or more fully-connected layers~\autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}.   
+\par In the CNN category itself there are different variants, but they all abide the fundamental structure of a feedforward hierarchical multi-layer network \reffig{fig:cnn}. Feedforward because the information only flows in a singular direction without cycling~\autocite{zellSimulationNeuronalerNetze1994}, hierarchical because the higher complexity internal representations are learned from lower ones~\autocite{lecunDeepLearning2015, zhuBCNNBranchConvolutional2017} and multi-layer because it is composed of a series of stages. The raw data is fed to an input layer, forwarded to a sequence of intercalating convolutional and pooling layers and transmitted to a stage of one or more fully-connected layers~\autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018, alzubaidiReviewDeepLearning2021}.   
 
 \subsubsection{Convolutional Layer}
-\par The convolutional layer aims at extracting feature representations from the inputs, and is formed by a set of learnable filters called kernels and an activation function~\autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. 
+\par The convolutional layer aims at extracting feature representations from the inputs. It is formed by a set of learnable filters called kernels and an activation function~\autocite{guRecentAdvancesConvolutional2018,yamashitaConvolutionalNeuralNetworks2018}. 
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.45\textwidth]{sobel.png}
-    \caption{3x3 Kernels of the Sobel-Feldman operator used for edge detection~\autocite{sobelIsotropicGradientOperator1973}.}
+    \caption[3x3 Kernels of the Sobel-Feldman operator used for edge detection.]{3x3 Kernels of the Sobel-Feldman operator used for edge detection~\autocite{sobelIsotropicGradientOperator1973}.}
     \label{fig:sobel}
 \end{figure}
 
-A kernel \reffig{fig:sobel}, is a grid-like structure of fixed dimensions [WxHxD], where W is the width, H is the height and D is the depth (number of channels). Each of its elements is a learnable weight that is adjusted during training to extract significant features~\autocite{alzubaidiReviewDeepLearning2021}. With a predetermined stride, the kernel scans its receptive field~\autocite{khanSurveyRecentArchitectures2020}, horizontally and vertically, through the input data, and produces the feature map~\autocite{lecunDeepLearning2015, alzubaidiReviewDeepLearning2021} by performing an element-wise product, called convolution, that can be described as follows~\autocite{khanSurveyRecentArchitectures2020}:
+A kernel \reffig{fig:sobel}, is a grid-like structure of fixed dimensions $W\times H\times D$, where W is the width, H is the height and D is the depth (number of channels), in each of its elements is a learnable weight adjusted during training to extract significant features~\autocite{alzubaidiReviewDeepLearning2021}. With a predetermined stride, the kernel scans the receptive field~\autocite{khanSurveyRecentArchitectures2020}, horizontally and vertically, through the input data, and produces the feature map~\autocite{lecunDeepLearning2015, alzubaidiReviewDeepLearning2021} by performing an element-wise product, called convolution \reffig{fig:padding}, that can be described as follows~\autocite{khanSurveyRecentArchitectures2020}:
 \begin{equation}
     f_l^k(p, q) = \sum_{c}^{}\sum_{x, y}^{}i_c(x, y)\cdot w^k_l(u,v)
 \end{equation}
 
-where $f_l^k(p, q)$ is an element at line $p$ and column $q$ in the feature map from the k-th kernel in the l-th layer, $i_c(x, y)$ is the element at line $x$ and row $y$ in the input data, and $w^k_l(u,v)$ is the weight at line $u$ and column $v$ from the k-th kernel of the l-th layer.
+\noindent where $f_l^k(p, q)$ is an element at line $p$ and column $q$ in the feature map from the k-th kernel in the l-th layer, $i_c(x, y)$ is the element at line $x$ and row $y$ in the input data, and $w^k_l(u,v)$ is the weight at line $u$ and column $v$ from the k-th kernel of the l-th layer.
 
 \begin{figure}[H]
     \centering
@@ -53,7 +53,7 @@ where $f_l^k(p, q)$ is an element at line $p$ and column $q$ in the feature map 
     \label{fig:padding}
 \end{figure}
 
-\par The overall architecture of CNNs are inspired by the visual perception~\autocite{hubelReceptiveFieldsBinocular1962}, so a direct parallelism can be made to better define the activation function. The kernels can be seen as receptors, or artificial neurons, that respond to different features, whereas the activation function is a simulation of the threshold function that dictates if the next neuron is activated or not. Additionally, the convolution operation is linear, consequently, if no nonlinear activation function was used, the input of the next layer would be a linear output of the previous layer. The introduction of nonlinearity through activation functions, such as ReLU (Rectified Linear Unit) and its variations (Leaky, Parametric, Randomized, Concatenated, Bounded, etc) or others like Sigmoid or Tanh \autocite{dubeyActivationFunctionsDeep2022}, allows deep neural networks to approximate any function, enhancing the ability to fit to any data~\autocite{liSurveyConvolutionalNeural2022}.
+\par The overall architecture of CNNs are inspired by the visual perception~\autocite{hubelReceptiveFieldsBinocular1962}, so a direct parallelism can be made to better define the activation function. The kernels can be seen as receptors, or artificial neurons, that respond to different features, whereas the activation function is a simulation of the threshold function that dictates if the next neuron is activated or not. Additionally, the convolution operation is linear, consequently, if a non-linear activation function was not used, the input of the next layer would be a linear output of the previous layer. The introduction of nonlinearity through activation functions, such as \gls{ReLU} and its variations (Leaky, Parametric, Randomized, Concatenated, Bounded, etc) or others like Sigmoid or Tanh \autocite{dubeyActivationFunctionsDeep2022}, allows deep neural networks to approximate any function, enhancing the ability to fit to any data~\autocite{liSurveyConvolutionalNeural2022}.
 
 \subsubsection{Pooling Layer}
 After the features are extracted, their spatial location becomes less relevant for the following layers. Introducing a pooling layer that reduces the spatial size of the feature maps by joining identical features~\autocite{lecunDeepLearning2015, guRecentAdvancesConvolutional2018}, keeps only the dominant information. This downsampling operation has two important advantages that help reduce the overfitting problem~\autocite{ajitReviewConvolutionalNeural2020,liSurveyConvolutionalNeural2022}. First, it reduces the number of learnable features, which requires less memory to train the network. Second, it enhances feature extraction invariance to shifts and rotations by emphasizing only the relevant features.
@@ -68,36 +68,37 @@ After the features are extracted, their spatial location becomes less relevant f
 There are many ways of downsampling the feature map through pooling such as min pooling, average pooling or stochastic pooling. However max pooling is by far the most popular one. As pictured in \reffig{fig:maxpool}, this operation divides the feature map in sections and computes the maximum value in each while discarding the other ones.
 
 \subsubsection{Fully Connected Layer}
-The fully connected (FC) layer is located at the end of the network. It is a dense, feedforward neural network in which every neuron is connected to all other neurons~\autocite{yamashitaConvolutionalNeuralNetworks2018, alzubaidiReviewDeepLearning2021}. The final feature map is flattened and transformed in a one-dimensional feature vector and the purpose of the FC layer is using this vector as an input, and act as the CNN classifier by performing high logic reasoning~\autocite{guRecentAdvancesConvolutional2018}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.15]{fc.png}
+    \caption{Visualization of a fully connected layer~\autocite{kostApplyingNeuralNetworks2019}.}
+    \label{fig:maxpool}
+\end{figure}
+
+The \gls{FC} layer is located at the end of the network. It is a dense, feedforward neural network in which every neuron is connected to all other neurons~\autocite{yamashitaConvolutionalNeuralNetworks2018, alzubaidiReviewDeepLearning2021}. The final feature map is flattened and transformed in a one-dimensional feature vector and the purpose of the FC layer is using this vector as an input, and act as the CNN classifier by performing high logic reasoning~\autocite{guRecentAdvancesConvolutional2018}.
 
 \subsection{Training}
-Training a network in the context of CNNs is the process of finding the optimal kernel weights' values. The training data is passed through the model, the predictions asserted and the distance between them and the expected ones is measured by a loss function. LeCun \textit{et al.}~\autocite{lecunGradientBasedLearningApplied1998} presents the problem as follows:
+Training a network in the context of CNNs is the process of finding the optimal kernel's weight values that reduces the loss. The training data is passed through the model, the predictions asserted and the distance between them and the expected result is measured by a loss function. LeCun \textit{et al.}~\autocite{lecunGradientBasedLearningApplied1998} presents the problem as follows:
 \begin{equation}
     E^p = \mathcal{D}(D^p, Y^p)
 \end{equation}
 
-\noindent The loss function, $E^p$, is a measure of error. It computes the difference between the expected result, $D^p$, and the predicted result $Y^p$, where $Y^p = F(Z^p, W)$ is a function of the $p$-th training example, $Z^p$, for a determined weight $W$. Additionally, $E_{train}(W)$, is the average of all the errors calculated in a training set $\left\{(Z^x, D^x),\dots (Z^p, D^p)\right\}$. Training the network is nothing more than a function minimization problem, and for that there are several techniques, the optimizers.
+\noindent The loss function, $E^p$, is a measure of error. It computes the difference between the expected result, $D^p$, and the predicted result $Y^p$, where $Y^p = F(Z^p, W)$ is a function of the $p$-th training example, $Z^p$, for a determined weight $W$. Additionally, $E_{train}(W)$, is the average of all the errors calculated in a training set $\left\{(Z^x, D^x),\dots (Z^p, D^p)\right\}$. Training the network is nothing more than a function minimizing problem, and for that there are several techniques called optimizers.
 
-\subsubsection{Optimizers}
+\subsubsection{Optimizers and backpropagation}
 
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.6\textwidth]{gd.png} %source: https://www.ibm.com/topics/gradient-descent
-%     \caption{Gradient descent}
-%     \label{fig:gd}
-% \end{figure}
+\par The loss function is minimized by calculating its gradient with respect to the learnable weights and subsequently updating them, bringing the loss closer to its minimum. This process is called gradient descent~\autocite{ruderOverviewGradientDescent}, and it is the simplest minimization technique. To compute the gradient and update the weights accordingly to the optimizer, a technique called backpropagation is used. Backpropagation is an efficient algorithm~\autocite{6795724} that applies the \textit{Chain Rule of Calculus} $\left(\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\right)$, starting at the final layer and proceeding backwards~\autocite{Goodfellow-et-al-2016}.
 
+\par Regarding the optimizers, there are several common ones, namely, mini-batch gradient descent or \gls{Adam}~\autocite{kingmaAdamMethodStochastic2015}, but \gls{SGD}~\autocite{alzubaidiReviewDeepLearning2021} is often preferred due to its memory-efficient characteristics. It is described as follows:
 
-\par By computing the gradient of the loss function in respect to the learnable parameters it allows studying how said parameters influence the loss function and how it can be more efficiently minimized. This algorithm is called gradient descent~\autocite{ruderOverviewGradientDescent}, and is the simplest minimization technique. By definition, the gradient of a function is the direction of the steepest ascent, henceforth, the learnable parameters are updated once every epoch in the opposite direction to reduce the error: 
 \begin{equation}
-    W_k = W_{k-1}-\epsilon\frac{\delta E(W)}{{\delta} W}
+    \theta = \theta - \eta\cdot\nabla_{\theta}J\left(\theta;x^{i};y^{i}\right)
 \end{equation}
 
-\noindent where $\epsilon$ is a constant called \textbf{learning rate} that controls how much the parameters are updated and has an immense impact in the performance of a neural network. According to Goodfellow \textit{et al.}~\autocite{Goodfellow-et-al-2016}, if the learning rate is set too low, training will be much slower and can become permanently stuck with a high training error. On the other hand, if the learning rate is too high, the gradient descent can increase the training error instead of reducing it.
-\par Stochastic Gradient Descent (SGD)~\autocite{alzubaidiReviewDeepLearning2021} is an efficient algorithm in terms of memory usage, and is the algorithm of choice to optimize the loss function but others such as mini-batch gradient descent or Adam (Adaptive moment estimation)~\autocite{kingmaAdamMethodStochastic2015} are also common.
-
-\subsubsection{Backpropagation}
-\par Regardless of the optimizer selected, computing an analytical expression for the gradient is trivial, but evaluating it is a computational heavy task when the aim is to find a minimum with respect to all the parameters in the network. To this extent, the backpropagation algorithm is a solution to do so efficiently~\autocite{6795724} by computing the gradient using an application of the \textit{Chain Rule of Calculus} $\left(\frac{dz}{dx} = \frac{dz}{dy}\frac{dy}{dx}\right)$, that starts at the final layer, and proceeds backwards~\autocite{Goodfellow-et-al-2016}. 
+\noindent where $\theta$ are the weights, $\eta$ is the learning rate, $J$ is the loss function and $\nabla_{\theta}J\left(\theta;x^{i};y^{i}\right)$ is loss's gradient descent for each example, since SGD is performed one data iteration at a time. 
+\par Additionally, the learning rate is an important hyperparameter with immense impact on the training, since it controls how much the weights are changed. According to Goodfellow \textit{et al.}~\autocite{Goodfellow-et-al-2016}, if the rate is set too low, training will be much slower and can become permanently stuck with a high training error. On the other hand, if it is too high, a local minimum can be overshot, and the training error increases.
+ 
 
 \phantomsection\label{transf learning}
 \subsubsection{Transfer Learning} %Source: https://cs231n.github.io/transfer-learning/
@@ -117,20 +118,20 @@ Training a network in the context of CNNs is the process of finding the optimal 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.38]{face_rec_pipeline.png}
-    \caption[Pipeline]{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
+    \caption{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
     \label{fig:fr pipeline}
 \end{figure}
 
 \par According to Ranjan \textit{et al.}~\autocite{ranjanDeepLearningUnderstanding2018}, the goal of a face recognition system is to find, process and learn from a face, gathering as much information as possible. As a result, it is one of the most widely implemented biometric system solutions in light of its versatility when facing real world application~\autocite{duElementsEndtoendDeep2022}.
 
-\par All end-to-end automatic face recognition systems follow a sequential and modular\footnote{Sequential because each stage relies on the output from the previous ones, and modular in the sense that each stage employs its own method which can be modified or shapped to better adapt to specific tasks.} pipeline \reffig{fig:fr pipeline} composed of three pillar stages~\autocite{wangDeepFaceRecognition2021}: face detection, face alignment and face representation. First an image or frame from a video is used as an input then, as the name suggests, the \textbf{face detection} module is responsible for finding a face. Next, the \textbf{face alignment} phase applies spatial transformations to the data in order to normalize the faces' pictures to a standardized view. Finally, the \textbf{face representation} stage, makes use of deep learning techniques to learn and further extract discriminative features that will allow the recognition \textit{per se}. A feature is nothing more than a characteristic inherent to the input image that has been measured or processed, and presented as a result~\autocite{Goodfellow-et-al-2016}.
+\par All end-to-end automatic face recognition systems follow a sequential and modular\footnote{Sequential because each stage relies on the output from the previous ones, and modular in the sense that each stage employs its own method which can be modified or shapped to better adapt to specific tasks.} pipeline \reffig{fig:fr pipeline} composed of three pillar stages~\autocite{wangDeepFaceRecognition2021}: face detection, face alignment and face representation. First an image or frame from a video is used as an input then, as the name suggests, the ace detection module is responsible for finding a face. Next, the face alignment phase applies spatial transformations to the data in order to normalize the faces' pictures to a standardized view. Finally, the face representation stage, makes use of deep learning techniques to learn and further extract discriminative features that will allow the recognition \textit{per se}. A feature is nothing more than a characteristic inherent to the input image that has been measured or processed, and presented as a result~\autocite{Goodfellow-et-al-2016}.
 
-\par All three stages have their individual importance and methods of implementation. \textbf{Face detection} is achievable through classical approaches~\autocite{violaRapidObjectDetection2001, brubakerDesignCascadesBoosted2008} or deep methods, among them is RetinaFace~\autocite{dengRetinaFaceSinglestageDense2019} and MTCNN~\autocite{zhangJointFaceDetection2016a}. \textbf{Face alignment}, once again, can be accomplished through traditional measures~\autocite{cootesViewbasedActiveAppearance2002, martinezLocalEvidenceAggregation2013} or more modern ones, namely PropagationNet~\autocite{huangPropagationNetPropagatePoints2020} or, yet again, MTCNN~\autocite{zhangJointFaceDetection2016a} which concurrently performs detection and alignment. To conclude, the \textbf{face representation} module is no exception, and can also be divided in two groups, regarding the methodology used. Some conventional systems were already mentioned, such as Eigenfaces~\autocite{p.n.belhumeurEigenfacesVsFisherfaces1997,turkEigenfacesRecognition1991}, and the deep learning ones are the object of discussion of this dissertation and will be reviewed along the following sections. As such, the focus will be on describing, with particular interest, the face representation stage. For a deeper and extensive study, please refer to:~\autocite{zafeiriouSurveyFaceDetection2015} in the case of classic face detection approaches and~\autocite{minaeeGoingDeeperFace2021} for deep learning based methods;~\autocite{wangFacialFeaturePoint2018} addresses traditional face alignment methods and is complemented with~\autocite{duElementsEndtoendDeep2022} for more up-to-date techniques; and~\autocite{learned-millerLabeledFacesWild2016} tackles classic face representation.
+\par All three stages have their individual importance and methods of implementation. Face detection is achievable through classical approaches~\autocite{violaRapidObjectDetection2001, brubakerDesignCascadesBoosted2008} or deep methods, among them is RetinaFace~\autocite{dengRetinaFaceSinglestageDense2019} and MTCNN~\autocite{zhangJointFaceDetection2016a}. Face alignment, once again, can be accomplished through traditional measures~\autocite{cootesViewbasedActiveAppearance2002, martinezLocalEvidenceAggregation2013} or more modern ones, namely PropagationNet~\autocite{huangPropagationNetPropagatePoints2020} or, yet again, MTCNN~\autocite{zhangJointFaceDetection2016a} which concurrently performs detection and alignment. To conclude, the face representation module is no exception, and can also be divided in two groups, regarding the methodology used. Some conventional systems were already mentioned, such as Eigenfaces~\autocite{p.n.belhumeurEigenfacesVsFisherfaces1997,turkEigenfacesRecognition1991}, and the deep learning ones are the object of discussion of this dissertation and will be reviewed along the following sections. As such, the focus will be on describing, with particular interest, the face representation stage. For a deeper and extensive study, please refer to:~\autocite{zafeiriouSurveyFaceDetection2015} in the case of classic face detection approaches and~\autocite{minaeeGoingDeeperFace2021} for deep learning based methods;~\autocite{wangFacialFeaturePoint2018} addresses traditional face alignment methods and is complemented with~\autocite{duElementsEndtoendDeep2022} for more up-to-date techniques; and~\autocite{learned-millerLabeledFacesWild2016} tackles classic face representation.
 
 \subsection{Face Detection}
 \par Face detection is the first step in any automatic facial recognition system. Given an input image to a face detector module, it is in charge of detecting every face in the picture and returning bounding-boxes coordinates, for each one, with a certain confidence score~\autocite{duElementsEndtoendDeep2022,ranjanDeepLearningUnderstanding2018}.
 
-\par Previously employed traditional face detectors are incapable of detecting facial information when faced with challenges such as variants in image resolution, age, pose, illumination, race, occlusions or accessories (masks, glasses, makeup)~\autocite{duElementsEndtoendDeep2022,ranjanDeepLearningUnderstanding2018}. The progress in deep learning and increasing GPU power led Deep CNNs (DCNNs) to become a viable and reliable option that solves said problems in face detection. Methods such as CenterFace~\autocite{xuCenterFaceJointFace2019}, MTCNN~\autocite{zhangJointFaceDetection2016a} or RetinaFace\autocite{dengRetinaFaceSinglestageDense2019} are examples of the more commonly adopted state-of-the-art approaches.
+\par Previously employed traditional face detectors are incapable of detecting facial information when faced with challenges such as variants in image resolution, age, pose, illumination, race, occlusions or accessories (masks, glasses, makeup)~\autocite{duElementsEndtoendDeep2022,ranjanDeepLearningUnderstanding2018}. The progress in deep learning and increasing GPU power led \gls{DCNNs} to become a viable and reliable option that solves said problems in face detection. Methods such as CenterFace~\autocite{xuCenterFaceJointFace2019}, MTCNN~\autocite{zhangJointFaceDetection2016a} or RetinaFace\autocite{dengRetinaFaceSinglestageDense2019} are examples of the more commonly adopted state-of-the-art approaches.
 
 \par These techniques can be included in different categories depending on the method's characteristics. A more analytical perspective~\autocite{duElementsEndtoendDeep2022} distributes the methods, depending upon their architecture or purpose of application, over seven categories: multi-stage, single-stage, anchor-based, anchor-free, multi-task learning, CPU real-time and, finally, problem-oriented. To an in depth review of each category, refer to the \hyperref[sec:face_detection_appendix]{Appendix - Face Detection Classes}.
 
@@ -160,7 +161,7 @@ Training a network in the context of CNNs is the process of finding the optimal 
         \footnotesize b)
     \end{minipage}
     \vspace{-0.4cm}
-    \caption{Comparison between \textbf{a)} MTCNN: multi-stage, CPU real-time and multi-task learning, and \textbf{b)} RetinaFace: single-stage, anchor-based, CPU real-time and multi-task learning. MTCNN~\autocite{zhangJointFaceDetection2016a} proposes a series of bounding boxes then, through a series of refinement stages, the best solution and landmarks are found. RetinaFace~\autocite{dengRetinaFaceSinglestageDense2019} accomplishes, in a single-stage, face classification and bounding box regression by evaluating anchors, landmark localization and dense 3D projection for facial correspondence.}
+    \caption[Comparison between MTCNN and RetinaFace.]{Comparison between \textbf{a)} MTCNN: multi-stage, CPU real-time and multi-task learning, and \textbf{b)} RetinaFace: single-stage, anchor-based, CPU real-time and multi-task learning. MTCNN~\autocite{zhangJointFaceDetection2016a} proposes a series of bounding boxes then, through a series of refinement stages, the best solution and landmarks are found. RetinaFace~\autocite{dengRetinaFaceSinglestageDense2019} accomplishes, in a single-stage, face classification and bounding box regression by evaluating anchors, landmark localization and dense 3D projection for facial correspondence.}
     \label{fig:mtcnn vs retinaface}
 \end{figure}
 
@@ -168,7 +169,7 @@ Training a network in the context of CNNs is the process of finding the optimal 
 \subsection{Face Alignment}
 \par Face Alignment, or facial landmark detection~\autocite{changFacePoseNetMakingCase2017}, is the second stage of the face recognition pipeline, and has the objective of calibrating the detected face to a canonical layout, through landmark-based or landmark-free approaches, in order to leverage the core final stage of face representation~\autocite{duElementsEndtoendDeep2022}. 
 \par Despite the fact that traditional face alignment methods are very accurate, that only occurs in constrained circumstances. Therefore, once again, to address that issue, deep learning-based methods are the solution to perform an accurate facial landmark localization that realistically scales to real world scenarios~\autocite{fengWingLossRobust2018}. 
-\par Furthermore, face alignment, can be accomplished through two categories of methods: landmark-based and landmark-free. Landmark-based alignment leverages facial landmarks (eyes, mouth, nose, etc.) to normalize the image to a layout through spatial transformations~\autocite{duElementsEndtoendDeep2022}. Methods like Wing loss~\autocite{fengWingLossRobust2018}, Kernel Density Deep Neural Network~\autocite{chenFaceAlignmentKernel2019} or the Recurrent Dual Refinement (RDR) proposed in~\autocite{xiaoRecurrent3D2DDual2017} integrate this category. Landmark-free alignment, as the name obviously suggests, is the category of methods that align the face without points of reference, namely RDCFace~\autocite{zhaoRDCFaceRadialDistortion2020} or the one proposed by by Hayat \textit{et al.}~\autocite{hayatJointRegistrationRepresentation2017}. The \hyperref[sec:face_alignment_appendix]{Appendix - Face Alignment Classes} presents more details regarding the aforementioned.
+\par Furthermore, face alignment, can be accomplished through two categories of methods: landmark-based and landmark-free. Landmark-based alignment leverages facial landmarks (eyes, mouth, nose, etc.) to normalize the image to a layout through spatial transformations~\autocite{duElementsEndtoendDeep2022}. Methods like Wing loss~\autocite{fengWingLossRobust2018}, Kernel Density Deep Neural Network~\autocite{chenFaceAlignmentKernel2019} or the \GLS{RDR} proposed in~\autocite{xiaoRecurrent3D2DDual2017} integrate this category. Landmark-free alignment, as the name obviously suggests, is the category of methods that align the face without points of reference, namely RDCFace~\autocite{zhaoRDCFaceRadialDistortion2020} or the one proposed by by Hayat \textit{et al.}~\autocite{hayatJointRegistrationRepresentation2017}. The \hyperref[sec:face_alignment_appendix]{Appendix - Face Alignment Classes} presents more details regarding the aforementioned.
 
 \vspace{0.7\baselineskip}
 \par As can be seen from the previous section, this step in the face recognition process can be accomplished, very sporadically, through standalone methods that process the detected face from the previous stage, but generally joint detection and alignment methods, such as RetinaFace \autocite{dengRetinaFaceSinglestageDense2019}, are the optimal choice~\autocite{changFacePoseNetMakingCase2017}.
@@ -215,7 +216,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparison of the training datasets. \cmark - Datasets that are still available to the public. \xmark  - Datasets that have been removed from distribution.}
+    \caption[Comparison of the training datasets.]{Comparison of the training datasets. \cmark - Datasets that are still available to the public. \xmark  - Datasets that have been removed from distribution.}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|c|c|c|c|c|c|c|}
     \hline
@@ -253,7 +254,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 
 \begin{table}[!ht]
     \centering
-    \caption{Comparison of the test datasets. \cmark - Datasets that are still available to the public. \xmark - Datasets that have been removed from distribution.}
+    \caption[Comparison of the test datasets.]{Comparison of the test datasets. \cmark - Datasets that are still available to the public. \xmark - Datasets that have been removed from distribution.}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|c|c|c|c|c|c|c|}
     \hline
@@ -286,7 +287,7 @@ In the following pages, a mix of training datasets, of overall relevance and mor
 
 \subsection{Feature Extractor}
 A feature extractor is present in both the training and testing stage of the Face Representation process, as it allows the visual data to be processed for evaluation by transforming the input into low dimensional representations~\autocite{lecunGradientBasedLearningApplied1998}. It is also what distinguishes a Conventional Machine Learning approach from a Deep Learning one.  
-\par The following methods are all based in deep learning, therefore the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a Convolutional Neural Network (CNN), that is trained with a loss function, 2) the trained feature extractor contains prior knowledge and is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - ``who is this person?'') or 1:1 similarity (face verification - ``are these persons the same?'').
+\par The following methods are all based in deep learning, therefore the \textit{modus operandi} abides by the same principles and can be outlined as follows: 1) the feature extractor is a deep neural network, more specifically a CNN, that is trained with a loss function, 2) the trained feature extractor contains prior knowledge and is applied on unseen test data and 3) the results are used to compute 1:N similarity (face identification - ``who is this person?'') or 1:1 similarity (face verification - ``are these persons the same?'').
 \par Over the years, the architecture of CNNs evolved and became of great importance to all image related tasks. Other than the already mentioned revolutionary AlexNet~\autocite{krizhevskyImageNetClassificationDeep2012}, there are other designs that significantly contributed to breakthroughs and broken benchmark records. There can be general architectures, like VGGNet~\autocite{simonyanVERYDEEPCONVOLUTIONAL2015}, GoogLeNet~\autocite{szegedyGoingDeeperConvolutions2014}, ResNet~\autocite{heDeepResidualLearning2016}, iResNet~\autocite{dutaImprovedResidualNetworks2021}, or specialized architectures. For example, lightweight face recognition implementations such as MobileFaceNet~\autocite{chenMobileFaceNetsEfficientCNNs2018}, VarGFaceNet~\autocite{yanVarGFaceNetEfficientVariable2019}, MixFaceNet~\autocite{boutrosMixFaceNetsExtremelyEfficient2021} and ConvFaceNeXt~\autocite{hooConvFaceNeXtLightweightNetworks2022}.
 
 \vspace{\baselineskip}
@@ -320,7 +321,7 @@ A feature extractor is present in both the training and testing stage of the Fac
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.16]{mobilenet.png}
-    \caption{Comparison between ResNet's residual block (left)~\autocite{chenMobileFaceNetsEfficientCNNs2018} with the inverted residual block proposed by MobileNetV2 (right)~\autocite{sandlerMobileNetV2InvertedResiduals2019} and used by MobileFaceNet. Image taken from MovileNetV2's paper~\autocite{sandlerMobileNetV2InvertedResiduals2019}.}
+    \caption[Comparison between ResNet's residual block and the inverted residual block proposed by MobileNetV2.]{Comparison between ResNet's residual block (left)~\autocite{chenMobileFaceNetsEfficientCNNs2018} and the inverted residual block used by MobileFaceNet, proposed by MobileNetV2 (right)~\autocite{sandlerMobileNetV2InvertedResiduals2019}. Image taken from MovileNetV2's paper~\autocite{sandlerMobileNetV2InvertedResiduals2019}.}
     \label{fig:mobilefacenet}
 \end{figure}
 
@@ -340,17 +341,17 @@ A feature extractor is present in both the training and testing stage of the Fac
         \includegraphics[scale=0.17]{vargnet_ds.png}
     \end{subfigure}
     
-    \caption{VargNet's normal block (top) and downsampling block (bottom)~\autocite{zhangVarGNetVariableGroup2020} used by VargFaceNet. Image from VargNet's paper~\autocite{zhangVarGNetVariableGroup2020}.}
+    \caption[VargNet's normal and downsampling blocks used by VargFaceNet.]{VargNet's normal block (top) and downsampling block (bottom)~\autocite{zhangVarGNetVariableGroup2020} used by VargFaceNet. Image from VargNet's paper~\autocite{zhangVarGNetVariableGroup2020}.}
     \label{fig:vargnet}
 \end{figure}
 
-\noindent\textbf{$\rightarrow$ VarGFaceNet}~\autocite{yanVarGFaceNetEfficientVariable2019} is a lightweight face recognition CNN implementation based on the VarGNet architecture~\autocite{zhangVarGNetVariableGroup2020}~\autocite{chenMobileFaceNetsEfficientCNNs2018} that introduced a variable group convolution to solve unbalance of computational intensity due to hardware and compilers optimization. VarGFaceNet will use the normal and downsampling blocks from the VarGNet CNN \reffig{fig:vargnet}, but will add a Squeeze and Excitation (SE) block~\autocite{huSqueezeandExcitationNetworks2019} and replace the usual ReLU activation function by the PReLU~\autocite{heDelvingDeepRectifiers2015} one, since it is better for face recognition tasks. Other than that, the head setting is also changed without losing discriminative ability. The network is started with a 3x3 convolution with stride 1 that preserves the input size, instead of the downsampling 3x3 one with stride 2 from VarGNet. Finally, the embedding setting is also modified by performing variable group convolution and pointwise convolution to shrink the feature map to a 512-dimensional feature vector that is fed to the fully connected layer. In conclusion, the VarGFaceNet network is capable of performing accurate face recognition while maintaining a low amount of 5 million parameters.
+\noindent\textbf{$\rightarrow$ VarGFaceNet}~\autocite{yanVarGFaceNetEfficientVariable2019} is a lightweight face recognition CNN implementation based on the VarGNet architecture~\autocite{zhangVarGNetVariableGroup2020}~\autocite{chenMobileFaceNetsEfficientCNNs2018} that introduced a variable group convolution to solve unbalance of computational intensity due to hardware and compilers optimization. VarGFaceNet will use the normal and downsampling blocks from the VarGNet CNN \reffig{fig:vargnet}, but will add a \gls{SE} block~\autocite{huSqueezeandExcitationNetworks2019} and replace the usual ReLU activation function by the \gls{PReLU} one, since it is better for face recognition tasks~\autocite{heDelvingDeepRectifiers2015}. Other than that, the head setting is also changed without losing discriminative ability. The network is started with a 3x3 convolution with stride 1 that preserves the input size, instead of the downsampling 3x3 one with stride 2 from VarGNet. Finally, the embedding setting is also modified by performing variable group convolution and pointwise convolution to shrink the feature map to a 512-dimensional feature vector that is fed to the fully connected layer. In conclusion, the VarGFaceNet network is capable of performing accurate face recognition while maintaining a low amount of 5 million parameters.
 
 \vspace{0.7\baselineskip}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.16]{mixconv.png}
-    \caption{A normal convolution block that uses a single kernel (left) and the Mixed Depthwise Convolution proposed by MixNet~\autocite{tanMixConvMixedDepthwise}.}
+    \caption[A normal convolution block that uses a single kernel and the Mixed Depthwise Convolution proposed by MixNet.]{A normal convolution block that uses a single kernel (left) and the Mixed Depthwise Convolution proposed by MixNet~\autocite{tanMixConvMixedDepthwise}.}
     \label{fig:mixconv}
 \end{figure}
 
@@ -359,18 +360,18 @@ A feature extractor is present in both the training and testing stage of the Fac
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.2]{convnext.png}
-    \caption{Convolutional block proposed by ConvNeXt~\autocite{liuConvNet2020s2022} (top) and the one by ConvFaceNeXt~\autocite{hooConvFaceNeXtLightweightNetworks2022} (bottom). Image from the ConvFaceNeXt work~\autocite{hooConvFaceNeXtLightweightNetworks2022}.}
+    \caption[Convolutional block proposed by ConvNeXt and the one by ConvFaceNeXt.]{Convolutional block proposed by ConvNeXt~\autocite{liuConvNet2020s2022} (top) and the one by ConvFaceNeXt~\autocite{hooConvFaceNeXtLightweightNetworks2022} (bottom). Image from the ConvFaceNeXt work~\autocite{hooConvFaceNeXtLightweightNetworks2022}.}
     \label{fig:convnext}
 \end{figure}
 
-\noindent\textbf{$\rightarrow$ ConvFaceNeXt}~\autocite{hooConvFaceNeXtLightweightNetworks2022} is a family of lightweight face recognition models, based on the ConvNeXt~\autocite{liuConvNet2020s2022} and MobileFaceNet architectures \reffig{fig:convnext}. The original ConvNeXt block is modified to better adapt to face recognition tasks and optimized to reduce the number of parameters. Accordingly, the Enhanced ConvNext (ECN) block is designed by adopting a smaller 3x3 kernel during the depthwise convolution, instead of the original 7x7 one. Adopting the principles studied in the MobileFaceNets implementation, rather than the usual layer of normalization and GeLU in the ConvNeXt model, batch normalization and PReLU~\autocite{heDelvingDeepRectifiers2015} are employed. 
+\noindent\textbf{$\rightarrow$ ConvFaceNeXt}~\autocite{hooConvFaceNeXtLightweightNetworks2022} is a family of lightweight face recognition models, based on the ConvNeXt~\autocite{liuConvNet2020s2022} and MobileFaceNet architectures \reffig{fig:convnext}. The original ConvNeXt block is modified to better adapt to face recognition tasks and optimized to reduce the number of parameters. Accordingly, the \gls{ECN} block is designed by adopting a smaller 3x3 kernel during the depthwise convolution, instead of the original 7x7 one. Adopting the principles studied in the MobileFaceNets implementation, rather than the usual layer of normalization and \gls{GELU} activation function in the ConvNeXt model, batch normalization and PReLU~\autocite{heDelvingDeepRectifiers2015} are employed. 
 
 \subsection{Loss}
 
 \begin{figure}[!h]
     \centering
     \includegraphics[scale=0.3]{compactness.png}
-    \caption{Intra- and Inter-class challenge \autocite{wangNormFaceL2Hypersphere2017}. Eventhough features $f_2$ and $f_3$ belong to the same class, the euclidean distance between $f_1$ and $f_2$ is much smaller, proving the ineffectiveness of the softmax loss regarding inter-class compactness and inter-class separateness.}
+    \caption[Intra- and Inter-class challenge.]{Intra- and Inter-class challenge \autocite{wangNormFaceL2Hypersphere2017}. Eventhough features $f_2$ and $f_3$ belong to the same class, the euclidean distance between $f_1$ and $f_2$ is much smaller, proving the ineffectiveness of the softmax loss regarding inter-class compactness and inter-class separateness.}
     \label{fig:compactness}
 \end{figure}
 
@@ -400,7 +401,7 @@ Classification-based loss functions, derived from the general object classificat
 \begin{figure}[!h]
     \centering
     \includegraphics[scale=0.215]{sphereface.png}
-    \caption{Comparison between the classic softmax loss, modified softmax loss (NormFace)~\autocite{wangNormFaceL2Hypersphere2017} and SphereFace \autocite{liuSphereFaceDeepHypersphere2018}.}
+    \caption[Comparison between the classic softmax loss, modified softmax loss (NormFace) and SphereFace]{Comparison between the classic softmax loss, modified softmax loss (NormFace)~\autocite{wangNormFaceL2Hypersphere2017} and SphereFace \autocite{liuSphereFaceDeepHypersphere2018}.}
     \label{fig:sphereface}
 \end{figure}
 
@@ -430,7 +431,7 @@ Classification-based loss functions, derived from the general object classificat
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.13]{norm_arc.png}
-    \caption{Demonstration of the intra-class compactness and inter-class distance of ArcFace (right) compared to Norm-Softmax (left) for 8 identities. The distance margin between classes is clear for ArcFace. Image from ArcFace's paper ~\autocite{dengArcFaceAdditiveAngular}.}
+    \caption[Demonstration of the intra-class compactness and inter-class distance of ArcFace compared to Norm-Softmax for 8 identities.]{Demonstration of the intra-class compactness and inter-class distance of ArcFace (right) compared to Norm-Softmax (left) for 8 identities. The distance margin between classes is clear for ArcFace. Image from ArcFace's paper ~\autocite{dengArcFaceAdditiveAngular}.}
     \label{fig:norm_arcface}
 \end{figure}
 
@@ -454,7 +455,7 @@ Metric learning loss functions include the methods that aim optimizing the dista
 \begin{figure}[!h]
     \centering
     \includegraphics[scale=0.215]{triplet.png}
-    \caption{Representation of training using triplet loss. Image from Facenet's paper \autocite{schroffFaceNetUnifiedEmbedding2015}.}
+    \caption[Triplet loss training representation.]{Triplet loss training representation. Image from Facenet's paper \autocite{schroffFaceNetUnifiedEmbedding2015}.}
     \label{fig:triplet}
 \end{figure}
 
@@ -476,7 +477,7 @@ Metric learning loss functions include the methods that aim optimizing the dista
 The development of solutions for student monitoring, specially image-based, has encompassed a plethora of possibilities that can face several challenges, specially not being capable of controlling the capturing conditions or the computational power of the device where the system is executed. Depending on the application, they can be intended for commercial purposes or developed as part of academic research. Commercial solutions such as Kryterion, ProctorExam, ProctorU, Procotorio, ProctorFree, or SMOWL~\autocite{portugalContinuousUserIdentification2023} are available; however, with the exception of SMOWL, due to their proprietary nature, their methods of implementation are not disclosed, not allowing to study them adequately. Therefore, all the methods analyzed, except SMOWL, will fall under the second category.
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ Zhang \textit{et al.}~\autocite{zhangVirtualLaboratorySystem2016} (2016)} studied a system based on facial features exclusively. The faces are first detected and extracted using the OpenCV pretrained classifier based on the Viola-Jones/Haar Cascades algorithm. Subsequently, recognition is carried out utilizing the Eigenfaces algorithm, which incorporates Principal Component Analysis (PCA). The main disadvantage of this solution is lacking the flexibility to adverse visual conditions that Deep Learning techniques have.
+\noindent\textbf{$\rightarrow$ Zhang \textit{et al.}~\autocite{zhangVirtualLaboratorySystem2016} (2016)} studied a system based on facial features exclusively. The faces are first detected and extracted using the OpenCV pretrained classifier based on the Viola-Jones/Haar Cascades algorithm. Subsequently, recognition is carried out utilizing the Eigenfaces algorithm, which incorporates \gls{PCA}. The main disadvantage of this solution is lacking the flexibility to adverse visual conditions that Deep Learning techniques have.
 
 \vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ Atoum \textit{et al.}~\autocite{atoumAutomatedOnlineExam2017} (2017)} proposed a solution that employs Viola-Jones/Haar Cascades face detector and Minimum Average Correlation Energy (MACE) filter for face verification. Once again, the methodologies utilized are too sensitive to image variations, such as illumination, pose, expressions, etc.
@@ -495,7 +496,7 @@ The development of solutions for student monitoring, specially image-based, has 
 \noindent\textbf{$\rightarrow$ SMOWL~\autocite{labayenOnlineStudentAuthentication2021} (2021)} is a multi-modal tool that analyzes voice, face and key-strokes data. For this dissertation, the interest resides only on the facial aspect of it. For face detection, it utilizes a combination of FaceBoxes with MobileNet-SSD for occlusion detection. The face recognition is accomplished with a Facenet model trained with triplet loss on the MS-Celeb-1M dataset. Anew, the triplet loss training can be considered a drawback. 
 
 \vspace{0.7\baselineskip}
-\noindent\textbf{$\rightarrow$ TrustID~\autocite{fariaImagebasedFaceVerification2023} (2023)} is our solution, designed and developed at ISR - UC. It utilizes as a face detection a linear detector conjointly with a Histogram of Oriented Gradients and pyramidal image search. After the faces are detected and aligned, they are cropped to a Region of Interest (RoI) of $150\times150$ pixels. Finally, the faces are passed to a face recognition module that uses a CNN with 29 layers based on the ResNet-34, trained with triplet loss on a dataset of, approximately, 3 million faces derived from the Visual Geometry Group
+\noindent\textbf{$\rightarrow$ TrustID~\autocite{fariaImagebasedFaceVerification2023} (2023)} is our solution, designed and developed at \acrshort{ISR-UC}. It utilizes as a face detection a linear detector conjointly with a Histogram of Oriented Gradients and pyramidal image search. After the faces are detected and aligned, they are cropped to a \gls{RoI} of $150\times150$ pixels. Finally, the faces are passed to a face recognition module that uses a CNN with 29 layers based on the ResNet-34, trained with triplet loss on a dataset of, approximately, 3 million faces derived from the Visual Geometry Group
 Face~\autocite{parkhiDeepFaceRecognition2015} and FaceScrub~\autocite{ngDatadrivenApproachCleaning2014} datasets.
 
 

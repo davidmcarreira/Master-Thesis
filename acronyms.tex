@@ -1,0 +1,24 @@
+\documentclass[a4paper, 12pt]{report}
+\linespread{1.4}
+
+%Packages import
+%\usepackage{pkgs}
+\usepackage{glossaries}
+
+\makeglossaries
+
+\newglossaryentry{sample}{name={sample}, description={an example}}
+
+\newacronym{FR}{FR}{Face Recognition}
+\newacronym{AI}{AI}{Artificial Intelligence}
+\newacronym{ANN}{ANN}{Artificial Neural Network}
+\newacronym{CNN}{CNN}{Convolutional Neural Network}
+\newacronym{SGD}{SGD}{Stochastic Gradient Descent}
+\newacronym{Adam}{Adam}{Adaptive moment estimation}
+\newacronym{DCNN}{DCNN}{Deep Convolutional Neural Network}
+\newacronym{test}{t}{testing}
+
+\begin{document}
+\printglossary
+\gls{FR} A
+\end{document}

@@ -16,15 +16,37 @@
 \newacronym{AI}{AI}{Artificial Intelligence}
 \newacronym{ANN}{ANN}{Artificial Neural Network}
 \newacronym{CNN}{CNN}{Convolutional Neural Network}
+\newacronym{CNNs}{CNNs}{Convolutional Neural networks}
 \newacronym{SGD}{SGD}{Stochastic Gradient Descent}
 \newacronym{Adam}{Adam}{Adaptive moment estimation}
 \newacronym{DCNN}{DCNN}{Deep Convolutional Neural Network}
+\newacronym{DCNNs}{DCNNs}{Deep Convolutional Neural Networks}
+\newacronym{ReLU}{ReLU}{Rectified Linear Unit}
+\newacronym{PReLU}{PReLU}{Parametric Rectified Linear Unit}
+\newacronym{FC}{FC}{Fully Connected}
+\newacronym{RDR}{RDR}{Recurrent Dual Refinement}
+\newacronym{SE}{SE}{Squeeze and Excitation}
+\newacronym{ECN}{ECN}{Enhanced ConvNext}
+\newacronym{GELU}{GELU}{Gaussian Error Linear Unit}
+\newacronym{PCA}{PCA}{Principal Component Analysis}
+\newacronym{MACE}{MACE}{Minimum Average Correlation Energy}
+\newacronym{RoI}{RoI}{Region of Interest}
+\newacronym{ISR-UC}{ISR-UC}{Instituto de Sistemas e Robótica da Universidade de Coimbra}
+\newacronym{ROC}{ROC}{Receiver Operating Characteristic}
+\newacronym{DET}{DET}{Detection Error Trade-off}
+\newacronym{TAR}{TAR}{True Acceptance Rate}
+\newacronym{FAR}{FAR}{False Acceptance Rate}
+\newacronym{FRR}{FRR}{False Reject Rate}
+\newacronym{EER}{EER}{Equal Error Rate}
+\newacronym{NPUA}{NPUA}{Number of Parameters per Unit of Accuracy}
+\newacronym{ILSVRC}{ILSVRC}{ImageNet Large Scale Visual Recognition Challenge}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \import{cover/}{cover.tex}
 \newpage
-\printglossary[type=\acronymtype]
+\printglossary[type=\acronymtype, nonumberlist]
 
 \newpage
 \listoffigures
@@ -39,9 +61,11 @@
 
 \newpage
 \section*{Abstract}\addcontentsline{toc}{section}{Abstract}
+\import{abstract/}{abstract.tex}
 
 \newpage
 \section*{Resumo}\addcontentsline{toc}{section}{Resumo}
+\import{abstract/}{resumo.tex}
 
 \mainmatter
 
