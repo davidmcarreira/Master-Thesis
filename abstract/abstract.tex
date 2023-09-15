@@ -1,0 +1,10 @@
+\documentclass[class=report, crop=false, a4paper, 12pt]{standalone}
+
+%Packages import
+\usepackage{../pkgs}
+
+
+\begin{document}
+\par The COVID-19 pandemic forced educational systems to quickly switch to remote lecturing, raising a debate about the credibility of evaluations, as they became more susceptible to fraud. This motivated the implementation of student monitoring systems, such as TrustID, an image-based deep learning solution with standard face recognition stages (face detection, alignment and representation). Yet, deep learning methods' performance is extremely data dependent and, due to the context where the model is applied, depending on the device used by the student, there are challenges regarding the quality of the acquired data and the device's available processing power. If the student uses a webcam or a smartphone's front facing camera, the resulting images will be highly different in terms of resolution, color, pose, etc. To this extent, the face representation stage is where there is more room for improvement, and an approach capable of handling the previous challenges with better accuracy/computational cost trade-off is explored. This work studies four pre-trained \gls{DCNNs} methods: iResnet-SE-50, iResnet-18, FaceNet and MobileFaceNet. After being subjected to different benchmarks that mimic real world scenarios, the results and accuracy/resource utilization metrics are analyzed, where MobileFaceNet proves to have the overall superior accuracy/resource trade-off. Then, in an attempt to further improve the model, it is fine-tuned with ArcFace using different layer freezing strategies, and for that, two datasets are selected: DigiFace-1M and QMUL-SurvFace. DigiFace-1M aims to understand how the model reacts to fully synthetic data and to increase the model's performance in pose benchmarks, whereas QMUL-SurvFace, is selected to enhance the model's competence on low quality images.
+
+\end{document}

@@ -1,5 +1,5 @@
 \documentclass[a4paper, 12pt]{report}
-\linespread{1.4}
+\renewcommand{\baselinestretch}{1.5}
 
 \def\mainfile{}
 
@@ -40,6 +40,7 @@
 \newacronym{EER}{EER}{Equal Error Rate}
 \newacronym{NPUA}{NPUA}{Number of Parameters per Unit of Accuracy}
 \newacronym{ILSVRC}{ILSVRC}{ImageNet Large Scale Visual Recognition Challenge}
+\newacronym{KDDNN}{KDDNN}{Kernel Density Deep Neural Network}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End of Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -57,14 +58,21 @@
 \newpage
 \tableofcontents
 \frontmatter
-\section*{Acknowledgments}\addcontentsline{toc}{section}{Acknowledgments}
+\vspace*{50pt}
+\section*{\Huge{Acknowledgments}}\addcontentsline{toc}{section}{Acknowledgments}
+\import{acknowledgments/}{acknowledgments.tex}
+\vspace{40pt}
 
 \newpage
-\section*{Abstract}\addcontentsline{toc}{section}{Abstract}
+\vspace*{50pt}
+\section*{\Huge{Abstract}}\addcontentsline{toc}{section}{Abstract}
+\vspace{40pt}
 \import{abstract/}{abstract.tex}
 
 \newpage
-\section*{Resumo}\addcontentsline{toc}{section}{Resumo}
+\vspace*{50pt}
+\section*{\Huge{Resumo}}\addcontentsline{toc}{section}{Resumo}
+\vspace{40pt}
 \import{abstract/}{resumo.tex}
 
 \mainmatter
@@ -85,7 +93,7 @@
 \import{methodology/}{methodology.tex}
 
 \newpage
-\chapter{Results}
+\chapter{Results and Discussion}
 \import{results/}{results.tex}
 
 \newpage
@@ -96,6 +104,5 @@
 \printbibliography
 
 \newpage
-\section*{Appendix}
 \import{appendix/}{appendix.tex}
 \end{document}

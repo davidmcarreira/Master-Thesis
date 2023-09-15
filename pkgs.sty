@@ -15,7 +15,7 @@
 \RequirePackage{amsmath}
 \RequirePackage{graphicx}
 \RequirePackage{fontspec}
-\RequirePackage{geometry}
+\RequirePackage[left=2.5cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \RequirePackage{float}
 \RequirePackage{adjustbox}
 \RequirePackage[acronym]{glossaries}
@@ -28,6 +28,9 @@
 \RequirePackage{pifont}
 \RequirePackage{diagbox}
 \RequirePackage{siunitx}
+\RequirePackage{changepage}
+\RequirePackage{afterpage}
+\RequirePackage[toc,page]{appendix}
 \crefformat{footnote}{#2\textsuperscript{\normalfont #1}#3}
 
 % Custom parameters 
@@ -46,6 +49,15 @@
 \newcommand{\reffig}[1]{\hyperref[#1]{(Figure~\ref*{#1})}} %Command to make referencing figure easier. Only the figure label needs to be passed as an argument
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
+
+%Command to break lateral margins for specific elements
+\newcommand{\breaklateral}[2]{%
+  \afterpage{%
+    \begin{adjustwidth}{-#1}{-#2}  % Adjust the margins for this element
+    #2%  % Use the element here
+    \end{adjustwidth}%
+  }%
+}
 
 %Handles the paths
 \ifdefined\mainfile

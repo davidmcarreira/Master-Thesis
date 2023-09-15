@@ -8,7 +8,7 @@
 \par From the previously described systems in Section~\ref{sec:related_work}, two methods must be picked: one for face detection and one for face representation (that include the feature extracting backbone neural network and the loss function necessary for training\footnote{As this dissertation specifically focuses on the face recognition domain, the loss function pertains exclusively to the training of that stage.}). The next sections describe these choices and the reasons behind them, as well as the implementation and necessary steps.
 
 \section{Face detection}
-\par Following the proposed pipeline for a Face Recognition system, the initial design choice pertains to the Face Detection module, responsible for detecting, selecting and standardizing the faces. A comprehensive study of solutions was presented in Section 2.3.1, wherein RetinaFace emerged as the best overall solution for a student monitoring context for the following, therefore, it will be method used in this work. This approach accepts an image as input and produces multiple outputs, including a bounding box, five key facial landmarks (representing the center of the eyes, nose, and corners of the mouth), and a confidence score that reflects the likelihood of the detection accurately identifying a face. The selection of this method was predominantly influenced by three critical factors: 1) adaptability to changes in light, pose, facial expressions, etc., facilitated by the DCNN backbone, 2) incorporation of a single-stage approach and leveraging multi-task learning, enabling efficient real-time detection of facial landmarks using just a single CPU core (for VGA resolution), and 3) availability of readily implemented solutions with ample support.
+\par Following the proposed pipeline for a Face Recognition system, the initial design choice pertains to the Face Detection module, responsible for detecting, selecting and standardizing the faces. A comprehensive study of solutions was presented in Section 2.3.1, wherein RetinaFace emerged as the best overall solution for a student monitoring context, therefore, it will be method used in this work. This approach accepts an image as input and produces multiple outputs, including a bounding box, five key facial landmarks (representing the center of the eyes, nose, and corners of the mouth), and a confidence score that reflects the likelihood of the detection accurately identifying a face. The selection of this method was predominantly influenced by three critical factors: 1) adaptability to changes in light, pose, facial expressions, etc., facilitated by the DCNN backbone, 2) incorporation of a single-stage approach and leveraging multi-task learning, enabling efficient real-time detection of facial landmarks using just a single CPU core (for VGA resolution), and 3) availability of readily implemented solutions with ample support.
 
 \par The solution of choice is a Pytorch implementation\footnote{\url{https://github.com/biubug6/Pytorch_Retinaface}} of the original method that offers both a MobileNet-0.25 or ResNet-50 as backbones pre-trained on ImageNet. To better suit our application, further development over the original implementation was required. RetinaFace is distributed as a general face detection algorithm that is deployed on data with multiple faces to be handled, therefore, there is no built-in method for face selection or transformations, like alignment and resizing. However, on a student's monitoring scenario, only one face is relevant, and as consequence of that, the face recognition systems are to be trained and validated on single face pictures normalized to a canonical view.
 
@@ -19,20 +19,19 @@
     \label{fig:rf_1}
 \end{figure}
 
-\newpage
 Instantiating the model with default threshold parameters and Resnet-50 as the backbone, it produces the results seen in \reffig{fig:rf_1}. From all the bounding boxes available, one must be picked, and one way of doing so is by assuming that the more relevant face is closer to the camera, hence the area of its bounding box will be greater.
 
 \begin{figure}[h]
     \centering
     \begin{minipage}[c]{0.48\textwidth}
       \centering
-      \includegraphics[width=0.8\textwidth]{RF_2.png}
+      \includegraphics[width=0.7\textwidth]{RF_2.png}
       \label{fig:rf_2}
     \end{minipage}
     \hfill
     \begin{minipage}[c]{0.48\textwidth}
       \centering
-      \includegraphics[width=0.8\textwidth]{RF_3.png}
+      \includegraphics[width=0.7\textwidth]{RF_3.png}
       \label{fig:rf_3}
     \end{minipage} 
     %\vspace{-0.4cm}
@@ -76,39 +75,70 @@ As can be seen in \reffig{fig:scenarios}, for faces captured in the same exact s
 \par To comprehensively assess the performance of the chosen models, we will subject them to testing across eight diverse datasets: VGGFace2, AgeDB30, two CFP variations (CFP-FF for frontal-frontal pairs and CFP-FP for frontal-profile pairs), CALFW, CPLFW, XQLFW and LFW. This approach is designed to capture a wide array of characteristics, closely resembling real-world scenarios for a thorough evaluation, therefore, four dataset groups based on their characteristics are defined: frontal, age, pose and hard. 
 
 
-\begin{table}[H]
-  \centering
-  \caption[Benchmarks' groups, their difficulty and intended evaluation purpose.]{Benchmarks' groups, their difficulty and intended evaluation purpose. * - Very easy. ***** - Very difficult.}
-  \label{tab:bench_groups}
-  \resizebox{0.5\textwidth}{!}{%
-  \begin{tabular}{c|c|c|c|}
-  \cline{2-4}
-  \multicolumn{1}{l|}{}                          & Dataset  & Difficulty & Evaluation purpose                                                                           \\ \hline
-  \multicolumn{1}{|c|}{\multirow{2}{*}{Frontal}} & CFP-FF   & ***        & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frontal view\\ performance.\end{tabular}}        \\ \cline{2-3}
-  \multicolumn{1}{|c|}{}                         & LFW      & *          &                                                                                              \\ \hline
-  \multicolumn{1}{|c|}{\multirow{2}{*}{Age}}     & AgeDB30  & ***        & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Sensitivity to \\ age variations.\end{tabular}}   \\ \cline{2-3}
-  \multicolumn{1}{|c|}{}                         & CALFW    & ***        &                                                                                              \\ \hline
-  \multicolumn{1}{|c|}{\multirow{2}{*}{Pose}}    & CFP-FP   & ****       & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Performance for\\ a range of poses.\end{tabular}} \\ \cline{2-3}
-  \multicolumn{1}{|c|}{}                         & CPLFW    & ***        &                                                                                              \\ \hline
-  \multicolumn{1}{|c|}{\multirow{2}{*}{Hard}}    & VGGFace2 & *****      & \begin{tabular}[c]{@{}c@{}}Great variation in pose, \\ age, illumination, etc.\end{tabular}  \\ \cline{2-4} 
-  \multicolumn{1}{|c|}{}                         & XQLFW    & *****      & \begin{tabular}[c]{@{}c@{}}Performance for very\\ low image quality.\end{tabular}            \\ \hline
-  \end{tabular}%
-  }
+% \begin{table}[H]
+%   \centering
+%   \caption[Benchmarks' groups, their difficulty and intended evaluation purpose.]{Benchmarks' groups, their difficulty and intended evaluation purpose. * - Very easy. ***** - Very difficult.}
+%   \label{tab:bench_groups}
+%   \resizebox{0.5\textwidth}{!}{%
+%   \begin{tabular}{c|c|c|c|}
+%   \cline{2-4}
+%   \multicolumn{1}{l|}{}                          & Dataset  & Difficulty & Evaluation purpose                                                                           \\ \hline
+%   \multicolumn{1}{|c|}{\multirow{2}{*}{Frontal}} & CFP-FF   & ***        & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frontal view\\ performance.\end{tabular}}        \\ \cline{2-3}
+%   \multicolumn{1}{|c|}{}                         & LFW      & *          &                                                                                              \\ \hline
+%   \multicolumn{1}{|c|}{\multirow{2}{*}{Age}}     & AgeDB30  & ***        & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Sensitivity to \\ age variations.\end{tabular}}   \\ \cline{2-3}
+%   \multicolumn{1}{|c|}{}                         & CALFW    & ***        &                                                                                              \\ \hline
+%   \multicolumn{1}{|c|}{\multirow{2}{*}{Pose}}    & CFP-FP   & ****       & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Performance for\\ a range of poses.\end{tabular}} \\ \cline{2-3}
+%   \multicolumn{1}{|c|}{}                         & CPLFW    & ***        &                                                                                              \\ \hline
+%   \multicolumn{1}{|c|}{\multirow{2}{*}{Hard}}    & VGGFace2 & *****      & \begin{tabular}[c]{@{}c@{}}Great variation in pose, \\ age, illumination, etc.\end{tabular}  \\ \cline{2-4} 
+%   \multicolumn{1}{|c|}{}                         & XQLFW    & *****      & \begin{tabular}[c]{@{}c@{}}Performance for very\\ low image quality.\end{tabular}            \\ \hline
+%   \end{tabular}%
+%   }
+%   \end{table}
+
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[scale=0.11]{benchmarks.png}
+%   \caption[Example face pairs from each benchmark.]{Example face pairs from each benchmark. Row 1: CFP-FF and LFW; Row 2: AgeDB30 and CALFW; Row 3: CFP-FP and CPLFW; Row 4: VGGFace2 and XQLFW}
+%   \label{fig:benchmarks}
+% \end{figure}
+
+
+\begin{adjustwidth}{-2cm}{-2cm} % Change the values to adjust margins
+  \begin{table}[htbp]
+      \centering
+      \caption[Benchmarks' groups, their difficulty, and intended evaluation purpose.]{Benchmarks' groups, their difficulty, and intended evaluation purpose. * - Very easy. ***** - Very difficult.}
+      \label{tab:bench_groups}
+      \resizebox{\textwidth}{!}{%
+      \begin{tabular}{c|c|c|c|}
+          \cline{2-4}
+          \multicolumn{1}{l|}{}                          & Dataset  & Difficulty & Evaluation purpose                                                                           \\ \hline
+          \multicolumn{1}{|c|}{\multirow{2}{*}{Frontal}} & CFP-FF   & ***        & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Frontal view\\ performance.\end{tabular}}        \\ \cline{2-3}
+          \multicolumn{1}{|c|}{}                         & LFW      & *          &                                                                                              \\ \hline
+          \multicolumn{1}{|c|}{\multirow{2}{*}{Age}}     & AgeDB30  & ***        & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Sensitivity to \\ age variations.\end{tabular}}   \\ \cline{2-3}
+          \multicolumn{1}{|c|}{}                         & CALFW    & ***        &                                                                                              \\ \hline
+          \multicolumn{1}{|c|}{\multirow{2}{*}{Pose}}    & CFP-FP   & ****       & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Performance for\\ a range of poses.\end{tabular}} \\ \cline{2-3}
+          \multicolumn{1}{|c|}{}                         & CPLFW    & ***        &                                                                                              \\ \hline
+          \multicolumn{1}{|c|}{\multirow{2}{*}{Hard}}    & VGGFace2 & *****      & \begin{tabular}[c]{@{}c@{}}Great variation in pose, \\ age, illumination, etc.\end{tabular}  \\ \cline{2-4} 
+          \multicolumn{1}{|c|}{}                         & XQLFW    & *****      & \begin{tabular}[c]{@{}c@{}}Performance for very\\ low image quality.\end{tabular}            \\ \hline
+          \end{tabular}%
+      }
   \end{table}
 
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.11]{benchmarks.png}
+    \caption[Example face pairs from each benchmark.]{Example face pairs from each benchmark. Row 1: CFP-FF and LFW; Row 2: AgeDB30 and CALFW; Row 3: CFP-FP and CPLFW; Row 4: VGGFace2 and XQLFW}
+    \label{fig:benchmarks}
+  \end{figure}
+\end{adjustwidth}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.11]{benchmarks.png}
-  \caption[Example face pairs from each benchmark.]{Example face pairs from each benchmark. Row 1: CFP-FF and LFW; Row 2: AgeDB30 and CALFW; Row 3: CFP-FP and CPLFW; Row 4: VGGFace2 and XQLFW}
-  \label{fig:benchmarks}
-\end{figure}
 
 These groups are summarized in \autoref{tab:bench_groups} and pictured on \reffig{fig:benchmarks}, where it is possible to observe the diversity in pose, expressions, age, illumination and image quality. In terms of difficulty, the Frontal group is easier, while the Age and Pose groups are moderate. However, the Hard group significantly raises the challenge, leading to stricter benchmarks.
 
 % The frontal group is composed of the CFP-FF and LFW, easier datasets with only frontal views of the face. The age group is designed to evaluate the model's sensitivity to age variations, and gathers the AgeDB30 and CALFW datasets. The pose one measures the system's performance when tested against faces with a wide range of poses by evaluating in the CFP-FP and CPLFW datasets. Finally, the hard group includes VGGFace2, a large scale benchmark with great variation in pose, age, light, etc., and XQLFW, a very difficult dataset with degraded image quality. 
 
-\par The chosen evaluation metrics are based on biometric systems of verification and encompass Accuracy, the \gls{ROC} and \GLS{DET} plots obtained by sweeping an interval of thresholds and calculating the \gls{TAR}, \gls{FAR} and the \gls{FRR}, and the \gls{EER}. The $Accuracy=\frac{TP+TN}{TP+TN+FP+FN}$ is a measure for the number of correct predictions, $TAR=\frac{TP}{TP+FN}$ indicates the proportion of genuine face pairs correctly classified and $FAR=\frac{FP}{FP+TN}$ indicates the quantity of imposter face pairs incorrectly classified as matches, where TP is True Positive, TN is True Negative, FP is False Positive and FN is False Negative. With the previous metrics is possible to obtain the ROC plot and study the trade-off between the TAR and FAR at different thresholds and evaluate the performance of different models \reffig{fig:roc_curve}. $FRR = 1 - TAR$ calculates the ratio of genuine matches that are classified as a non-match and allows to generate the DET curve which serves a similar purpose to the ROC curves, but with a better performance visualization due to the axis' logarithmic scale. Finally, the EER is the point where FRR = FAR and the lower it is, the better performing the system is. 
+\par The chosen evaluation metrics are based on biometric systems of verification and encompass Accuracy, the \gls{ROC} and \gls{DET} plots obtained by sweeping an interval of thresholds and calculating the \gls{TAR}, \gls{FAR} and the \gls{FRR}, and the \gls{EER}. The $Accuracy=\frac{TP+TN}{TP+TN+FP+FN}$ is a measure for the number of correct predictions, $TAR=\frac{TP}{TP+FN}$ indicates the proportion of genuine face pairs correctly classified and $FAR=\frac{FP}{FP+TN}$ indicates the quantity of imposter face pairs incorrectly classified as matches, where TP is True Positive, TN is True Negative, FP is False Positive and FN is False Negative. With the previous metrics is possible to obtain the ROC plot and study the trade-off between the TAR and FAR at different thresholds and evaluate the performance of different models \reffig{fig:roc_curve}. $FRR = 1 - TAR$ calculates the ratio of genuine matches that are classified as a non-match and allows to generate the DET curve which serves a similar purpose to the ROC curves, but with a better performance visualization due to the axis' logarithmic scale. Finally, the EER is the point where FRR = FAR and the lower it is, the better performing the system is. 
 
 
 %\footnote{Commonly, FRR@FAR is also termed FNMR@FMR, yet they differ in "attempts" and "transactions" within a biometric system, where a transaction may comprise several attempts. Here, $FRR=FNMR$ and $FAR=FMR$ due to the absence of transactions or attempts.}
@@ -121,7 +151,7 @@ These groups are summarized in \autoref{tab:bench_groups} and pictured on \reffi
 \end{figure}
 
 \par \reffig{fig:roc_curve} highlights the performance visualization for both the curves' plots. The closer the ROC curve is to the top left corner, the better performance the model has, since that means that it is able of correctly identify more genuine face matches (TAR) while minimizing the wrong identities incorrectly classified as matches (FAR). For DET, a curve closer to the origin represents a better model, since it minimizes the amount of genuine identities matches classified wrongly classified as imposters (FRR) for a more strict FAR threshold.
-\par Additionally, to evaluate the performance/resource utilization trade-off, the following are considered: the number of trainable parameters, trainable layers, quantity of multiplication and addition operations (mult-adds), inference time and a proposed metric called \textit{``Number of Parameters per Unit of Accuracy''} (NPUA). 
+\par Additionally, to evaluate the performance/resource utilization trade-off, the following are considered: the number of trainable parameters, trainable layers, quantity of multiplication and addition operations (mult-adds), inference time and a proposed metric called Number of Parameters per Unit of Accuracy (NPUA). 
 
 \section{Implementation details}
 \par All the training, processing, and benchmarking was developed in a Docker environment to ensure reproducibility. The code was written using Python 3.8.10 and relies on PyTorch 1.14.0 and Torchvision 0.15.0, along with their corresponding required libraries. The training process is conducted exclusively on a single GPU, specifically NVIDIA's GeForce RTX 3080 Ti 12GB. 
@@ -129,7 +159,7 @@ These groups are summarized in \autoref{tab:bench_groups} and pictured on \reffi
 
 \section{Discussion}\label{sec:methodology_discussion}
 \par Considering the possible challenging scenarios described allied to the incapability of guaranteeing robust computational power or quality capture devices, due to the image-based student monitoring application, it prompts a selection of the methods of face detection, recognition methods and training datasets with that in mind. 
-\par RetinaFace's backbone DCNN assures adaptability to image variations resulting from the capture device, and its multi-task, real-time and single CPU core data processing eliminates the need for powerful execution machines. After being processed by the customized RetinaFace implementation, the datasets (QMUL-SurvFace and DigiFace-1M) will serve as a fine-tuning source. Their increased depth, width and varied image characteristics (accessories, illumination, poses, quality, etc.) constitute a theoretical robust source of diverse information to improve a model. Finally, Section~\ref{sec:related_work} highlighted FaceNet, iResnet-18, iResnet-SE-50 and MobileFaceNet as possible substitutes to TrustID's face recognition method. Since they are all deep learning approaches, they all have an inherent flexibility to adapt to information, but the data where they were trained has great influence on their performance. Regarding the computational power, these methods also differ in the overhead they generate, wherein iResnet-SE-50 is the heaviest and MobileFaceNet is the lightest. Hence, because they are trained on different datasets and have different complexity, each one must be benchmarked in order to pick the model to be fine-tuned that shows a better performance/resource utilization trade-off. Furthermore, it's important to acknowledge that achieving perfect accuracy may not be an absolute requirement. This is because the monitoring process involves face verifications occurring over an extended period, during which a large quantity of verifications can compensate for lower accuracy values.
+\par RetinaFace's backbone DCNN assures adaptability to image variations resulting from the capture device, and its multi-task, real-time and single CPU core data processing eliminates the need for powerful execution machines. After being processed by the customized RetinaFace implementation, the datasets (QMUL-SurvFace and DigiFace-1M) will serve as a fine-tuning source. Their increased depth, width and varied image characteristics (accessories, illumination, poses, quality, etc.) constitute a theoretical robust source of diverse information to improve a model. Finally, Section~\ref{sec:related_work} highlighted FaceNet, iResnet-18, iResnet-SE-50 and MobileFaceNet as possible alternatives to TrustID's face recognition method. Since they are all deep learning approaches, they all have an inherent flexibility to adapt to information, but the data where they were trained has great influence on their performance. Regarding the computational power, these methods also differ in the overhead they generate, wherein iResnet-SE-50 is the heaviest and MobileFaceNet is the lightest. Hence, because they are trained on different datasets and have different complexity, each one must be benchmarked in order to pick the model to be fine-tuned that shows a better performance/resource utilization trade-off. Furthermore, it is important to acknowledge that achieving perfect accuracy may not be an absolute requirement. This is because the monitoring process involves face verifications occurring over an extended period, during which a large quantity of verifications can compensate for lower accuracy values.
 \end{document}
 
 
