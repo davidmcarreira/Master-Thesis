@@ -8,9 +8,9 @@
 % A face recognition system works in either or both of two modalities: face verification (or authentication) or face identification (or recognition). The difference between them lies in the final stage of the workflow, identification involves a one-to-one pairing, while identification is a one-to-many match.
 
 \section{Face Recognition - Theory Background}
-\par \acrlong{FR} (FR) is a thoroughly debated and extensively researched task in the Computer Vision community for more than two decades~\autocite{ranjanDeepLearningUnderstanding2018}, popularized in the early 1990s with the introduction of the Eigenfaces~\autocite{turkEigenfacesRecognition1991} or Fisherfaces~\autocite{p.n.belhumeurEigenfacesVsFisherfaces1997} approaches. These methods project faces in a low-dimensional subspace assuming certain distributions, but lack the ability to handle uncontrolled facial changes that breaks said assumptions. Henceforth, bringing about face recognition approaches through local-features~\autocite{chengjunliuGaborFeatureBased2002, ahonenFaceDescriptionLocal2006} that, even though, presented considerable results, were not distinctive or compact. Beginning in 2010, methods based on learnable filters have risen~\autocite{z.caoFaceRecognitionLearningbased2010,leiLearningDiscriminantFace2014}, but revealed limitations when nonlinear variations were at stake.
+\par \acrlong{FR} (FR) is a thoroughly debated and extensively researched task in the Computer Vision community for more than two decades~\autocite{ranjanDeepLearningUnderstanding2018}, popularized in the early 1990s with the introduction of the Eigenfaces~\autocite{turkEigenfacesRecognition1991} or Fisherfaces~\autocite{p.n.belhumeurEigenfacesVsFisherfaces1997} approaches. These methods project faces in a low-dimensional subspace assuming certain distributions, but lack the ability to handle uncontrolled facial changes that breaks said assumptions. Henceforth, bringing about face recognition approaches through local features~\autocite{chengjunliuGaborFeatureBased2002, ahonenFaceDescriptionLocal2006} that have respectable performance, however, they are not distinctive or compact. Beginning in 2010, methods based on learnable filters have risen~\autocite{z.caoFaceRecognitionLearningbased2010,leiLearningDiscriminantFace2014}, but reveal limitations when nonlinear variations are at stake.
 
-\par Earlier methods for FR worked appropriately when the data was handpicked or generated on a constrained environment. However, they did not scale adequately in the real world were there are large fluctuations in, particularly, pose, age, illumination, background scenario, the presence of facial occlusion~\autocite{ranjanDeepLearningUnderstanding2018} and many unimaginable more~\autocite{kalkaIJBIARPAJanus2018}. These shortcomings can be dealt with by using Deep Learning, a framework of techniques that solves the nonlinear inseparable classes problem~\autocite{minsky69perceptrons}, more specifically a structure called \gls{CNN}~\autocite{wangDeepFaceRecognition2021}. 
+\par Earlier methods for FR worked appropriately when the data was handpicked or generated on a constrained environment. However, they did not scale adequately in the real world where there are large fluctuations in, particularly, pose, age, illumination, background scenario, the presence of facial occlusion~\autocite{ranjanDeepLearningUnderstanding2018} and many unimaginable more~\autocite{kalkaIJBIARPAJanus2018}. These shortcomings can be dealt with by using Deep Learning, a framework of techniques that solves the nonlinear inseparable classes problem~\autocite{minsky69perceptrons}, more specifically a structure called \gls{CNN}~\autocite{wangDeepFaceRecognition2021}. 
 
 \par CNNs are a type of Artificial Neural Network that exhibits an improved performance on image or video-based tasks compared to other methods~\autocite{lecunGradientBasedLearningApplied1998}. They were greatly hailed in 2012, after the AlexNet~\autocite{krizhevskyImageNetClassificationDeep2012} victory, by a great margin, on the \gls{ILSVRC}. Just two years later, DeepFace~\autocite{taigmanDeepFaceClosingGap2014} revolutionized the benchmarks scores by achieving state-of-the-art results that approached human performance, reinforcing even further the importance of Deep Learning and shifting the research path to be taken~\autocite{wangDeepFaceRecognition2021}.
 
@@ -71,8 +71,8 @@ There are many ways of downsampling the feature map through pooling such as min 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.15]{fc.png}
-    \caption{Visualization of a fully connected layer~\autocite{kostApplyingNeuralNetworks2019}.}
+    \includegraphics[scale=0.2]{fc.png}
+    \caption[Visualization of a fully connected layer.]{Visualization of a fully connected layer~\autocite{kostApplyingNeuralNetworks2019}.}
     \label{fig:maxpool}
 \end{figure}
 
@@ -100,15 +100,15 @@ Training a neural network in the context of CNNs is the process of finding the o
 \section{A Face Recognition System}
 
 % \begin{figure}[H]
-%     \includegraphics[scale=0.30]{fr_pipeline.png}
-%     \caption[Pipeline]{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
+%     \centering
+%     \includegraphics[scale=0.38]{face_rec_pipeline2.png}
+%     \caption{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
 %     \label{fig:fr pipeline}
 % \end{figure}
-
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.38]{face_rec_pipeline.png}
-    \caption{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
+    \includegraphics[scale=0.75]{face_rec_pipeline2.eps}
+    \caption[A typical learning-based face recognition architecture.]{A typical learning-based face recognition pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
     \label{fig:fr pipeline}
 \end{figure}
 
@@ -119,7 +119,7 @@ Training a neural network in the context of CNNs is the process of finding the o
 \par All three stages have their individual importance and methods of implementation. Face detection is achievable through classical approaches~\autocite{violaRapidObjectDetection2001, brubakerDesignCascadesBoosted2008} or deep methods, among them is RetinaFace~\autocite{dengRetinaFaceSinglestageDense2019} and MTCNN~\autocite{zhangJointFaceDetection2016a}. Face alignment, once again, can be accomplished through traditional measures~\autocite{cootesViewbasedActiveAppearance2002, martinezLocalEvidenceAggregation2013} or more modern ones, namely PropagationNet~\autocite{huangPropagationNetPropagatePoints2020} or, once more, MTCNN~\autocite{zhangJointFaceDetection2016a}, which concurrently performs detection and alignment. To conclude, the face representation module is no exception, and can also be divided in two groups regarding the methodology used. Some conventional systems were already mentioned, for instance Eigenfaces~\autocite{p.n.belhumeurEigenfacesVsFisherfaces1997,turkEigenfacesRecognition1991}, and the deep learning ones will be reviewed along the following sections owing to the fact that they are the object of discussion of this dissertation. As such, the focus will be on describing, with particular interest, the face representation stage. 
 \par For a deeper and extensive study, please refer to: \autocite{zafeiriouSurveyFaceDetection2015} in the case of classic face detection approaches and~\autocite{minaeeGoingDeeperFace2021} for deep learning based methods; \autocite{wangFacialFeaturePoint2018} addresses traditional face alignment methods and is complemented with \autocite{duElementsEndtoendDeep2022} for more up-to-date techniques; and~\autocite{learned-millerLabeledFacesWild2016} tackles classic face representation.
 
-\subsection{Face Detection}
+\subsection{Face Detection}\label{sec:face_detect}
 \par Face detection is the first step in any automatic facial recognition system. Given an input image to a face detector module, it is in charge of detecting every face in the picture and returning bounding-boxes, for each one, with a certain confidence score~\autocite{duElementsEndtoendDeep2022,ranjanDeepLearningUnderstanding2018}.
 
 \par Previously employed traditional face detectors are incapable of detecting facial information when confronted with challenges such as variations in image resolution, age, pose, illumination, race, occlusions or accessories (masks, glasses, makeup)~\autocite{duElementsEndtoendDeep2022,ranjanDeepLearningUnderstanding2018}. The progress in deep learning and increasing GPU power led \gls{DCNNs} to become a viable and reliable option that solves said problems in face detection. Methods such as CenterFace~\autocite{xuCenterFaceJointFace2019}, MTCNN~\autocite{zhangJointFaceDetection2016a} or RetinaFace\autocite{dengRetinaFaceSinglestageDense2019} are examples of the more commonly adopted state-of-the-art approaches.
@@ -176,10 +176,17 @@ Training a neural network in the context of CNNs is the process of finding the o
 
 \section{Face Representation Pipeline}
 
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[scale=0.5]{face_representation.png}
+%     \caption[Face Representation pipeline.]{Face Representation pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
+%     \label{fig:frep pipeline}
+% \end{figure}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{face_representation.png}
-    \caption[Face Representation pipeline.]{Face Representation pipeline, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
+    \includegraphics[scale=0.6]{face_representation.eps}
+    \caption[Face Representation stages and components.]{Face Representation stages and components, guided by the approach in~\autocite{wangDeepFaceRecognition2021}.}
     \label{fig:frep pipeline}
 \end{figure}
 
@@ -196,31 +203,31 @@ Training a neural network in the context of CNNs is the process of finding the o
 
 % 
 
-\begin{table}[!ht]
+\begin{table}[H]
     \centering
     \caption[Comparison of the training datasets.]{Comparison of the training datasets. \cmark - Datasets that are still available to the public. \xmark  - Datasets that have been removed from distribution.}
     \resizebox{\textwidth}{!}{%
-    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+    \begin{tabular}{|l|c|c|c|c|c|c|l|}
     \hline
-    \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Year} & \textbf{Availability} & \textbf{Images/videos} & \textbf{Depth} & \textbf{Avg. Breadth} & \textbf{Distribution} & \textbf{Description} \\ \hline
-    CASIA-WebFace~\autocite{yiLearningFaceRepresentation2014}                         & 2014          & \xmark          & 494,414/-              & 10,575         & 46.7                  & Public                & First public face recognition dataset.                 \\ \hline
-    \textit{Facebook}~\autocite{taigmanWebscaleTrainingFace2015}                               & 2015          & \xmark                     & 500M/-                 & 10M            & 50                    & Private               & \textit{Facebook}'s private dataset used to test different properties in face identification.                 \\ \hline
-    \textit{Google}~\autocite{schroffFaceNetUnifiedEmbedding2015}                                 & 2015          & \xmark                     & 200M/-                 & 8M             & 25                    & Private               & Private dataset used to train the FaceNet method.                 \\ \hline
-    VGGFace~\autocite{parkhiDeepFaceRecognition2015}                                & 2015          & \xmark          & 2,6M/-                 & 2,622          & 991.6                 & Public                & High width public dataset released alongside VGGFace method.                 \\ \hline
-    MS-Celeb-1M~\autocite{guoMSCeleb1MDatasetBenchmark2016}                           & 2016          & \xmark          & 10M/-                  & 100k           & 100                   & Public                & Large-scale celebrities dataset.                 \\ \hline
-    MegaFace~\autocite{nechLevelPlayingField2017}                               & 2016          & \xmark                  & 4,753,320/-            & 672,057        & 7.1                   & Public                & Non-celebrity dataset.                 \\ \hline
-    VGGFace2~\autocite{caoVGGFace2DatasetRecognising2018}                               & 2017          & \xmark                  & 3,31M/-                & 9131           & 362.5                 & Public                & High characteristics variation dataset.                 \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Year} & \textbf{Availability} & \textbf{Images} & \textbf{Depth} & \textbf{Avg. Breadth} & \textbf{Distribution} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
+    CASIA-WebFace~\autocite{yiLearningFaceRepresentation2014}                         & 2014          & \xmark          & 494,414              & 10,575         & 46.7                  & Public                & First public face recognition dataset.                 \\ \hline
+    \textit{Facebook}~\autocite{taigmanWebscaleTrainingFace2015}                               & 2015          & \xmark                     & 500,000,000                 & 10,000,000            & 50                    & Private               & \begin{tabular}[c]{@{}l@{}}\textit{Facebook}'s private dataset used to test\\ different properties in face identification.\end{tabular}                 \\ \hline
+    \textit{Google}~\autocite{schroffFaceNetUnifiedEmbedding2015}                                 & 2015          & \xmark                     & 200,000,000                 & 8,000,000             & 25                    & Private               & \begin{tabular}[c]{@{}l@{}}Private dataset used to train the FaceNet\\ method.\end{tabular}                 \\ \hline
+    VGGFace~\autocite{parkhiDeepFaceRecognition2015}                                & 2015          & \xmark          & 2,600,000                 & 2,622          & 991.6                 & Public                & \begin{tabular}[c]{@{}l@{}}High width public dataset released\\ alongside VGGFace method.\end{tabular}                 \\ \hline
+    MS-Celeb-1M~\autocite{guoMSCeleb1MDatasetBenchmark2016}                           & 2016          & \xmark          & 10,000,000                  & 100,000           & 100                   & Public                & Large-scale celebrities' dataset.                 \\ \hline
+    MegaFace~\autocite{nechLevelPlayingField2017}                               & 2016          & \xmark                  & 4,753,320            & 672,057        & 7.1                   & Public                & Non-celebrity dataset.                 \\ \hline
+    VGGFace2~\autocite{caoVGGFace2DatasetRecognising2018}                               & 2017          & \xmark                  & 3,310,000                & 9131           & 362.5                 & Public                & High characteristics variation dataset.                 \\ \hline
     UMDFaces-Videos~\autocite{bansalDonTsCNNbased2017}                        & 2017          & \xmark                  & -/22,075               & 3,107          & 7.1                   & Public                & Video-based dataset with great variations.                 \\ \hline
-    Celeb-500k~\autocite{caoCeleb500KLargeTraining2018}                             & 2018          & \cmark                  & 50M/-                  & 500k           & 100                   & Public                & Noisy celebrities dataset.                 \\ \hline
-    Celeb-500k-2R~\autocite{caoCeleb500KLargeTraining2018}                          & 2018          & \cmark                  & 25M/-                  & 245k           & 102                   & Public                & Cleaned version.                 \\ \hline
-    IMDb-Face~\autocite{wangDevilFaceRecognition2018}                              & 2018          & \cmark                  & 1,7M/-                 & 59k            & 28.8                  & Public                & Manually cleaned revision of MS-Celeb-1M and MegaFace.                 \\ \hline
-    MS1MV2~\autocite{dengArcFaceAdditiveAngular}                                 & 2019          & \cmark                  & 5,8M/-                 & 85k            & 68.2                  & Public                & Semi-automatic cleaned version of MS-Celeb-1M.                 \\ \hline
-    RMFRD~\autocite{wangMaskedFaceRecognition2020}                                 & 2020          & \cmark                  & 95k/-                  & 525            & 180.9                 & Public                & Dataset of masked and unmasked celebrities.                 \\ \hline
-    Glint360k~\autocite{anPartialFCTraining2021}                              & 2021          & \cmark                  & 17M/-                  & 360k           & 47.2                  & Public                & Cleaned version of the Celeb-500k AND MS1MV2 datasets.                \\ \hline
-    WebFace260M~\autocite{zhuWebFace260MBenchmarkUnveiling2021}                            & 2021          & \cmark                  & 260M/-                 & 4M             & 65                    & Public                & Largest publicly available dataset of celebrities faces (noisy).                 \\ \hline
-    WebFace42M~\autocite{zhuWebFace260MBenchmarkUnveiling2021}                             & 2021          & \cmark                  & 42M/-                  & 2M             & 21                    & Public                & Cleaned and smaller version.                 \\ \hline
-    WebFace4M~\autocite{zhuWebFace260MBenchmarkUnveiling2021}                              & 2021          & \cmark                  & 4,2M/-                 & 200k           & 21                    & Public                & Smaller version.                 \\ \hline
-    DigiFace-1M~\autocite{baeDigiFace1MMillionDigital2023}                            & 2022          & \cmark                  & 1,22M/-                & 110k           & 11.1                  & Public                & Large-scale, fully synthetic dataset.                 \\ \hline
+    Celeb-500k~\autocite{caoCeleb500KLargeTraining2018}                             & 2018          & \cmark                  & 50,000,000                  & 500,000           & 100                   & Public                & Noisy celebrities' dataset.                 \\ \hline
+    Celeb-500k-2R~\autocite{caoCeleb500KLargeTraining2018}                          & 2018          & \cmark                  & 25,000,000                  & 245,000           & 102                   & Public                & Cleaned version.                 \\ \hline
+    IMDb-Face~\autocite{wangDevilFaceRecognition2018}                              & 2018          & \cmark                  & 1,700,000                 & 59,000            & 28.8                  & Public                & \begin{tabular}[c]{@{}l@{}}Manually cleaned revision\\ of MS-Celeb-1M and MegaFace.\end{tabular}                 \\ \hline
+    MS1MV2~\autocite{dengArcFaceAdditiveAngular}                                 & 2019          & \cmark                  & 5,800,000                 & 85,000            & 68.2                  & Public                & \begin{tabular}[c]{@{}l@{}}Semi-automatic cleaned version\\ of MS-Celeb-1M.\end{tabular}                 \\ \hline
+    RMFRD~\autocite{wangMaskedFaceRecognition2020}                                 & 2020          & \cmark                  & 95,000                  & 525            & 180.9                 & Public                & \begin{tabular}[c]{@{}l@{}}Dataset of masked and unmasked\\ celebrities.\end{tabular}                 \\ \hline
+    Glint360k~\autocite{anPartialFCTraining2021}                              & 2021          & \cmark                  & 17,000,000                  & 360k           & 47.2                  & Public                & \begin{tabular}[c]{@{}l@{}}Cleaned version of the Celeb-500k\\ and MS1MV2 datasets.\end{tabular}                \\ \hline
+    WebFace260M~\autocite{zhuWebFace260MBenchmarkUnveiling2021}                            & 2021          & \cmark                  & 260,000,000                 & 4,000,000             & 65                    & Public                & \begin{tabular}[c]{@{}l@{}}Largest publicly available dataset\\ of celebrities faces (noisy).\end{tabular}                 \\ \hline
+    WebFace42M~\autocite{zhuWebFace260MBenchmarkUnveiling2021}                             & 2021          & \cmark                  & 42,000,000                  & 2,000,000             & 21                    & Public                & Cleaned and smaller version.                 \\ \hline
+    WebFace4M~\autocite{zhuWebFace260MBenchmarkUnveiling2021}                              & 2021          & \cmark                  & 4,2,000,000                 & 200,000           & 21                    & Public                & Smaller version.                 \\ \hline
+    DigiFace-1M~\autocite{baeDigiFace1MMillionDigital2023}                            & 2022          & \cmark                  & 1,220,000                & 110k           & 11.1                  & Public                & Large-scale, fully synthetic dataset.                 \\ \hline
     \end{tabular}%
     }
     
@@ -233,30 +240,30 @@ Training a neural network in the context of CNNs is the process of finding the o
 
 \par After the training is completed the performance of the system needs to be evaluated on different challenges to properly assess if it generalizes to unseen scenarios. The way of doing so is by employing test datasets, where their evaluation protocols are designed to perform pair matching, that is, face verification. 
 
-\begin{table}[!ht]
+\begin{table}[H]
     \centering
-    \caption[Comparison of the test datasets.]{Comparison of the test datasets. \cmark - Datasets that are still available to the public. \xmark - Datasets that have been removed from distribution.}
+    \caption[Comparison of the test datasets.]{Comparison of the test datasets. \cmark - Datasets that are still available to the public. \xmark - Datasets that have been removed from distribution. * 153,428 are the number of the dataset's distractors.}
     \resizebox{\textwidth}{!}{%
-    \begin{tabular}{|l|c|c|c|c|c|c|c|}
+    \begin{tabular}{|l|c|c|c|c|c|c|l|}
     \hline
-    \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Year} & \textbf{Availability} & \textbf{Images/videos} & \textbf{Depth} & \textbf{Avg. Breadth} & \textbf{Description} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Dataset}} & \textbf{Year} & \textbf{Availability} & \textbf{Images/videos} & \textbf{Depth} & \textbf{Avg. Breadth} & \multicolumn{1}{c|}{\textbf{Description}} \\ \hline
     LFW~\autocite{huangLabeledFacesWild}                                    & 2007          & \xmark          & 13,233/-              & 5,749         & 2.3                  & The most well known face verification public dataset.                 \\ \hline
     YTF~\autocite{wolfFaceRecognitionUnconstrained2011}                                    & 2011          & \cmark                     & -/3,425                 & 1595            & 2.1                    & Face verification video dataset inspired on the LFW                 \\ \hline
-    IJB-A~\autocite{klarePushingFrontiersUnconstrained2015}                                  & 2015          & \xmark                     & 5,712/2,085                 & 500             & 11.4/4.2                    & Benchmark that aims at straying from accuracy saturation by proposing a more challenging dataset.                 \\ \hline
-    CFP~\autocite{senguptaFrontalProfileFace2016}                                 & 2016          & \xmark          & 7,000/-                 & 500          & 14                 & Studies the effect of extreme pose variations on face verification.                 \\ \hline
-    CPLFW~\autocite{zhengCrossPoseLFWDatabase}                                  & 2017          & \cmark                  & 13,233/-            & 5,749        & 2.3                   & Variation of the LFW for different poses with refined verification pairs.                 \\ \hline
-    CALFW~\autocite{zhengCrossAgeLFWDatabase2017}                                  & 2017          & \cmark                  & 13,233/-                & 5,749           & 2.3                 & Same principles of CPLFW but applied to age related tests.                 \\ \hline
-    AgeDB~\autocite{moschoglouAgeDBFirstManually2017}                                  & 2017          & \cmark                  & 16,488/-               & 568          & 29.0                   & Similar to CALFW but promotes noise free labelling by doing it manually.                 \\ \hline
-    IJB-B~\autocite{whitelamIARPAJanusBenchmarkB2017}                                 & 2017          & \xmark                  & 21,798/7,011                  & 1,845           & 11.8/3.8                   & Improvement over the IJB-B dataset (more data and more possible pairs).                 \\ \hline
-    TinyFace~\autocite{chengLowResolutionFaceRecognition2019}                               & 2018          & \cmark                  & 15,975 (153,428)/-                  & 5,139           & 3.1                   & Genuine low resolution face recognition benchmark.                 \\ \hline
-    IJB-C~\autocite{mazeIARPAJanusBenchmark2018}                                  & 2018          & \xmark                  & 31,334/11,779                 & 3,531            & 8.9/3.3                  & IJB-B refinement (more protocols and increased individuals diversity).                 \\ \hline
-    IJB-S~\autocite{kalkaIJBIARPAJanus2018}                                  & 2018          & \xmark                  & 5,656/350 (202)                 & 202            & 28/2.7                  & Very challenging manually annotated benchmark.                 \\ \hline
+    IJB-A~\autocite{klarePushingFrontiersUnconstrained2015}                                  & 2015          & \xmark                     & 5,712/2,085                 & 500             & 11.4/4.2                    & \begin{tabular}[c]{@{}l@{}}Benchmark that aims at straying from accuracy\\ saturation by proposing a more challenging dataset.\end{tabular}                 \\ \hline
+    CFP~\autocite{senguptaFrontalProfileFace2016}                                 & 2016          & \xmark          & 7,000/-                 & 500          & 14                 & \begin{tabular}[c]{@{}l@{}}Studies the effect of extreme pose variations on face\\ verification.\end{tabular}                 \\ \hline
+    CPLFW~\autocite{zhengCrossPoseLFWDatabase}                                  & 2017          & \cmark                  & 13,233/-            & 5,749        & 2.3                   & \begin{tabular}[c]{@{}l@{}}Variation of the LFW for different poses with refined\\ verification pairs.\end{tabular}                 \\ \hline
+    CALFW~\autocite{zhengCrossAgeLFWDatabase2017}                                  & 2017          & \cmark                  & 13,233/-                & 5,749           & 2.3                 & \begin{tabular}[c]{@{}l@{}}Same principles of CPLFW but applied to age\\ related tests.\end{tabular}                 \\ \hline
+    AgeDB~\autocite{moschoglouAgeDBFirstManually2017}                                  & 2017          & \cmark                  & 16,488/-               & 568          & 29.0                   & \begin{tabular}[c]{@{}l@{}}Similar to CALFW but promotes noise free\\ labelling by doing it manually.\end{tabular}                 \\ \hline
+    IJB-B~\autocite{whitelamIARPAJanusBenchmarkB2017}                                 & 2017          & \xmark                  & 21,798/7,011                  & 1,845           & 11.8/3.8                   & \begin{tabular}[c]{@{}l@{}}Improvement over the IJB-B dataset (more data and\\ more possible pairs).\end{tabular}                 \\ \hline
+    TinyFace~\autocite{chengLowResolutionFaceRecognition2019}                               & 2018          & \cmark                  & 15,975 (153,428)*/-                  & 5,139           & 3.1                   & Genuine low resolution face recognition benchmark.                 \\ \hline
+    IJB-C~\autocite{mazeIARPAJanusBenchmark2018}                                  & 2018          & \xmark                  & 31,334/11,779                 & 3,531            & 8.9/3.3                  & \begin{tabular}[c]{@{}l@{}}IJB-B refinement (more protocols and increased\\ individuals diversity).\end{tabular}                 \\ \hline
+    IJB-S~\autocite{kalkaIJBIARPAJanus2018}                                  & 2018          & \xmark                  & 5,656/552                 & 202            & 28/2.7                  & Very challenging manually annotated benchmark.                 \\ \hline
     RFW~\autocite{wangRacialFacesWild2019}                                    & 2018 & \cmark                  & 40,607/-                  & 11,429            & 3.5                 & Benchmarks the racial bias of face verification methods.                 \\ \hline          
-    QMUL-SurvFace~\autocite{chengSurveillanceFaceRecognition2018}                          & 2018          & \cmark                  & 463,507/-                  & 15,573            & Public                & Dataset colected in uncooperative surveillance scenarios, presenting high variance of characteristics.                  \\ \hline
+    QMUL-SurvFace~\autocite{chengSurveillanceFaceRecognition2018}                          & 2018          & \cmark                  & 463,507/-                  & 15,573            & 29.8                & \begin{tabular}[c]{@{}l@{}}Dataset colected in uncooperative surveillance\\ scenarios, presenting high variance of characteristics.\end{tabular}                  \\ \hline
     MDMFR~\autocite{ullahNovelDeepMaskNetModel2022}                                  & 2021          & \cmark                  & 2,896/-                  & 226            & 12.8                 & Large scale dataset for masked face recognition.                 \\ \hline
-    XQLFW~\autocite{knocheCrossQualityLFWDatabase2021}                                  & 2021          & \cmark                  & 13,233/-                  & 5,749           & 2.3                  & LFW variation to study the effect of resolution on face verification.                 \\ \hline
-    CAFR~\autocite{zhaoAgeInvariantFaceRecognition2022}                                   & 2022          & \cmark                  & 1,446,500/-                  & 25,000            & 57.9                 & Large scale dataset to study the impact of individual's age.                 \\ \hline
-    FaVCI2D~\autocite{popescuFaceVerificationChallenging2022}                                & 2022          & \cmark                  & 64,879/-                 & 52,411             & 1.2                    & Face verification dataset that addresses easy pairs, demographic bias and ethical concerns.                 \\ \hline
+    XQLFW~\autocite{knocheCrossQualityLFWDatabase2021}                                  & 2021          & \cmark                  & 13,233/-                  & 5,749           & 2.3                  & \begin{tabular}[c]{@{}l@{}}LFW variation to study the effect of resolution\\ on face verification.\end{tabular}                 \\ \hline
+    CAFR~\autocite{zhaoAgeInvariantFaceRecognition2022}                                   & 2022          & \cmark                  & 1,446,500/-                  & 25,000            & 57.9                 & \begin{tabular}[c]{@{}l@{}}Large scale dataset to study the impact of\\ individual's age.\end{tabular}                 \\ \hline
+    FaVCI2D~\autocite{popescuFaceVerificationChallenging2022}                                & 2022          & \cmark                  & 64,879/-                 & 52,411             & 1.2                    & \begin{tabular}[c]{@{}l@{}}Face verification dataset that addresses easy\\ pairs, demographic bias and ethical concerns.\end{tabular}                 \\ \hline
     \end{tabular}%
     }
     
@@ -272,22 +279,22 @@ A feature extractor is present in both the training and testing stage of the Fac
 \par Over the years, the architecture of CNNs evolved and became of great importance to all image related tasks. Other than the already mentioned revolutionary AlexNet~\autocite{krizhevskyImageNetClassificationDeep2012}, there are other designs that significantly contributed to breakthroughs and broken benchmark records. There can be general architectures, like VGGNet~\autocite{simonyanVERYDEEPCONVOLUTIONAL2015}, GoogLeNet~\autocite{szegedyGoingDeeperConvolutions2014}, ResNet~\autocite{heDeepResidualLearning2016}, iResNet~\autocite{dutaImprovedResidualNetworks2021}, or specialized architectures. For example, lightweight face recognition implementations such as MobileFaceNet~\autocite{chenMobileFaceNetsEfficientCNNs2018}, VarGFaceNet~\autocite{yanVarGFaceNetEfficientVariable2019}, MixFaceNet~\autocite{boutrosMixFaceNetsExtremelyEfficient2021} and ConvFaceNeXt~\autocite{hooConvFaceNeXtLightweightNetworks2022}.
 
 \vspace{\baselineskip}
-\noindent\textbf{$\rightarrow$ VGGNet}~\autocite{simonyanVERYDEEPCONVOLUTIONAL2015} took inspiration from AlexNet and improved its accuracy in image classification by studying the effect of the network's depth. It accomplished that by substituting the 11x11 convolution kernel with stride 4 for a stack of very small 3x3 receptive field with stride 1. The final best performing model was 19 layers deep (16 convolutional and 3 fully-connected) and had 144 million parameters.
+\noindent\textbf{$\rightarrow$ VGGNet}~\autocite{simonyanVERYDEEPCONVOLUTIONAL2015} took inspiration from AlexNet and improved its accuracy in image classification by studying the effect of the network's depth. It accomplished that by replacing the $11\times 11$ convolution kernel with stride 4 for a stack of very small $3\times 3$ receptive field with stride 1. The final best performing model was 19 layers deep (16 convolutional and 3 fully-connected) and had 144 million parameters.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.11]{inception_naive.png}
-    \caption{GoogLeNet's inception block from the original paper~\autocite{szegedyGoingDeeperConvolutions2014}.}
+    \caption[GoogLeNet's inception block.]{GoogLeNet's inception block from the original paper~\autocite{szegedyGoingDeeperConvolutions2014}.}
     \label{fig:inception}
 \end{figure}
 
-\noindent\textbf{$\rightarrow$ GoogLeNet}~\autocite{szegedyGoingDeeperConvolutions2014}, also known as Inception-V1, aimed at reducing the computational cost associated with training and executing a network, while retaining highly accurate results. That was accomplished by introducing sparse connectivity between feature maps, an inception block \autoref{fig:inception}, consisting of multi-scale convolutional layers with small blocks of different sized kernels (1x1, 3x3 and 5x5), and replacing the last fully connected layer with a global averaging pooling one and adding a dimension lowering bottleneck layer of 1x1 convolution before large kernels. These changes helped to achieve a low number of 4 million parameters (12 times fewer than the revolutionary AlexNet and 36x less than VGGNet)
+\noindent\textbf{$\rightarrow$ GoogLeNet}~\autocite{szegedyGoingDeeperConvolutions2014}, also known as Inception-V1, aimed at reducing the computational cost associated with training and executing a network, while retaining highly accurate results. That was accomplished by introducing sparse connectivity between feature maps, an inception block \autoref{fig:inception}, consisting of multi-scale convolutional layers with small blocks of different sized kernels ($1\times 1$, $3\times 3$ and $5\times 5$), and replacing the last fully connected layer with a global averaging pooling one and adding a dimension lowering bottleneck layer of $1\times 1$ convolution before large kernels. These changes helped to achieve a low number of 4 million parameters (12 times fewer than the revolutionary AlexNet and $36\times$ less than VGGNet)
 
 \vspace{0.7\baselineskip}
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.35]{residual.png}
-    \caption{ResNet's residual block from the original paper~\autocite{heDeepResidualLearning2016}.}
+    \caption[ResNet's residual block.]{ResNet's residual block from the original paper~\autocite{heDeepResidualLearning2016}.}
     \label{fig:residual}
 \end{figure}
 
@@ -349,7 +356,7 @@ A feature extractor is present in both the training and testing stage of the Fac
 
 \subsection{Loss}
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.3]{compactness.png}
     \caption[Intra- and Inter-class challenge.]{Intra- and Inter-class challenge \autocite{wangNormFaceL2Hypersphere2017}. Even though features $f_2$ and $f_3$ belong to the same class, the euclidean distance between $f_1$ and $f_2$ is much smaller, proving the ineffectiveness of the softmax loss regarding inter-class compactness and inter-class separateness.}
@@ -381,14 +388,13 @@ Classification-based loss functions, derived from the general object classificat
 \noindent where $s$ is the scale parameter and $\cos{(\theta_j)}$ results from the inner product between the $L_2$ normalized  weights $W_j$ and features $x_i$, i.e., $\cos{(\theta_j)}=\frac{\langle x_i, W_j\rangle}{\|W_j\|_2\|i_i\|_2}$.
 
 \vspace{0.7\baselineskip}
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.215]{sphereface.png}
     \caption[Comparison between the classic softmax loss, modified softmax loss (NormFace) and SphereFace]{Comparison between the classic softmax loss, modified softmax loss (NormFace)~\autocite{wangNormFaceL2Hypersphere2017} and SphereFace \autocite{liuSphereFaceDeepHypersphere2018}.}
     \label{fig:sphereface}
 \end{figure}
 
-\vspace{0.7\baselineskip}
 \noindent\textbf{$\rightarrow$ SphereFace}~\autocite{liuSphereFaceDeepHypersphere2018} improved the intra-class compactness and inter-class distance by introducing a very important concept of angular margin that contrasts with the usual Euclidean margin. As proven by Liu \textit{et al.}, features learned by softmax loss adopt an intrinsic angular distribution, therefore, euclidean margins are not compatible with softmax loss \reffig{fig:sphereface}. The decision boundary for a classic softmax loss function is $(W_1 - W_2)x+b_1-b_2=0$, and by normalizing the weights and zeroing the bias, it becomes $\|x\|(\cos{(\theta_1)}-\cos{(\theta_2)})=0$, where $x$ is a feature vector and the decision will only depend on the angles between class 1 and 2. SphereFace introduces the hyperparameter $m$ ($m\geq1 \in \mathbb{Z}$) that will, effectively, control the margin size between class 1 and 2 respectively as such $\|x\|(\cos{(m\theta_1)}-\cos{(\theta_2)})=0$ and $\|x\|(\cos{(\theta_1)}-\cos{(m\theta_2)})=0$.
 
 
@@ -398,7 +404,7 @@ Classification-based loss functions, derived from the general object classificat
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.215]{arcface.png}
-    \caption{ArcFace training process as described in the original paper~\autocite{dengArcFaceAdditiveAngular}.}
+    \caption[ArcFace training process.]{ArcFace training process as described in the original paper~\autocite{dengArcFaceAdditiveAngular}.}
     \label{fig:arcface}
 \end{figure}
 

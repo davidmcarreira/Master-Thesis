@@ -5,10 +5,18 @@
 
 
 \begin{document}
-The main purpose of the following chapter is to select a better approach to TrustID's facial recognition solution that encapsulates a good trade-off between performance and computational cost. To achieve that, first the pre-trained models are benchmarked. These results, combined with the models' complexity and resources cost related specifications, will allow the choice of the best model to be fine-tuned. After training, the tests are repeated in order to evaluate if the model improved or not, and a final choice for the main objective is made.
+The main purpose of the following chapter is to select a superior approach to TrustID's facial recognition solution that encapsulates an appropriate trade-off between performance and computational cost. To achieve that, first the pre-trained models are benchmarked. These results, combined with the models' complexity and resources cost related specifications, will allow the choice of the most adequate model to be fine-tuned. After training, the tests are repeated in order to evaluate if the model improved or not, and a final choice for the main objective is made.
 
 \section{Models' specifications}
-\par Here we compare the following four models against the TrustID Resnet-34 based solution, which comprises 29 layers, an average inference time of 7.28 seconds (computed by averaging the inference time on the entire dataset for all the benchmarks) and has been trained on the VGG Face and Facescrub ensemble dataset using triplet loss. Relevant specifications to assist the identification of a superior model are presented in \autoref{tab:models-table}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.13]{trustid_arch.png}
+    \caption[TrustID's Architecture.]{TrustID's Architecture. Image from the case study's paper~\autocite{fariaImagebasedFaceVerification2023}}
+    \label{fig:trustid_arch}
+  \end{figure}
+
+\par Here we compare the following four models against the TrustID Resnet-34 based solution \reffig{fig:trustid_arch}, which comprises 29 layers, an average inference time of 7.28 seconds (computed by averaging the inference time on the entire dataset for all the benchmarks) and has been trained on the VGG Face and Facescrub ensemble dataset using triplet loss. Relevant specifications to assist the identification of a superior model are presented in \autoref{tab:models-table}. 
 
 \begin{table}[H]
     \caption[Model's characteristics: ``\# Parameter'', ``\# Mult-Adds'', ``\# Layers'', ``Embedding'', ``Inference time (s)'', ``Loss'', and ``Dataset''.]{Model's characteristics. ``\# Parameter'' refers to the trainable parameters, ``\# Mult-Adds'' to the number of multiplication and addition operations, ``\# Layers'' denotes the quantity of convolutional and linear layers present in the model, ``Embedding'' signifies the dimensionality of the feature embedding produced by the model's output, ``Inference time (s)'' represents the average time taken for inference of all images from all the benchmark datasets, ``Loss'' is the loss function used to train the model, and ``Dataset'' are the training images.}
@@ -41,15 +49,15 @@ The main purpose of the following chapter is to select a better approach to Trus
     \label{tab:acc}
     \resizebox{\textwidth}{!}{%
     \begin{tabular}{|l|cc|cc|cc|cc|l}
-    \cline{2-9}
+    \cline{1-9}
 
   \multicolumn{1}{|c|}{\multirow{2}{*}{\diagbox{Models}{Datasets}}}      & \multicolumn{2}{c|}{\textit{Frontal group}}                           & \multicolumn{2}{c|}{\textit{Age group}}                               & \multicolumn{2}{c|}{\textit{Pose group}}                              & \multicolumn{2}{c|}{\textit{Hard group}}                              &  \\ \cline{2-9}
-  \multicolumn{1}{|c|}{}                                                 & \multicolumn{1}{c|}{CFP-FF}           & LFW            & \multicolumn{1}{c|}{AgeDB30}          & CALFW          & \multicolumn{1}{c|}{CFP-FP}           & CPLFW          & \multicolumn{1}{c|}{VGGFace2}         & XQLFW          &  \\ \hline
-  \multicolumn{1}{|l|}{MobileFaceNet}                                    & \multicolumn{1}{c|}{0.9884}          & 0.9912          & \multicolumn{1}{c|}{0.9308}          & 0.9362          & \multicolumn{1}{c|}{0.8957}          & 0.8642          & \multicolumn{1}{c|}{0.9050}          & 0.5063          &  \\ \hline
-  \multicolumn{1}{|l|}{iResnet-18}                      & \multicolumn{1}{c|}{\textbf{0.9960}} & \textbf{0.9960} & \multicolumn{1}{c|}{\textbf{0.9728}} & \textbf{0.9555} & \multicolumn{1}{c|}{0.9414}          & 0.8943          & \multicolumn{1}{c|}{0.9198}          & 0.4943                           &  \\ \hline
-  \multicolumn{1}{|l|}{FaceNet}                         & \multicolumn{1}{c|}{0.8909}          & 0.9038          & \multicolumn{1}{c|}{0.7147}          & 0.7470          & \multicolumn{1}{c|}{0.7664}          & 0.6738          & \multicolumn{1}{c|}{0.7748}          & 0.5000                           &  \\ \hline
-  \multicolumn{1}{|l|}{TrustID}                         & \multicolumn{1}{c|}{0.8807}          & 0.9906          & \multicolumn{1}{c|}{0.7153}          & 0.7198          & \multicolumn{1}{c|}{0.7030}          & 0.6235          & \multicolumn{1}{c|}{0.7400}          & \textbf{0.6135}                  &  \\ \hline
-  \multicolumn{1}{|l|}{iResnet-SE-50}                   & \multicolumn{1}{c|}{0.9959}          & 0.9953          & \multicolumn{1}{c|}{0.9263}          & 0.9543          & \multicolumn{1}{c|}{\textbf{0.9457}} & \textbf{0.9047} & \multicolumn{1}{c|}{\textbf{0.9396}} & 0.5137                           &  \\ \hline
+  \multicolumn{1}{|c|}{}                                                 & \multicolumn{1}{c|}{CFP-FF}           & LFW            & \multicolumn{1}{c|}{AgeDB30}          & CALFW          & \multicolumn{1}{c|}{CFP-FP}           & CPLFW          & \multicolumn{1}{c|}{VGGFace2}         & XQLFW          &  \\ \cline{1-9}
+  \multicolumn{1}{|l|}{MobileFaceNet}                                    & \multicolumn{1}{c|}{0.9884}          & 0.9912          & \multicolumn{1}{c|}{0.9308}          & 0.9362          & \multicolumn{1}{c|}{0.8957}          & 0.8642          & \multicolumn{1}{c|}{0.9050}          & 0.5063          &  \\ \cline{1-9}
+  \multicolumn{1}{|l|}{iResnet-18}                      & \multicolumn{1}{c|}{\textbf{0.9960}} & \textbf{0.9960} & \multicolumn{1}{c|}{\textbf{0.9728}} & \textbf{0.9555} & \multicolumn{1}{c|}{0.9414}          & 0.8943          & \multicolumn{1}{c|}{0.9198}          & 0.4943                           &  \\ \cline{1-9}
+  \multicolumn{1}{|l|}{FaceNet}                         & \multicolumn{1}{c|}{0.8909}          & 0.9038          & \multicolumn{1}{c|}{0.7147}          & 0.7470          & \multicolumn{1}{c|}{0.7664}          & 0.6738          & \multicolumn{1}{c|}{0.7748}          & 0.5000                           &  \\ \cline{1-9}
+  \multicolumn{1}{|l|}{TrustID}                         & \multicolumn{1}{c|}{0.8807}          & 0.9906          & \multicolumn{1}{c|}{0.7153}          & 0.7198          & \multicolumn{1}{c|}{0.7030}          & 0.6235          & \multicolumn{1}{c|}{0.7400}          & \textbf{0.6135}                  &  \\ \cline{1-9}
+  \multicolumn{1}{|l|}{iResnet-SE-50}                   & \multicolumn{1}{c|}{0.9959}          & 0.9953          & \multicolumn{1}{c|}{0.9263}          & 0.9543          & \multicolumn{1}{c|}{\textbf{0.9457}} & \textbf{0.9047} & \multicolumn{1}{c|}{\textbf{0.9396}} & 0.5137                           &  \\ \cline{1-9}
   \end{tabular}%
   }
 \end{table}
@@ -58,7 +66,7 @@ The main purpose of the following chapter is to select a better approach to Trus
 
 
 \subsection{ROC Curves}
-\par The previous table indicates that the three methods with superior performance, based exclusively on the accuracy at the best similarity threshold for each model and dataset, are the iResnet-SE-50, iResnet-18 and MobileFaceNet. To conduct a more thorough investigation allowing us to select the most appropriate model to be fine-tuned, the TAR values are computed for a range of FAR values and the ROC curves are generated. By inspecting how close the ROC curve is to the top left corner, the prime models can be determined since those are able to correctly identify more genuine matches while keeping the impostor matches low. 
+\par The previous table indicates that the three methods with superior performance, based exclusively on the accuracy at the best similarity threshold for each model and dataset, are the iResnet-SE-50, iResnet-18 and MobileFaceNet. To conduct a more thorough investigation allowing us to select the most appropriate model to be fine-tuned, the TAR values are computed for a range of FAR values and the ROC curves are generated. By inspecting how close the ROC curve is to the top left corner, the prime models can be determined since those are able to correctly identify more genuine matches while keeping the incorrect matches low. 
 
 \begin{figure}[H]
     \centering
@@ -99,7 +107,7 @@ The main purpose of the following chapter is to select a better approach to Trus
   \vspace{-0.4cm}
 \end{figure}
 
-\par The selected ROC curves support our initial assumptions. It is evident that, across the entire FAR range, the three top-performing models are iResnet-SE-50, iResnet-18, and MobileFacenet. With the exception of XQLFW in \reffig{fig:roc_xqlfw}, where all models, except TrustID, perform poorly and are close to random guessing, the remaining seven datasets consistently position these three models near the top-left corner. This pattern indicates strong model performance. In scenarios with low FAR values, where the model is less tolerant of incorrectly identifying impostors as matches, the number of correctly classified pairs (TAR) is higher. Please refer to \hyperref[appendix:roc_curves_appendix]{Appendix E} for the remaining from each benchmark group
+\par The selected ROC curves support our initial assumptions. It is evident that, across the entire FAR range, the three top-performing models are iResnet-SE-50, iResnet-18, and MobileFacenet. With the exception of XQLFW in \reffig{fig:roc_xqlfw}, where all models, except TrustID, perform poorly and are close to random guessing, the remaining seven datasets consistently position these three models near the top-left corner. This pattern indicates strong model performance. In scenarios with low FAR values, where the model is less tolerant of incorrectly identifying impostors as matches, the number of correctly classified pairs (TAR) is higher. Please refer to \hyperref[appendix:roc_curves_appendix]{Appendix E} for the remaining from each benchmark group.
 
 \begin{table}[H]
     \caption{TAR@FAR for all the models and benchmarks.}
@@ -128,7 +136,7 @@ The aforementioned three highest-achieving models distance themselves from FaceN
 \par For a low FAR value of $1e-4$, the threshold is more firm and leaves less margin for identifying wrong matches as true identities, all models fail on more demanding datasets, but for less intricate ones, iResnet-SE-50 achieves suitable performance on LFW and CALFW, and MobileFaceNet on LFW. Reducing the strictness and increasing the FAR to $1e-3,$ leads to an improvement on the results, as expected. The iResnet models produce high TAR values on all datasets apart from the more challenging CFP variations and XQLFW datasets. MobileFacenet starts to improve but still performs poorly on the pose group, hard group, CFP pair and AgeDB30 dataset. Finally, at $1e-2$ is the threshold at which all models excel without compromising the security of the system, since increasing the FAR to $1e-1$ would lead to too much falsely matched pairs. iResnet-SE-50 and iResnet-18 have comparable performance with high scores on the same benchmarks and both failing XQLFW. MobileFaceNet approaches iResnet levels of capability aside from slightly lower scores on the age and pose groups and the XQLFW dataset.
 
 \subsection{DET Curves}
-To finalize the selection of the most appropriate model, the FRRs are calculated and plotted against the previous FAR values to obtain the DET curves. The intersection between the identity line that divides the graph and the DETs, i.e, the EER points can be extracted. These curves also allow to make a better distinction between models due to the more expansive logarithmic scale in which they are generated. In this case, contrary to the ROC curves, the better performing models are closer to the lower left corner, since that will minimize both the amount of impostors matched as true identities (FAR) and true identities classified as impostors (FRR).
+To finalize the selection of the most appropriate model, the FRRs are calculated and plotted against the previous FAR values to obtain the DET curves. The intersection between the identity line that divides the graph and the DETs, i.e, the EER points can be extracted. These curves also allow to make a better distinction between models due to the more expansive logarithmic scale in which they are generated. In this case, contrary to the ROC curves, the better performing models are closer to the lower left corner, minimizing both the amount of impostors matched as true identities (FAR) and true identities classified as impostors (FRR).
 
 \begin{figure}[H]
     \centering
@@ -168,7 +176,8 @@ To finalize the selection of the most appropriate model, the FRRs are calculated
 \end{adjustbox}
 \vspace{-0.4cm}
 \end{figure}
-\vspace{0.7\baselineskip}
+
+\vspace{0.9\baselineskip}
 \begin{table}[H]
     \centering
     \caption{EER values for all the models and respective benchmarks.}
@@ -187,8 +196,8 @@ To finalize the selection of the most appropriate model, the FRRs are calculated
     }
 
 \end{table}
-
-As a final analysis, the DET plots and the EER values support what has been previously discussed: iResnet-SE-50, iResnet-18 and MobileFaceNet are the best performing models. To no surprise, this group is always close to each other and close to the ideal corner of the DET graphs. Additionally, XQLFW reveals once again to be too much of a challenge. Regarding the EER scores, the results and conclusions are similar to the ones from \autoref{tab:acc}. iResnet-SE-50, the more complex model, has the lower scores, with iResnet-18 a close second and MobileFaceNet as the third. Please refer to \hyperref[appendix:det_curves_appendix]{Appendix F} for the remaining from each benchmark group
+\newpage
+\par As a final analysis, the DET plots and the EER values support what has been previously discussed: iResnet-SE-50, iResnet-18 and MobileFaceNet are the best performing models. To no surprise, this group is always close to each other and close to the ideal corner of the DET graphs. Additionally, XQLFW reveals once again to be too much of a challenge. Regarding the EER scores, the results and conclusions are similar to the ones from \autoref{tab:acc}. iResnet-SE-50, the more complex model, has the lower scores, with iResnet-18 a close second and MobileFaceNet as the third. Please refer to \hyperref[appendix:det_curves_appendix]{Appendix F} for the remaining from each benchmark group
 
 \section{Number of trainable parameters per unit of accuracy}
 
@@ -214,10 +223,10 @@ As a final analysis, the DET plots and the EER values support what has been prev
 
 
 \subsection{Discussion}
-\par At this stage, we are capable of assuring, based on the previous tests, that there are more adequate solutions to TrustID's facial verification framework. The three top performing methods proved their robustness to extreme variation in pose (CFP-FP and CPLFW), age (AgeDB30 and CALFW) or illumination (CFP-FF, VGGFace2). That being said, the benchmark concerning quality and image degradation (XQLFW) proved to be a major hurdle to most of the models aside from TrustID.
+\par At this stage, we are capable of assuring, based on the previous tests, that one objective is achieved and more adequate solutions to TrustID's facial verification framework were found. The three top performing methods proved their robustness to extreme variation in pose (CFP-FP and CPLFW), age (AgeDB30 and CALFW) or illumination (CFP-FF, VGGFace2). That being said, the benchmark concerning quality and image degradation (XQLFW) proved to be a major hurdle to most of the models aside from TrustID.
 
 \par Considering the benchmarks' results, the much lower amount of trainable parameters, mult-adds, inference time and NPUA, MobileFaceNet is the best balance between performance and computational cost. As discussed in \autoref{sec:methodology_discussion}, due to the monitoring context, achieving perfect accuracy is not the main concern. This is due to the fact that, as the monitoring occurs over a time span it allows the system to perform more face verifications, compensating for lower accuracy values.
-Furthermore, although it is true that MobileFacenet's accuracy is high in the pose group and VGGFace2, there is room for improvement in the TAR at low FAR values, hence the fine-tuning. The objective of further training the model first with QMUL-SurvFace is to try and improve its scores in both the hard group, but specially XQLFW, and pose group benchmarks. On the other hand, DigiFace-1M enables the study of the impact of fully-synthetic ethically collected data on the scores throughout the benchmarks, with a special attention to the pose group benchmarks. 
+Furthermore, although it is true that MobileFacenet's accuracy is high in the pose group and VGGFace2, there is room for improvement in the TAR at low FAR values, hence the fine-tuning. The objective of further training the model first with QMUL-SurvFace is to try and improve its scores in both the hard group, specially XQLFW, and pose group benchmarks. On the other hand, DigiFace-1M enables the study of the impact of fully-synthetic ethically collected data on the scores throughout the benchmarks, with a special attention to the pose group benchmarks. 
 
 
 \section{Training Details}
@@ -248,7 +257,7 @@ By leveraging Optuna's hyperparameter searching capabilities\footnote{\url{https
     }
 \end{table}
 
-\par According to \autoref{tab:acc_whole_qmul}, fine-tuning with QMUL-SurvFace improves, as intended, the XQLFW benchmark performance by $5.17\%$. However, the verified increase is moderate and disadvantageous when the accuracy degradation verified on the remaining benchmarks is taken into account. Hence, in an effort to improve the results, the margin is reduced in order to generate a less penalizing training with a more lax distance between classes. The results from these settings are shown in \autoref{tab:acc_whole_qmul}, and when fine-tuned with QMUL-SurvFace, it occurs the same behavior as in $m=0.5$. The XQLFW results are also better than the original pre-trained model, increasing $5.77\%$ for $m=0.4$ and $3.00\%$ for $m=0.3$, while the other scores worsen. 
+\par According to \autoref{tab:acc_whole_qmul}, fine-tuning with QMUL-SurvFace improves, as intended, the XQLFW benchmark performance by $5.17\%$. However, the verified increase is moderate and disadvantageous when the accuracy degradation verified on the remaining benchmarks is taken into account. Hence, in an effort to improve the results, the margin is reduced in order to generate a less penalizing training with a smaller distance between classes. The results from these settings are shown in \autoref{tab:acc_whole_qmul}, and when fine-tuned with QMUL-SurvFace, it occurs the same behavior as in $m=0.5$. The XQLFW results are also better than the original pre-trained model, increasing $5.77\%$ for $m=0.4$ and $3.00\%$ for $m=0.3$, while the other scores worsen. 
 \begin{table}[H]
     \centering
     \caption{MobileFaceNet accuracy scores before and after fine-tuning the whole network on DigiFace-1M with different ArcFace margins.}
@@ -273,7 +282,7 @@ By leveraging Optuna's hyperparameter searching capabilities\footnote{\url{https
 \par In the case of DigiFace-1M in \autoref{tab:acc_whole_digiface}, no discernible improvements were observed, and reducing the margin size did not yield any positive changes. Instead, the model appears to struggle in adapting to the dataset, resulting in adjustments to the weights that ultimately led to a deterioration in benchmark performance.  
 
 \par When comparing directly with the paper's suggested margin ($m=0.5$), some conclusions can be drawn. The model fine-tuned with QMUL-SurvFace produces inferior results in the frontal and age groups for $m=0.4$ and $m=0.3$, the pose group is superior for both margins and the hard group is mixed, where VGGFace2 has lower performance for $m=0.4$ and $m=0.3$, and XQLFW improves for $m=0.4$ and not for $m=0.3$. On the other hand, when $m=0.4$ and $m=0.3$, the DigiFace-1M training saw a marginal improvement throughout the tests but still performs poorly. All in all, reducing the margin size does not have a meaningful impact on the accuracy results, aside from the XQLFW when tuned with QMUL-SurvFace.
-\vspace{\baselineskip}
+
 \par To achieve a more profound understanding of how the model reacts to the data, \autoref{tab:tar_far_qmul} and \autoref{tab:tar_far_digiface} present the TAR at very low FAR.
 
 \begin{table}[H]
@@ -297,7 +306,7 @@ By leveraging Optuna's hyperparameter searching capabilities\footnote{\url{https
     }
 \end{table}
 
-The reduced margins $m=0.4$ and $m=0.3$ produce lower TAR scores at any FAR, including the very relevant frontal group. However, when $m=0.5$, there are some improvements. At $FAR=1e-3$ and $FAR=1e-2$, the pose group suffers a significant improvement and XQLFW increases slightly.
+The reduced margins $m=0.4$ and $m=0.3$ produce lower TAR scores at any FAR, including the very relevant frontal group. However, when $m=0.5$, there are some improvements. At $FAR=1e-3$ and $FAR=1e-2$, XQLFW increases slightly and the pose group suffers a significant improvement relative to its higher scores before fine-tuning ($44.7\%$ for CFP-FP at FAR $1e-3$ and $1e-2$, and $59.0\%$ for CPLFW at FAR equal to $1e-3$ and 1e-2).
 
 \begin{table}[H]
     \centering
@@ -353,7 +362,7 @@ The reduced margins $m=0.4$ and $m=0.3$ produce lower TAR scores at any FAR, inc
 
 \begin{table}[H]
     \centering
-    \caption{MobileFaceNet accuracies before and after fine-tuning the network, with the first five layers frozen, on DigiFace-1M with different ArcFace margins.}
+    \caption{MobileFaceNet accuracy scores before and after fine-tuning the network, with the first five layers frozen, on DigiFace-1M with different ArcFace margins.}
     \label{tab:acc_5_digiface}
     \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{clcccc}
@@ -446,7 +455,7 @@ To finalize, we conducted additional tests by training only the last two layers 
 
 \begin{table}[H]
     \centering
-    \caption{MobileFaceNet accuracies before and after fine-tuning the network, with all the layers frozen aside the last two, on DigiFace-1M with different ArcFace margins.}
+    \caption{MobileFaceNet accuracy scores before and after fine-tuning the network, with all the layers frozen aside the last two, on DigiFace-1M with different ArcFace margins.}
     \label{tab:acc_final_digiface}
     \resizebox{0.6\textwidth}{!}{%
     \begin{tabular}{|clc|c|c|c|}
@@ -513,7 +522,7 @@ To finalize, we conducted additional tests by training only the last two layers 
 \par To conclude, the TAR values continue to be worse than the original model, for both QMUL-SurvFace (\autoref{tab:tar_far_final_qmul}) and DigiFace-1M (\autoref{tab:tar_far_final_digiface}), with the usual outliers values that are slightly higher but do not highlight any pattern of improvement.
 
 \subsection{Discussion}
-\par Taking into consideration the previous experiments, it can be inferred that the most adequate solution is the pre-trained model. Further training on any of the selected datasets does not improve the overall performance. Although fine-tuning the whole network with QMUL-SurvFace leads to higher accuracy on the XQLFW benchmark, the scores for the other tests are worse. Moreover, when $m=0.5$ the model is more discriminative for $FAR=1e-3$ and $1e-2$ on the pose group and XQLFW, but once again, on the other benchmarks the model is less discriminative. Since the intended application is to monitor students, it is highly required for the model to adapt to any quality and pose, that is, profile and frontal. Therefore, improvement on one benchmark at a cost of having negative impact on the others is less than idealized. The initial pre-trained model outperforms TrustID's method, with low computational cost and respectable scores on all the tests and benchmarks. Despite the fact that it did not respond well to the fine-tuning on the selected datasets, it still is the most competent approach to the student monitoring problem as it performs appropriately considering the possible challenges of pose, illumination, expressions, etc. while maintaining a light resource utilization\footnote{A video demonstration of the chosen method on a real-time webcam feed is available in the following repository:\url{https://github.com/davidmcarreira/dfrosi-demo}}. 
+\par Taking into consideration the previous experiments, it can be inferred that the most adequate solution is the pre-trained model. Further training on any of the selected datasets does not improve the overall performance. Although, fine-tuning the whole network with QMUL-SurvFace leads to higher accuracy on the XQLFW benchmark, the scores for the other tests are worse. Moreover, when $m=0.5$ the model is more discriminative for $FAR=1e-3$ and $1e-2$ on the pose group and XQLFW, but once again, on the other benchmarks the model becomes less discriminative. Since the intended application is to monitor students, it is highly required for the model to adapt to any quality and pose, that is, profile and frontal. Therefore, improvement on one benchmark at a cost of having negative impact on the others is less than idealized. The initial pre-trained model outperforms TrustID's method, with low computational cost and respectable scores on all the tests and benchmarks. Despite the fact that it did not respond well to the fine-tuning on the selected datasets, it still is the most competent approach to the student monitoring problem as it performs appropriately considering the possible challenges of pose, illumination, expressions, etc. while maintaining a light resource utilization\footnote{A video demonstration of the chosen method on a real-time webcam feed is available in the following repository:\url{https://github.com/davidmcarreira/dfrosi-demo}}. 
 
  
 \end{document}
